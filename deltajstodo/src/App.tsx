@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword'
+import LayOut from './pages/LayOut'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
@@ -17,12 +18,17 @@ function App(): JSX.Element {
   <div className="">Hello World</div>*/}
       <div>
         <Routes>
-          <Route path="api/auth/login" element={<Login />} />
-          <Route path="/" element={<Login />} />
-          <Route path="api/auth/register" element={<Register />} />
-          <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
-          <Route path="api/auth/resetPassword" element={<ResetPassword />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<LayOut />}>
+            <Route path="api/auth/login" element={<Login />} />
+            <Route index element={<Login />} />
+            <Route path="api/auth/register" element={<Register />} />
+            <Route
+              path="api/auth/forgetPassword"
+              element={<ForgetPassword />}
+            />
+            <Route path="api/auth/resetPassword" element={<ResetPassword />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </div>
     </>
