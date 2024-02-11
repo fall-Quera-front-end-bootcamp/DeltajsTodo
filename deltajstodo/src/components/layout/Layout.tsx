@@ -2,17 +2,17 @@ import '../../dist/output.css'
 import AuthSvg from '../Svg/AuthSvg'
 import Header from './Header'
 
-function Layout({
+function Layout ({
   children,
   buttonText,
-  linkText,
+  linkText
 }: {
   children: any
   buttonText: string
   linkText: string
 }): JSX.Element {
   return (
-    <div className="flex justify-center items-center h-[100vh]">
+    <div className="flex h-[100vh] items-center justify-center">
       <Header buttonText={buttonText} linkText={linkText} />
       {children}
       <AuthSvg />
