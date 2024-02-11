@@ -8,6 +8,7 @@ module.exports = {
     'standard-with-typescript',
     'plugin:react/recommended',
     'plugin:tailwindcss/recommended',
+    'plugin:react/jsx-runtime',
   ],
   overrides: [
     {

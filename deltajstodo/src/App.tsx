@@ -1,12 +1,19 @@
 /* eslint-disable spaced-comment */
+import Layout from './components/layout/Layout'
 import './dist/output.css'
-import { Route, Routes } from 'react-router-dom'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import NotFound from './pages/NotFound'
-import ForgetPassword from './pages/ForgetPassword'
-import ResetPassword from './pages/ResetPassword'
-import LayOut from './pages/LayOut'
+// import { Route, Routes } from 'react-router-dom'
+// import Login from './pages/Login'
+// import Register from './pages/Register'
+// import NotFound from './pages/NotFound'
+// import ForgetPassword from './pages/ForgetPassword'
+// import ResetPassword from './pages/ResetPassword'
+// import LayOut from './pages/LayOut'
+/* eslint-disable tailwindcss/no-custom-classname */
+import "./dist/output.css";
+import Layout from "./components/Layout/Layout";
+import AuthCard from "./components/Card/AuthCard";
+import Input from "./components/Input/Input";
+import FormButton from "./components/Buttons/FormButton";
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
@@ -16,7 +23,7 @@ function App(): JSX.Element {
         سلام به همه
       </h1>
   <div className="">Hello World</div>*/}
-      <div>
+      {/* <div>
         <Routes>
           <Route path="/" element={<LayOut />}>
             <Route path="api/auth/login" element={<Login />} />
@@ -30,7 +37,15 @@ function App(): JSX.Element {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </div>
+      </div> */}
+         <Layout buttonText={"ثبت‌نام"} linkText={"ثبت‌نام نکرده‌ای؟"}>
+        <AuthCard>
+          <h1>ثبت نام</h1>
+          <Input name="نام کاربری" type="password" />
+          <FormButton text="ورود" />
+          <Input name="نام کاربری" type="password" />
+        </AuthCard>
+      </Layout>
     </>
   )
 }
