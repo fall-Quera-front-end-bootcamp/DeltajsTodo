@@ -38,7 +38,7 @@ function App(): JSX.Element {
           </Route>
         </Routes>
       </div> */}
-         <Layout buttonText={"ثبت‌نام"} linkText={"ثبت‌نام نکرده‌ای؟"}>
+      <Layout buttonText={"ثبت‌نام"} linkText={"ثبت‌نام نکرده‌ای؟"}>
         <AuthCard>
           <h1>ثبت نام</h1>
           <Input name="نام کاربری" type="password" />
