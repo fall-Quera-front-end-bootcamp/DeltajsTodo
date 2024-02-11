@@ -13,7 +13,6 @@ function Header({
     <div
     dir="rtl"
     className="flex flex-col sm:flex-row justify-between items-center w-[88.88%] fixed top-[7.8125%]"
-
   >
       <h1 className="text-[32px] font-extrabold leading-[45.09px] bg-gradient-to-r from-[#118C80] from-0% to-[#4AB7D8] to-[120%] bg-clip-text text-transparent">
         کوئرا تسک منیجر
