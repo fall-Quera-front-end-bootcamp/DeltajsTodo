@@ -1,6 +1,4 @@
 /* eslint-disable spaced-comment */
-import Layout from './components/layout/Layout'
-import './dist/output.css'
 // import { Route, Routes } from 'react-router-dom'
 // import Login from './pages/Login'
 // import Register from './pages/Register'
@@ -9,11 +7,11 @@ import './dist/output.css'
 // import ResetPassword from './pages/ResetPassword'
 // import LayOut from './pages/LayOut'
 /* eslint-disable tailwindcss/no-custom-classname */
-import "./dist/output.css";
-import Layout from "./components/Layout/Layout";
-import AuthCard from "./components/Card/AuthCard";
-import Input from "./components/Input/Input";
-import FormButton from "./components/Buttons/FormButton";
+import './dist/output.css'
+import Layout from './components/layout/Layout'
+import AuthCard from './components/Card/AuthCard'
+import Input from './components/Input/Input'
+import FormButton from './components/Buttons/FormButton'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
@@ -38,7 +36,7 @@ function App(): JSX.Element {
           </Route>
         </Routes>
       </div> */}
-      <Layout buttonText={"ثبت‌نام"} linkText={"ثبت‌نام نکرده‌ای؟"}>
+      <Layout buttonText={'ثبت‌نام'} linkText={'ثبت‌نام نکرده‌ای؟'}>
         <AuthCard>
           <h1>ثبت نام</h1>
           <Input name="نام کاربری" type="password" />
