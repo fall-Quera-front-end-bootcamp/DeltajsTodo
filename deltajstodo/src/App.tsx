@@ -1,16 +1,15 @@
 /* eslint-disable tailwindcss/no-custom-classname */
-import React from 'react'
-import './dist/output.css'
+import "./dist/output.css";
+import Layout from "./components/Layout/Layout";
 
-function App (): JSX.Element {
+function App(): JSX.Element {
   return (
     <>
-      <h1 className="m-l text-body font-yekan flex items-center">
-        سلام به همه
-      </h1>
-      <div className="">Hello World</div>
+      <Layout buttonText={"ثبت‌نام"} linkText={"ثبت‌نام نکرده‌ای؟"}>
+        {/* add your card */}
+      </Layout>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
