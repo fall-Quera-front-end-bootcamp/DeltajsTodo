@@ -10,6 +10,6 @@ body {
   @font-face {
     font-family: Yekan;
     font-weight: normal;
-    src: url(../assets/fonts/yekan/Yekan.woff) format("woff");
+    src: url(../assets/fonts/yekan/Yekan.woff) format('woff');
   }
 }
