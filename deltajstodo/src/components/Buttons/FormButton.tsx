@@ -1,6 +1,6 @@
 import '../../dist/output.css'
 
-function FormButton ({
+function FormButton({
   text,
   color,
   ...props
@@ -13,7 +13,7 @@ function FormButton ({
     color === 'bg-brand-primary' ? 'text-[white]' : 'text-brand-primary'
   return (
     <button
-      className={`${color} ${textColor} font-yekan text-bolds rounded-[6px] p-[10px] w-[100%] mb-2`}
+      className={`${color} ${textColor} font-yekan font-extrabold text-[14px] leading-[19.73px] rounded-[6px] p-[10px] w-[100%] h-[40px] mb-2`}
       onClick={props.onClickFunction}
     >
       {text}
