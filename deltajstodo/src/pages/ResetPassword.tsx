@@ -16,7 +16,7 @@ const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
         linkSrc={'/api/auth/resetpassword'}
       >
         <AuthCard className="flex flex-col gap-8">
-          <h1 className="text-center font-yekan text-[32px] font-extrabold leading-[45.09px]">
+          <h1 className="text-center font-yekan text-headingl font-extrabold">
             تغییر رمز عبور
           </h1>
           <div className="flex flex-col gap-4">
@@ -24,7 +24,7 @@ const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
             <Input name="رمز عبور" type="password" />
             <div className="">
               <FormButton
-                className=""
+                className="h-[48px]"
                 text="اعمال تغییرات"
                 color="bg-brand-primary"
                 onClickFunction={() => {}}
