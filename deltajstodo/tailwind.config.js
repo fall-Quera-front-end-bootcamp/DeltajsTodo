@@ -6,6 +6,7 @@ export default {
       yekan: ["Yekan"],
     },
     colors: {
+      transparent: "transparent",
       gray: {
         secondary: "#F1F3F5",
         primary: "#868E96",
