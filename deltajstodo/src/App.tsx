@@ -6,7 +6,6 @@
 // import ForgetPassword from './pages/ForgetPassword'
 // import ResetPassword from './pages/ResetPassword'
 // import LayOut from './pages/LayOut'
-/* eslint-disable tailwindcss/no-custom-classname */
 import './dist/output.css'
 import Layout from './components/layout/Layout'
 import AuthCard from './components/Card/AuthCard'
