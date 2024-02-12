@@ -3,15 +3,17 @@
 import '../../dist/output.css'
 import HeaderButton from '../Buttons/HeaderButton'
 
+interface HeaderProps {
+  buttonText: string
+  linkText: string
+  onClickFunction: any
+}
+
 function Header({
   buttonText,
   linkText,
-  linkSrc,
-}: {
-  buttonText: string
-  linkText: string
-  linkSrc: string
-}): JSX.Element {
+  onClickFunction,
+}: HeaderProps): JSX.Element {
   return (
     <div
       dir="rtl"
@@ -24,7 +26,7 @@ function Header({
         <span className="font-yekan text-right text-[16px] font-medium leading-[22.55px]">
           {linkText}
         </span>
-        <HeaderButton text={buttonText} src={linkSrc} />
+        <HeaderButton text={buttonText} onClickFunction={onClickFunction} />
       </div>
     </div>
   )

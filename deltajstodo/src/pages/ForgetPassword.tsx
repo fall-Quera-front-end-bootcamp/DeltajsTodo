@@ -18,7 +18,7 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
     <Layout
       buttonText={'ورود'}
       linkText={'قبلا ثبت‌نام کرده‌ای؟'}
-      linkSrc={'/api/auth/Login'}
+      onClickFunction={() => {}}
     >
       <AuthCard>
         <h1 className="font-yekan font-extrabold text-[32px] leading-[45.09px] text-center">
@@ -31,11 +31,7 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
             color="bg-brand-primary"
             onClickFunction={sendEmail}
           />
-          <FormButton
-            text="بازگشت"
-            color="transparent"
-            onClickFunction={() => {}}
-          />
+          <FormButton text="بازگشت" color="transparent" />
         </div>
         <div className={`${formVisible ? 'hidden' : 'mt-[32px]'}`}>
           <span className="block text-center font-yekan font-normal text-[14px] leading-[19.73px]">

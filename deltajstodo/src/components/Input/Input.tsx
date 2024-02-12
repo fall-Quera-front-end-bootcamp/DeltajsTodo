@@ -1,8 +1,13 @@
 import '../../dist/output.css'
 
-function Input({ name, type }: { name: string; type: string }): JSX.Element {
+interface InputProps {
+  name: string
+  type: string
+}
+
+function Input({ name, type }: InputProps): JSX.Element {
   return (
-    <div dir="rtl" className="mb-5">
+    <div dir="rtl">
       <label
         htmlFor=""
         className="block font-yekan font-normal text-[14px] leading-[19.73px] mb-2"
