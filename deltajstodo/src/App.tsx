@@ -7,10 +7,17 @@
 // import ResetPassword from './pages/ResetPassword'
 // import LayOut from './pages/LayOut'
 import './dist/output.css'
+
 import Layout from './components/layout/Layout'
 import AuthCard from './components/Card/AuthCard'
 import Input from './components/Input/Input'
 import FormButton from './components/Buttons/FormButton'
+import { Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import ForgetPassword from './pages/ForgetPassword'
+import ResetPassword from './pages/ResetPassword'
+import NotFound from './pages/NotFound'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
@@ -35,14 +42,23 @@ function App(): JSX.Element {
           </Route>
         </Routes>
       </div> */}
-      <Layout buttonText={'ثبت‌نام'} linkText={'ثبت‌نام نکرده‌ای؟'}>
+      {/* { <Layout buttonText={'ثبت‌نام'} linkText={'ثبت‌نام نکرده‌ای؟'}>
         <AuthCard>
           <h1>ثبت نام</h1>
           <Input name="نام کاربری" type="password" />
           <FormButton text="ورود" />
           <Input name="نام کاربری" type="password" />
         </AuthCard>
-      </Layout>
+      </Layout>} */}
+
+      <Routes>
+        <Route path="api/auth/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="api/auth/register" element={<Register />} />
+        <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
+        <Route path="api/auth/resetPassword" element={<ResetPassword />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   )
 }
