@@ -4,12 +4,14 @@ import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
+import { useNavigate } from 'react-router-dom'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}
 
 const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
   const [formVisible, setFormVisible] = useState(true)
+  const navigate: NavigateFunction = useNavigate()
 
   const sendEmail = () => {
     setFormVisible(false)
@@ -31,7 +33,11 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
             color="bg-brand-primary"
             onClickFunction={sendEmail}
           />
-          <FormButton text="بازگشت" color="transparent" />
+          <FormButton
+            text="بازگشت"
+            color="transparent"
+            onClickFunction={() => navigate('/api/auth/login')}
+          />
         </div>
         <div className={`${formVisible ? 'hidden' : 'mt-[32px]'}`}>
           <span className="block text-center font-yekan font-normal text-[14px] leading-[19.73px]">

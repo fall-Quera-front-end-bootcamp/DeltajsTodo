@@ -23,8 +23,8 @@ function AuthSvg(): JSX.Element {
             y2="287"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#06846F" />
-            <stop offset="1" stop-color="#54BEE8" />
+            <stop stopColor="#06846F" />
+            <stop offset="1" stopColor="#54BEE8" />
           </linearGradient>
         </defs>
       </svg>

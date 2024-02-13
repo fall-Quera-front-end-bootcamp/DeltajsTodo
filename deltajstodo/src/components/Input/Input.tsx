@@ -5,6 +5,7 @@ interface InputProps {
   type: string
 }
 
+// eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function Input({ name, type }: InputProps): JSX.Element {
   return (
     <div dir="rtl">
