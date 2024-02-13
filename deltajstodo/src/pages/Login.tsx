@@ -2,7 +2,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { useState, type FunctionComponent } from 'react'
-
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
@@ -23,10 +22,10 @@ const Login: FunctionComponent<LoginProps> = () => {
       onClickFunction={() => navigate('/api/auth/register')}
     >
       <AuthCard>
-        <h1 className="font-yekan text-center text-[32px] font-extrabold leading-[45.09px]">
+        <h1 className="text-center font-yekan text-[32px] font-extrabold leading-[45.09px]">
           (: به کوئرا تسک منیجر خوش برگشتی
         </h1>
-        <div className={`${formVisible ? 'mt-[32px]' : 'hidden'}`}>
+        <form className={`${formVisible ? 'mt-[32px]' : 'hidden'}`}>
           <Input name="نام کاربری" type="text" />
           <Input name="رمز عبور" type="password" />
           <div className="flex flex-row items-center justify-end">
@@ -42,13 +41,13 @@ const Login: FunctionComponent<LoginProps> = () => {
           <div className="flex flex-row items-center justify-center">
             <button
               onClick={() => navigate('/api/auth/register')}
-              className="text-brand-primary font-yekan h-[40px] rounded-[6px] p-[10px] text-[14px] font-extrabold leading-[19.73px] "
+              className="h-[40px] rounded-[6px] p-[10px] font-yekan text-[14px] font-extrabold leading-[19.73px] text-brand-primary "
             >
               ثبت نام
             </button>
             <span className="mr-2">ثبت‌نام نکرده‌ای؟</span>
           </div>
-        </div>
+        </form>
       </AuthCard>
     </Layout>
   )

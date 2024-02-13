@@ -43,7 +43,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                   type="checkbox"
                 />
                 <svg
-                  className="text-white pointer-events-none absolute left-[4px] top-[4px] opacity-0 transition-opacity peer-checked:opacity-100"
+                  className="pointer-events-none absolute left-[4px] top-[4px] opacity-0 transition-opacity peer-checked:opacity-100"
                   width="9"
                   height="7"
                   viewBox="0 0 12 9"

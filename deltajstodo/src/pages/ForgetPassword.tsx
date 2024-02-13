@@ -4,7 +4,7 @@ import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
-import { useNavigate } from 'react-router-dom'
+import { type NavigateFunction, useNavigate } from 'react-router-dom'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}
@@ -13,7 +13,7 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
   const [formVisible, setFormVisible] = useState(true)
   const navigate: NavigateFunction = useNavigate()
 
-  const sendEmail = () => {
+  const sendEmail = (): void => {
     setFormVisible(false)
   }
   return (
@@ -23,10 +23,12 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
       onClickFunction={() => {}}
     >
       <AuthCard>
-        <h1 className="font-yekan font-extrabold text-[32px] leading-[45.09px] text-center">
+        <h1 className="text-center text-[32px] font-extrabold leading-[45.09px]">
           فراموشی رمز عبور
         </h1>
-        <div className={`${formVisible ? 'mt-[32px]' : 'hidden'}`}>
+        <div
+          className={`${formVisible ? 'mt-[32px] flex flex-col gap-4' : 'hidden'}`}
+        >
           <Input name="ایمیل خود را وارد کنید" type="email" />
           <FormButton
             text="دریافت ایمیل بازیابی رمز عبور"
@@ -36,11 +38,13 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
           <FormButton
             text="بازگشت"
             color="transparent"
-            onClickFunction={() => navigate('/api/auth/login')}
+            onClickFunction={() => {
+              navigate('/api/auth/login')
+            }}
           />
         </div>
         <div className={`${formVisible ? 'hidden' : 'mt-[32px]'}`}>
-          <span className="block text-center font-yekan font-normal text-[14px] leading-[19.73px]">
+          <span className="block text-center font-yekan text-[14px] font-normal leading-[19.73px]">
             .لینک تغییر رمز عبور برای شما ایمیل شد. لطفا ایمیل خود را بررسی کنید
           </span>
         </div>

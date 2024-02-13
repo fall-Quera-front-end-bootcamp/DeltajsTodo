@@ -5,16 +5,16 @@ interface FormButtonProps {
   text: string
   color: string
   onClickFunction?: any
-  height?: string
+  className?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
-function FormButton({ text, color, ...props }: FormButtonProps): JSX.Element {
+function FormButton({ text, color, className, ...props }: FormButtonProps): JSX.Element {
   const textColor =
     color === 'bg-brand-primary' ? 'text-[white]' : 'text-brand-primary'
   return (
     <button
-      className={`${color} ${textColor} font-yekan h-[40px] w-[100%] rounded-[6px] p-[10px] text-[14px] font-extrabold leading-[19.73px] ${props.height}`}
+      className={`${color} ${textColor} h-[40px] w-[100%] rounded-[6px] p-[10px] font-yekan text-[14px] font-extrabold leading-[19.73px] ${className}`}
       onClick={props.onClickFunction}
     >
       {text}
