@@ -19,6 +19,8 @@ import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword'
 import NotFound from './pages/NotFound'
 
+import TermsConditions from './components/Modals/TermsConditions'
+
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   return (
@@ -50,15 +52,16 @@ function App(): JSX.Element {
           <Input name="نام کاربری" type="password" />
         </AuthCard>
       </Layout>} */}
+      <TermsConditions/>
 
-      <Routes>
+      {/* <Routes>
         <Route path="api/auth/login" element={<Login />} />
         <Route path="/" element={<Login />} />
         <Route path="api/auth/register" element={<Register />} />
         <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
         <Route path="api/auth/resetPassword" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes> */}
     </>
   )
 }
