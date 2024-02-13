@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import '../../dist/output.css'
 
 interface FormButtonProps {
@@ -7,6 +8,7 @@ interface FormButtonProps {
   height?: string
 }
 
+// eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function FormButton({ text, color, ...props }: FormButtonProps): JSX.Element {
   const textColor =
     color === 'bg-brand-primary' ? 'text-[white]' : 'text-brand-primary'

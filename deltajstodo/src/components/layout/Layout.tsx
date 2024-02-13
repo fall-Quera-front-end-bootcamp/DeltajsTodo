@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/comma-dangle */
 import '../../dist/output.css'
 import AuthSvg from '../Svg/AuthSvg'
 import Header from './Header'
@@ -9,6 +10,7 @@ interface LayoutProps {
   onClickFunction: any
 }
 
+// eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function Layout({
   children,
   buttonText,

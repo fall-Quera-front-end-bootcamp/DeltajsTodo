@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/comma-dangle */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable tailwindcss/no-contradicting-classname */
 import '../../dist/output.css'
@@ -9,6 +10,7 @@ interface HeaderProps {
   onClickFunction: any
 }
 
+// eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function Header({
   buttonText,
   linkText,
