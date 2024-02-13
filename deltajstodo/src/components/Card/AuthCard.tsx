@@ -1,14 +1,8 @@
 import '../../dist/output.css'
 
-function AuthCard({
-  children,
-  className,
-}: {
-  children: any
-  className?: string
-}): JSX.Element {
+function AuthCard ({ children }: { children: any }): JSX.Element {
   return (
-    <div className="w-[100%] sm:w-[640px] bg-[white] p-6 rounded-[20px] shadow-card flex flex-col gap-4">
+    <div className="flex w-[100%] flex-col gap-4 rounded-[20px] bg-[white] p-6 shadow-card sm:w-[640px]">
       {children}
     </div>
   )
