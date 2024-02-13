@@ -49,7 +49,7 @@ function App(): JSX.Element {
 
       <Routes>
         <Route path="api/auth/login" element={<Login />} />
-        <Route path="/" element={<ResetPassword />} />
+        <Route path="/" element={<Login />} />
         <Route path="api/auth/register" element={<Register />} />
         <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
         <Route path="api/auth/resetPassword" element={<ResetPassword />} />
