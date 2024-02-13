@@ -24,7 +24,7 @@ const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
             <Input name="رمز عبور" type="password" />
             <div className="">
               <FormButton
-                className="h-[48px]"
+                height="h-[48px]"
                 text="اعمال تغییرات"
                 color="bg-brand-primary"
                 onClickFunction={() => {}}
