@@ -24,7 +24,7 @@ const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
             تغییر رمز عبور
           </h1>
           <div className="flex flex-col gap-4">
-            <Input name="رمز عبور جدید را وارد کنید" type="text" />
+            <Input name="رمز عبور جدید را وارد کنید" type="password" />
             <Input name="رمز عبور" type="password" />
             <div className="">
               <FormButton
