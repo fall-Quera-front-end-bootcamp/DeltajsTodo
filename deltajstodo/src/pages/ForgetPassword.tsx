@@ -5,6 +5,7 @@ import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
 import { useNavigate } from 'react-router-dom'
+import Button from '../components/Buttons/Button'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}
