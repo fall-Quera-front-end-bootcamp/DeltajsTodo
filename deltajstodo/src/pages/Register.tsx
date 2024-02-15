@@ -8,6 +8,7 @@ import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { type FunctionComponent } from 'react'
 import Checkbox from '../components/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
+import TermsConditions from '../components/Modals/TermsConditions'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
@@ -94,6 +95,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                     {' '}
                     قوانین و مقررات
                   </p>{' '}
+                  <TermsConditions />
                   را می پذیرم .
                 </label>
               </div>

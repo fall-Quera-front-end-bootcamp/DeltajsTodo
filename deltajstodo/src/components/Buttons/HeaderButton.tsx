@@ -11,7 +11,7 @@ function HeaderButton({ text, ...props }: HeaderButtonProps): JSX.Element {
   return (
     <button
       className={
-        'bg-brand-primary font-yekan mr-[6px] h-[40px] w-[95px] rounded-[6px] p-[10px] text-[14px] font-extrabold leading-[19.73px] text-[white]'
+        'mr-[6px] h-[40px] w-[95px] rounded-[6px] bg-brand-primary p-[10px] font-yekan text-[14px] font-extrabold leading-[19.73px] text-[white]'
       }
       onClick={props.onClickFunction}
     >

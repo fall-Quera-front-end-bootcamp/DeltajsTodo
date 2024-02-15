@@ -12,6 +12,9 @@ interface InputProps {
   placeholder?: string
   name: string
   validation: object
+  className?: string
+  dir?: string
+  inputDir?: string
 }
 
 const Input = ({
@@ -20,7 +23,10 @@ const Input = ({
   id,
   placeholder,
   name,
-  validation
+  validation,
+  className,
+  dir = 'rtl',
+  inputDir = 'ltr'
 }: InputProps): JSX.Element => {
   const {
     register,
@@ -31,10 +37,10 @@ const Input = ({
   const isInvalid = isFormInvalid(inputError)
 
   return (
-    <div dir="rtl">
+    <div dir={dir} className="relative flex flex-col gap-2">
       <label
         htmlFor=""
-        className="mb-2 block text-[14px] font-normal leading-[19.73px]"
+        className="block text-[14px] font-normal leading-[19.73px]"
       >
         {label}
       </label>
@@ -50,7 +56,8 @@ const Input = ({
         id={id}
         type={type}
         placeholder={placeholder}
-        className="w-[100%] rounded-[6px] border-[1px] border-solid border-gray-primary bg-[white] p-2"
+        dir={inputDir}
+        className={`w-[100%] rounded-[6px] border-[1px] border-solid border-gray-primary bg-[white] p-2  ${className}`}
         required
         {...register(name, validation)}
       />
@@ -65,7 +72,7 @@ interface InputErrorProps {
 const InputError = ({ message }: InputErrorProps): JSX.Element => {
   return (
     <motion.p
-      className="flex items-center gap-1 rounded-md bg-red-secondary px-2 font-semibold text-red-primary"
+      className="absolute left-[10px] top-[2px] flex items-center gap-1 rounded-md bg-red-secondary px-2 font-semibold text-red-primary"
       {...FRAMER_ERROR}
     >
       <MdError />
@@ -75,7 +82,7 @@ const InputError = ({ message }: InputErrorProps): JSX.Element => {
 }
 
 const FRAMER_ERROR = {
-  initial: { opacity: 0, y: 10 },
+  initial: { opacity: 0, x: -10, y: 10 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: 10 },
   transition: { duration: 0.2 }
