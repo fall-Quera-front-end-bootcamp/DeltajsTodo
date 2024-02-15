@@ -5,7 +5,7 @@ import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
-import { type FunctionComponent } from 'react'
+import { useState, type FunctionComponent } from 'react'
 import Checkbox from '../components/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
 import TermsConditions from '../components/Modals/TermsConditions'
@@ -16,6 +16,8 @@ interface RegisterProps {}
 const Register: FunctionComponent<RegisterProps> = () => {
   const navigate: NavigateFunction = useNavigate()
   const methods = useForm()
+
+  const [showBox, setShowBox] = useState(false)
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
@@ -65,6 +67,11 @@ const Register: FunctionComponent<RegisterProps> = () => {
     type: 'email'
   }
 
+  function showBoxFunction() {
+    console.log('Hello')
+    setShowBox((prev) => !prev)
+  }
+
   return (
     <>
       <Layout
@@ -91,11 +98,16 @@ const Register: FunctionComponent<RegisterProps> = () => {
               <div dir="rtl" className="flex  items-center  gap-2 ">
                 <Checkbox />
                 <label className=" text-base h-[23px] w-[190px] text-right font-extrabold leading-[22.5px] text-[#1E1E1E] ">
-                  <p className="inline  underline underline-offset-4">
+                  <p
+                    className="inline  underline underline-offset-4 cursor-pointer"
+                    onClick={showBoxFunction}
+                  >
                     {' '}
                     قوانین و مقررات
                   </p>{' '}
-                  <TermsConditions />
+                  <div className={`${showBox ? 'block' : 'hidden'}`}>
+                    <TermsConditions onClickFunction={showBoxFunction} />
+                  </div>
                   را می پذیرم .
                 </label>
               </div>

@@ -3,18 +3,23 @@ import { IoCloseOutline } from 'react-icons/io5' // react-icons
 import Button from '../Buttons/Button'
 
 interface TermProps {
-  className: string
+  className?: string
+  onClickFunction: any
 }
 
-const TermsConditions = ({ className }: TermProps): JSX.Element => {
+const TermsConditions = ({
+  className,
+  onClickFunction
+}: TermProps): JSX.Element => {
   return (
     <section
-      className={`peer absolute left-[50%] top-[50%] hidden h-screen w-full translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center ${className}`}
+      className={`peer absolute left-[50%] top-[50%] flex h-screen w-full translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center ${className}`}
     >
       <div className="relative flex w-[800px] flex-col items-center justify-center gap-[32px] rounded-[20px] bg-white p-6 px-[24px] pb-[32px] pt-[24px] ">
         <div className=" flex w-full flex-row-reverse items-center justify-center">
           <svg
-            className="absolute left-[16px] top-[16px]"
+            onClick={onClickFunction}
+            className="absolute left-[16px] top-[16px] cursor-pointer"
             width="32"
             height="33"
             viewBox="0 0 32 33"
