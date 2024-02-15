@@ -4,11 +4,12 @@ import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
+import { Link } from 'react-router-dom'
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
-  const [formVisible, setFormVisible] = useState(true)
+  const [formVisible] = useState(true)
 
   return (
     <Layout
@@ -22,17 +23,29 @@ const Login: FunctionComponent<LoginProps> = () => {
         </h1>
         <div className={`${formVisible ? 'mt-[32px]' : 'hidden'}`}>
           <Input name="نام کاربری" type="text" />
-          <Input name="رمز عبور" type="password" />
-          <div className="flex flex-row items-center justify-end"> 
-          <a href="">رمز عبور خود را فراموش کردی؟</a>
+          <Input name="رمز عبور" type="password" className={"mb-1"} />
+          <div className="flex flex-row items-center justify-end">
+            <Link className={"underline mb-6 text-[#1E1E1E] text-[14px]"} to={"/api/auth/forgetPassword"}>
+              رمز عبور خود را فراموش کردی؟
+            </Link>
           </div>
           <FormButton
             text="ورود"
             color="bg-brand-primary"
             onClickFunction={() => {}}
           />
-          <div className="flex flex-row items-center justify-center"> 
-          <button className="text-brand-primary font-yekan font-extrabold text-[14px] leading-[19.73px] rounded-[6px] p-[10px] h-[40px] ">ثبت نام</button>
+
+          <div className="flex flex-row items-center justify-center">
+            <Link to={"/api/auth/register"}>
+            <FormButton
+              text="ثبت نام"
+              color="transparent"
+              onClickFunction={() => {
+              }}
+              className={"w-auto mb-0"}
+            />
+            </Link>
+
             <span className="mr-2">ثبت‌نام نکرده‌ای؟</span>
 
           </div>
