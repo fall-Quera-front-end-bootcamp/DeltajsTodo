@@ -7,11 +7,6 @@
 // import ResetPassword from './pages/ResetPassword'
 // import LayOut from './pages/LayOut'
 import './dist/output.css'
-
-import Layout from './components/layout/Layout'
-import AuthCard from './components/Card/AuthCard'
-import Input from './components/Input/Input'
-import FormButton from './components/Buttons/FormButton'
 import { Route, Routes } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -50,7 +45,7 @@ function App(): JSX.Element {
           <Input name="نام کاربری" type="password" />
         </AuthCard>
       </Layout>} */}
-      
+      {/* {<TermsConditions />} */}
 
       <Routes>
         <Route path="api/auth/login" element={<Login />} />
