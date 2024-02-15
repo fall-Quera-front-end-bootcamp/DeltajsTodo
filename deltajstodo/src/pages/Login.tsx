@@ -12,7 +12,7 @@ const Login: FunctionComponent<LoginProps> = () => {
       </div>
       <div>
         <button>
-          <NavLink to="/api/auth/register">Click To Register</NavLink>
+          <NavLink to="/api/auth/register"></NavLink>
         </button>
       </div>
       <div>
