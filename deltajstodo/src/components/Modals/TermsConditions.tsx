@@ -1,9 +1,7 @@
 import '../../dist/output.css'
-import { IoCloseOutline } from 'react-icons/io5' // react-icons
-import Button from '../Buttons/Button'
 
 interface TermProps {
-  className: string
+  className?: string
 }
 
 const TermsConditions = ({ className }: TermProps): JSX.Element => {

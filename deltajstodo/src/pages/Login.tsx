@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-import { useState, type FunctionComponent } from 'react'
+import {
+  useState,
+  type FunctionComponent,
+  type SetStateAction,
+  type Dispatch
+} from 'react'
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
@@ -17,6 +22,7 @@ const Login: FunctionComponent<LoginProps> = () => {
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
+    methods.reset()
   })
 
   const [formVisible, setFormVisible] = useState(true)
@@ -84,7 +90,7 @@ const Login: FunctionComponent<LoginProps> = () => {
             className={`${formVisible ? 'mt-[32px]' : 'hidden'}`}
           >
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
                 <Input {...userNameProps} />
                 <div className="flex flex-col gap-2">
                   <Input {...userPasswordProps} />
@@ -98,7 +104,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
                 <FormButton
                   text="ورود"
                   color="bg-brand-primary"

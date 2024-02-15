@@ -4,12 +4,53 @@ import AuthCard from '../components/Card/AuthCard'
 import FormButton from '../components/Buttons/FormButton'
 import Input from '../components/Input/Input'
 import { useNavigate } from 'react-router-dom'
+import { FormProvider, useForm } from 'react-hook-form'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ResetPasswordProps {}
 
 const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
   const navigate = useNavigate()
+  const methods = useForm()
+
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data)
+  })
+
+  // userPassword input Props
+  const userPasswordPropsFirst = {
+    name: 'رمز عبور جدید را وارد کنید',
+    validation: {
+      required: {
+        value: true,
+        message: 'لطفا رمز عبور جدید خود را وارد کنید'
+      },
+      minLength: {
+        value: 6,
+        message: 'باید بیشتر از ۸ کاراکتر باشد'
+      }
+    },
+    id: 'password',
+    label: 'رمز عبور جدید را وارد کنید',
+    type: 'password'
+  }
+
+  const userPasswordPropsSecond = {
+    name: 'تکرار رمز عبور',
+    validation: {
+      required: {
+        value: true,
+        message: 'لطفا تکرار رمز عبور جدید خود را وارد کنید'
+      },
+      minLength: {
+        value: 6,
+        message: 'باید بیشتر از ۸ کاراکتر باشد'
+      }
+    },
+    id: 'password',
+    label: 'تکرار رمز عبور ',
+    type: 'password'
+  }
   return (
     <>
       <Layout
@@ -23,18 +64,28 @@ const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
           <h1 className="text-center font-yekan text-headingl font-extrabold">
             تغییر رمز عبور
           </h1>
-          <div className="flex flex-col gap-4">
-            <Input name="رمز عبور جدید را وارد کنید" type="password" />
-            <Input name="رمز عبور" type="password" />
-            <div className="">
-              <FormButton
-                className="h-[48px]"
-                text="اعمال تغییرات"
-                color="bg-brand-primary"
-                onClickFunction={() => {}}
-              />
-            </div>
-          </div>
+          <FormProvider {...methods}>
+            <form
+              noValidate
+              autoComplete="off"
+              onSubmit={(e) => {
+                e.preventDefault()
+              }}
+            >
+              <div className="flex flex-col gap-4">
+                <Input {...userPasswordPropsFirst} />
+                <Input {...userPasswordPropsSecond} />
+                <div className="">
+                  <FormButton
+                    className="h-[48px]"
+                    text="اعمال تغییرات"
+                    color="bg-brand-primary"
+                    onClickFunction={onSubmit}
+                  />
+                </div>
+              </div>
+            </form>
+          </FormProvider>
         </AuthCard>
       </Layout>
     </>

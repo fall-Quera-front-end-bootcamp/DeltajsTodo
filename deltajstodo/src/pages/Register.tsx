@@ -5,7 +5,7 @@ import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
-import { type FunctionComponent } from 'react'
+import { useState, type FunctionComponent } from 'react'
 import Checkbox from '../components/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
 import TermsConditions from '../components/Modals/TermsConditions'
@@ -16,9 +16,12 @@ interface RegisterProps {}
 const Register: FunctionComponent<RegisterProps> = () => {
   const navigate: NavigateFunction = useNavigate()
   const methods = useForm()
+  // const [success, setSuccess] = useState(false)
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
+    methods.reset()
+    // setSuccess(true)
   })
 
   // userName input Props
