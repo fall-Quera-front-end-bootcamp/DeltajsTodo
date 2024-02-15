@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { useState, type FunctionComponent } from 'react'
 
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
-import { useNavigate } from 'react-router-dom'
+import { type NavigateFunction, useNavigate } from 'react-router-dom'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}
@@ -20,7 +21,9 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
     <Layout
       buttonText={'ورود'}
       linkText={'قبلا ثبت‌نام کرده‌ای؟'}
-      onClickFunction={() => {}}
+      onClickFunction={() => {
+        navigate('/api/auth/login')
+      }}
     >
       <AuthCard>
         <h1 className="font-yekan font-extrabold text-[32px] leading-[45.09px] text-center">

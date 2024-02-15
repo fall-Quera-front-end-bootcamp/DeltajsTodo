@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "eslint-config-standard": "^17.1.0",
+    "framer-motion": "^11.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",

@@ -7,12 +7,14 @@
 // import ResetPassword from './pages/ResetPassword'
 // import LayOut from './pages/LayOut'
 import './dist/output.css'
-import { Route, Routes } from 'react-router-dom'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import ForgetPassword from './pages/ForgetPassword'
-import ResetPassword from './pages/ResetPassword'
-import NotFound from './pages/NotFound'
+//import { Route, Routes } from 'react-router-dom'
+//import Login from './pages/Login'
+//import Register from './pages/Register'
+//import ForgetPassword from './pages/ForgetPassword'
+//import ResetPassword from './pages/ResetPassword'
+//import NotFound from './pages/NotFound'
+import LocationProvider from './components/LocationProvider/LocationProvider'
+import RoutesWithAnimation from './components/RoutesWithAnimation/RoutesWithAnimation'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
@@ -47,14 +49,18 @@ function App(): JSX.Element {
       </Layout>} */}
       {/* {<TermsConditions />} */}
 
-      <Routes>
+      {/* <Routes>
         <Route path="api/auth/login" element={<Login />} />
         <Route path="/" element={<Login />} />
         <Route path="api/auth/register" element={<Register />} />
         <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
         <Route path="api/auth/resetPassword" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes> */}
+
+      <LocationProvider>
+        <RoutesWithAnimation />
+      </LocationProvider>
     </>
   )
 }
