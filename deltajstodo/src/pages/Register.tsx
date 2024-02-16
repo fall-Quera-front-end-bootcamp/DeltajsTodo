@@ -9,6 +9,7 @@ import Checkbox from '../components/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
 import TermsConditions from '../components/Modals/TermsConditions'
 import Button from '../components/Buttons/Button'
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
@@ -89,7 +90,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
               onSubmit={(e) => e.preventDefault()}
               className="flex flex-col  gap-2"
             >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-center ">
                   <h1 className="h-[45px] w-[382px]  text-right text-[32px] font-extrabold leading-[45.09px] text-[#1E1E1E]">
                     ثبت‌نام در کوئرا تسک منیجر
@@ -100,17 +101,23 @@ const Register: FunctionComponent<RegisterProps> = () => {
                 <Input {...userPasswordProps} />
                 <div dir="rtl" className="flex items-center gap-2 ">
                   <Checkbox />
-                  <label className=" text-base h-[23px] w-[190px] text-right font-extrabold leading-[22.5px] text-[#1E1E1E] ">
+                  <label className="text-base h-[23px] w-[190px] text-right font-normal leading-[22.5px] text-[#1E1E1E] ">
                     <p
-                      className="inline  cursor-pointer underline underline-offset-4"
+                      className="inline cursor-pointer underline underline-offset-4"
                       onClick={showBoxFunction}
                     >
                       {' '}
                       قوانین و مقررات
                     </p>{' '}
-                    <div className={`${showBox ? 'block' : 'hidden'}`}>
-                      <TermsConditions onClickFunction={showBoxFunction} />
-                    </div>
+                    <AnimatePresence>
+                      <MotionConfig transition={{ duration: 1 }}>
+                        <motion.div
+                          className={`${showBox ? 'block' : 'hidden'}`}
+                        >
+                          <TermsConditions onClickFunction={showBoxFunction} />
+                        </motion.div>
+                      </MotionConfig>
+                    </AnimatePresence>
                     را می پذیرم .
                   </label>
                 </div>
@@ -132,3 +139,10 @@ const Register: FunctionComponent<RegisterProps> = () => {
 }
 
 export default Register
+
+const framerMotion = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+  transition: { duration: 0.5 }
+}
