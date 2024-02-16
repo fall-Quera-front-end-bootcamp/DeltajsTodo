@@ -9,7 +9,7 @@ import Checkbox from '../components/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
 import TermsConditions from '../components/Modals/TermsConditions'
 import Button from '../components/Buttons/Button'
-import { AnimatePresence,motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
