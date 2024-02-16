@@ -1,14 +1,17 @@
-const CalendarSvgIcon = ({
+const CalendarIconSvg = ({
   size = '32',
-  color = '#323232'
+  color = '#323232',
+  className
 }: {
   size?: string
   color?: string
+  className?: string
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes
   return (
     <svg
+      className={className}
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}
@@ -56,4 +59,4 @@ const CalendarSvgIcon = ({
   )
 }
 
-export default CalendarSvgIcon
+export default CalendarIconSvg
