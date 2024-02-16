@@ -40,7 +40,7 @@ const Input = ({
     <div dir={dir} className="relative flex flex-col gap-2">
       <label
         htmlFor=""
-        className="block text-[14px] font-normal leading-[19.73px]"
+        className="block text-[16px] font-normal leading-[19.73px]"
       >
         {label}
       </label>

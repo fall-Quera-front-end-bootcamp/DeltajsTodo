@@ -17,12 +17,17 @@ const Register: FunctionComponent<RegisterProps> = () => {
   const navigate: NavigateFunction = useNavigate()
   const methods = useForm()
   // const [success, setSuccess] = useState(false)
+  const [showBox, setShowBox] = useState(false)
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
     methods.reset()
     // setSuccess(true)
   })
+
+  function showBoxFunction(): void {
+    setShowBox((prev) => !prev)
+  }
 
   // userName input Props
   const userNameProps = {
@@ -94,11 +99,16 @@ const Register: FunctionComponent<RegisterProps> = () => {
               <div dir="rtl" className="flex  items-center  gap-2 ">
                 <Checkbox />
                 <label className=" text-base h-[23px] w-[190px] text-right font-extrabold leading-[22.5px] text-[#1E1E1E] ">
-                  <p className="inline  underline underline-offset-4">
+                  <p
+                    onClick={showBoxFunction}
+                    className="inline cursor-pointer underline underline-offset-4"
+                  >
                     {' '}
                     قوانین و مقررات
                   </p>{' '}
-                  <TermsConditions />
+                  <div className={`${showBox ? 'block' : 'hidden'}`}>
+                    <TermsConditions onClickFunction={showBoxFunction} />
+                  </div>
                   را می پذیرم .
                 </label>
               </div>

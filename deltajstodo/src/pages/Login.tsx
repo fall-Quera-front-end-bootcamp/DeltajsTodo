@@ -90,13 +90,13 @@ const Login: FunctionComponent<LoginProps> = () => {
             className={`${formVisible ? 'mt-[32px]' : 'hidden'}`}
           >
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-6">
                 <Input {...userNameProps} />
                 <div className="flex flex-col gap-2">
                   <Input {...userPasswordProps} />
-                  <div className="mt-2 flex flex-row items-center justify-end">
+                  <div className="flex flex-row items-center justify-end text-bodys">
                     <Link
-                      className="border-b-[1px]"
+                      className="border-b-[1px] font-thin text-[#1e1e1e]"
                       to={'/api/auth/forgetPassword'}
                     >
                       رمز عبور خود را فراموش کردی؟
@@ -104,20 +104,20 @@ const Login: FunctionComponent<LoginProps> = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-6">
                 <FormButton
                   text="ورود"
                   color="bg-brand-primary"
                   onClickFunction={onSubmit}
                 />
-                <div className="flex flex-row items-center justify-center">
+                <div className="flex flex-row items-center justify-center text-[19px]">
                   <button
                     onClick={() => navigate('/api/auth/register')}
-                    className="h-[40px] rounded-[6px] p-[10px] font-yekan text-[14px] font-extrabold leading-[19.73px] text-brand-primary "
+                    className="h-[40px] rounded-[6px] p-[10px] font-extrabold leading-[19.73px] text-brand-primary"
                   >
-                    ثبت نام
+                    ثبت‌نام
                   </button>
-                  <span className="mr-2">ثبت‌نام نکرده‌ای؟</span>
+                  <span className=" font-thin">ثبت‌نام نکرده‌ای؟</span>
                 </div>
               </div>
             </div>
