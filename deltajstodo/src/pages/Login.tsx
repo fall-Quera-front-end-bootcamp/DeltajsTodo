@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-import { useState, type FunctionComponent } from 'react'
+import {
+  useState,
+  type FunctionComponent,
+  type SetStateAction,
+  type Dispatch
+} from 'react'
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
@@ -17,6 +22,7 @@ const Login: FunctionComponent<LoginProps> = () => {
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
+    methods.reset()
   })
 
   const [formVisible, setFormVisible] = useState(true)
@@ -88,9 +94,9 @@ const Login: FunctionComponent<LoginProps> = () => {
                 <Input {...userNameProps} />
                 <div className="flex flex-col gap-2">
                   <Input {...userPasswordProps} />
-                  <div className="mt-2 flex flex-row items-center justify-end">
+                  <div className="flex flex-row items-center justify-end text-bodys">
                     <Link
-                      className="border-b-[1px]"
+                      className="border-b-[1px] font-thin text-[#1e1e1e]"
                       to={'/api/auth/forgetPassword'}
                     >
                       رمز عبور خود را فراموش کردی؟
@@ -104,14 +110,14 @@ const Login: FunctionComponent<LoginProps> = () => {
                   color="bg-brand-primary"
                   onClickFunction={onSubmit}
                 />
-                <div className="flex flex-row items-center justify-center">
+                <div className="flex flex-row items-center justify-center text-[19px]">
                   <button
                     onClick={() => navigate('/api/auth/register')}
-                    className="h-[40px] rounded-[6px] p-[10px] font-yekan text-[14px] font-extrabold leading-[19.73px] text-brand-primary "
+                    className="h-[40px] rounded-[6px] p-[10px] font-extrabold leading-[19.73px] text-brand-primary"
                   >
-                    ثبت نام
+                    ثبت‌نام
                   </button>
-                  <span className="mr-2">ثبت‌نام نکرده‌ای؟</span>
+                  <span className=" font-thin">ثبت‌نام نکرده‌ای؟</span>
                 </div>
               </div>
             </div>

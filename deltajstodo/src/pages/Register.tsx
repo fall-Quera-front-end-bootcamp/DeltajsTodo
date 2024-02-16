@@ -16,12 +16,20 @@ interface RegisterProps {}
 const Register: FunctionComponent<RegisterProps> = () => {
   const navigate: NavigateFunction = useNavigate()
   const methods = useForm()
+  // const [success, setSuccess] = useState(false)
+  const [showBox, setShowBox] = useState(false)
 
   const [showBox, setShowBox] = useState(false)
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
+    methods.reset()
+    // setSuccess(true)
   })
+
+  function showBoxFunction(): void {
+    setShowBox((prev) => !prev)
+  }
 
   // userName input Props
   const userNameProps = {

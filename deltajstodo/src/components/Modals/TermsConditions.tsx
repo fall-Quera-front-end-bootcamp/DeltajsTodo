@@ -46,7 +46,7 @@ const TermsConditions = ({
           </h1>
         </div>
         <div className="flex flex-col gap-8">
-          <p className="leading-[24px] text-right text-[16px] font-normal text-[#1E1E1E] ">
+          <p className="text-right text-[16px] font-normal leading-[24px] text-[#1E1E1E] ">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
             ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
@@ -82,7 +82,7 @@ const TermsConditions = ({
           </ul>
         </div>
       </div>{' '}
-      <div className="absolute -z-[1] h-screen w-full bg-gray-dark/50 backdrop-blur-md"></div>
+      <div className="absolute -z-10 h-screen w-full bg-gray-dark/50 backdrop-blur-md"></div>
     </section>
   )
 }
