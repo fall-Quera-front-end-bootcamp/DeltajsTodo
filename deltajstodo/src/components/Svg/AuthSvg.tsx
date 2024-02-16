@@ -1,8 +1,8 @@
 import '../../dist/output.css'
 
-function AuthSvg(): JSX.Element {
+function AuthSvg (): JSX.Element {
   return (
-    <div className="fixed bottom-0 w-[100%] h-[60vh] z-[-1000]">
+    <div className="fixed bottom-0 z-[-1000] h-[60vh] w-[100%]">
       <svg
         width="100%"
         height="100%"

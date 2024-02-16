@@ -2,11 +2,11 @@ import '../../dist/output.css'
 import ShareButton from '../Buttons/ShareButton'
 import TaskMoreOption from './TaskMoreOption'
 
-function TaskMore(): JSX.Element {
+function TaskMore (): JSX.Element {
   return (
     <div
       dir="rtl"
-      className="bg-[white] p-3 rounded-lg flex flex-col gap-4 w-[184px]"
+      className="flex w-[184px] flex-col gap-4 rounded-lg bg-[white] p-3"
     >
       <TaskMoreOption
         color="text-[black]"

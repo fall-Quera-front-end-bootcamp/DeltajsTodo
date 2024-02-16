@@ -11,12 +11,12 @@ interface ProjectMoreOptionProps {
   type: string
 }
 
-function ProjectMoreOption({
+function ProjectMoreOption ({
   color,
   text,
   type
 }: ProjectMoreOptionProps): JSX.Element {
-  function iconChoose() {
+  function iconChoose (): JSX.Element {
     switch (type) {
       case 'addProject':
         return <EditIconSvg />
@@ -33,10 +33,10 @@ function ProjectMoreOption({
     }
   }
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       {iconChoose()}
       <span
-        className={`font-yekan font-normal text-[14px] ${color} leading-[19.73px]`}
+        className={`font-yekan text-[14px] font-normal ${color} leading-[19.73px]`}
       >
         {text}
       </span>

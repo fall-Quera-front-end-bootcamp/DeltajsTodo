@@ -2,11 +2,11 @@ import '../../dist/output.css'
 import RedCross from '../Svg/RedCross'
 import PriorityOption from './PriorityOption'
 
-function Priority(): JSX.Element {
+function Priority (): JSX.Element {
   return (
     <div
       dir="rtl"
-      className="bg-[white] w-max p-3 rounded-lg flex flex-col gap-4"
+      className="flex w-max flex-col gap-4 rounded-lg bg-[white] p-3"
     >
       <div className="flex flex-col gap-4">
         <PriorityOption color="#FA5252" text="فوری" />
@@ -14,9 +14,9 @@ function Priority(): JSX.Element {
         <PriorityOption color="#15AABF" text="متوسط" />
         <PriorityOption color="#82C91E" text="پایین" />
       </div>
-      <div className="flex gap-2 items-center w-[142px]">
+      <div className="flex w-[142px] items-center gap-2">
         <RedCross />
-        <span className="font-yekan font-normal text-[14px] text-[#534D60] leading-[19.73px]">
+        <span className="font-yekan text-[14px] font-normal leading-[19.73px] text-[#534D60]">
           حذف اولویت
         </span>
       </div>

@@ -1,6 +1,6 @@
 import '../../dist/output.css'
 
-function LinkCopyIconSvg(): JSX.Element {
+function LinkCopyIconSvg (): JSX.Element {
   return (
     <svg
       width="20"

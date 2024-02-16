@@ -10,12 +10,12 @@ interface BordMoreOptionProps {
   type: string
 }
 
-function BordMoreOption({
+function BordMoreOption ({
   color,
   text,
   type
 }: BordMoreOptionProps): JSX.Element {
-  function iconChoose() {
+  function iconChoose (): JSX.Element | undefined {
     switch (type) {
       case 'edit':
         return <EditIconSvg />
@@ -28,10 +28,10 @@ function BordMoreOption({
     }
   }
   return (
-    <div className="flex gap-2 items-center w-[142px]">
+    <div className="flex w-[142px] items-center gap-2">
       {iconChoose()}
       <span
-        className={`font-yekan font-normal text-[14px] ${color} leading-[19.73px]`}
+        className={`font-yekan text-[14px] font-normal ${color} leading-[19.73px]`}
       >
         {text}
       </span>

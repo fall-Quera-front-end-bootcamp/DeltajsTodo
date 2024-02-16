@@ -6,11 +6,11 @@ interface PriorityOptionProps {
   text: string
 }
 
-function PriorityOption({ color, text }: PriorityOptionProps): JSX.Element {
+function PriorityOption ({ color, text }: PriorityOptionProps): JSX.Element {
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       <PriorityFlag color={color} />
-      <span className="font-yekan font-normal text-[14px] leading-[19.73px]">
+      <span className="font-yekan text-[14px] font-normal leading-[19.73px]">
         {text}
       </span>
     </div>

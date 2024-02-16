@@ -1,20 +1,12 @@
 import '../../dist/output.css'
-// import { IoCloseOutline } from 'react-icons/io5' // react-icons
-// import Button from '../Buttons/Button'
 
 interface TermProps {
-  className?: string
   onClickFunction: any
 }
 
-const TermsConditions = ({
-  className,
-  onClickFunction
-}: TermProps): JSX.Element => {
+const TermsConditions = ({ onClickFunction }: TermProps): JSX.Element => {
   return (
-    <section
-      className={`peer absolute left-[50%] top-[50%] flex h-screen w-full translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center ${className}`}
-    >
+    <div className="absolute left-[50%] top-[50%] flex h-screen w-full translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center">
       <div className="relative flex w-[800px] flex-col items-center justify-center gap-[32px] rounded-[20px] bg-white p-6 px-[24px] pb-[32px] pt-[24px] ">
         <div className=" flex w-full flex-row-reverse items-center justify-center">
           <svg
@@ -41,12 +33,12 @@ const TermsConditions = ({
               strokeLinejoin="round"
             />
           </svg>
-          <h1 className="text-right text-headingl text-[#1E1E1E]">
+          <h1 className="text-right text-headingl font-[800] leading-[45px] text-[#1E1E1E]">
             قوانین و مقررات
           </h1>
         </div>
-        <div className="flex flex-col gap-8">
-          <p className="text-right text-[16px] font-normal leading-[24px] text-[#1E1E1E] ">
+        <div className="flex flex-col gap-8 text-justify text-[20px] font-thin">
+          <p className="text-right leading-[24px] text-[#1E1E1E] ">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
             ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
@@ -54,36 +46,37 @@ const TermsConditions = ({
             زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و
             متخصصان را می طلبد.
           </p>
-          <ul className="text-right ">
-            <li className="list-disc text-right">
+
+          <ul className="mr-7 flex list-disc  flex-col gap-8 text-right">
+            <li className="">
               لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
               استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
               در ستون و سطرآنچنان که لازم است،{' '}
             </li>
-            <li className="list-disc text-right">
+            <li className="">
               و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف
               بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد
               گذشته حال و آینده،{' '}
             </li>
-            <li className="list-disc text-right">
+            <li className="">
               شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت
               بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ
               پیشرو در زبان فارسی ایجاد کرد،
             </li>
-            <li className="list-disc text-right">
+            <li className="">
               در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه
               راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل
               حروفچینی دستاوردهای اصلی، و{' '}
             </li>
-            <li className="list-disc text-right">
+            <li className="">
               جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده
               قرار گیرد.
             </li>
           </ul>
         </div>
       </div>{' '}
-      <div className="absolute -z-10 h-screen w-full bg-gray-dark/50 backdrop-blur-md"></div>
-    </section>
+      <div className="absolute -z-10 h-screen w-full bg-gray-dark/70 backdrop-blur-md"></div>
+    </div>
   )
 }
 

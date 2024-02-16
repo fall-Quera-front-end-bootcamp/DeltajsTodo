@@ -10,12 +10,12 @@ interface TaskMoreOptionProps {
   type: string
 }
 
-function TaskMoreOption({
+function TaskMoreOption ({
   color,
   text,
   type
 }: TaskMoreOptionProps): JSX.Element {
-  function iconChoose() {
+  function iconChoose (): JSX.Element {
     switch (type) {
       case 'addTask':
         return <EditIconSvg />
@@ -30,10 +30,10 @@ function TaskMoreOption({
     }
   }
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       {iconChoose()}
       <span
-        className={`font-yekan font-normal text-[14px] ${color} leading-[19.73px]`}
+        className={`font-yekan text-[14px] font-normal ${color} leading-[19.73px]`}
       >
         {text}
       </span>

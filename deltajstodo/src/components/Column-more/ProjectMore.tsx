@@ -2,11 +2,11 @@ import '../../dist/output.css'
 import ShareButton from '../Buttons/ShareButton'
 import ProjectMoreOption from './ProjectMoreOption'
 
-function ProjectMore(): JSX.Element {
+function ProjectMore (): JSX.Element {
   return (
     <div
       dir="rtl"
-      className="bg-[white] w-[193px] p-3 rounded-lg flex flex-col gap-4"
+      className="flex w-[193px] flex-col gap-4 rounded-lg bg-[white] p-3"
     >
       <ProjectMoreOption
         color="text-[black]"
