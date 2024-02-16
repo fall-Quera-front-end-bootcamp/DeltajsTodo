@@ -100,8 +100,8 @@ const Register: FunctionComponent<RegisterProps> = () => {
                 <Checkbox />
                 <label className=" text-base h-[23px] w-[190px] text-right font-extrabold leading-[22.5px] text-[#1E1E1E] ">
                   <p
+                    className="inline  underline underline-offset-4 cursor-pointer"
                     onClick={showBoxFunction}
-                    className="inline cursor-pointer underline underline-offset-4"
                   >
                     {' '}
                     قوانین و مقررات
