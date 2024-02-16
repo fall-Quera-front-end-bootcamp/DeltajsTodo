@@ -3,9 +3,9 @@ import { useState, type FunctionComponent } from 'react'
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
-import FormButton from '../components/Buttons/FormButton'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
+import Button from '../components/Buttons/Button'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}
@@ -16,9 +16,9 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
 
   const methods = useForm()
 
-  const onSubmit = methods.handleSubmit((data) => {
+  const onSubmit = methods.handleSubmit(() => {
     setFormVisible(false)
-    console.log(data)
+    // console.log(data)
   })
   // userEmail input Props
   const userEmailProps = {
@@ -57,18 +57,25 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
               className={`${formVisible ? 'mt-[32px] flex flex-col gap-4' : 'hidden'}`}
             >
               <Input {...userEmailProps} />
-              <FormButton
-                text="دریافت ایمیل بازیابی رمز عبور"
-                color="bg-brand-primary"
+              <Button
+                formButtonLogin
+                formButtonLoginPrimary
+                textWhite
                 onClickFunction={onSubmit}
-              />
-              <FormButton
-                text="بازگشت"
-                color="transparent"
+              >
+                دریافت ایمیل بازیابی رمز عبور
+              </Button>
+              <Button
+                formButtonLogin
+                formButtonLoginPrimary
+                bgTransparent
+                textBrandPrimary
                 onClickFunction={() => {
                   navigate('/api/auth/login')
                 }}
-              />
+              >
+                بازگشت
+              </Button>
             </div>
             <div className={`${formVisible ? 'hidden' : 'mt-[32px]'}`}>
               <span className="block text-center font-yekan text-[14px] font-normal leading-[19.73px]">

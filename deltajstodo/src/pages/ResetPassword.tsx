@@ -1,10 +1,10 @@
 import { type FunctionComponent } from 'react'
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
-import FormButton from '../components/Buttons/FormButton'
 import Input from '../components/Input/Input'
 import { useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
+import Button from '../components/Buttons/Button'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ResetPasswordProps {}
@@ -76,12 +76,14 @@ const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
                 <Input {...userPasswordPropsFirst} />
                 <Input {...userPasswordPropsSecond} />
                 <div className="">
-                  <FormButton
-                    className="h-[48px]"
-                    text="اعمال تغییرات"
-                    color="bg-brand-primary"
+                  <Button
+                    formButtonLogin
+                    formButtonLoginPrimary
+                    textWhite
                     onClickFunction={onSubmit}
-                  />
+                  >
+                    اعمال تغییرات
+                  </Button>
                 </div>
               </div>
             </form>
