@@ -4,12 +4,11 @@ import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
-import { useState, type FunctionComponent } from 'react'
+import { useState, type FunctionComponent, useMemo } from 'react'
 import Checkbox from '../components/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
 import TermsConditions from '../components/Modals/TermsConditions'
 import Button from '../components/Buttons/Button'
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
@@ -27,8 +26,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
     // setSuccess(true)
   })
 
-  function showBoxFunction (): void {
+  function showBoxFunction(): void {
     setShowBox((prev) => !prev)
+    console.log('click')
   }
 
   // userName input Props
@@ -88,7 +88,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
           <FormProvider {...methods}>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="flex flex-col  gap-2"
+              className="flex flex-col gap-2"
             >
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-center ">
@@ -109,15 +109,6 @@ const Register: FunctionComponent<RegisterProps> = () => {
                       {' '}
                       قوانین و مقررات
                     </p>{' '}
-                    <AnimatePresence>
-                      <MotionConfig transition={{ duration: 1 }}>
-                        <motion.div
-                          className={`${showBox ? 'block' : 'hidden'}`}
-                        >
-                          <TermsConditions onClickFunction={showBoxFunction} />
-                        </motion.div>
-                      </MotionConfig>
-                    </AnimatePresence>
                     را می پذیرم .
                   </label>
                 </div>
@@ -133,16 +124,10 @@ const Register: FunctionComponent<RegisterProps> = () => {
             </form>
           </FormProvider>
         </AuthCard>
+        {showBox && <TermsConditions onClickFunction={showBoxFunction} />}
       </Layout>
     </>
   )
 }
 
 export default Register
-
-const framerMotion = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.5 }
-}
