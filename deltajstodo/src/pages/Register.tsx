@@ -1,18 +1,76 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable tailwindcss/no-custom-classname */
-// import { NavLink } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import FormButton from '../components/Buttons/FormButton'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
-import { type FunctionComponent } from 'react'
+import { useState, type FunctionComponent } from 'react'
+import Checkbox from '../components/Checkbox'
+import { FormProvider, useForm } from 'react-hook-form'
+import TermsConditions from '../components/Modals/TermsConditions'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
 
 const Register: FunctionComponent<RegisterProps> = () => {
   const navigate: NavigateFunction = useNavigate()
+  const methods = useForm()
+
+  const [showBox, setShowBox] = useState(false)
+
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data)
+  })
+
+  // userName input Props
+  const userNameProps = {
+    name: 'نام کاربری',
+    validation: {
+      required: {
+        value: true,
+        message: 'لطفا نام کاربری خود را وارد کنید'
+      }
+    },
+    id: 'text',
+    label: 'نام کاربری',
+    type: 'text'
+  }
+  // userPassword input Props
+  const userPasswordProps = {
+    name: 'رمز عبور',
+    validation: {
+      required: {
+        value: true,
+        message: 'لطفا رمز عبور خود را وارد کنید'
+      },
+      minLength: {
+        value: 6,
+        message: 'باید بیشتر از ۸ کاراکتر باشد'
+      }
+    },
+    id: 'password',
+    label: 'رمز عبور',
+    type: 'password'
+  }
+  // userEmail input Props
+  const userEmailProps = {
+    name: 'ایمیل',
+    validation: {
+      required: {
+        value: true,
+        message: 'لطفا ایمیل خود را وارد کنید'
+      }
+    },
+    id: 'email',
+    label: 'ایمیل',
+    type: 'email'
+  }
+
+  function showBoxFunction() {
+    console.log('Hello')
+    setShowBox((prev) => !prev)
+  }
 
   return (
     <>
@@ -24,44 +82,45 @@ const Register: FunctionComponent<RegisterProps> = () => {
         }}
       >
         <AuthCard>
-          <div className="flex flex-col  gap-2">
-            <div className="flex items-center justify-center ">
-              <h1 className="h-[45px] w-[382px]  text-right text-[32px] font-extrabold leading-[45.09px] text-[#1E1E1E]">
-                ثبت‌نام در کوئرا تسک منیجر
-              </h1>
-            </div>
-
-            <Input name="نام کاربری" type="text" />
-            <Input name="ایمیل" type="email" />
-            <Input name="رمز عبور" type="password" />
-            <div dir="rtl" className="flex  items-center  gap-2 ">
-              <input
-                className="size-[20px]  rounded border-[#999999]  bg-[#999999] "
-                type="checkbox"
-              ></input>{' '}
-              <label className=" h-[23px] w-[190px] text-right text-base font-extrabold leading-[22.5px] text-[#1E1E1E] ">
-                <p className="inline  underline underline-offset-4">
-                  {' '}
-                  قوانین و مقررات
-                </p>{' '}
-                را می پذیرم .
-              </label>
-            </div>
-            <FormButton
-              color={'bg-brand-primary'}
-              text={'ثبت نام'}
-              height="h-[48px]"
-            />
-          </div>
+          <FormProvider {...methods}>
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="flex flex-col  gap-2"
+            >
+              <div className="flex items-center justify-center ">
+                <h1 className="h-[45px] w-[382px]  text-right text-[32px] font-extrabold leading-[45.09px] text-[#1E1E1E]">
+                  ثبت‌نام در کوئرا تسک منیجر
+                </h1>
+              </div>
+              <Input {...userNameProps} />
+              <Input {...userEmailProps} />
+              <Input {...userPasswordProps} />
+              <div dir="rtl" className="flex  items-center  gap-2 ">
+                <Checkbox />
+                <label className=" text-base h-[23px] w-[190px] text-right font-extrabold leading-[22.5px] text-[#1E1E1E] ">
+                  <p
+                    className="inline  underline underline-offset-4 cursor-pointer"
+                    onClick={showBoxFunction}
+                  >
+                    {' '}
+                    قوانین و مقررات
+                  </p>{' '}
+                  <div className={`${showBox ? 'block' : 'hidden'}`}>
+                    <TermsConditions onClickFunction={showBoxFunction} />
+                  </div>
+                  را می پذیرم .
+                </label>
+              </div>
+              <FormButton
+                color={'bg-brand-primary'}
+                text={'ثبت نام'}
+                className="h-[48px] bg-brand-primary"
+                onClickFunction={onSubmit}
+              />
+            </form>
+          </FormProvider>
         </AuthCard>
       </Layout>
-
-      {/* {<div>
-        <p>Registering...</p>
-      </div>
-      <button>
-        <NavLink to="/api/auth/Login">Click To Login</NavLink>
-      </button>} */}
     </>
   )
 }

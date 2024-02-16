@@ -1,29 +1,58 @@
 import '../../dist/output.css'
-import { IoCloseOutline } from 'react-icons/io5' // react-icons
+// import { IoCloseOutline } from 'react-icons/io5' // react-icons
+// import Button from '../Buttons/Button'
 
-const TermsConditions = (): JSX.Element => {
+interface TermProps {
+  className?: string
+  onClickFunction: any
+}
+
+const TermsConditions = ({
+  className,
+  onClickFunction
+}: TermProps): JSX.Element => {
   return (
-    <section className="flex h-screen flex-col items-center justify-center ">
-      <div className="h-[509px] w-[800px] p-6 flex flex-col items-center justify-center rounded-[20px] pt-[24px] pr-[24px] pb-[32px] pl-[24px] gap-[32px]  bg-gray-primary ">
-        <div className="flex items-center justify-between">
-          <IoCloseOutline className="w-[32px] h-[32px] text-[#323232] relative right-60 justify-center items-center " />
-          <h1 className="text-right w-[222px] h-[45px]  font-yekan text-headingl font-extrabold text-[#1E1E1E]">
+    <section
+      className={`peer absolute left-[50%] top-[50%] flex h-screen w-full translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center ${className}`}
+    >
+      <div className="relative flex w-[800px] flex-col items-center justify-center gap-[32px] rounded-[20px] bg-white p-6 px-[24px] pb-[32px] pt-[24px] ">
+        <div className=" flex w-full flex-row-reverse items-center justify-center">
+          <svg
+            onClick={onClickFunction}
+            className="absolute left-[16px] top-[16px] cursor-pointer"
+            width="32"
+            height="33"
+            viewBox="0 0 32 33"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.6666 11.1666L21.3333 21.8333"
+              stroke="#323232"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M21.3333 11.1666L10.6666 21.8333"
+              stroke="#323232"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <h1 className="text-right text-headingl text-[#1E1E1E]">
             قوانین و مقررات
           </h1>
         </div>
-        <div className="gap-[32px] w-[752px] h-[376px]">
-          <p className="text-right gap-4 text-[#1E1E1E] line-clamp-[24px] font-[400] ">
+        <div className="flex flex-col gap-8">
+          <p className="leading-[24px] text-right text-[16px] font-normal text-[#1E1E1E] ">
             لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
             استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
             ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
             و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای
             زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و
-            متخصصان را می طلبد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-            صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه
-            روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
-            تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی
-            می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت
-            فراوان جامعه و متخصصان را می طلبد،
+            متخصصان را می طلبد.
           </p>
           <ul className="text-right ">
             <li className="list-disc text-right">
@@ -52,7 +81,8 @@ const TermsConditions = (): JSX.Element => {
             </li>
           </ul>
         </div>
-      </div>
+      </div>{' '}
+      <div className="absolute -z-[1] h-screen w-full bg-gray-dark/50 backdrop-blur-md"></div>
     </section>
   )
 }
