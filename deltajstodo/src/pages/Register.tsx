@@ -4,11 +4,12 @@ import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
-import { useState, type FunctionComponent, useMemo } from 'react'
+import { useState, type FunctionComponent } from 'react'
 import Checkbox from '../components/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
 import TermsConditions from '../components/Modals/TermsConditions'
 import Button from '../components/Buttons/Button'
+import { AnimatePresence } from 'framer-motion'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
@@ -26,9 +27,8 @@ const Register: FunctionComponent<RegisterProps> = () => {
     // setSuccess(true)
   })
 
-  function showBoxFunction(): void {
+  function showBoxFunction (): void {
     setShowBox((prev) => !prev)
-    console.log('click')
   }
 
   // userName input Props
@@ -124,7 +124,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
             </form>
           </FormProvider>
         </AuthCard>
-        {showBox && <TermsConditions onClickFunction={showBoxFunction} />}
+        <AnimatePresence>
+          {showBox && <TermsConditions onClickFunction={showBoxFunction} />}
+        </AnimatePresence>
       </Layout>
     </>
   )
