@@ -27,7 +27,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
     // setSuccess(true)
   })
 
-  function showBoxFunction (): void {
+  function showBoxFunction(): void {
     setShowBox((prev) => !prev)
   }
 
@@ -86,7 +86,15 @@ const Register: FunctionComponent<RegisterProps> = () => {
       >
         <AuthCard>
           <FormProvider {...methods}>
-            <form
+            <motion.form
+              initial={{ opacity: 0, y: '25px' }}
+              animate={{ transform: 'translateY(0)', opacity: 1 }}
+              transition={{ duration: 1 }}
+              exit={{
+                opacity: 1,
+                transform: 'translateY(25px)',
+                transition: { duration: 1 }
+              }}
               onSubmit={(e) => e.preventDefault()}
               className="flex flex-col  gap-2"
             >
@@ -130,7 +138,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                   ثبت‌نام
                 </Button>
               </div>
-            </form>
+            </motion.form>
           </FormProvider>
         </AuthCard>
       </Layout>
