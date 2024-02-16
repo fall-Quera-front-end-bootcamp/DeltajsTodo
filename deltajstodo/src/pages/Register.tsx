@@ -27,7 +27,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
     // setSuccess(true)
   })
 
-  function showBoxFunction(): void {
+  function showBoxFunction (): void {
     setShowBox((prev) => !prev)
   }
 
@@ -132,7 +132,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
             </motion.form>
           </FormProvider>
         </AuthCard>
-        {showBox && <TermsConditions onClickFunction={showBoxFunction} />}
+        <AnimatePresence>
+          {showBox && <TermsConditions onClickFunction={showBoxFunction} />}
+        </AnimatePresence>
       </Layout>
     </>
   )
