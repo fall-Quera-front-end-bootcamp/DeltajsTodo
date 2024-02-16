@@ -7,6 +7,7 @@ export default {
     },
     colors: {
       white: 'white',
+      black: 'black',
       transparent: 'transparent',
       gray: {
         secondary: '#F1F3F5',

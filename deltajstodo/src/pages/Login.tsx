@@ -4,15 +4,13 @@
 import {
   useState,
   type FunctionComponent,
-  type SetStateAction,
-  type Dispatch
 } from 'react'
 import Layout from '../components/layout/Layout'
 import AuthCard from '../components/Card/AuthCard'
 import Input from '../components/Input/Input'
-import FormButton from '../components/Buttons/FormButton'
 import { Link, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
+import Button from '../components/Buttons/Button'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
@@ -105,15 +103,18 @@ const Login: FunctionComponent<LoginProps> = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-6">
-                <FormButton
-                  text="ورود"
-                  color="bg-brand-primary"
+                <Button
+                  formButtonLogin
+                  formButtonLoginSecondary
+                  textWhite
                   onClickFunction={onSubmit}
-                />
+                >
+                  ورود
+                </Button>
                 <div className="flex flex-row items-center justify-center text-[19px]">
                   <button
                     onClick={() => navigate('/api/auth/register')}
-                    className="h-[40px] rounded-[6px] p-[10px] font-extrabold leading-[19.73px] text-brand-primary"
+                    className="p-[10px] font-extrabold leading-[19.73px] text-brand-primary"
                   >
                     ثبت‌نام
                   </button>

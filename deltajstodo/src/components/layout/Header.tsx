@@ -2,7 +2,7 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable tailwindcss/no-contradicting-classname */
 import '../../dist/output.css'
-import HeaderButton from '../Buttons/HeaderButton'
+import Button from '../Buttons/Button'
 
 interface HeaderProps {
   buttonText: string
@@ -14,7 +14,7 @@ interface HeaderProps {
 function Header({
   buttonText,
   linkText,
-  onClickFunction,
+  onClickFunction
 }: HeaderProps): JSX.Element {
   return (
     <div
@@ -25,10 +25,10 @@ function Header({
         کوئرا تسک منیجر
       </h1>
       <div>
-        <span className="font-yekan text-right text-[16px] font-medium leading-[22.55px]">
+        <span className="text-right font-yekan text-[16px] font-medium leading-[22.55px]">
           {linkText}
         </span>
-        <HeaderButton text={buttonText} onClickFunction={onClickFunction} />
+        <Button headerButton onClickFunction={onClickFunction}>{buttonText}</Button>
       </div>
     </div>
   )
