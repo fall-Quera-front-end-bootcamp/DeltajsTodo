@@ -15,10 +15,10 @@ function Layout({
   children,
   buttonText,
   linkText,
-  onClickFunction,
+  onClickFunction
 }: LayoutProps): JSX.Element {
   return (
-    <div className="flex h-[100vh] items-center justify-center ">
+    <div className="relative flex h-[100vh] items-center justify-center ">
       <Header
         buttonText={buttonText}
         linkText={linkText}
