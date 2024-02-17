@@ -39,37 +39,41 @@ const QueraTaskManager = (): JSX.Element => {
           {/* --------------------------------------- */}
           {/* search input  */}
           <div>
-            <form className="max-w-md mx-auto ">
-              {/* <label className="mb-2 text-sm font-medium text-gray-900  dark:text-white">
-                Search
-              </label> */}
+            <div className="flex items-center">
+              <input
+                type="text"
+                className="bg-[#F6F7F9] block w-[274px] h-[40px] py-4 px-10 ps-10 rounded-[4px] text-right placeholder:pr-2 placeholder:text-bodyxs placeholder:font-yekan placeholder:font-normal text-[#1E1E1E] font-yekan rounded-[4px]"
+                placeholder="جستجو کنید"
+              />
               <div className="relative">
                 <div className="absolute inset-y-0 right-0 px-3 flex items-center ps-3 pointer-events-none">
                   <svg
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400 cursor-pointer"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
                     fill="none"
-                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      stroke="currentColor"
+                    <circle
+                      cx="11.0586"
+                      cy="11.0586"
+                      r="7.06194"
+                      stroke="#323232"
+                      stroke-width="1.5"
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                    <path
+                      d="M20.0033 20.0033L16.0516 16.0516"
+                      stroke="#323232"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
                     />
                   </svg>
                 </div>
-                <input
-                  type="search"
-                  id="default-search"
-                  className="bg-[#F6F7F9] block w-[274px] h-[40px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-[4px] bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:ml-20"
-                  placeholder="جستجو کنید"
-                  required
-                />
               </div>
-            </form>
+            </div>
           </div>
           {/* ----------------------------------------------------- */}
           {/* Spices */}
