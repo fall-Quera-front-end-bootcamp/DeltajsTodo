@@ -9,7 +9,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../components/Buttons/Button'
 import { motion } from 'framer-motion'
-import PriorityFlag from '../components/Svg/PriorityFlag'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
@@ -63,7 +62,6 @@ const Login: FunctionComponent<LoginProps> = () => {
       onClickFunction={() => navigate('/api/auth/register')}
     >
       <AuthCard>
-        <PriorityFlag />
         <FormProvider {...methods}>
           <motion.form
             initial={{ opacity: 0, y: '-25px' }}
