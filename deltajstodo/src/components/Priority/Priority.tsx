@@ -1,8 +1,8 @@
 import '../../dist/output.css'
-import RedCross from '../Svg/RedCross'
+import RedCross from '../Icons/RedCross'
 import PriorityOption from './PriorityOption'
 
-function Priority (): JSX.Element {
+function Priority(): JSX.Element {
   return (
     <div
       dir="rtl"

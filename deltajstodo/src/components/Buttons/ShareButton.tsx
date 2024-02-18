@@ -1,6 +1,6 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import '../../dist/output.css'
-import ShareIconSvg from '../Svg/ShareIconSvg'
+import ShareIconSvg from '../Icons/ShareIconSvg'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function ShareButton(): JSX.Element {

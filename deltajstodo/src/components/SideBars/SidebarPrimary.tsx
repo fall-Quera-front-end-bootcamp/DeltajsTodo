@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import ArrowDownIconSvg from '../Svg/ArrowDownIconSvg'
-import SearchIconSvg from '../Svg/SearchIconSvg'
-import AddSecondaryIconSvg from '../Svg/AddSecondaryIconSvg'
-import LogoutIconSvg from '../Svg/LogoutIconSvg'
-import LightModeSwitchIconSvg from '../Svg/LightModeSwitchIconSvg'
-import DarkModeSwitchIconSvg from '../Svg/DarkModeSwitchIconSvg'
+import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
+import SearchIconSvg from '../Icons/SearchIconSvg'
+import AddSecondaryIconSvg from '../Icons/AddSecondaryIconSvg'
+import LogoutIconSvg from '../Icons/LogoutIconSvg'
+import LightModeSwitchIconSvg from '../Icons/LightModeSwitchIconSvg'
+import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 
 const SidebarPrimary = (): JSX.Element => {
   const [darkMode, setDarkMode] = useState(false)
@@ -153,13 +153,11 @@ const SidebarPrimary = (): JSX.Element => {
         <div className="flex justify-between space-x-2 p-[16px]">
           <div className="flex items-center justify-center bg-blue-secondary transition-all delay-300 ease-in-out">
             <button onClick={toggleDarkMode}>
-              {darkMode
-                ? (
+              {darkMode ? (
                 <LightModeSwitchIconSvg />
-                  )
-                : (
+              ) : (
                 <DarkModeSwitchIconSvg />
-                  )}
+              )}
             </button>
           </div>
           <div className="flex items-center justify-center space-x-2">
