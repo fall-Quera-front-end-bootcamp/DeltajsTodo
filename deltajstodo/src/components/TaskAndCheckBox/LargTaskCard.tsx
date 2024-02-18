@@ -1,5 +1,5 @@
 import dekstopImg from '..Imgs/dekstopImgpng.png'
-
+import Checkbox from '../Checkbox'
 function LargTaskCard(): JSX.Element {
   return (
     <section className="w-[249px] h-[350px] rounded-[16px] p-[16px] gap-[16px] bg-[#ffff]">
@@ -13,7 +13,7 @@ function LargTaskCard(): JSX.Element {
         <div className="flex flex-col justify-end text-right space-y-2">
           <div className="flex justify-between space-y-3">
             <div className="flex justify-center items-center mb-[6px] mr-[4px]">
-              <svg
+              {/* <svg
                 width="24"
                 height="22"
                 viewBox="0 0 24 22"
@@ -30,7 +30,7 @@ function LargTaskCard(): JSX.Element {
                   d="M10.7061 14.1021H9.70019L7.12258 9.9971V14.1021H6.11668V8.31813H7.12258L9.70759 12.4379V8.31813H10.7061V14.1021ZM13.1946 8.31813L14.8662 12.7522L16.5304 8.31813H17.8284V14.1021H16.8262V12.1938L16.9261 9.64577L15.2175 14.1021H14.5001L12.7952 9.64947L12.8951 12.1938V14.1021H11.8929V8.31813H13.1946Z"
                   fill="#FAB005"
                 />
-              </svg>
+              </svg> */}
             </div>
             <div className="flex flex-col justify-end text-right gap-[9px]">
               <p className="font-yekan font-normal text-bodyxs text-right text-[#534D60]">
@@ -86,15 +86,10 @@ function LargTaskCard(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="flex justify-end items-center flex-row">
-            <p className="font-yekan text-bodyxs font-normal">۲ / ۱۲</p>
+          <div className="flex justify-end items-center">
+            <p className="font-yekan text-bodyxs font-normal text-gray-primary">۲ / ۱۲</p>
             <div>
-              <input
-                id="default-checkbox"
-                type="checkbox"
-                value=""
-                className="w-[16.01px] h-[16.01px] accent-brand-primary  "
-              />
+              <Checkbox />
             </div>
             <div>۵ مهر - فردا</div>
             <div>
