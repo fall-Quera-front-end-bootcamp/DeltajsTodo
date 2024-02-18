@@ -34,7 +34,7 @@ const SidebarPrimary = (): JSX.Element => {
             <div className="flex items-center">
               <input
                 type="text"
-                className="block h-[40px] w-[274px] rounded-[4px] bg-[#F6F7F9] px-10 py-4 ps-10 text-right text-[#1E1E1E] placeholder:pr-2 placeholder:font-yekan placeholder:text-bodyxs placeholder:font-normal"
+                className="block h-[40px] w-[274px] rounded-[4px] bg-[#F6F7F9] px-10 py-4 ps-10 text-right text-[#1E1E1E] placeholder:pr-2 placeholder:  placeholder:text-bodyxs placeholder:font-normal"
                 placeholder="جستجو کنید"
               />
               <div className="relative">

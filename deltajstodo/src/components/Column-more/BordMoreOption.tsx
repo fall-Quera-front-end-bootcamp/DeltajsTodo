@@ -30,9 +30,7 @@ function BordMoreOption({
   return (
     <div className="flex w-[142px] items-center gap-2">
       {iconChoose()}
-      <span
-        className={`font-yekan text-[14px] font-normal ${color} leading-[19.73px]`}
-      >
+      <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
         {text}
       </span>
     </div>

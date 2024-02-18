@@ -61,7 +61,7 @@ const ResetPassword: FunctionComponent<ResetPasswordProps> = () => {
         }}
       >
         <AuthCard>
-          <h1 className="text-center font-yekan text-headingl font-extrabold">
+          <h1 className="text-center   text-headingl font-extrabold">
             تغییر رمز عبور
           </h1>
           <FormProvider {...methods}>

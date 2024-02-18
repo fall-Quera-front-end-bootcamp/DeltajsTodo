@@ -34,9 +34,9 @@ const Button = ({
 }: ButtonProps): JSX.Element => {
   // 1st arg:: for all variations.
   const classes = className('px-3 py-1.5 border', {
-    'w-[100%]  bg-brand-primary border-0 rounded-[6px] p-[10px] font-yekan text-[16px] font-extrabold leading-[19.73px]':
+    'w-[100%]  bg-brand-primary border-0 rounded-[6px] p-[10px]   text-[16px] font-extrabold leading-[19.73px]':
       formButtonLogin,
-    'mr-[6px] h-[40px] w-[95px] rounded-[6px] bg-brand-primary p-[10px] font-yekan text-[14px] font-extrabold leading-[19.73px] text-white':
+    'mr-[6px] h-[40px] w-[95px] rounded-[6px] bg-brand-primary p-[10px]   text-[14px] font-extrabold leading-[19.73px] text-white':
       headerButton,
     'h-[40px]': formButtonLoginSecondary,
     'h-[48px]': formButtonLoginPrimary,
