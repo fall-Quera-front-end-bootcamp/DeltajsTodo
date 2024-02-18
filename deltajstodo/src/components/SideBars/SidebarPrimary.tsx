@@ -12,7 +12,7 @@ const SidebarPrimary = (): JSX.Element => {
     setDarkMode(!darkMode)
   }
   return (
-    <section className="relative right-0 top-0 ml-auto flex h-screen w-[340px] flex-col justify-between bg-[#ffff]">
+    <section className="relative right-0 top-0 ml-auto flex h-screen w-[340px] flex-col justify-between border-l-[1px] border-[#AAAAAA] bg-[#ffff]">
       <div className="flex flex-col items-center justify-center gap-y-[32px] p-6 text-right">
         {/* top text */}
         <div>
@@ -34,7 +34,7 @@ const SidebarPrimary = (): JSX.Element => {
             <div className="flex items-center">
               <input
                 type="text"
-                className="block h-[40px] w-[274px] rounded-[4px] bg-[#F6F7F9] px-10 py-4 ps-10 text-right text-[#1E1E1E] placeholder:pr-2 placeholder:  placeholder:text-bodyxs placeholder:font-normal"
+                className="placeholder: block h-[40px] w-[274px] rounded-[4px] bg-[#F6F7F9] px-10 py-4 ps-10 text-right text-[#1E1E1E] placeholder:pr-2  placeholder:text-bodyxs placeholder:font-normal"
                 placeholder="جستجو کنید"
               />
               <div className="relative">
@@ -153,11 +153,13 @@ const SidebarPrimary = (): JSX.Element => {
         <div className="flex justify-between space-x-2 p-[16px]">
           <div className="flex items-center justify-center bg-blue-secondary transition-all delay-300 ease-in-out">
             <button onClick={toggleDarkMode}>
-              {darkMode ? (
+              {darkMode
+                ? (
                 <LightModeSwitchIconSvg />
-              ) : (
+                  )
+                : (
                 <DarkModeSwitchIconSvg />
-              )}
+                  )}
             </button>
           </div>
           <div className="flex items-center justify-center space-x-2">
