@@ -1,15 +1,20 @@
-import '../../dist/output.css'
-
-interface PriorityFlagProps {
-  color: string
-}
-
-function PriorityFlag ({ color }: PriorityFlagProps): JSX.Element {
+const PriorityFlag = ({
+  size = '20',
+  color = 'black',
+  className
+}: {
+  size?: string
+  color?: string
+  className?: string
+}): JSX.Element => {
+  // The size Prop it's Width & Height
+  // Color the Color of svg Strokes
   return (
     <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
+      className={className}
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
