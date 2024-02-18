@@ -1,6 +1,6 @@
-const MailIconSvg = ({
-  size = '24',
-  color = '#C9CBDA',
+const CircleCheckMarkIconSvg = ({
+  size = '20',
+  color = '#323232',
   className
 }: {
   size?: string
@@ -20,9 +20,9 @@ const MailIconSvg = ({
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M16 12C16 14.209 14.209 16 12 16C9.791 16 8 14.209 8 12C8 9.791 9.791 8 12 8V8C14.209 8 16 9.791 16 12V13.5C16 14.881 17.119 16 18.5 16C19.881 16 21 14.881 21 13.5V12C21 7.029 16.971 3 12 3C7.029 3 3 7.029 3 12C3 16.971 7.029 21 12 21C13.149 21 14.317 20.782 15.444 20.315C16.052 20.063 16.614 19.747 17.133 19.386"
+        d="M6.85667 9.35167L10.0042 12.5L16.4 6.10417C15.0833 3.94583 12.7133 2.5 10 2.5C5.8575 2.5 2.5 5.8575 2.5 10C2.5 14.1425 5.8575 17.5 10 17.5C13.86 17.5 17.0358 14.5833 17.4508 10.8333"
         stroke={color}
-        strokeWidth="1.5"
+        strokeWidth="1.25"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -30,4 +30,4 @@ const MailIconSvg = ({
   )
 }
 
-export default MailIconSvg
+export default CircleCheckMarkIconSvg
