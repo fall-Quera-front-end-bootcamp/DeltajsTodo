@@ -1,9 +1,9 @@
 import '../../dist/output.css'
-import AddIconSvg from '../Svg/AddIconSvg'
-import ColorPaletteIconSvg from '../Svg/ColorPaletteIconSvg'
-import EditIconSvg from '../Svg/EditIconSvg'
-import LinkCopyIconSvg from '../Svg/LinkCopyIconSvg'
-import RemoveIconSvg from '../Svg/RemoveIconSvg'
+import AddIconSvg from '../Icons/AddIconSvg'
+import ColorPaletteIconSvg from '../Icons/ColorPaletteIconSvg'
+import EditIconSvg from '../Icons/EditIconSvg'
+import LinkCopyIconSvg from '../Icons/LinkCopyIconSvg'
+import RemoveIconSvg from '../Icons/RemoveIconSvg'
 
 interface ProjectMoreOptionProps {
   color: string
@@ -11,12 +11,12 @@ interface ProjectMoreOptionProps {
   type: string
 }
 
-function ProjectMoreOption ({
+function ProjectMoreOption({
   color,
   text,
   type
 }: ProjectMoreOptionProps): JSX.Element {
-  function iconChoose (): JSX.Element {
+  function iconChoose(): JSX.Element {
     switch (type) {
       case 'addProject':
         return <EditIconSvg />
@@ -35,9 +35,7 @@ function ProjectMoreOption ({
   return (
     <div className="flex items-center gap-2">
       {iconChoose()}
-      <span
-        className={`font-yekan text-[14px] font-normal ${color} leading-[19.73px]`}
-      >
+      <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
         {text}
       </span>
     </div>

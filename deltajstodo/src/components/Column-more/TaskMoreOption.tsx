@@ -1,8 +1,8 @@
 import '../../dist/output.css'
-import AddIconSvg from '../Svg/AddIconSvg'
-import EditIconSvg from '../Svg/EditIconSvg'
-import LinkCopyIconSvg from '../Svg/LinkCopyIconSvg'
-import RemoveIconSvg from '../Svg/RemoveIconSvg'
+import AddIconSvg from '../Icons/AddIconSvg'
+import EditIconSvg from '../Icons/EditIconSvg'
+import LinkCopyIconSvg from '../Icons/LinkCopyIconSvg'
+import RemoveIconSvg from '../Icons/RemoveIconSvg'
 
 interface TaskMoreOptionProps {
   color: string
@@ -10,12 +10,12 @@ interface TaskMoreOptionProps {
   type: string
 }
 
-function TaskMoreOption ({
+function TaskMoreOption({
   color,
   text,
   type
 }: TaskMoreOptionProps): JSX.Element {
-  function iconChoose (): JSX.Element {
+  function iconChoose(): JSX.Element {
     switch (type) {
       case 'addTask':
         return <EditIconSvg />
@@ -32,9 +32,7 @@ function TaskMoreOption ({
   return (
     <div className="flex items-center gap-2">
       {iconChoose()}
-      <span
-        className={`font-yekan text-[14px] font-normal ${color} leading-[19.73px]`}
-      >
+      <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
         {text}
       </span>
     </div>

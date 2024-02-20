@@ -25,10 +25,12 @@ function Header({
         کوئرا تسک منیجر
       </h1>
       <div>
-        <span className="text-right font-yekan text-[16px] font-medium leading-[22.55px]">
+        <span className="text-right   text-[16px] font-medium leading-[22.55px]">
           {linkText}
         </span>
-        <Button headerButton onClickFunction={onClickFunction}>{buttonText}</Button>
+        <Button headerButton onClickFunction={onClickFunction}>
+          {buttonText}
+        </Button>
       </div>
     </div>
   )

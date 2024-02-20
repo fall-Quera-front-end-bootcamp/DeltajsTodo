@@ -78,7 +78,7 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
               </Button>
             </div>
             <div className={`${formVisible ? 'hidden' : 'mt-[32px]'}`}>
-              <span className="block text-center font-yekan text-[14px] font-normal leading-[19.73px]">
+              <span className="block text-center   text-[14px] font-normal leading-[19.73px]">
                 .لینک تغییر رمز عبور برای شما ایمیل شد. لطفا ایمیل خود را بررسی
                 کنید
               </span>
