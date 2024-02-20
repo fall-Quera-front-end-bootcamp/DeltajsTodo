@@ -114,11 +114,11 @@ export default {
     },
     extend: {
       spacing: {
-        xs: '1rem',
-        s: '2rem',
-        m: '3rem',
-        l: '4rem',
-        xl: '5rem'
+        xs: '0.5rem',
+        s: '1rem',
+        m: '1.5rem',
+        l: '2rem',
+        xl: '2.5rem'
       },
       boxShadow: {
         card: '0px 70px 100px -20px #32325D40, 0px 50px 60px -30px #0000004D'
