@@ -1,8 +1,8 @@
-import Calendar from '../components/Task/NewTask'
+import Calendar from '../components/Calendar/Calendar'
 
 const Workspace = (): JSX.Element => {
   return (
-    <div className="h-screen w-full bg-gray-primary">
+    <div className="h-screen w-full bg-gray-secondary">
       <Calendar />
     </div>
   )
