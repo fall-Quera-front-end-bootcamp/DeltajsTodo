@@ -52,10 +52,17 @@ enum Priorities {
   middle,
   low
 }
+interface Comment {
+  userName: string
+  profileImg: string
+  gmailAccount?: string
+  commentDescription: string
+}
 interface Task {
   id: string
   title: string
   projectTitle: string
+  status: Permission.manager
   archived: false
   sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
   describtion?: string
@@ -64,6 +71,7 @@ interface Task {
   tags: Tag[]
   timeLine: TimeLine
   priority: Priorities
+  comments: Comment[]
 }
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
 interface Board {
@@ -74,6 +82,8 @@ interface Board {
 export interface Project {
   id: string
   title: string
+  status: Permission.manager
+  sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
   boards: Board[]
 }
 export enum Permission {
@@ -92,7 +102,8 @@ export interface Workspace {
   id: string
   title: string
   color: string
-  status: Permission
+  link?: string
+  status: Permission.manager
   projects: Project[]
 }
 /*--------------------------------- User--------------------------------------- */

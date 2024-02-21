@@ -6,12 +6,12 @@ import { type User, type sidebarItem } from '../utilities/models'
 import { Outlet } from 'react-router-dom'
 
 interface MainLayoutProps {
-  currentUser: User
+  // currentUser: User
 }
 interface sidebarItems {
   items: sidebarItem[]
 }
-const MainLayout: FunctionComponent<MainLayoutProps> = ({ currentUser }) => {
+const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   // const [sidebarItems, setSidebarItems] = useState<sidebarItems['items']>([
   //   {
   //     id: '1',
@@ -52,7 +52,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = ({ currentUser }) => {
     <>
       <div className="flex flex-row-reverse gap-4">
         <div>
-          <SidebarPrimary items={currentUser.workspaces} />
+          <SidebarPrimary />
         </div>
 
         <div className="w-[1100px] bg-pink-primary">

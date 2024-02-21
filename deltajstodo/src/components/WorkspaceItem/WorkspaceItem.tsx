@@ -18,7 +18,6 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
   projectItems
 }) => {
   const [isSelected, setSelect] = useState(false)
-
   return (
     <>
       <div className="peer flex h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
@@ -58,7 +57,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
           projectItems?.map((project) => {
             return (
               <>
-                <div>
+                <div key={project.id}>
                   <li>
                     <ProjectItem
                       project={project}

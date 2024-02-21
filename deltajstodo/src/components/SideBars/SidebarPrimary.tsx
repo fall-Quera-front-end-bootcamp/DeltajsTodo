@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable multiline-ternary */
-import { type FunctionComponent, useState } from 'react'
+import { type FunctionComponent, useState, useContext } from 'react'
 import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
 import SearchIconSvg from '../Icons/SearchIconSvg'
 import AddSecondaryIconSvg from '../Icons/AddSecondaryIconSvg'
@@ -8,17 +10,21 @@ import LogoutIconSvg from '../Icons/LogoutIconSvg'
 import LightModeSwitchIconSvg from '../Icons/LightModeSwitchIconSvg'
 import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import WorkspaceItem from '../WorkspaceItem/WorkspaceItem'
-import { type Workspace } from '../../utilities/models'
+import { Permission, type Workspace } from '../../utilities/models'
+import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
 
 interface SidebarPrimaryProps {
-  items: Workspace[]
+  // items: Workspace[]
 }
 
-const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = ({ items }) => {
+const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
   const [darkMode, setDarkMode] = useState(false)
   const toggleDarkMode = (): void => {
     setDarkMode(!darkMode)
   }
+  const items1 = useContext(UserContext)
+  const dispatch: any = useContext(UserDispatchContext)
+
   return (
     <section className="relative right-0 top-0 ml-auto flex h-screen w-[340px] flex-col justify-between border-l-[1px] border-[#AAAAAA] bg-[#ffff]">
       <div className="flex flex-col items-center justify-center gap-y-[32px] p-6 text-right">
@@ -58,9 +64,24 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = ({ items }) => {
             {/* Creating a new space */}
             <div className="flex flex-col">
               <div className="flex w-full items-center justify-center space-x-1 rounded-[6px] bg-[#D3D3D3]">
-                <p className="text-bodyxs font-normal text-[#1E1E1E]">
-                  ساختن اسپیس جدید
-                </p>
+                <button
+                  onClick={() =>
+                    dispatch({
+                      type: 'added',
+                      new_workspace: {
+                        id: '5',
+                        title: 'درس طراحی الگوریتم',
+                        color: 'bg-[#228BE6]',
+                        status: Permission.manager,
+                        projects: []
+                      }
+                    })
+                  }
+                >
+                  <p className="text-bodyxs font-normal text-[#1E1E1E]">
+                    ساختن اسپیس جدید
+                  </p>
+                </button>
                 <AddSecondaryIconSvg />
               </div>
             </div>
@@ -69,7 +90,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = ({ items }) => {
               {/* ***********!!!  Need typescript to display remove and add list !!!******************************************** */}
               {/* one list work */}
 
-              {items?.map((item) => {
+              {items1?.workspaces?.map((item) => {
                 return (
                   <li key={item.id}>
                     <WorkspaceItem
