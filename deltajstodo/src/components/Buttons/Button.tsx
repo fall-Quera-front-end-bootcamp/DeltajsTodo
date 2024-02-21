@@ -15,6 +15,7 @@ interface ButtonProps {
   textWhite?: string | boolean
   textBlack?: string | boolean
   textBrandPrimary?: string | boolean
+  newTask?: string | boolean
   onClickFunction?: any
   children: any
 }
@@ -30,10 +31,11 @@ const Button = ({
   textBrandPrimary,
   headerButton,
   onClickFunction,
+  newTask,
   children
 }: ButtonProps): JSX.Element => {
   // 1st arg:: for all variations.
-  const classes = className('px-3 py-1.5 border', {
+  const classes = className({
     'w-[100%]  bg-brand-primary border-0 rounded-[6px] p-[10px]   text-[16px] font-extrabold leading-[19.73px]':
       formButtonLogin,
     'mr-[6px] h-[40px] w-[95px] rounded-[6px] bg-brand-primary p-[10px]   text-[14px] font-extrabold leading-[19.73px] text-white':
@@ -43,7 +45,9 @@ const Button = ({
     'bg-transparent': bgTransparent,
     'text-black': textBlack,
     'text-white': textWhite,
-    'text-brand-primary': textBrandPrimary
+    'text-brand-primary': textBrandPrimary,
+    'bg-brand-primary text-white rounded-[4px] py-[4px] px-[7px] text-[12px] h-[32px] w-[125px]':
+      newTask
   })
   return (
     <>
@@ -64,7 +68,8 @@ Button.prototype = {
     bgTransparent,
     textBlack,
     textWhite,
-    textBrandPrimary
+    textBrandPrimary,
+    newTask
   }: {
     formButtonLogin: string | null
     formButtonLoginSecondary: string | null
@@ -74,6 +79,7 @@ Button.prototype = {
     textBlack: string | null
     textWhite: string | null
     textBrandPrimary: string | null
+    newTask: string | null
   }) => {
     const count =
       Number(!!formButtonLogin) +
@@ -83,7 +89,8 @@ Button.prototype = {
       Number(!!bgTransparent) +
       Number(!!textBlack) +
       Number(!!textWhite) +
-      Number(!!textBrandPrimary)
+      Number(!!textBrandPrimary) +
+      Number(!!newTask)
     if (count > 1) {
       return new Error('Only one of the F,H can be true.')
     }
