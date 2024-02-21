@@ -1,4 +1,4 @@
-const ArrowIconSvg = ({
+const BookmarkTagIconSvg = ({
   size = '20',
   color = '#C1C1C1',
   className
@@ -46,4 +46,4 @@ const ArrowIconSvg = ({
   )
 }
 
-export default ArrowIconSvg
+export default BookmarkTagIconSvg
