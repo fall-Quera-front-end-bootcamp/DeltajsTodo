@@ -16,7 +16,7 @@ function App(): JSX.Element {
     <>
       <div className='h-screen w-full m-32 p-6 flex flex-col'>
         <div><Filter/></div>
-        <div>
+        <div className='my-14'>
           <FilterWhere/>
           <FilterTags/>
           <FilterIsOrNot/>
