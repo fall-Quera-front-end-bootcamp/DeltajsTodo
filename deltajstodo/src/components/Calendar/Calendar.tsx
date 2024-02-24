@@ -1,9 +1,17 @@
+import moment from 'jalali-moment'
 import { toFarsiNumber } from '../../utilities/toFarsiNumber'
 import Button from '../Buttons/Button'
 import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
 import CalendarIconSvg from '../Icons/CalendarIconSvg'
+import { dayOfWeek } from '../../constants'
+import { formatDate, getDaysInMonth, getFirstDayInMonth } from '../../helpers'
 
 const Calendar = (): JSX.Element => {
+  moment.locale('fa')
+  console.log(getFirstDayInMonth(moment()))
+  console.log(moment().daysInMonth())
+  console.log(getDaysInMonth(moment()))
+
   return (
     <div
       dir="rtl"
@@ -64,8 +72,8 @@ const Calendar = (): JSX.Element => {
             </div>
           </div>
           {/* calendar number & week left  */}
-          <div className="w-[630px]">
-            <div className="mr-[17px] mt-7 flex flex-row items-center justify-center gap-5 text-[20px]">
+          <div className="">
+            <div className="absolute left-[390px] top-[100px] flex flex-row items-center justify-center gap-5 text-[24px]">
               <div className="">تیر ۱۴۰۲</div>
               <div className="flex flex-row">
                 <button onClick={() => {}}>
@@ -77,14 +85,17 @@ const Calendar = (): JSX.Element => {
               </div>
               <div className="">امروز</div>
             </div>
-            <div className="flex w-full flex-row gap-1">
-              <div className="">شنبه</div>
-              <div className="">یکشنبه</div>
-              <div className="">دوشنبه</div>
-              <div className="">سه‌شنبه</div>
-              <div className="">چهار‌شنبه</div>
-              <div className="">پنجشنبه</div>
-              <div className="">جمعه</div>
+            <div className="absolute right-[320px] top-[165px] flex flex-row gap-10">
+              {dayOfWeek.map((day, x) => {
+                return (
+                  <div className="text-[18px] text-gray-primary" key={x}>
+                    {day}
+                  </div>
+                )
+              })}
+            </div>
+            <div className="absolute right-[320px] top-[235px] flex flex-col">
+              {}
             </div>
             <Button CalendarButton>بستن</Button>
           </div>
