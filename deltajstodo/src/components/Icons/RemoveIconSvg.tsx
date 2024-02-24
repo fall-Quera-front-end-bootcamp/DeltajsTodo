@@ -1,16 +1,19 @@
 const RemoveIconSvg = ({
   size = '20',
   color = '#FA5252',
-  className
+  className,
+  onClick 
 }: {
   size?: string
   color?: string
   className?: string
+  onClick?: any
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes
   return (
     <svg
+      onClick={onClick}
       className={className}
       width={size}
       height={size}

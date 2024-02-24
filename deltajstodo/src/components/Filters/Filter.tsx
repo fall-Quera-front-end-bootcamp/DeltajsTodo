@@ -13,12 +13,13 @@ const Filter = (): JSX.Element => {
   };
 
 const removeFilter = (id: string) => {
-  setFilters((prevFilters) => prevFilters.filter((filter) => filter !== id))
+  setFilters((prevFilters) => prevFilters.filter((filter) => filter !== id));
+  console.log(id)
 }
 
-
+console.log(filters)
   return (
-    <section className="w-[718px] h-[208px] rounded-[8px] bg-white shadow-2xl items-center justify-center">
+    <section className="w-[718px] rounded-[8px] bg-white shadow-2xl items-center justify-center">
       <div id="body-filter" className="flex flex-col">
         <div className="flex justify-between p-6">
           <div className="w-[24px] h-[24px]">
