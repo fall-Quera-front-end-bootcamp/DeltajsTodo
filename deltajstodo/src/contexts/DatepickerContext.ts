@@ -2,7 +2,7 @@ import type dayjs from 'dayjs'
 import type React from 'react'
 import { createContext } from 'react'
 
-import { DATE_FORMAT, LANGUAGE, START_WEEK } from '../constants'
+import { DATE_FORMAT } from '../constants'
 import {
   type Configs,
   type Period,
@@ -13,6 +13,7 @@ import {
   type PopoverDirectionType,
   type ColorKeys
 } from '../types'
+import { type MomentInput } from 'jalali-moment'
 
 interface DatepickerStore {
   input?: React.RefObject<HTMLInputElement>
@@ -24,7 +25,7 @@ interface DatepickerStore {
   hideDatepicker: () => void
   period: Period
   changePeriod: (period: Period) => void
-  dayHover: string | null
+  dayHover: MomentInput | undefined
   changeDayHover: (day: string | null) => void
   inputText: string
   changeInputText: (text: string) => void
@@ -44,7 +45,6 @@ interface DatepickerStore {
   toggleClassName?: ((className: string) => string) | string | null
   toggleIcon?: (open: boolean) => React.ReactNode
   readOnly?: boolean
-  startWeekOn?: string | null
   displayFormat: string
   minDate?: DateType | null
   maxDate?: DateType | null
@@ -82,7 +82,7 @@ const DatepickerContext = createContext<DatepickerStore>({
   ) => {},
   showFooter: false,
   value: null,
-  i18n: LANGUAGE,
+  i18n: 'fa',
   disabled: false,
   inputClassName: '',
   containerClassName: '',
@@ -95,7 +95,6 @@ const DatepickerContext = createContext<DatepickerStore>({
   disabledDates: null,
   inputId: undefined,
   inputName: undefined,
-  startWeekOn: START_WEEK,
   toggleIcon: undefined,
   classNames: undefined,
   popoverDirection: undefined,

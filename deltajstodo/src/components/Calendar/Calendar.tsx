@@ -3,14 +3,209 @@ import { toFarsiNumber } from '../../utilities/toFarsiNumber'
 import Button from '../Buttons/Button'
 import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
 import CalendarIconSvg from '../Icons/CalendarIconSvg'
-import { dayOfWeek } from '../../constants'
-import { formatDate, getDaysInMonth, getFirstDayInMonth } from '../../helpers'
+import { DATE_FORMAT } from '../../constants'
+import {
+  formatDate,
+  getDaysInMonth,
+  getFirstDayInMonth,
+  getFirstDaysInMonth,
+  getLastDaysInMonth,
+  getNumberOfDay,
+  nextMonth,
+  previousMonth
+} from '../../helpers'
+import { useCallback, useContext, useMemo, useState } from 'react'
+import Days from './Days'
+import Week from './Week'
+import DatepickerContext from '../../contexts/DatepickerContext'
 
 const Calendar = (): JSX.Element => {
   moment.locale('fa')
-  console.log(getFirstDayInMonth(moment()))
-  console.log(moment().daysInMonth())
-  console.log(getDaysInMonth(moment()))
+  const [firstDate, setFirstDate] = useState(moment())
+  const [secondDate, setSecondDate] = useState(nextMonth(moment()))
+  // Contexts
+  const {
+    period,
+    changePeriod,
+    changeDayHover,
+    showFooter,
+    changeDatepickerValue,
+    hideDatepicker,
+    asSingle,
+    input
+  } = useContext(DatepickerContext)
+  console.log(firstDate)
+
+  // Functions
+  const previous = useCallback(() => {
+    return getLastDaysInMonth(
+      previousMonth(firstDate),
+      getNumberOfDay(getFirstDayInMonth(firstDate).ddd, 'sat')
+    )
+  }, [firstDate, 'sat'])
+
+  const current = useCallback(() => {
+    return getDaysInMonth(formatDate(firstDate))
+  }, [firstDate])
+
+  console.log(getDaysInMonth(formatDate(firstDate)))
+
+  const next = useCallback(() => {
+    return getFirstDaysInMonth(
+      previousMonth(firstDate),
+      42 - (previous().length + current().length)
+    )
+  }, [current, firstDate, previous])
+
+  // Variables
+  const calendarData = useMemo(() => {
+    return {
+      date: moment(),
+      days: {
+        previous: previous(),
+        current: current(),
+        next: next()
+      }
+    }
+  }, [current, moment(), next, previous])
+
+  const clickDay = useCallback(
+    (day: number, month = moment().month() + 1, year = moment().year()) => {
+      const fullDay = `${year}-${month}-${day}`
+      let newStart
+      let newEnd = null
+
+      function chosePeriod(start: string, end: string): void {
+        const ipt = input?.current
+        changeDatepickerValue(
+          {
+            startDate: moment(start).format(DATE_FORMAT),
+            endDate: moment(end).format(DATE_FORMAT)
+          },
+          ipt
+        )
+        hideDatepicker()
+      }
+
+      if (period.start && period.end) {
+        if (changeDayHover) {
+          changeDayHover(null)
+        }
+        changePeriod({
+          start: null,
+          end: null
+        })
+      }
+
+      if ((!period.start && !period.end) || (period.start && period.end)) {
+        if (!period.start && !period.end) {
+          changeDayHover(fullDay)
+        }
+        newStart = fullDay
+        if (asSingle) {
+          newEnd = fullDay
+          chosePeriod(fullDay, fullDay)
+        }
+      } else {
+        if (period.start && !period.end) {
+          // start not null
+          // end null
+          const condition =
+            moment(fullDay).isSame(moment(period.start)) ||
+            moment(fullDay).isAfter(moment(period.start))
+          newStart = condition ? period.start : fullDay
+          newEnd = condition ? fullDay : period.start
+        } else {
+          // Start null
+          // End not null
+          const condition =
+            moment(fullDay).isSame(moment(period.end)) ||
+            moment(fullDay).isBefore(moment(period.end))
+          newStart = condition ? fullDay : period.start
+          newEnd = condition ? period.end : fullDay
+        }
+
+        if (!showFooter) {
+          if (newStart && newEnd) {
+            chosePeriod(newStart, newEnd)
+          }
+        }
+      }
+
+      if (!(newEnd && newStart) || showFooter) {
+        changePeriod({
+          start: newStart,
+          end: newEnd
+        })
+      }
+    },
+    [
+      asSingle,
+      changeDatepickerValue,
+      changeDayHover,
+      changePeriod,
+      moment(),
+      hideDatepicker,
+      period.end,
+      period.start,
+      showFooter,
+      input
+    ]
+  )
+
+  /* Start First */
+  const firstGotoDate = useCallback(
+    (date: moment.Moment) => {
+      const newDate = moment()
+      const reformatDate = moment(formatDate(secondDate))
+      if (newDate.isSame(reformatDate) || newDate.isAfter(reformatDate)) {
+        setSecondDate(nextMonth(moment()))
+      }
+      setFirstDate(date)
+    },
+    [secondDate]
+  )
+
+  const previousMonthFirst = useCallback(() => {
+    setFirstDate(previousMonth(firstDate))
+  }, [firstDate])
+
+  const nextMonthFirst = useCallback(() => {
+    firstGotoDate(nextMonth(firstDate))
+  }, [firstDate, firstGotoDate])
+
+  const changeFirstMonth = useCallback(
+    (month: number) => {
+      firstGotoDate(
+        moment(`${firstDate.year()}-${month < 10 ? '0' : ''}${month}-01`)
+      )
+    },
+    [firstDate, firstGotoDate]
+  )
+
+  const changeFirstYear = useCallback(
+    (year: number) => {
+      firstGotoDate(moment(`${year}-${firstDate.month() + 1}-01`))
+    },
+    [firstDate, firstGotoDate]
+  )
+  const clickPreviousDays = useCallback(
+    (day: number) => {
+      const newDate = previousMonth(moment())
+      clickDay(day, newDate.month() + 1, newDate.year())
+      previousMonthFirst()
+    },
+    [clickDay, moment(), previousMonthFirst]
+  )
+
+  const clickNextDays = useCallback(
+    (day: number) => {
+      const newDate = nextMonth(moment())
+      clickDay(day, newDate.month() + 1, newDate.year())
+      nextMonthFirst()
+    },
+    [clickDay, moment(), nextMonthFirst]
+  )
 
   return (
     <div
@@ -22,11 +217,16 @@ const Calendar = (): JSX.Element => {
         {/*  Calendar Head  */}
         <div className="mx-5 mb-[36px] mt-[51px] flex flex-row items-start">
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2">
-            <div className="text-brand-primary">۱۰ تیر</div>
+            <div className="text-[26px] font-[500] text-brand-primary">
+              ۱۰ تیر
+            </div>
             <p className="text-[24px]"> زمان شروع</p>
             <CalendarIconSvg color="#BDBDBD" />
           </div>
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2 border-r-[1px] border-[#E8EAED] pr-2">
+            <div className="text-[26px] font-[500] text-brand-primary">
+              ۴ تیر
+            </div>
             <p className="text-[24px]"> زمان پایان</p>
             <CalendarIconSvg color="#BDBDBD" />
           </div>
@@ -76,26 +276,23 @@ const Calendar = (): JSX.Element => {
             <div className="absolute left-[390px] top-[100px] flex flex-row items-center justify-center gap-5 text-[24px]">
               <div className="">تیر ۱۴۰۲</div>
               <div className="flex flex-row">
-                <button onClick={() => {}}>
+                <button onClick={nextMonthFirst}>
                   <ArrowDownIconSvg className="-rotate-90" color="#7D828C" />
                 </button>
-                <button onClick={() => {}}>
+                <button onClick={previousMonthFirst}>
                   <ArrowDownIconSvg className="rotate-90" color="#7D828C" />
                 </button>
               </div>
               <div className="">امروز</div>
             </div>
-            <div className="absolute right-[320px] top-[165px] flex flex-row gap-10">
-              {dayOfWeek.map((day, x) => {
-                return (
-                  <div className="text-[18px] text-gray-primary" key={x}>
-                    {day}
-                  </div>
-                )
-              })}
-            </div>
-            <div className="absolute right-[320px] top-[235px] flex flex-col">
-              {}
+            <div className="absolute left-[16px] top-[160px] my-1 grid grid-cols-7 gap-x-[30px] gap-y-4">
+              <Week />
+              <Days
+                calendarData={calendarData}
+                onClickPreviousDays={clickPreviousDays}
+                onClickDay={clickDay}
+                onClickNextDays={clickNextDays}
+              />
             </div>
             <Button CalendarButton>بستن</Button>
           </div>

@@ -1,10 +1,11 @@
 import type React from 'react'
 
 import { type COLORS } from '../constants'
+import { type MomentInput } from 'jalali-moment'
 
 export interface Period {
-  start: string | null
-  end: string | null
+  start: MomentInput | undefined
+  end: MomentInput | undefined
 }
 
 type CustomShortcuts = Record<string, ShortcutsItem>
@@ -54,7 +55,10 @@ export type PopoverDirectionType = 'up' | 'down'
 export interface DatepickerType {
   primaryColor?: ColorKeys
   value: DateValueType
-  onChange: (value: DateValueType, e?: HTMLInputElement | null | undefined) => void
+  onChange: (
+    value: DateValueType,
+    e?: HTMLInputElement | null | undefined
+  ) => void
   useRange?: boolean
   showFooter?: boolean
   showShortcuts?: boolean
@@ -84,6 +88,9 @@ export interface DatepickerType {
 
 export type ColorKeys = (typeof COLORS)[number] // "blue" | "orange"
 
-export type Colors = Record<string, {
-  [K in ColorKeys]: string;
-}>
+export type Colors = Record<
+  string,
+  {
+    [K in ColorKeys]: string
+  }
+>
