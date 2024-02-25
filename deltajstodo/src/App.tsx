@@ -5,6 +5,7 @@ import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
 import ResetPassword from './pages/ResetPassword'
 import NotFound from './pages/NotFound'
+import WorkSpace from './pages/Workspace'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
@@ -16,6 +17,7 @@ function App(): JSX.Element {
         <Route path="api/auth/register" element={<Register />} />
         <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
         <Route path="api/auth/resetPassword" element={<ResetPassword />} />
+        <Route path="api/auth/workSpace" element={<WorkSpace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
