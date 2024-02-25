@@ -22,7 +22,6 @@ import DatepickerContext from '../../contexts/DatepickerContext'
 const Calendar = (): JSX.Element => {
   moment.locale('fa')
   const [firstDate, setFirstDate] = useState(moment())
-  const [secondDate, setSecondDate] = useState(nextMonth(moment()))
   // Contexts
   const {
     period,
@@ -34,7 +33,6 @@ const Calendar = (): JSX.Element => {
     asSingle,
     input
   } = useContext(DatepickerContext)
-  console.log(firstDate)
 
   // Functions
   const previous = useCallback(() => {
@@ -47,8 +45,6 @@ const Calendar = (): JSX.Element => {
   const current = useCallback(() => {
     return getDaysInMonth(formatDate(firstDate))
   }, [firstDate])
-
-  console.log(getDaysInMonth(formatDate(firstDate)))
 
   const next = useCallback(() => {
     return getFirstDaysInMonth(
@@ -153,58 +149,30 @@ const Calendar = (): JSX.Element => {
     ]
   )
 
-  /* Start First */
-  const firstGotoDate = useCallback(
-    (date: moment.Moment) => {
-      const newDate = moment()
-      const reformatDate = moment(formatDate(secondDate))
-      if (newDate.isSame(reformatDate) || newDate.isAfter(reformatDate)) {
-        setSecondDate(nextMonth(moment()))
-      }
-      setFirstDate(date)
-    },
-    [secondDate]
-  )
-
   const previousMonthFirst = useCallback(() => {
     setFirstDate(previousMonth(firstDate))
   }, [firstDate])
 
   const nextMonthFirst = useCallback(() => {
-    firstGotoDate(nextMonth(firstDate))
-  }, [firstDate, firstGotoDate])
+    setFirstDate(nextMonth(firstDate))
+  }, [firstDate])
 
-  const changeFirstMonth = useCallback(
-    (month: number) => {
-      firstGotoDate(
-        moment(`${firstDate.year()}-${month < 10 ? '0' : ''}${month}-01`)
-      )
-    },
-    [firstDate, firstGotoDate]
-  )
-
-  const changeFirstYear = useCallback(
-    (year: number) => {
-      firstGotoDate(moment(`${year}-${firstDate.month() + 1}-01`))
-    },
-    [firstDate, firstGotoDate]
-  )
   const clickPreviousDays = useCallback(
     (day: number) => {
-      const newDate = previousMonth(moment())
+      const newDate = previousMonth(firstDate)
       clickDay(day, newDate.month() + 1, newDate.year())
       previousMonthFirst()
     },
-    [clickDay, moment(), previousMonthFirst]
+    [clickDay, firstDate, previousMonthFirst]
   )
 
   const clickNextDays = useCallback(
     (day: number) => {
-      const newDate = nextMonth(moment())
+      const newDate = nextMonth(firstDate)
       clickDay(day, newDate.month() + 1, newDate.year())
       nextMonthFirst()
     },
-    [clickDay, moment(), nextMonthFirst]
+    [clickDay, firstDate, nextMonthFirst]
   )
 
   return (

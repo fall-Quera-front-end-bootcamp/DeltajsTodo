@@ -55,7 +55,7 @@ export function nextMonth(date: moment.Moment): moment.Moment {
     .month(date.month() + 1)
 }
 
-export function previousMonth(date: moment.Moment): string | moment.Moment {
+export function previousMonth(date: moment.Moment): moment.Moment {
   return date
     .date(1)
     .hour(0)
