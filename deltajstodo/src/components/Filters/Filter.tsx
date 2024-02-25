@@ -14,10 +14,7 @@ const Filter = (): JSX.Element => {
 
 const removeFilter = (id: string) => {
   setFilters((prevFilters) => prevFilters.filter((filter) => filter !== id));
-  console.log(id)
 }
-
-console.log(filters)
   return (
     <section className="w-[718px] rounded-[8px] bg-white shadow-2xl items-center justify-center">
       <div id="body-filter" className="flex flex-col">
