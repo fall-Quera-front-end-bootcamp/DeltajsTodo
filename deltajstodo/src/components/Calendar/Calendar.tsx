@@ -14,25 +14,17 @@ import {
   nextMonth,
   previousMonth
 } from '../../helpers'
-import { useCallback, useContext, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import Days from './Days'
 import Week from './Week'
-import DatepickerContext from '../../contexts/DatepickerContext'
 
 const Calendar = (): JSX.Element => {
   moment.locale('fa')
-  const [firstDate, setFirstDate] = useState(moment())
-  // Contexts
-  const {
-    period,
-    changePeriod,
-    changeDayHover,
-    showFooter,
-    changeDatepickerValue,
-    hideDatepicker,
-    asSingle,
-    input
-  } = useContext(DatepickerContext)
+  const m = useMemo(() => {
+    return moment()
+  }, [moment().seconds()])
+  const [firstDate, setFirstDate] = useState(m)
+  const [calendarData, setCalendarData] = useState<object>({})
 
   // Functions
   const previous = useCallback(() => {
@@ -53,127 +45,18 @@ const Calendar = (): JSX.Element => {
     )
   }, [current, firstDate, previous])
 
-  // Variables
-  const calendarData = useMemo(() => {
-    return {
-      date: moment(),
+  console.log(firstDate)
+  // Update the calendarData state whenever the dependencies change
+  useEffect(() => {
+    setCalendarData({
+      date: firstDate,
       days: {
         previous: previous(),
         current: current(),
         next: next()
       }
-    }
-  }, [current, moment(), next, previous])
-
-  const clickDay = useCallback(
-    (day: number, month = moment().month() + 1, year = moment().year()) => {
-      const fullDay = `${year}-${month}-${day}`
-      let newStart
-      let newEnd = null
-
-      function chosePeriod(start: string, end: string): void {
-        const ipt = input?.current
-        changeDatepickerValue(
-          {
-            startDate: moment(start).format(DATE_FORMAT),
-            endDate: moment(end).format(DATE_FORMAT)
-          },
-          ipt
-        )
-        hideDatepicker()
-      }
-
-      if (period.start && period.end) {
-        if (changeDayHover) {
-          changeDayHover(null)
-        }
-        changePeriod({
-          start: null,
-          end: null
-        })
-      }
-
-      if ((!period.start && !period.end) || (period.start && period.end)) {
-        if (!period.start && !period.end) {
-          changeDayHover(fullDay)
-        }
-        newStart = fullDay
-        if (asSingle) {
-          newEnd = fullDay
-          chosePeriod(fullDay, fullDay)
-        }
-      } else {
-        if (period.start && !period.end) {
-          // start not null
-          // end null
-          const condition =
-            moment(fullDay).isSame(moment(period.start)) ||
-            moment(fullDay).isAfter(moment(period.start))
-          newStart = condition ? period.start : fullDay
-          newEnd = condition ? fullDay : period.start
-        } else {
-          // Start null
-          // End not null
-          const condition =
-            moment(fullDay).isSame(moment(period.end)) ||
-            moment(fullDay).isBefore(moment(period.end))
-          newStart = condition ? fullDay : period.start
-          newEnd = condition ? period.end : fullDay
-        }
-
-        if (!showFooter) {
-          if (newStart && newEnd) {
-            chosePeriod(newStart, newEnd)
-          }
-        }
-      }
-
-      if (!(newEnd && newStart) || showFooter) {
-        changePeriod({
-          start: newStart,
-          end: newEnd
-        })
-      }
-    },
-    [
-      asSingle,
-      changeDatepickerValue,
-      changeDayHover,
-      changePeriod,
-      moment(),
-      hideDatepicker,
-      period.end,
-      period.start,
-      showFooter,
-      input
-    ]
-  )
-
-  const previousMonthFirst = useCallback(() => {
-    setFirstDate(previousMonth(firstDate))
-  }, [firstDate])
-
-  const nextMonthFirst = useCallback(() => {
-    setFirstDate(nextMonth(firstDate))
-  }, [firstDate])
-
-  const clickPreviousDays = useCallback(
-    (day: number) => {
-      const newDate = previousMonth(firstDate)
-      clickDay(day, newDate.month() + 1, newDate.year())
-      previousMonthFirst()
-    },
-    [clickDay, firstDate, previousMonthFirst]
-  )
-
-  const clickNextDays = useCallback(
-    (day: number) => {
-      const newDate = nextMonth(firstDate)
-      clickDay(day, newDate.month() + 1, newDate.year())
-      nextMonthFirst()
-    },
-    [clickDay, firstDate, nextMonthFirst]
-  )
+    })
+  }, [current, firstDate, next, previous])
 
   return (
     <div
@@ -244,10 +127,10 @@ const Calendar = (): JSX.Element => {
             <div className="absolute left-[390px] top-[100px] flex flex-row items-center justify-center gap-5 text-[24px]">
               <div className="">تیر ۱۴۰۲</div>
               <div className="flex flex-row">
-                <button onClick={nextMonthFirst}>
+                <button onClick={() => {}}>
                   <ArrowDownIconSvg className="-rotate-90" color="#7D828C" />
                 </button>
-                <button onClick={previousMonthFirst}>
+                <button onClick={() => {}}>
                   <ArrowDownIconSvg className="rotate-90" color="#7D828C" />
                 </button>
               </div>
@@ -255,12 +138,7 @@ const Calendar = (): JSX.Element => {
             </div>
             <div className="absolute left-[16px] top-[160px] my-1 grid grid-cols-7 gap-x-[30px] gap-y-4">
               <Week />
-              <Days
-                calendarData={calendarData}
-                onClickPreviousDays={clickPreviousDays}
-                onClickDay={clickDay}
-                onClickNextDays={clickNextDays}
-              />
+              <Days calendarData={calendarData} />
             </div>
             <Button CalendarButton>بستن</Button>
           </div>

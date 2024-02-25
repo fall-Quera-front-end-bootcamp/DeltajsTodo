@@ -23,7 +23,7 @@ export function getFirstDayInMonth(date: moment.Moment): {
   }
 }
 
-export function getLastDayInMonth(date: string | moment.Moment): object {
+export function getLastDayInMonth (date: string | moment.Moment): object {
   return {
     ddd: formatDate(moment(date).endOf('month'), 'ddd'),
     basic: formatDate(moment(date).endOf('month')),
@@ -31,7 +31,7 @@ export function getLastDayInMonth(date: string | moment.Moment): object {
   }
 }
 
-export function generateArrayNumber(start = 0, end = 0): number[] {
+export function generateArrayNumber (start = 0, end = 0): number[] {
   const array = []
   for (let i = start; i <= end; i++) {
     array.push(i)
@@ -39,14 +39,14 @@ export function generateArrayNumber(start = 0, end = 0): number[] {
   return array
 }
 
-export function getDaysInMonth(date: string | moment.Moment): number[] {
+export function getDaysInMonth (date: string | moment.Moment): number[] {
   if (!isNaN(moment(date).daysInMonth())) {
     return [...generateArrayNumber(1, moment(date).daysInMonth())]
   }
   return []
 }
 
-export function nextMonth(date: moment.Moment): moment.Moment {
+export function nextMonth (date: moment.Moment): moment.Moment {
   return date
     .date(1)
     .hour(0)
@@ -55,7 +55,7 @@ export function nextMonth(date: moment.Moment): moment.Moment {
     .month(date.month() + 1)
 }
 
-export function previousMonth(date: moment.Moment): moment.Moment {
+export function previousMonth (date: moment.Moment): moment.Moment {
   return date
     .date(1)
     .hour(0)
@@ -64,7 +64,7 @@ export function previousMonth(date: moment.Moment): moment.Moment {
     .month(date.month() - 1)
 }
 
-export function getNumberOfDay(
+export function getNumberOfDay (
   dayString: string,
   startWeekOn?: string | undefined
 ): number {
