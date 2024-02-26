@@ -17,7 +17,6 @@ function App(): JSX.Element {
         <Route path="api/auth/register" element={<Register />} />
         <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
         <Route path="api/auth/resetPassword" element={<ResetPassword />} />
-        <Route path="api/auth/workSpace" element={<WorkSpace />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
