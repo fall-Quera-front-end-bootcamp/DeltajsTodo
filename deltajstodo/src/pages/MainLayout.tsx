@@ -1,16 +1,25 @@
+/* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent } from 'react'
+import {
+  useState,
+  type FunctionComponent,
+  useReducer,
+  createContext,
+  useRef
+} from 'react'
 import SidebarPrimary from '../components/SideBars/SidebarPrimary'
 import { type User, type sidebarItem } from '../utilities/models'
 import { Outlet } from 'react-router-dom'
+import NewProject from '../components/Modals/NewProject/NewProject'
+import NewWorkspace from '../components/Modals/NewWorkspace/NewWorkspace'
+import Button from '../components/Buttons/Button'
+import AddIconSvg from '../components/Icons/AddIconSvg'
 
 interface MainLayoutProps {
   // currentUser: User
 }
-interface sidebarItems {
-  items: sidebarItem[]
-}
+let WIDForNewProject: null | string = null
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   // const [sidebarItems, setSidebarItems] = useState<sidebarItems['items']>([
   //   {
@@ -48,20 +57,59 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   //   }
   // ])
 
+  const [localPage, dispatch] = useReducer(StepReducer, 0)
+  // const WIDForNewProject = useRef(null)
   return (
     <>
-      <div className="flex flex-row-reverse gap-4">
-        <div>
-          <SidebarPrimary />
-        </div>
+      <localPageContext.Provider value={localPage}>
+        <localPageDispatchContext.Provider value={dispatch}>
+          <div className="flex flex-row-reverse gap-4">
+            <div>
+              <SidebarPrimary />
+            </div>
 
-        <div className="w-[1100px] bg-pink-primary">
-          {' '}
-          <Outlet />
-        </div>
-      </div>
+            <div
+              // eslint-disable-next-line tailwindcss/no-custom-classname
+              className={'w-[1100px] '}
+            >
+              <div
+                className={`${localPage !== 0 && 'bg-gray-primary blur-md'}`}
+              >
+                <Outlet />
+              </div>
+              {localPage === 1 && <NewWorkspace />}
+              {localPage === 2 && <NewProject WID={WIDForNewProject} />}
+              {/* {step === 3 && <NewTask />}??? */}
+            </div>
+          </div>
+        </localPageDispatchContext.Provider>
+      </localPageContext.Provider>
     </>
   )
 }
 
 export default MainLayout
+export const localPageContext = createContext<number | null>(null)
+
+export const localPageDispatchContext = createContext<unknown>(null)
+function StepReducer(localPage: number, action: any): number {
+  switch (action?.type) {
+    case 'openNewProject': {
+      WIDForNewProject = action?.WID
+      console.log(WIDForNewProject)
+
+      return 2
+    }
+
+    case 'closeModal': {
+      return 0
+    }
+    case 'openNewWorkspace': {
+      return 1
+    }
+
+    default: {
+      throw Error('Unknown action: ' + action.type)
+    }
+  }
+}

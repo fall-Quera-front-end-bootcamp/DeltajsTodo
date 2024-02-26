@@ -1,28 +1,50 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent } from 'react'
+import { useState, type FunctionComponent, useContext } from 'react'
 import { type Project } from '../../utilities/models'
 import ProjectItem from './ProjectItem/ProjectItem'
 import { NavLink } from 'react-router-dom'
+import ProjectMore from '../Column-more/ProjectMore'
+
+import { localPageDispatchContext } from '../../pages/MainLayout'
 
 interface WorkspaceItemProps {
+  workspaceItemID: string
   workspaceItemTitle: string
   workspaceItemColor: string
   projectItems: Project[]
 }
 
 const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
+  workspaceItemID,
   workspaceItemColor,
   workspaceItemTitle,
   projectItems
 }) => {
-  const [isSelected, setSelect] = useState(false)
+  const [isSelected, setSelect] = useState<boolean>(false)
+  const [isColumnMoreSelected, setColumnMoreSelect] = useState<boolean>(false)
+  const stepDispatch: any = useContext(localPageDispatchContext)
+
   return (
     <>
-      <div className="peer flex h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
-        <div className=" w-[20px] group-hover:block group-hover:w-[30px] peer-hover:visible">
-          <button className="w-[30px]">...</button>
+      <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
+        <div className="invisible w-[20px] group-hover:visible ">
+          <button
+            className="w-[30px]"
+            onClick={() => setColumnMoreSelect((prev) => !prev)}
+          >
+            ...
+          </button>
+        </div>
+        <div className="relative">
+          <div
+            className="absolute top-[20px] right-[-100px]"
+            onMouseLeave={() => setColumnMoreSelect((prev) => false)}
+          >
+            {isColumnMoreSelected && <ProjectMore id={workspaceItemID} />}
+          </div>
         </div>
         <div className="flex flex-row items-center justify-between gap-2">
           <div>
@@ -46,11 +68,11 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
 
           <div>
             <div
-              className={`size-[20px] rounded-[4px] bg-[#228BE6] ${workspaceItemColor}`}
+              className={`size-[20px] rounded-[4px] bg-[${workspaceItemColor}] `}
             ></div>
           </div>
         </div>
-      </div>
+      </button>
 
       {isSelected ? (
         projectItems.length > 0 ? (
@@ -60,6 +82,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
                 <div key={project.id}>
                   <li>
                     <ProjectItem
+                      workspaceID={workspaceItemID}
                       project={project}
                       projectItemTitle={project.title}
                       projectItemID={project.id}
@@ -71,7 +94,12 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
           })
         ) : (
           <>
-            <button className=" text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] ">
+            <button
+              className=" text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] "
+              onClick={() =>
+                stepDispatch({ type: 'openNewProject', WID: workspaceItemID })
+              }
+            >
               ساختن پروژه جدید
             </button>
           </>

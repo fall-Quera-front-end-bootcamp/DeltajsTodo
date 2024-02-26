@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound'
 import Workspace from './pages/Workspace'
 import MainLayout from './pages/MainLayout'
 import Board from './pages/Board'
-import { type User, Permission } from './utilities/models'
+import { type User, Permission, type Workspace as W } from './utilities/models'
 import { useReducer, useRef } from 'react'
 import EmptyArea from './pages/EmptyArea'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
@@ -42,7 +42,7 @@ function App(): JSX.Element {
       {
         id: '1',
         title: 'درس مدیریت پروژه',
-        color: 'bg-[#40C057]',
+        color: '#40C057',
         status: Permission.manager,
         projects: [
           {
@@ -72,7 +72,7 @@ function App(): JSX.Element {
       {
         id: '2',
         title: 'درس کامپایلر',
-        color: 'bg-[#FA5252]',
+        color: '#FA5252',
         status: Permission.manager,
         projects: [
           {
@@ -101,8 +101,38 @@ function App(): JSX.Element {
       },
       {
         id: '3',
+        title: 'کارهای شخصی',
+        color: '#FAB005',
+        status: Permission.manager,
+        projects: [
+          {
+            id: '31',
+            title: 'پروژه اول',
+            status: Permission.manager,
+            boards: [
+              {
+                title: '',
+                tasks: []
+              }
+            ]
+          },
+          {
+            id: '32',
+            title: 'پروژه دوم',
+            status: Permission.manager,
+            boards: [
+              {
+                title: '',
+                tasks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: '4',
         title: 'درس طراحی الگوریتم',
-        color: 'bg-[#228BE6]',
+        color: '#228BE6',
         status: Permission.manager,
         projects: []
       }
@@ -138,25 +168,43 @@ function App(): JSX.Element {
 export default App
 function UserReducer(user: User, action: any): User {
   switch (action?.type) {
-    case 'added': {
+    case 'AddWorkspace': {
       const deepcopy = JSON.parse(JSON.stringify(user))
       deepcopy.workspaces.push(action?.new_workspace)
 
       return { ...user, ...deepcopy }
     }
-    // case 'changed': {
-    //   const deepcopy = JSON.parse(JSON.stringify(user))
-    //   const index = deepcopy.workspaces.findIndex((t) => t.id === action.id)
-    //   deepcopy.workspaces[index].color = action.new_color
-    //   return { ...user, ...deepcopy }
-    // }
-    // case 'deleted': {
-    //   const deepcopy = JSON.parse(JSON.stringify(user))
-    //   deepcopy.workspaces = deepcopy.workspaces.filter(
-    //     (t) => t?.id !== action.id
-    //   )
-    //   return { ...user, ...deepcopy }
-    // }
+    case 'changeTitleWorkspace': {
+      const deepcopy = JSON.parse(JSON.stringify(user))
+      const index = deepcopy.workspaces.findIndex((w: W) => w.id === action?.id)
+      deepcopy.workspaces[index].title = action?.new_title
+      return { ...user, ...deepcopy }
+    }
+    case 'changeColorWorkspace': {
+      const deepcopy = JSON.parse(JSON.stringify(user))
+      const index = deepcopy.workspaces.findIndex((w: W) => w.id === action?.id)
+      deepcopy.workspaces[index].color = action?.new_color
+      return { ...user, ...deepcopy }
+    }
+    case 'DeleteWorkspace': {
+      const deepcopy = JSON.parse(JSON.stringify(user))
+      deepcopy.workspaces = deepcopy.workspaces.filter(
+        (t: W) => t?.id !== action?.id
+      )
+      return { ...user, ...deepcopy }
+    }
+    case 'AddProject': {
+      const deepcopy = JSON.parse(JSON.stringify(user))
+      console.log(action?.WID)
+
+      const index = deepcopy.workspaces.findIndex(
+        (w: W) => action?.WID === w.id
+      )
+      console.log(index)
+
+      deepcopy?.workspaces[index]?.projects?.push(action?.new_project)
+      return { ...user, ...deepcopy }
+    }
     default: {
       throw Error('Unknown action: ' + action.type)
     }

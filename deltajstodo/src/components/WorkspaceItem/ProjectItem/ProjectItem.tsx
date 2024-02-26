@@ -6,12 +6,14 @@ import { NavLink } from 'react-router-dom'
 import { type Project } from '../../../utilities/models'
 
 interface ProjectItemProps {
+  workspaceID: string
   project: Project
   projectItemID: string
   projectItemTitle: string
 }
 
 const ProjectItem: FunctionComponent<ProjectItemProps> = ({
+  workspaceID,
   project,
   projectItemTitle,
   projectItemID

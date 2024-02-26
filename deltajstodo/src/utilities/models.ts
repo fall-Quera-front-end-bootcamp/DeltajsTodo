@@ -80,7 +80,7 @@ interface Board {
 }
 
 export interface Project {
-  id: string
+  readonly id: string
   title: string
   status: Permission.manager
   sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
@@ -99,7 +99,7 @@ export enum Permission {
  * * Every time should created from contex api or localstorage
  */
 export interface Workspace {
-  id: string
+  readonly id: string
   title: string
   color: string
   link?: string

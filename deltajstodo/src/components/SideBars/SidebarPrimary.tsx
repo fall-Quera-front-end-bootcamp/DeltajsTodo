@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable tailwindcss/no-custom-classname */
@@ -10,8 +11,8 @@ import LogoutIconSvg from '../Icons/LogoutIconSvg'
 import LightModeSwitchIconSvg from '../Icons/LightModeSwitchIconSvg'
 import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import WorkspaceItem from '../WorkspaceItem/WorkspaceItem'
-import { Permission, type Workspace } from '../../utilities/models'
 import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
+import { localPageDispatchContext } from '../../pages/MainLayout'
 
 interface SidebarPrimaryProps {
   // items: Workspace[]
@@ -23,7 +24,16 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
     setDarkMode(!darkMode)
   }
   const items1 = useContext(UserContext)
+  const [items, setItems] = useState<any>([])
+  const [filterValue, setFilterValue] = useState('')
   const dispatch: any = useContext(UserDispatchContext)
+  const stepDispatch: any = useContext(localPageDispatchContext)
+
+  const filterWorkspacesHandler = (e: any): void => {
+    e?.target?.value !== ''
+      ? setFilterValue(e?.target?.value as string)
+      : setFilterValue('')
+  }
 
   return (
     <section className="relative right-0 top-0 ml-auto flex h-screen w-[340px] flex-col justify-between border-l-[1px] border-[#AAAAAA] bg-[#ffff]">
@@ -44,18 +54,24 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
           </div>
           {/* --------------------------------------- */}
           {/* search input  */}
-          <div>
+          <div className="relative">
             <div className="flex items-center">
               <input
                 type="text"
                 className="placeholder: placeholder:text-bodyxs block h-[40px] w-[274px] rounded-[4px] bg-[#F6F7F9] px-10 py-4 ps-10 text-right text-[#1E1E1E]  placeholder:pr-2 placeholder:font-normal"
                 placeholder="جستجو کنید"
+                onChange={filterWorkspacesHandler}
               />
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 ps-3">
                   <SearchIconSvg />
                 </div>
               </div>
+            </div>
+            <div
+              className={`absolute w-[290px] bg-violet-primary${items.length === 0 ? 'invisible' : ''}`}
+            >
+              <ul></ul>
             </div>
           </div>
           {/* ----------------------------------------------------- */}
@@ -66,15 +82,8 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
               <div className="flex w-full items-center justify-center space-x-1 rounded-[6px] bg-[#D3D3D3]">
                 <button
                   onClick={() =>
-                    dispatch({
-                      type: 'added',
-                      new_workspace: {
-                        id: '5',
-                        title: 'درس طراحی الگوریتم',
-                        color: 'bg-[#228BE6]',
-                        status: Permission.manager,
-                        projects: []
-                      }
+                    stepDispatch({
+                      type: 'openNewWorkspace'
                     })
                   }
                 >
@@ -90,19 +99,35 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
               {/* ***********!!!  Need typescript to display remove and add list !!!******************************************** */}
               {/* one list work */}
 
-              {items1?.workspaces?.map((item) => {
-                return (
-                  <li key={item.id}>
-                    <WorkspaceItem
-                      workspaceItemColor={item.color}
-                      workspaceItemTitle={item.title}
-                      projectItems={item.projects}
-                    />
-                  </li>
-                )
-              })}
-
-              <li>
+              {filterValue === '' &&
+                items1?.workspaces.map((item) => {
+                  return (
+                    <li key={item.id}>
+                      <WorkspaceItem
+                        workspaceItemID={item.id}
+                        workspaceItemColor={item.color}
+                        workspaceItemTitle={item.title}
+                        projectItems={item.projects}
+                      />
+                    </li>
+                  )
+                })}
+              {filterValue !== '' &&
+                items1?.workspaces
+                  .filter((i) => i?.title?.startsWith(filterValue))
+                  .map((item) => {
+                    return (
+                      <li key={item.id}>
+                        <WorkspaceItem
+                          workspaceItemID={item.id}
+                          workspaceItemColor={item.color}
+                          workspaceItemTitle={item.title}
+                          projectItems={item.projects}
+                        />
+                      </li>
+                    )
+                  })}
+              {/* <li>
                 <div className="flex justify-end space-x-2">
                   <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
                     درس مدیریت پروژه
@@ -111,9 +136,9 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                     <div className="size-[20px] rounded-[4px] bg-[#40C057]"></div>
                   </div>
                 </div>
-              </li>
+              </li> */}
               {/* two list work */}
-              <li className="flex flex-col gap-[6px] space-y-[6px]">
+              {/* <li className="flex flex-col gap-[6px] space-y-[6px]">
                 <div className="flex justify-end space-x-2">
                   <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
                     کارهای شخصی
@@ -121,10 +146,10 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                   <div>
                     <div className="size-[20px] rounded-[4px] bg-[#FAB005]"></div>
                   </div>
-                </div>
-                {/* -------------------------------------START------------------------------------------- */}
-                {/* --------------------------- subcategory - کارهای شخصی -------------------------- */}
-                {/* <li>
+                </div> */}
+              {/* -------------------------------------START------------------------------------------- */}
+              {/* --------------------------- subcategory - کارهای شخصی -------------------------- */}
+              {/* <li>
                   <div className="flex justify-end space-x-2">
                     <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
                       پروژه اول
@@ -134,11 +159,11 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                     </div>
                   </div>
                 </li> */}
-              </li>
+              {/* </li> */}
               {/* ----------------------------------------END---------------------------------------- */}
 
               {/* three  list work */}
-              <li>
+              {/* <li>
                 <div className="flex justify-end space-x-2">
                   <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
                     درس کامپایلر
@@ -147,15 +172,15 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                     <div className="size-[20px] rounded-[4px] bg-[#FA5252]"></div>
                   </div>
                 </div>
-              </li>
+              </li> */}
               {/* --------------------------------------START------------------------------------------ */}
               {/* ----------!!!!!!!!!!!!!!!!-button new project - ساختن پروژه جدید !!!!!!!!!!!!!!!!-------------------------------------------- */}
-              <button className="hidden=[36px] text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] ">
+              {/* <button className="hidden=[36px] text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] ">
                 ساختن پروژه جدید
-              </button>
+              </button> */}
               {/* -----------------------------------------END--------------------------------------- */}
               {/* four  list work */}
-              <li>
+              {/* <li>
                 <div className="flex justify-end space-x-2">
                   <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
                     درس طراحی الگوریتم
@@ -164,7 +189,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                     <div className="size-[20px] rounded-[4px] bg-[#228BE6]"></div>
                   </div>
                 </div>
-              </li>
+              </li> */}
               {/* <li>
                 <WorkspaceItem
                   projectItems={[]}
