@@ -1,9 +1,8 @@
-import moment from 'jalali-moment'
+import type moment from 'jalali-moment'
 import { toFarsiNumber } from '../../utilities/toFarsiNumber'
 import Button from '../Buttons/Button'
 import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
 import CalendarIconSvg from '../Icons/CalendarIconSvg'
-import { DATE_FORMAT } from '../../constants'
 import {
   formatDate,
   getDaysInMonth,
@@ -14,49 +13,46 @@ import {
   nextMonth,
   previousMonth
 } from '../../helpers'
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Days from './Days'
 import Week from './Week'
 
-const Calendar = (): JSX.Element => {
-  moment.locale('fa')
-  const m = useMemo(() => {
-    return moment()
-  }, [moment().seconds()])
-  const [firstDate, setFirstDate] = useState(m)
-  const [calendarData, setCalendarData] = useState<object>({})
-
+const Calendar = ({ date }: { date: string }): JSX.Element => {
   // Functions
   const previous = useCallback(() => {
     return getLastDaysInMonth(
-      previousMonth(firstDate),
-      getNumberOfDay(getFirstDayInMonth(firstDate).ddd, 'sat')
+      previousMonth(date),
+      getNumberOfDay(getFirstDayInMonth(date).ddd, 'sat')
     )
-  }, [firstDate, 'sat'])
+  }, [date, 'sat'])
+
+  console.log(previousMonth(date))
+  console.log(nextMonth(date))
 
   const current = useCallback(() => {
-    return getDaysInMonth(formatDate(firstDate))
-  }, [firstDate])
+    return getDaysInMonth(date)
+  }, [date])
 
   const next = useCallback(() => {
     return getFirstDaysInMonth(
-      previousMonth(firstDate),
+      previousMonth(date),
       42 - (previous().length + current().length)
     )
-  }, [current, firstDate, previous])
+  }, [current, date, previous])
 
-  console.log(firstDate)
   // Update the calendarData state whenever the dependencies change
-  useEffect(() => {
-    setCalendarData({
-      date: firstDate,
+  const calendarData = useMemo(() => {
+    return {
+      date,
       days: {
         previous: previous(),
         current: current(),
         next: next()
       }
-    })
-  }, [current, firstDate, next, previous])
+    }
+  }, [current, date, previous])
+
+  console.log(date)
 
   return (
     <div

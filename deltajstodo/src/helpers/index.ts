@@ -1,17 +1,17 @@
 import moment from 'jalali-moment'
 import { DATE_FORMAT } from '../constants'
 
-export function formatDate(date: moment.Moment, format = DATE_FORMAT): string {
+export function formatDate (date: moment.Moment, format = DATE_FORMAT): string {
   return date.format(format)
 }
 
-export function classNames(
-  ...classes: (false | null | undefined | string)[]
+export function classNames (
+  ...classes: Array<false | null | undefined | string>
 ): string {
   return classes.filter(Boolean).join(' ')
 }
 
-export function getFirstDayInMonth(date: moment.Moment): {
+export function getFirstDayInMonth (date: string): {
   ddd: string
   basic: string
   object: moment.Moment
@@ -23,7 +23,7 @@ export function getFirstDayInMonth(date: moment.Moment): {
   }
 }
 
-export function getLastDayInMonth (date: string | moment.Moment): object {
+export function getLastDayInMonth (date: string): object {
   return {
     ddd: formatDate(moment(date).endOf('month'), 'ddd'),
     basic: formatDate(moment(date).endOf('month')),
@@ -39,29 +39,23 @@ export function generateArrayNumber (start = 0, end = 0): number[] {
   return array
 }
 
-export function getDaysInMonth (date: string | moment.Moment): number[] {
+export function getDaysInMonth (date: string): number[] {
   if (!isNaN(moment(date).daysInMonth())) {
     return [...generateArrayNumber(1, moment(date).daysInMonth())]
   }
   return []
 }
 
-export function nextMonth (date: moment.Moment): moment.Moment {
-  return date
-    .date(1)
-    .hour(0)
-    .minute(0)
-    .second(0)
-    .month(date.month() + 1)
+export function nextMonth (date: string): string {
+  const time: string = date
+  time.slice(1, 2)
+  return time
 }
 
-export function previousMonth (date: moment.Moment): moment.Moment {
-  return date
-    .date(1)
-    .hour(0)
-    .minute(0)
-    .second(0)
-    .month(date.month() - 1)
+export function previousMonth (date: string): string {
+  const time: string = date
+  time.slice(1, 6)
+  return time
 }
 
 export function getNumberOfDay (
@@ -117,7 +111,7 @@ export function getNumberOfDay (
   return number
 }
 
-export function getLastElementsInArray(
+export function getLastElementsInArray (
   array: number[] = [],
   size = 0
 ): number[] {
@@ -136,21 +130,21 @@ export function getLastElementsInArray(
   return result.reverse()
 }
 
-export function getFirstElementsInArray(
+export function getFirstElementsInArray (
   array: number[] = [],
   size = 0
 ): number[] {
   return array.slice(0, size)
 }
 
-export function getLastDaysInMonth(
+export function getLastDaysInMonth (
   date: moment.Moment | string,
   size = 0
 ): number[] {
   return getLastElementsInArray(getDaysInMonth(date), size)
 }
 
-export function getFirstDaysInMonth(
+export function getFirstDaysInMonth (
   date: string | moment.Moment,
   size = 0
 ): number[] {

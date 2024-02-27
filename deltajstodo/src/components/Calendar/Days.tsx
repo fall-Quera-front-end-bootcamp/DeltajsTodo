@@ -2,19 +2,17 @@
 import type React from 'react'
 import moment from 'jalali-moment'
 import { toFarsiNumber } from '../../utilities/toFarsiNumber'
+import { formatDate } from '../../helpers'
 
 interface Props {
   calendarData: {
-    date: moment.Moment
+    date: string
     days: {
       previous: number[]
       current: number[]
       next: number[]
     }
   }
-  onClickPreviousDays: (day: number) => void
-  onClickDay: (day: number) => void
-  onClickNextDays: (day: number) => void
 }
 
 const Days: React.FC<Props> = ({ calendarData }) => {
@@ -34,7 +32,7 @@ const Days: React.FC<Props> = ({ calendarData }) => {
         <button
           type="button"
           key={index}
-          className="rounded-full border border-teal-primary text-[24px]"
+          className={`rounded-full ${Number(calendarData.date.slice(8, 10).replace(' ', '')) === index + 1 ? 'border border-teal-primary' : ''}  text-[24px]`}
         >
           {toFarsiNumber(`${item}`)}
         </button>
@@ -44,7 +42,7 @@ const Days: React.FC<Props> = ({ calendarData }) => {
         <button
           type="button"
           key={index}
-          className="rounded-full border border-teal-primary text-[24px]"
+          className="rounded-full text-[24px] text-gray-primary"
         >
           {toFarsiNumber(`${item}`)}
         </button>
