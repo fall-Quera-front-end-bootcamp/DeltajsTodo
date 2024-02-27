@@ -1,6 +1,8 @@
 import moment from 'jalali-moment'
 import { DATE_FORMAT } from '../constants'
 
+moment.locale('fa')
+
 export function formatDate (date: moment.Moment, format = DATE_FORMAT): string {
   return date.format(format)
 }
@@ -43,24 +45,29 @@ export function generateArrayNumber (start = 0, end = 0): number[] {
   return array
 }
 
-export function getDaysInMonth (date: string): number[] {
+export function getDaysInMonth (date: string | moment.Moment): number[] {
   if (!isNaN(moment(date).daysInMonth())) {
     return [...generateArrayNumber(1, moment(date).daysInMonth())]
   }
   return []
 }
 
-export function nextMonth (date: string): string {
-  const nextmonth =
-    Number(date.slice(5, 7)) === 12 ? 1 : Number(date.slice(5, 7)) + 1
-
-  return String(nextmonth)
+export function nextMonth (date: string): moment.Moment {
+  return moment(date)
+    .date(1)
+    .hour(0)
+    .minute(0)
+    .second(0)
+    .month(moment(date).month() + 1)
 }
 
-export function previousMonth (date: string): string {
-  const previousM =
-    Number(date.slice(5, 7)) === 1 ? 12 : Number(date.slice(5, 7)) - 1
-  return String(previousM)
+export function previousMonth (date: string): moment.Moment {
+  return moment(date)
+    .date(1)
+    .hour(0)
+    .minute(0)
+    .second(0)
+    .month(moment(date).month() - 1)
 }
 
 export function getNumberOfDay (
@@ -74,19 +81,19 @@ export function getNumberOfDay (
   if (startWeekOn != null) {
     switch (startWeekOn) {
       case 'دوشنبه':
-        startDateModifier = 6
+        startDateModifier = 2
         break
       case 'سه‌شنبه':
-        startDateModifier = 5
+        startDateModifier = 3
         break
       case 'چهارشنبه':
         startDateModifier = 4
         break
       case 'پنجشنبه':
-        startDateModifier = 3
+        startDateModifier = 5
         break
       case 'جمعه':
-        startDateModifier = 2
+        startDateModifier = 6
         break
       case 'یکشنبه':
         startDateModifier = 1
@@ -100,13 +107,13 @@ export function getNumberOfDay (
   }
 
   ;[
+    'شنبه',
     'یکشنبه',
     'دوشنبه',
     'سه‌شنبه',
     'چهارشنبه',
     'پنجشنبه',
-    'جمعه',
-    'شنبه'
+    'جمعه'
   ].forEach((item, index) => {
     if (item.includes(dayString)) {
       number = (index + startDateModifier) % 7

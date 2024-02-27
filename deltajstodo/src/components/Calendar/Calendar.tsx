@@ -8,19 +8,27 @@ import {
   getFirstDaysInMonth,
   getLastDaysInMonth,
   getNumberOfDay,
+  nextMonth,
   previousMonth
 } from '../../helpers'
 import { useCallback, useMemo } from 'react'
 import Days from './Days'
 import Week from './Week'
-import moment from 'jalali-moment'
 
-const Calendar = ({ date }: { date: string }): JSX.Element => {
+const Calendar = ({
+  date,
+  ClickNextMonth,
+  ClickPrevMonth
+}: {
+  date: string
+  ClickNextMonth: () => void
+  ClickPrevMonth: () => void
+}): JSX.Element => {
   // Functions
   const previous = useCallback(() => {
     return getLastDaysInMonth(
       previousMonth(date),
-      getNumberOfDay(getFirstDayInMonth(date).ddd, 'یکشنبه')
+      getNumberOfDay(getFirstDayInMonth(date).ddd, 'شنبه')
     )
   }, [date])
 
@@ -30,7 +38,7 @@ const Calendar = ({ date }: { date: string }): JSX.Element => {
 
   const next = useCallback(() => {
     return getFirstDaysInMonth(
-      previousMonth(date),
+      nextMonth(date),
       42 - (previous().length + current().length)
     )
   }, [current, date, previous])
@@ -46,11 +54,6 @@ const Calendar = ({ date }: { date: string }): JSX.Element => {
       }
     }
   }, [current, date, previous])
-
-  console.log(moment().weeks())
-  console.log(moment().weekYear())
-  console.log(moment().weekday())
-  console.log(moment().weeksInYear())
 
   return (
     <div
@@ -121,10 +124,10 @@ const Calendar = ({ date }: { date: string }): JSX.Element => {
             <div className="absolute left-[390px] top-[100px] flex flex-row items-center justify-center gap-5 text-[24px]">
               <div className="">تیر ۱۴۰۲</div>
               <div className="flex flex-row">
-                <button onClick={() => {}}>
+                <button onClick={ClickNextMonth}>
                   <ArrowDownIconSvg className="-rotate-90" color="#7D828C" />
                 </button>
-                <button onClick={() => {}}>
+                <button onClick={ClickPrevMonth}>
                   <ArrowDownIconSvg className="rotate-90" color="#7D828C" />
                 </button>
               </div>

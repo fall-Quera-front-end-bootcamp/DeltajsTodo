@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type React from 'react'
 import { toFarsiNumber } from '../../utilities/toFarsiNumber'
+import moment from 'jalali-moment'
 
 interface Props {
   calendarData: {
@@ -30,7 +31,7 @@ const Days: React.FC<Props> = ({ calendarData }) => {
         <button
           type="button"
           key={index}
-          className={`rounded-full ${Number(calendarData.date.slice(8, 10).replace(' ', '')) === index + 1 ? 'border border-teal-primary' : ''}  text-[24px]`}
+          className={`rounded-full ${moment(calendarData.date).date() === moment().date() ? (item === moment().date() ? 'border border-teal-primary' : '') : ''}  text-[24px]`}
         >
           {toFarsiNumber(`${item}`)}
         </button>
