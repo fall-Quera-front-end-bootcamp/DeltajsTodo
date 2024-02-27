@@ -1,33 +1,28 @@
-import type moment from 'jalali-moment'
 import { toFarsiNumber } from '../../utilities/toFarsiNumber'
 import Button from '../Buttons/Button'
 import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
 import CalendarIconSvg from '../Icons/CalendarIconSvg'
 import {
-  formatDate,
   getDaysInMonth,
   getFirstDayInMonth,
   getFirstDaysInMonth,
   getLastDaysInMonth,
   getNumberOfDay,
-  nextMonth,
   previousMonth
 } from '../../helpers'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import Days from './Days'
 import Week from './Week'
+import moment from 'jalali-moment'
 
 const Calendar = ({ date }: { date: string }): JSX.Element => {
   // Functions
   const previous = useCallback(() => {
     return getLastDaysInMonth(
       previousMonth(date),
-      getNumberOfDay(getFirstDayInMonth(date).ddd, 'sat')
+      getNumberOfDay(getFirstDayInMonth(date).ddd, 'یکشنبه')
     )
-  }, [date, 'sat'])
-
-  console.log(previousMonth(date))
-  console.log(nextMonth(date))
+  }, [date])
 
   const current = useCallback(() => {
     return getDaysInMonth(date)
@@ -52,7 +47,10 @@ const Calendar = ({ date }: { date: string }): JSX.Element => {
     }
   }, [current, date, previous])
 
-  console.log(date)
+  console.log(moment().weeks())
+  console.log(moment().weekYear())
+  console.log(moment().weekday())
+  console.log(moment().weeksInYear())
 
   return (
     <div

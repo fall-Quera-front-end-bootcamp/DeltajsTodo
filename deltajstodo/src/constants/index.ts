@@ -1,4 +1,4 @@
-export const DATE_FORMAT = 'YYYY-MM-DD'
+export const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss MMM ddd'
 
 export const DATE_LOOKING_OPTIONS = ['forward', 'backward', 'middle']
 

@@ -4,9 +4,7 @@ import moment from 'jalali-moment'
 
 const DateRangePicker = (): JSX.Element => {
   moment.locale('fa')
-  const [firstDate, setFirstDate] = useState(
-    moment().format('YYYY-M-D HH:mm:ss')
-  )
+  const [firstDate, setFirstDate] = useState(moment().format())
   return <Calendar date={firstDate} />
 }
 
