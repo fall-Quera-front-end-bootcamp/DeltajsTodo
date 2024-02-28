@@ -14,19 +14,16 @@ import WorkspaceItem from '../WorkspaceItem/WorkspaceItem'
 import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
 import { localPageDispatchContext } from '../../pages/MainLayout'
 
-interface SidebarPrimaryProps {
-  // items: Workspace[]
-}
+interface SidebarPrimaryProps {}
 
 const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
   const [darkMode, setDarkMode] = useState(false)
   const toggleDarkMode = (): void => {
     setDarkMode(!darkMode)
   }
-  const items1 = useContext(UserContext)
-  const [items, setItems] = useState<any>([])
+  const user = useContext(UserContext)
+
   const [filterValue, setFilterValue] = useState('')
-  const dispatch: any = useContext(UserDispatchContext)
   const stepDispatch: any = useContext(localPageDispatchContext)
 
   const filterWorkspacesHandler = (e: any): void => {
@@ -68,11 +65,6 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                 </div>
               </div>
             </div>
-            <div
-              className={`absolute w-[290px] bg-violet-primary${items.length === 0 ? 'invisible' : ''}`}
-            >
-              <ul></ul>
-            </div>
           </div>
           {/* ----------------------------------------------------- */}
           {/* Spices */}
@@ -97,25 +89,9 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
             {/* list workspace */}
             <ul className="flex flex-col gap-[8px] space-y-[8px]">
               {/* ***********!!!  Need typescript to display remove and add list !!!******************************************** */}
-              {/* one list work */}
 
-              {filterValue === '' &&
-                items1?.workspaces.map((item) => {
-                  return (
-                    <li key={item.id}>
-                      <WorkspaceItem
-                        workspaceItemID={item.id}
-                        workspaceItemColor={item.color}
-                        workspaceItemTitle={item.title}
-                        projectItems={item.projects}
-                      />
-                    </li>
-                  )
-                })}
-              {filterValue !== '' &&
-                items1?.workspaces
-                  .filter((i) => i?.title?.startsWith(filterValue))
-                  .map((item) => {
+              {filterValue === ''
+                ? user?.workspaces.map((item) => {
                     return (
                       <li key={item.id}>
                         <WorkspaceItem
@@ -126,83 +102,26 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                         />
                       </li>
                     )
-                  })}
-              {/* <li>
-                <div className="flex justify-end space-x-2">
-                  <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
-                    درس مدیریت پروژه
-                  </p>
-                  <div>
-                    <div className="size-[20px] rounded-[4px] bg-[#40C057]"></div>
-                  </div>
-                </div>
-              </li> */}
-              {/* two list work */}
-              {/* <li className="flex flex-col gap-[6px] space-y-[6px]">
-                <div className="flex justify-end space-x-2">
-                  <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
-                    کارهای شخصی
-                  </p>
-                  <div>
-                    <div className="size-[20px] rounded-[4px] bg-[#FAB005]"></div>
-                  </div>
-                </div> */}
-              {/* -------------------------------------START------------------------------------------- */}
-              {/* --------------------------- subcategory - کارهای شخصی -------------------------- */}
-              {/* <li>
-                  <div className="flex justify-end space-x-2">
-                    <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
-                      پروژه اول
-                    </p>
-                    <div>
-                      <div className="size-[20px] rounded-[4px]"></div>
-                    </div>
-                  </div>
-                </li> */}
-              {/* </li> */}
-              {/* ----------------------------------------END---------------------------------------- */}
-
-              {/* three  list work */}
-              {/* <li>
-                <div className="flex justify-end space-x-2">
-                  <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
-                    درس کامپایلر
-                  </p>
-                  <div>
-                    <div className="size-[20px] rounded-[4px] bg-[#FA5252]"></div>
-                  </div>
-                </div>
-              </li> */}
-              {/* --------------------------------------START------------------------------------------ */}
-              {/* ----------!!!!!!!!!!!!!!!!-button new project - ساختن پروژه جدید !!!!!!!!!!!!!!!!-------------------------------------------- */}
-              {/* <button className="hidden=[36px] text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] ">
-                ساختن پروژه جدید
-              </button> */}
-              {/* -----------------------------------------END--------------------------------------- */}
-              {/* four  list work */}
-              {/* <li>
-                <div className="flex justify-end space-x-2">
-                  <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
-                    درس طراحی الگوریتم
-                  </p>
-                  <div>
-                    <div className="size-[20px] rounded-[4px] bg-[#228BE6]"></div>
-                  </div>
-                </div>
-              </li> */}
-              {/* <li>
-                <WorkspaceItem
-                  projectItems={[]}
-                  workspaceItemColor="bg-[#FA5252]"
-                  workspaceItemTitle="    درس کامپایلر"
-                />
-              </li> */}
+                  })
+                : user?.workspaces
+                    .filter((i) => i?.title?.startsWith(filterValue))
+                    .map((item) => {
+                      return (
+                        <li key={item.id}>
+                          <WorkspaceItem
+                            workspaceItemID={item.id}
+                            workspaceItemColor={item.color}
+                            workspaceItemTitle={item.title}
+                            projectItems={item.projects}
+                          />
+                        </li>
+                      )
+                    })}
             </ul>
           </div>
         </div>
-        {/* end center div input... */}
       </div>
-      {/* ------------------------------ */}
+      {/* ---------------------------------------------------------------------------------------- */}
       {/* account information */}
       <div className="relative bottom-3 flex flex-col justify-end">
         <div className="flex justify-end space-x-2 p-[16px]">

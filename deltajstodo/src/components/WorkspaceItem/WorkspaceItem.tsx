@@ -1,3 +1,5 @@
+/* eslint-disable tailwindcss/classnames-order */
+/* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable multiline-ternary */
@@ -9,6 +11,7 @@ import { NavLink } from 'react-router-dom'
 import ProjectMore from '../Column-more/ProjectMore'
 
 import { localPageDispatchContext } from '../../pages/MainLayout'
+import WorkspaceItemColor from '../Icons/WorkspaceItemColor'
 
 interface WorkspaceItemProps {
   workspaceItemID: string
@@ -41,7 +44,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
         <div className="relative">
           <div
             className="absolute top-[20px] right-[-100px]"
-            onMouseLeave={() => setColumnMoreSelect((prev) => false)}
+            onMouseLeave={() => setColumnMoreSelect(false)}
           >
             {isColumnMoreSelected && <ProjectMore id={workspaceItemID} />}
           </div>
@@ -67,9 +70,9 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
           </div>
 
           <div>
-            <div
-              className={`size-[20px] rounded-[4px] bg-[${workspaceItemColor}] `}
-            ></div>
+            <div className={'size-[20px] rounded-[4px]  '}>
+              <WorkspaceItemColor color={workspaceItemColor} />
+            </div>
           </div>
         </div>
       </button>

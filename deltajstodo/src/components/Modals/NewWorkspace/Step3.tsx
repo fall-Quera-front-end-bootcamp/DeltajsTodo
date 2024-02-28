@@ -60,8 +60,8 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
 
             <div
               className="flex h-[165px]
-            w-[453px] rounded-lg border-[0.5px] border-[#AAAAAA] flex-col gap-[16px] 
-            pt-[16px]  pl-[16px]  pb-[16px]  pr-[16px]
+            w-[453px] flex-col gap-[16px] rounded-lg border-[0.5px] border-[#AAAAAA] 
+            pb-[16px]  pl-[12px]  pr-[12px]  pt-[16px]
             "
             >
               {/*title */}
@@ -71,8 +71,8 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
                     نام ورک‌اسپیس‌
                   </p>
                 </div>
-                <div className="h-[20px] w-[64px]">
-                  <p className="font-yekan h-[20px] w-[64px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                <div className="h-[20px] min-w-[64px]">
+                  <p className="font-yekan h-[20px] min-w-[64px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     {form.title}‌
                   </p>
                 </div>
@@ -81,7 +81,7 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
               {/*color */}
               <div className="w-[429px] h-[34px] flex flex-row justify-between">
                 <div className="h-[20px] w-[98px]">
-                  <p className="font-yekan h-[20px] w-[93px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="font-yekan h-[20px] w-[98px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     رنگ ورک‌اسپیس‌
                   </p>
                 </div>
@@ -112,10 +112,18 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
                   </p>
                 </div>
                 <div
-                  className="w-[36px] h-[33px] rounded-[100px]
+                  className="w-[36px] h-[33px] 
+                  rounded-[100px]
                pt-[9px]  pl-[8px]  pb-[7px]  pr-[8px]
               "
-                ></div>
+                >
+                  <img
+                    height="33px"
+                    width="36px"
+                    src="../../../assets/picture/1.png"
+                    alt=""
+                  />
+                </div>
               </div>
             </div>
 
@@ -124,7 +132,10 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
         h-[40px] w-[415px] gap-[29px]    rounded-md bg-white "
             >
               <button
-                onClick={() => onSubmitWSCreation()}
+                onClick={() => {
+                  onSubmitWSCreation()
+                  localPageDispatch({ type: 'closeModal' })
+                }}
                 className="flex h-[40px] w-[415px] flex-row items-center justify-center rounded-md bg-[#208D8E] gap-[10px]"
               >
                 <p className="font-yekan h-[20px] w-[117px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">

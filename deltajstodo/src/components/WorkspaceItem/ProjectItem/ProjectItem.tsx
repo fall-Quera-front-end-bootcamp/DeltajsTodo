@@ -1,26 +1,30 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type FunctionComponent } from 'react'
+import { useState, type FunctionComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import { type Project } from '../../../utilities/models'
+import ProjectMore from '../../Column-more/ProjectMore'
 
 interface ProjectItemProps {
-  workspaceID: string
+  workspaceItemID: string
   project: Project
   projectItemID: string
   projectItemTitle: string
 }
 
 const ProjectItem: FunctionComponent<ProjectItemProps> = ({
-  workspaceID,
+  workspaceItemID,
   project,
   projectItemTitle,
   projectItemID
 }) => {
+  //const [isColumnMoreSelected, setColumnMoreSelect] = useState<boolean>(false)
+
   return (
     <>
-      <div className="flex w-[246px] cursor-pointer justify-end  space-x-2 hover:bg-[#E9F9FF]">
+      <div className="justify-end flex w-[246px] cursor-pointer space-x-2 hover:bg-[#E9F9FF]">
         <NavLink
           key={projectItemID}
           style={({ isActive }) => {
@@ -36,7 +40,6 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
             {projectItemTitle}
           </p>
         </NavLink>
-
         {/* <div>
           <div className="size-[20px] rounded-[4px]"></div>
         </div> */}

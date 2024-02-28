@@ -12,7 +12,7 @@ interface ProjectMoreOptionProps {
   color: string
   text: string
   type: string
-  id: string
+  workspaceID: string
   onClickHandler?: (id: string) => any
 }
 
@@ -20,7 +20,7 @@ function ProjectMoreOption({
   color,
   text,
   type,
-  id,
+  workspaceID,
   onClickHandler = () => {}
 }: ProjectMoreOptionProps): JSX.Element {
   function iconChoose(): JSX.Element {
@@ -45,7 +45,7 @@ function ProjectMoreOption({
       <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
         <button
           onClick={() => {
-            onClickHandler(id)
+            onClickHandler(workspaceID)
           }}
         >
           {text}

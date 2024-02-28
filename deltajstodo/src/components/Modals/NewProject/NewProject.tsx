@@ -25,9 +25,7 @@ const NewProject: FunctionComponent<NewProjectProps> = ({ WID }) => {
     <>
       <div
         dir="rtl"
-        className="
-             relative left-[225px] top-[200px]
-              flex h-[268px] w-[500px] flex-col items-center gap-[40px]"
+        className="flex h-[268px] w-[500px] flex-col items-center gap-[40px]"
       >
         <div
           className="bg-white 
@@ -137,6 +135,7 @@ rounded-md border-[1px] border-[#AAAAAA]
                       boards: []
                     }
                   })
+                  stepDispatch({ type: 'closeModal' })
                 }
               }}
               className="bg-[#208D8E] h-[40px] w-[415px] rounded-md flex flex-row items-center justify-center"

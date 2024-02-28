@@ -5,20 +5,18 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent, useRef, useContext } from 'react'
+import { useState, type FunctionComponent } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import Topbar from '../components/SideBars/Topbar'
+
 import ShareIconSvg from '../components/Icons/ShareIconSvg'
 import TodoListIconSvg from '../components/Icons/TodoListIconSvg'
 import ColumnArtboardIconSvg from '../components/Icons/ColumnArtboardIconSvg'
 import CalendarIconSvg from '../components/Icons/CalendarIconSvg'
 import SearchIconSvg from '../components/Icons/SearchIconSvg'
 import FilterSettingIconSvg from '../components/Icons/FilterIconSvg'
-import Step2 from '../components/Modals/NewWorkspace/Step2'
-import { localPageContext, localPageDispatchContext } from './MainLayout'
-import NewProject from '../components/Modals/NewProject/NewProject'
+
 import Button from '../components/Buttons/Button'
-import AddIconSvg from '../components/Icons/AddIconSvg'
+
 import AddSecondaryIconSvg from '../components/Icons/AddSecondaryIconSvg'
 
 interface BoardProps {}
@@ -32,17 +30,7 @@ const Board: FunctionComponent<BoardProps> = () => {
 
   const { state: projectInfo } = useLocation()
   const [view, setViw] = useState<Views>(Views.column)
-  const [workspaceItemSteps, setWorkspaceItemSteps] = useState<number>(0)
 
-  {
-    /**Step
-     * step=1 ---->  new workspace Modal
-     * 2   ----->  new project modal
-     * 3 ----> new task modal */
-  }
-  const step = useContext(localPageContext)
-  const dispatch = useContext(localPageDispatchContext)
-  const x = useRef<number>(643)
   const handleView = (e: any): void => {
     console.log(e?.target?.ariaLabel)
 
@@ -51,20 +39,6 @@ const Board: FunctionComponent<BoardProps> = () => {
 
   return (
     <>
-      {/* <p>Board</p>
-      <h1>hello {projectID}</h1>
-      <h2>{projectInfo.title}</h2> */}
-      {/* <div className="flex">
-        {view === Views.column && <columnBoard />}
-        {view === Views.column && <columnBoard />}
-        {view === Views.column && <columnBoard />}
-         </div> */}
-
-      {/* <Topbar
-        view={view}
-        handleView={handleView}
-        projectInfoTitle={projectInfo.title}
-      /> */}
       <div className="relative">
         {/*Header */}
         <div className="absolute top-[41px] left-[50px]  h-[64px] w-[1034px]  flex flex-col gap-4">

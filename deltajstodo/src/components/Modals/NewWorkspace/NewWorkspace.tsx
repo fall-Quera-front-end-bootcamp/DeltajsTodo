@@ -55,16 +55,14 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   const [form, setForm] = useState<Workspace>({
     id: '',
     title: '',
-    color: '',
+    color: '#7D828C',
     status: Permission.manager,
     projects: []
   })
   const user = useContext(UserContext)
-
   const userDispatch: any = useContext(UserDispatchContext)
-  const onchangeHandler = (e: any): void => {
-    console.log(e.target.value)
 
+  const onchangeHandler = (e: any): void => {
     setForm((prev) => {
       return { ...prev, [e.target.name]: e.target.value }
     })
@@ -94,9 +92,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="
-       relative left-[290px] top-[200px]
-        flex h-[316px] w-[500px] flex-col items-center gap-[40px]"
+            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px]"
           >
             {creationStep === 1 && (
               <Step1 value={form.title} onchangeHandler={onchangeHandler} />

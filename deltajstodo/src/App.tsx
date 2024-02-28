@@ -42,7 +42,7 @@ function App(): JSX.Element {
       {
         id: '1',
         title: 'درس مدیریت پروژه',
-        color: '#40C057',
+        color: '#BE4BDB',
         status: Permission.manager,
         projects: [
           {
@@ -174,15 +174,17 @@ function UserReducer(user: User, action: any): User {
 
       return { ...user, ...deepcopy }
     }
-    case 'changeTitleWorkspace': {
+    case 'changeWorkspaceTitle': {
       const deepcopy = JSON.parse(JSON.stringify(user))
       const index = deepcopy.workspaces.findIndex((w: W) => w.id === action?.id)
       deepcopy.workspaces[index].title = action?.new_title
       return { ...user, ...deepcopy }
     }
-    case 'changeColorWorkspace': {
+    case 'changeWorkspaceColor': {
       const deepcopy = JSON.parse(JSON.stringify(user))
       const index = deepcopy.workspaces.findIndex((w: W) => w.id === action?.id)
+      console.log(action?.new_color)
+
       deepcopy.workspaces[index].color = action?.new_color
       return { ...user, ...deepcopy }
     }

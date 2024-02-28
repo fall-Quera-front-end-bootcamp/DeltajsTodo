@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable tailwindcss/enforces-shorthand */
 /* eslint-disable tailwindcss/classnames-order */
@@ -10,25 +11,34 @@ import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
 
 import { localPageDispatchContext } from '../../../pages/MainLayout'
-import { CreationWorkspaceStepDispatchContext } from './NewWorkspace'
 import ButtonColorIconSvg from '../../Icons/ButtonColorIconSvg'
+import { UserDispatchContext } from '../../../contexts/UserProvider'
 
-interface Step2Props {
-  value: string
-  onChangeHandler: (e: any) => void
+interface ChangeWorkspaceColorProps {
+  WID: string
 }
 
-const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
+const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
+  WID
+}) => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const creationWorkspaceDispatch: any = useContext(
-    CreationWorkspaceStepDispatchContext
-  )
-  const [WScolor, setWSColor] = useState<string>('#7D828C')
-  const onWSColorChangeHandler = (e: any): void => {
-    setWSColor((p) => e?.target?.value)
-    onChangeHandler(e)
-  }
+  const userDispatch: any = useContext(UserDispatchContext)
 
+  const [WScolor, setWSColor] = useState<string>('#7D828C')
+
+  const onChangeHandler = (e: any): void => {
+    setWSColor((p) => e?.target?.value)
+  }
+  const onSubmitHandler = (): void => {
+    if (WScolor !== '') {
+      userDispatch({
+        type: 'changeWorkspaceColor',
+        id: WID,
+        new_color: WScolor
+      })
+    }
+    localPageDispatch({ type: 'closeModal' })
+  }
   const colorsPalet = useRef<any>([
     '#FD7E14',
     '#FAB005',
@@ -47,8 +57,8 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
   return (
     <>
       <div
-        className="bg-white 
-            h-[286px] w-[501px]
+        dir="rtl"
+        className=" bg-white h-[286px] w-[501px]
             rounded-lg p-[24px]
              flex flex-col items-center
               gap-[40px]
@@ -80,10 +90,8 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
                 انتخاب رنگ ورک‌اسپیس‌
               </p>
             </div>
-            <div>
-              <button
-                onClick={() => creationWorkspaceDispatch({ type: 'back' })}
-              >
+            <div className="invisible">
+              <button onClick={() => {}}>
                 <LeftArrow />
               </button>
             </div>
@@ -94,10 +102,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
                 flex flex-row gap-[16px]
                 "
           >
-            <div
-              className={`relative h-[70px] w-[70px] 
-             rounded-lg `}
-            >
+            <div className={'relative h-[70px] w-[70px] rounded-lg '}>
               <div className="absolute">
                 <svg
                   width="70"
@@ -150,7 +155,7 @@ leading-[19.73px]  text-[#1E1E1E] "
              flex flex-col gap-[11px]"
               >
                 <div
-                  className="w-[293px] h-[50px]
+                  className="rtl w-[293px] h-[50px]
              flex flex-wrap gap-[10px]"
                 >
                   <div onClick={() => setWSColor('#7D828C')}>
@@ -179,33 +184,14 @@ leading-[19.73px]  text-[#1E1E1E] "
                           name={'color'}
                           color={color}
                           value={color}
-                          onChangeHandler={onWSColorChangeHandler}
+                          onChangeHandler={onChangeHandler}
                         />
                       </div>
                     )
                   })}
                 </div>
-
-                {/*row 1 */}
-                <div></div>
-
-                <div></div>
               </div>
             </div>
-
-            {/* <p
-                className="font-yekan w-[92px]
-                   h-[20px] text-right text-[14px] font-[400px] 
-                  leading-[19.73px]  text-[#1E1E1E] "
-              >
-                نام ورک‌اسپیس
-              </p>
-
-              <div
-                className="w-[415px] h-[40px]
-    rounded-md border-[1px] border-[#AAAAAA]
-    "
-              ></div> */}
           </div>
         </div>
 
@@ -215,11 +201,11 @@ leading-[19.73px]  text-[#1E1E1E] "
             h-[40px] w-[415px] rounded-md    flex gap-[10px] "
         >
           <button
-            onClick={() => creationWorkspaceDispatch({ type: 'next' })}
+            onClick={() => onSubmitHandler()}
             className="bg-[#208D8E] h-[40px] w-[415px] rounded-md flex flex-row items-center justify-center"
           >
             <p className="font-yekan w-[30px] h-[20px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
-              ادامه
+              تایید
             </p>
           </button>
         </div>
@@ -227,4 +213,4 @@ leading-[19.73px]  text-[#1E1E1E] "
     </>
   )
 }
-export default Step2
+export default ChangeWorkspaceColor
