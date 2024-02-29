@@ -3,8 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { color } from 'framer-motion'
-import { useState, type FunctionComponent, useRef } from 'react'
+import { type FunctionComponent, useRef } from 'react'
 
 interface ButtonColorIconSvgProps {
   id: string
@@ -22,10 +21,6 @@ const ButtonColorIconSvg: FunctionComponent<ButtonColorIconSvgProps> = ({
   onChangeHandler
 }) => {
   const inputRef: any = useRef()
-  const [hovered, setHover] = useState<boolean>(false)
-  const [selected, setSelected] = useState<boolean>(true)
-  const [selected2, setSelected2] = useState<boolean>(false)
-
   return (
     <>
       <div className="relative flex size-[20px] items-center justify-center ">

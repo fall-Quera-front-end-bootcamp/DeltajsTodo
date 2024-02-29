@@ -173,7 +173,6 @@ const Board: FunctionComponent<BoardProps> = () => {
         </div>
 
         <div className="relative w-[1034px] left-[50px]">
-          {/* {step === 2 && <NewProject />} */}
           <div className="relative">
             <div className="absolute top-[954px]">
               {/**buttom تسک جدید */}
