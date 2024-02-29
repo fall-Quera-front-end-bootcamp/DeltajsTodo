@@ -85,7 +85,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
                 <div key={project.id}>
                   <li>
                     <ProjectItem
-                      workspaceID={workspaceItemID}
+                      workspaceItemID={workspaceItemID}
                       project={project}
                       projectItemTitle={project.title}
                       projectItemID={project.id}

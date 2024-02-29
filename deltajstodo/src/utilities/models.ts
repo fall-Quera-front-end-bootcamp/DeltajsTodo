@@ -59,7 +59,7 @@ interface Comment {
   commentDescription: string
 }
 interface Task {
-  id: string
+ readonly id: string
   title: string
   projectTitle: string
   status: Permission.manager
@@ -71,7 +71,7 @@ interface Task {
   tags: Tag[]
   timeLine: TimeLine
   priority: Priorities
-  comments: Comment[]
+  comments?: Comment[]
 }
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
 interface Board {

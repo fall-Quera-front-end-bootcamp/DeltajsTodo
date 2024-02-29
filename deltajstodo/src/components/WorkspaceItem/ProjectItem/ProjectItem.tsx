@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/quotes */
@@ -5,7 +6,8 @@
 import { useState, type FunctionComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import { type Project } from '../../../utilities/models'
-import ProjectMore from '../../Column-more/ProjectMore'
+
+import TaskMore from '../../Column-more/TaskMore'
 
 interface ProjectItemProps {
   workspaceItemID: string
@@ -20,11 +22,11 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
   projectItemTitle,
   projectItemID
 }) => {
-  //const [isColumnMoreSelected, setColumnMoreSelect] = useState<boolean>(false)
+  const [isColumnMoreSelected, setColumnMoreSelect] = useState<boolean>(false)
 
   return (
     <>
-      <div className="justify-end flex w-[246px] cursor-pointer space-x-2 hover:bg-[#E9F9FF]">
+      <div className=" justify-between flex w-[246px] cursor-pointer space-x-2 ">
         <NavLink
           key={projectItemID}
           style={({ isActive }) => {
@@ -34,11 +36,34 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
             }
           }}
           to={`/workspace/${projectItemID}`}
-          state={project}
+          state={{ workspaceItemID, project }}
         >
-          <p className="text-right text-[16px] font-medium text-[#1E1E1E]">
-            {projectItemTitle}
-          </p>
+          <div className="group justify-between flex w-[246px] cursor-pointer space-x-2 hover:bg-[#E9F9FF]">
+            <div className="invisible w-[20px] group-hover:visible group-hover:bg-[#E9F9FF]">
+              <button
+                className="w-[30px]"
+                onClick={() => setColumnMoreSelect((prev) => !prev)}
+              >
+                ...
+              </button>
+            </div>
+            <div className="relative">
+              <div
+                className="absolute top-[20px] right-[-100px]"
+                onMouseLeave={() => setColumnMoreSelect(false)}
+              >
+                {isColumnMoreSelected && (
+                  <TaskMore
+                    workspaceID={workspaceItemID}
+                    projectID={projectItemID}
+                  />
+                )}
+              </div>
+            </div>
+            <p className="text-right text-[16px]  font-medium text-[#1E1E1E]">
+              {projectItemTitle}
+            </p>
+          </div>
         </NavLink>
         {/* <div>
           <div className="size-[20px] rounded-[4px]"></div>

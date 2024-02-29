@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './dist/output.css'
@@ -10,10 +11,16 @@ import NotFound from './pages/NotFound'
 import Workspace from './pages/Workspace'
 import MainLayout from './pages/MainLayout'
 import Board from './pages/Board'
-import { type User, Permission, type Workspace as W } from './utilities/models'
+import {
+  type User,
+  Permission,
+  type Workspace as W,
+  type Project as P
+} from './utilities/models'
 import { useReducer, useRef } from 'react'
 import EmptyArea from './pages/EmptyArea'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
+import NewProject from './components/Modals/NewProject/NewProject'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -207,6 +214,28 @@ function UserReducer(user: User, action: any): User {
       deepcopy?.workspaces[index]?.projects?.push(action?.new_project)
       return { ...user, ...deepcopy }
     }
+    case 'changeProjectTitle': {
+      const deepcopy = JSON.parse(JSON.stringify(user))
+      const index = deepcopy.workspaces.findIndex(
+        (w: W) => w.id === action?.WID
+      )
+      const index2 = deepcopy.workspaces[index].projects.findIndex(
+        (p: P) => p.id === action?.PID
+      )
+      deepcopy.workspaces[index].projects[index2].title = action?.new_title
+      return { ...user, ...deepcopy }
+    }
+    case 'DeleteProject': {
+      const deepcopy = JSON.parse(JSON.stringify(user))
+      const index = deepcopy.workspaces.findIndex(
+        (w: W) => w.id === action?.WID
+      )
+      deepcopy.workspaces[index].projects = deepcopy.workspaces[
+        index
+      ].projects.filter((p: P) => p?.id !== action?.PID)
+      return { ...user, ...deepcopy }
+    }
+
     default: {
       throw Error('Unknown action: ' + action.type)
     }

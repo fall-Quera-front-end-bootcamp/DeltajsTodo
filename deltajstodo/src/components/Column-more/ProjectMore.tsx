@@ -34,7 +34,7 @@ function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
         text="ویرایش نام ورک‌اسپیس"
         type="editWordkSpace"
         onClickHandler={
-          (id) => localPageDispatch({ type: 'openNewWorkspaceTitle', WID: id })
+          () => localPageDispatch({ type: 'openNewWorkspaceTitle', WID: id })
           // dispatch({
           //   type: 'changeWorkspaceTitle',
           //   id: id,

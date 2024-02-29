@@ -1,6 +1,6 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useContext, type FunctionComponent, useRef } from 'react'
+import { useContext, type FunctionComponent, useRef, useState } from 'react'
 import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
 
@@ -11,16 +11,26 @@ import {
 } from '../../../contexts/UserProvider'
 import { Permission } from '../../../utilities/models'
 
-interface NewProjectProps {
+interface ChangeProjectTitleProps {
   WID: string | null
+  PID: string | null
 }
 
-const NewProject: FunctionComponent<NewProjectProps> = ({ WID }) => {
+const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
+  WID,
+  PID
+}) => {
   const stepDispatch: any = useContext(localPageDispatchContext)
   const inputRef: any = useRef()
   const user = useContext(UserContext)
 
   const userDispatch: any = useContext(UserDispatchContext)
+
+  const [inputValue, setInputValue] = useState('')
+  const onChangeHandler = (e: any): void => {
+    setInputValue((p) => e?.target?.value)
+  }
+
   return (
     <>
       <div
@@ -57,7 +67,7 @@ const NewProject: FunctionComponent<NewProjectProps> = ({ WID }) => {
                   className="font-yekan w-[192px] h-[32px] text-center text-[24px] font-extrabold 
                    leading-[32px]  text-[#1E1E1E] "
                 >
-                  ساختن پروژه جدید‌‌
+                  ویرایش نام پروژه‌
                 </p>
               </div>
               <div className="invisible">
@@ -91,6 +101,8 @@ rounded-md border-[1px] border-[#AAAAAA]
                             rounded-md border-[1px] border-[#AAAAAA]"
                   type="text"
                   name="title"
+                  value={inputValue}
+                  onChange={onChangeHandler}
                   ref={inputRef}
                 />
               </div>
@@ -103,24 +115,15 @@ rounded-md border-[1px] border-[#AAAAAA]
           >
             <button
               onClick={() => {
-                if (inputRef.current.value === '') {
-                  return
-                } else {
-                  const newId = user?.workspaces.reduce((p, c): number => {
-                    return c.projects.length + p
-                  }, 0)
+                if (inputValue !== '') {
                   userDispatch({
-                    type: 'AddProject',
-                    WID: WID,
-                    new_project: {
-                      id: ((newId ?? 0) + 1).toString(),
-                      title: inputRef.current.value,
-                      status: Permission.manager,
-                      boards: []
-                    }
+                    type: 'changeProjectTitle',
+                    WID,
+                    PID,
+                    new_title: inputValue
                   })
-                  stepDispatch({ type: 'closeModal' })
                 }
+                stepDispatch({ type: 'closeModal' })
               }}
               className="bg-[#208D8E] h-[40px] w-[415px] rounded-md flex flex-row items-center justify-center"
             >
@@ -135,4 +138,4 @@ rounded-md border-[1px] border-[#AAAAAA]
   )
 }
 
-export default NewProject
+export default ChangeProjectTitle

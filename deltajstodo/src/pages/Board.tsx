@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/enforces-shorthand */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable spaced-comment */
 /* eslint-disable tailwindcss/classnames-order */
@@ -5,8 +6,14 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import {
+  useState,
+  type FunctionComponent,
+  useEffect,
+  useContext,
+  useRef
+} from 'react'
+import { useLocation } from 'react-router-dom'
 
 import ShareIconSvg from '../components/Icons/ShareIconSvg'
 import TodoListIconSvg from '../components/Icons/TodoListIconSvg'
@@ -18,7 +25,8 @@ import FilterSettingIconSvg from '../components/Icons/FilterIconSvg'
 import Button from '../components/Buttons/Button'
 
 import AddSecondaryIconSvg from '../components/Icons/AddSecondaryIconSvg'
-
+import { Workspace as W, Project as P } from '../utilities/models'
+import { UserContext } from '../contexts/UserProvider'
 interface BoardProps {}
 enum Views {
   column = 643,
@@ -26,9 +34,21 @@ enum Views {
   calender = 541
 }
 const Board: FunctionComponent<BoardProps> = () => {
-  const { projectID } = useParams()
+  // const { projectID } = useParams()
 
-  const { state: projectInfo } = useLocation()
+  const {
+    state: { workspaceItemID, project }
+  } = useLocation()
+  // const user = useContext(UserContext)
+  // const [currentWorkspace, setW] = useState(W | undefined)
+  // const [currentProjec, setP] = useState(P | undefined)
+
+  // useEffect(() => {
+  //   setW(user?.workspaces?.find((w: W) => w.id === workspaceItemID))
+  //   setP(currentWorkspace?.projects?.find((p: P) => p.id === project.id))
+  // }, [])
+  // const [projectInfo, setProjectInfo] = useState(currentProjec)
+
   const [view, setViw] = useState<Views>(Views.column)
 
   const handleView = (e: any): void => {
@@ -41,7 +61,7 @@ const Board: FunctionComponent<BoardProps> = () => {
     <>
       <div className="relative">
         {/*Header */}
-        <div className="absolute top-[41px] left-[50px]  h-[64px] w-[1034px]  flex flex-col gap-4">
+        <div className="absolute top-[41px]   h-[64px] w-[1034px]  flex flex-col gap-4">
           <div className="">
             <div className="w-[1034px] h-[64px] flex flex-row items-center justify-between pt-4 pb-4">
               <div className="w-[118px] h-[24px] flex flex-row gap-[5px]">
@@ -56,7 +76,7 @@ const Board: FunctionComponent<BoardProps> = () => {
               <div className="flex h-[32px] w-[511px] flex-row-reverse gap-4">
                 <div className=" flex h-[32px] w-[77px] flex-row justify-between  ">
                   <p className="font-yekan w-[77px] text-right text-[20px] font-extrabold leading-[32px] text-[#1E1E1E] ">
-                    {projectInfo.title}
+                    {project.title}
                   </p>
                 </div>
                 <div className=" h-[22px] border-[1px] border-[#999999] self-center"></div>
@@ -125,7 +145,7 @@ const Board: FunctionComponent<BoardProps> = () => {
           </div>
 
           {/*filterbar */}
-          <div className="h-[28px] w-[1034px] bg-indigo-primary flex flex-row-reverse gap-[40px]">
+          {/* <div className="h-[28px] w-[1034px] bg-indigo-primary flex flex-row-reverse gap-[40px]">
             <div className=" flex h-[24px] w-[200px] flex-row justify-items-start gap-[4px]">
               <input
                 className=" w-[172px]"
@@ -149,7 +169,7 @@ const Board: FunctionComponent<BoardProps> = () => {
 
               <div></div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="relative w-[1034px] left-[50px]">
