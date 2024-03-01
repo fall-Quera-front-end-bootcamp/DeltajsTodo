@@ -11,19 +11,24 @@ import {
   nextMonth,
   previousMonth
 } from '../../helpers'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import Days from './Days'
 import Week from './Week'
+import moment from 'jalali-moment'
+import DatepickerContext from '../../contexts/DatepickerContext'
 
 const Calendar = ({
   date,
-  ClickNextMonth,
-  ClickPrevMonth
+  onClickNext,
+  onClickPrevious
 }: {
   date: string
-  ClickNextMonth: () => void
-  ClickPrevMonth: () => void
+  onClickPrevious: () => void
+  onClickNext: () => void
 }): JSX.Element => {
+  // Contexts
+  const { period, changePeriod, changeDayHover, changeDatepickerValue } =
+    useContext(DatepickerContext)
   // Functions
   const previous = useCallback(() => {
     return getLastDaysInMonth(
@@ -55,6 +60,96 @@ const Calendar = ({
     }
   }, [current, date, previous])
 
+  const clickDay = useCallback(
+    (
+      day: number,
+      month = moment(date).month() + 1,
+      year = moment(date).year()
+    ) => {
+      const fullDay = `${year}-${month}-${day}`
+      let newStart
+      let newEnd = null
+
+      function chosePeriod(start: string, end: string): void {
+        changeDatepickerValue({
+          startDate: moment(start).format(),
+          endDate: moment(end).format()
+        })
+      }
+
+      if (Boolean(period.start) && Boolean(period.end)) {
+        if (changeDayHover) {
+          changeDayHover(null)
+        }
+        changePeriod({
+          start: '0',
+          end: '0'
+        })
+      }
+
+      if (
+        (Boolean(period.start) && Boolean(period.end)) ||
+        (Boolean(period.start) && Boolean(period.end))
+      ) {
+        if (Boolean(period.start) && Boolean(period.end)) {
+          changeDayHover(fullDay)
+        }
+        newStart = fullDay
+      } else {
+        if (Boolean(period.start) && Boolean(period.end)) {
+          // start not null
+          // end null
+          const condition =
+            moment(fullDay).isSame(moment(period.start)) ||
+            moment(fullDay).isAfter(moment(period.start))
+          newStart = condition ? period.start : fullDay
+          newEnd = condition ? fullDay : period.start
+        } else {
+          // Start null
+          // End not null
+          const condition =
+            moment(fullDay).isSame(moment(period.end)) ||
+            moment(fullDay).isBefore(moment(period.end))
+          newStart = condition ? fullDay : period.start
+          newEnd = condition ? period.end : fullDay
+        }
+      }
+
+      if (!(Boolean(newEnd) && Boolean(newStart))) {
+        changePeriod({
+          start: newStart,
+          end: newEnd
+        })
+      }
+    },
+    [
+      changeDatepickerValue,
+      changeDayHover,
+      changePeriod,
+      date,
+      period.end,
+      period.start
+    ]
+  )
+
+  const clickPreviousDays = useCallback(
+    (day: number) => {
+      const newDate = previousMonth(date)
+      clickDay(day, newDate.month() + 1, newDate.year())
+      onClickPrevious()
+    },
+    [clickDay, date, onClickPrevious]
+  )
+
+  const clickNextDays = useCallback(
+    (day: number) => {
+      const newDate = nextMonth(date)
+      clickDay(day, newDate.month() + 1, newDate.year())
+      onClickNext()
+    },
+    [clickDay, date, onClickNext]
+  )
+
   return (
     <div
       dir="rtl"
@@ -66,14 +161,14 @@ const Calendar = ({
         <div className="mx-5 mb-[36px] mt-[51px] flex flex-row items-start">
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2">
             <div className="text-[26px] font-[500] text-brand-primary">
-              ۱۰ تیر
+              {period.start}
             </div>
             <p className="text-[24px]"> زمان شروع</p>
             <CalendarIconSvg color="#BDBDBD" />
           </div>
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2 border-r-[1px] border-[#E8EAED] pr-2">
             <div className="text-[26px] font-[500] text-brand-primary">
-              ۴ تیر
+              {period.end}
             </div>
             <p className="text-[24px]"> زمان پایان</p>
             <CalendarIconSvg color="#BDBDBD" />
@@ -124,10 +219,10 @@ const Calendar = ({
             <div className="absolute left-[390px] top-[100px] flex flex-row items-center justify-center gap-5 text-[24px]">
               <div className="">تیر ۱۴۰۲</div>
               <div className="flex flex-row">
-                <button onClick={ClickNextMonth}>
+                <button onClick={onClickPrevious}>
                   <ArrowDownIconSvg className="-rotate-90" color="#7D828C" />
                 </button>
-                <button onClick={ClickPrevMonth}>
+                <button onClick={onClickNext}>
                   <ArrowDownIconSvg className="rotate-90" color="#7D828C" />
                 </button>
               </div>
@@ -135,7 +230,12 @@ const Calendar = ({
             </div>
             <div className="absolute left-[16px] top-[160px] my-1 grid grid-cols-7 gap-x-[30px] gap-y-4">
               <Week />
-              <Days calendarData={calendarData} />
+              <Days
+                calendarData={calendarData}
+                onClickPreviousDays={clickPreviousDays}
+                onClickDay={clickDay}
+                onClickNextDays={clickNextDays}
+              />
             </div>
             <Button CalendarButton>بستن</Button>
           </div>

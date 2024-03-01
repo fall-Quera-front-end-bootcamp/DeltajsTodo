@@ -1,11 +1,8 @@
 import type React from 'react'
 
-import { type COLORS } from '../constants'
-import { type MomentInput } from 'jalali-moment'
-
 export interface Period {
-  start: MomentInput | undefined
-  end: MomentInput | undefined
+  start: string | null
+  end: string | null
 }
 
 type CustomShortcuts = Record<string, ShortcutsItem>
@@ -85,12 +82,3 @@ export interface DatepickerType {
   startWeekOn?: string | null
   popoverDirection?: PopoverDirectionType
 }
-
-export type ColorKeys = (typeof COLORS)[number] // "blue" | "orange"
-
-export type Colors = Record<
-  string,
-  {
-    [K in ColorKeys]: string
-  }
->

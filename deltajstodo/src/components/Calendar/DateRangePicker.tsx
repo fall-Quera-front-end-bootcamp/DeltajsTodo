@@ -1,43 +1,48 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import Calendar from './Calendar'
 import moment from 'jalali-moment'
+import { nextMonth, previousMonth } from '../../helpers'
+import DatepickerContext from '../../contexts/DatepickerContext'
+import { type Period } from '../../types'
 
 const DateRangePicker = (): JSX.Element => {
   moment.locale('fa')
   const [firstDate, setFirstDate] = useState(moment().format())
+  const [period, setPeriod] = useState<Period>({
+    start: null,
+    end: null
+  })
+  const [dayHover, setDayHover] = useState<string | null>(null)
 
-  const ClickNextMonth = useCallback(() => {
-    setFirstDate(
-      moment(firstDate)
-        .date(0)
-        .hour(0)
-        .minute(0)
-        .second(0)
-        .month(moment(firstDate).month() - 1)
-        .format()
-    )
+  const previousMonthFirst = useCallback(() => {
+    setFirstDate(previousMonth(firstDate).format())
   }, [firstDate])
 
-  const ClickPrevMonth = useCallback(() => {
-    setFirstDate(
-      moment(firstDate)
-        .date(1)
-        .hour(0)
-        .minute(0)
-        .second(0)
-        .month(moment(firstDate).month() + 1)
-        .format()
-    )
+  const nextMonthFirst = useCallback(() => {
+    setFirstDate(nextMonth(firstDate).format())
   }, [firstDate])
 
-  console.log(firstDate)
+  const contextValues = useMemo(() => {
+    return {
+      period,
+      changePeriod: (newPeriod: Period) => {
+        setPeriod(newPeriod)
+      },
+      dayHover,
+      changeDayHover: (newDay: string | null) => {
+        setDayHover(newDay)
+      }
+    }
+  }, [period, dayHover])
 
   return (
-    <Calendar
-      ClickNextMonth={ClickNextMonth}
-      ClickPrevMonth={ClickPrevMonth}
-      date={firstDate}
-    />
+    <DatepickerContext.Provider value={contextValues}>
+      <Calendar
+        onClickPrevious={previousMonthFirst}
+        onClickNext={nextMonthFirst}
+        date={firstDate}
+      />
+    </DatepickerContext.Provider>
   )
 }
 
