@@ -1,5 +1,7 @@
 import type React from 'react'
 
+import { type COLORS } from '../constants'
+
 export interface Period {
   start: string | null
   end: string | null
@@ -82,3 +84,12 @@ export interface DatepickerType {
   startWeekOn?: string | null
   popoverDirection?: PopoverDirectionType
 }
+
+export type ColorKeys = (typeof COLORS)[number] // "blue" | "orange"
+
+export type Colors = Record<
+string,
+{
+  [K in ColorKeys]: string
+}
+>
