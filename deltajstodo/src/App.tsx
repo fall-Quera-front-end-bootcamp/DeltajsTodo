@@ -21,6 +21,7 @@ import { useReducer, useRef } from 'react'
 import EmptyArea from './pages/EmptyArea'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import NewProject from './components/Modals/NewProject/NewProject'
+import Profile from './pages/Profile'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -155,6 +156,7 @@ function App(): JSX.Element {
           <Routes>
             <Route path="api/auth/login" element={<Login />} />
             <Route path="/" element={<EmptyArea />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/workspace" element={<MainLayout />}>
               <Route path=":projectID" element={<Board />} />
             </Route>

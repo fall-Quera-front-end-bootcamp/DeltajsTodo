@@ -123,6 +123,15 @@ export default {
       boxShadow: {
         card: '0px 70px 100px -20px #32325D40, 0px 50px 60px -30px #0000004D',
         comment: '0px -7px 18px -10px #00000040'
+      },
+      animation: {
+        fadein: 'fadein 2s linear'
+      },
+      keyframes: {
+        fadein: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' }
+        }
       }
     }
   },

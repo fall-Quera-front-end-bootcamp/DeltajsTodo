@@ -16,7 +16,7 @@ function TaskInfoComment({
 }: TaskInfoCommentProps): JSX.Element {
   return (
     <div
-      className={`${commentClassNames} relative cursor-pointer border-[1px] border-[#F4F4F4] overflow-hidden transition-all ease-linear duration-700`}
+      className={`${commentClassNames} relative cursor-pointer border-[1px] border-[#F4F4F4] overflow-hidden transition-all duration-700`}
       onClick={onClick}
     >
       <span className="absolute top-[13px] left-[600px] font-medium text-[16px] leading-[22.55px] text-[#AEAEAE]">
