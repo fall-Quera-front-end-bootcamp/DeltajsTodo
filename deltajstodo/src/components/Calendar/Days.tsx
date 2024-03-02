@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import moment from 'jalali-moment'
 import type React from 'react'
 import { useCallback, useContext } from 'react'
@@ -11,6 +12,7 @@ import {
   classNames as cn
 } from '../../helpers'
 import { type Period } from '../../types'
+import { toFarsiNumber } from '../../utilities/toFarsiNumber'
 
 interface Props {
   calendarData: {
@@ -47,13 +49,15 @@ const Days: React.FC<Props> = ({
   // Functions
   const currentDateClass = useCallback(
     (item: number) => {
-      const itemDate = `${calendarData.date.year()}-${calendarData.date.month() + 1}-${
+      const itemDate = `${moment(calendarData.date).jYear()}-${moment(calendarData.date).jMonth() + 1}-${
         item >= 10 ? item : '0' + item
       }`
-      if (formatDate(moment()) === formatDate(moment(itemDate))) {
-        return TEXT_COLOR['500'][
-          primaryColor as keyof (typeof TEXT_COLOR)['500']
-        ]
+
+      if (
+        moment().hours(0).minutes(0).seconds(0).format() ===
+        moment(itemDate).format()
+      ) {
+        return 'border border-teal-primary rounded-full'
       }
       return ''
     },
@@ -62,22 +66,22 @@ const Days: React.FC<Props> = ({
 
   const activeDateData = useCallback(
     (day: number) => {
-      const fullDay = `${calendarData.date.year()}-${calendarData.date.month() + 1}-${day}`
-      let className = ''
+      const fullDay = `${moment(calendarData.date).year()}-${moment(calendarData.date).month() + 1}-${day}`
+      let className = 'border border-teal-primary'
 
       if (
         moment(fullDay).isSame(period.start) &&
         moment(fullDay).isSame(period.end)
       ) {
-        className = ` ${BG_COLOR['500'][primaryColor]} text-white font-medium rounded-full`
+        className = 'bg-teal-primary text-white font-medium rounded-full'
       } else if (moment(fullDay).isSame(period.start)) {
-        className = ` ${BG_COLOR['500'][primaryColor]} text-white font-medium ${
+        className = ` bg-teal-primary text-white font-medium ${
           moment(fullDay).isSame(dayHover) && !period.end
             ? 'rounded-full'
             : 'rounded-l-full'
         }`
       } else if (moment(fullDay).isSame(period.end)) {
-        className = ` ${BG_COLOR['500'][primaryColor]} text-white font-medium ${
+        className = ` bg-teal-primary text-white font-medium ${
           moment(fullDay).isSame(dayHover) && !period.start
             ? 'rounded-full'
             : 'rounded-r-full'
@@ -97,15 +101,13 @@ const Days: React.FC<Props> = ({
   const hoverClassByDay = useCallback(
     (day: number) => {
       let className = currentDateClass(day)
-      const fullDay = `${calendarData.date.year()}-${calendarData.date.month() + 1}-${
+      const fullDay = `${moment(calendarData.date).year()}-${moment(calendarData.date).month() + 1}-${
         day >= 10 ? day : '0' + day
       }`
 
       if (period.start && period.end) {
         if (moment(fullDay).isBetween(period.start, period.end, 'day', '[)')) {
-          return ` ${BG_COLOR['100'][primaryColor]} ${currentDateClass(
-            day
-          )} dark:bg-white/10`
+          return ` bg-teal-primary ${currentDateClass(day)} dark:bg-white/10`
         }
       }
 
@@ -117,22 +119,18 @@ const Days: React.FC<Props> = ({
         period.start &&
         moment(fullDay).isBetween(period.start, dayHover, 'day', '[)')
       ) {
-        className = ` ${BG_COLOR['100'][primaryColor]} ${currentDateClass(
-          day
-        )} dark:bg-white/10`
+        className = ` bg-teal-primary ${currentDateClass(day)} dark:bg-white/10`
       }
 
       if (
         period.end &&
         moment(fullDay).isBetween(dayHover, period.end, 'day', '[)')
       ) {
-        className = ` ${BG_COLOR['100'][primaryColor]} ${currentDateClass(
-          day
-        )} dark:bg-white/10`
+        className = ` bg-teal-primary ${currentDateClass(day)} dark:bg-white/10`
       }
 
       if (dayHover === fullDay) {
-        const bgColor = BG_COLOR['500'][primaryColor]
+        const bgColor = 'bg-teal-primary'
         className = ` transition-all duration-500 text-white font-medium ${bgColor} ${
           period.start ? 'rounded-r-full' : 'rounded-l-full'
         }`
@@ -199,7 +197,7 @@ const Days: React.FC<Props> = ({
         next: nextMonth(calendarData.date)
       }
       const newDate = object[type as keyof typeof object]
-      const formattedDate = `${newDate.year()}-${newDate.month() + 1}-${
+      const formattedDate = `${moment(newDate).jYear()}-${moment(newDate).jMonth() + 1}-${
         day >= 10 ? day : '0' + day
       }`
 
@@ -232,8 +230,7 @@ const Days: React.FC<Props> = ({
 
   const buttonClass = useCallback(
     (day: number, type: 'current' | 'next' | 'previous') => {
-      const baseClass =
-        'flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10'
+      const baseClass = 'text-[24px]'
       if (type === 'current') {
         return cn(
           baseClass,
@@ -243,11 +240,7 @@ const Days: React.FC<Props> = ({
           isDateDisabled(day, type) && 'line-through'
         )
       }
-      return cn(
-        baseClass,
-        isDateDisabled(day, type) && 'line-through',
-        'text-gray-400'
-      )
+      return cn(baseClass, isDateDisabled(day, type) && 'line-through')
     },
     [activeDateData, hoverClassByDay, isDateDisabled]
   )
@@ -282,7 +275,8 @@ const Days: React.FC<Props> = ({
     (day: number, type: string) => {
       const object = getMetaData()
       const newDate = object[type as keyof typeof object]
-      const newHover = `${newDate.year()}-${newDate.month() + 1}-${
+
+      const newHover = `${moment(newDate).jYear()}-${moment(newDate).jMonth() + 1}-${
         day >= 10 ? day : '0' + day
       }`
 
@@ -348,7 +342,7 @@ const Days: React.FC<Props> = ({
       if (disabledDates?.length) {
         const object = getMetaData()
         const newDate = object[type as keyof typeof object]
-        const clickDay = `${newDate.year()}-${newDate.month() + 1}-${
+        const clickDay = `${moment(newDate).jYear()}-${moment(newDate).jMonth() + 1}-${
           day >= 10 ? day : '0' + day
         }`
 
@@ -375,8 +369,10 @@ const Days: React.FC<Props> = ({
     ]
   )
 
+  console.log(period)
+
   return (
-    <div className="my-1 grid grid-cols-7 gap-y-0.5">
+    <>
       {calendarData.days.previous.map((item, index) => (
         <button
           type="button"
@@ -390,7 +386,7 @@ const Days: React.FC<Props> = ({
             hoverDay(item, 'previous')
           }}
         >
-          {item}
+          {toFarsiNumber(`${item}`)}
         </button>
       ))}
 
@@ -407,7 +403,7 @@ const Days: React.FC<Props> = ({
             hoverDay(item, 'current')
           }}
         >
-          {item}
+          {toFarsiNumber(`${item}`)}
         </button>
       ))}
 
@@ -424,10 +420,10 @@ const Days: React.FC<Props> = ({
             hoverDay(item, 'next')
           }}
         >
-          {item}
+          {toFarsiNumber(`${item}`)}
         </button>
       ))}
-    </div>
+    </>
   )
 }
 
