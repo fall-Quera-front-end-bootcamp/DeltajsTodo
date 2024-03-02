@@ -160,6 +160,27 @@ const Calendar = ({
     [clickDay, date, onClickNext]
   )
 
+  const weekDays = useCallback((number: number) => {
+    switch (number) {
+      case 2:
+        return 'دوشنبه'
+      case 3:
+        return 'سه‌شنبه'
+      case 4:
+        return 'چهارشنبه'
+      case 5:
+        return 'پنجشنبه'
+      case 6:
+        return 'جمعه'
+      case 0:
+        return 'شنبه'
+      case 1:
+        return 'یکشنبه'
+      default:
+        break
+    }
+  }, [])
+
   return (
     <div
       dir="rtl"
@@ -173,7 +194,7 @@ const Calendar = ({
             <div className="text-[26px] font-[500] text-brand-primary">
               {toFarsiNumber(`${value.startDate}`) === 'null'
                 ? ''
-                : `${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
+                : `${moment(date).format('MMM')} ${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان شروع</p>
             <CalendarIconSvg color="#BDBDBD" />
@@ -182,7 +203,7 @@ const Calendar = ({
             <div className="text-[26px] font-[500] text-brand-primary">
               {toFarsiNumber(`${value.endDate}`) === 'null'
                 ? ''
-                : toFarsiNumber(`${value.endDate}`).slice(8, 10)}
+                : `${moment(date).format('MMM')} ${toFarsiNumber(`${value.endDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان پایان</p>
             <CalendarIconSvg color="#BDBDBD" />
@@ -195,7 +216,9 @@ const Calendar = ({
           <div className="flex h-[510px] w-[293px] flex-col gap-6 rounded-br-[20px] bg-gray-secondary px-[23px] py-[24px]">
             <div className="flex flex-row justify-between">
               <span className="text-[20px] font-[500]">امروز</span>
-              <span className="text-gray-primary">بکشنبه</span>
+              <span className="text-gray-primary">
+                {weekDays(moment(date).jDay())}
+              </span>
             </div>
             <div className="flex flex-row justify-between">
               <span className="text-[20px] font-[500]">کمی بعد</span>
@@ -205,7 +228,9 @@ const Calendar = ({
             </div>
             <div className="flex flex-row justify-between">
               <span className="text-[20px] font-[500]">فردا</span>
-              <span className="text-gray-primary">دوشنبه</span>
+              <span className="text-gray-primary">
+                {weekDays(moment(date).jDay())}
+              </span>
             </div>
             <div className="flex flex-row justify-between">
               <span className="text-[20px] font-[500]">این آخر هفته</span>
@@ -231,7 +256,10 @@ const Calendar = ({
           {/* calendar number & week left  */}
           <div className="">
             <div className="absolute left-[390px] top-[100px] flex flex-row items-center justify-center gap-5 text-[24px]">
-              <div className="">تیر ۱۴۰۲</div>
+              <div className="">
+                {' '}
+                {`${moment(date).format('MMM')} ${toFarsiNumber(`${moment(date).format('YYYY')}`)}`}
+              </div>
               <div className="flex flex-row">
                 <button onClick={onClickPrevious}>
                   <ArrowDownIconSvg className="-rotate-90" color="#7D828C" />

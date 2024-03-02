@@ -89,16 +89,12 @@ const Days: React.FC<Props> = ({
       const fullDay = `${moment(calendarData.date).year()}-${moment(calendarData.date).month() + 1}-${
         day >= 10 ? day : '0' + day
       }`
-      // console.log(
-      //   moment(fullDay).isBetween(period.start, dayHover, 'day', '[)'),
-      //   moment(fullDay).isBetween(period.start, period.end, 'day', '[)')
-      // )
-      // console.log(fullDay)
-      // fullDay.filter((x) => x > first && x < last) ? 'green' : ''
-      // console.log(period.start, fullDay, dayHover)
 
       if (period.start && period.end) {
-        if (moment(fullDay).isBetween(period.start, period.end, 'day', '[)')) {
+        if (
+          moment(fullDay) > moment(period.start) &&
+          moment(fullDay) < moment(period.end)
+        ) {
           console.log('hello')
           return `bg-teal-secondary ${currentDateClass(day)}`
         }
@@ -110,14 +106,16 @@ const Days: React.FC<Props> = ({
 
       if (
         period.start &&
-        moment(fullDay).isBetween(period.start, dayHover, 'day', '[)')
+        moment(fullDay) > moment(period.start) &&
+        moment(fullDay) < moment(dayHover)
       ) {
         className = `bg-teal-secondary ${currentDateClass(day)}`
       }
 
       if (
         period.end &&
-        moment(fullDay).isBetween(dayHover, period.end, 'day', '[)')
+        moment(fullDay) > moment(dayHover) &&
+        moment(fullDay) < moment(period.end)
       ) {
         className = `bg-teal-secondary ${currentDateClass(day)}`
       }
