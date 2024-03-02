@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { toFarsiNumber } from '../../utilities/toFarsiNumber'
 import Button from '../Buttons/Button'
 import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
@@ -19,10 +20,15 @@ import DatepickerContext from '../../contexts/DatepickerContext'
 
 const Calendar = ({
   date,
+  value,
   onClickNext,
   onClickPrevious
 }: {
   date: string
+  value: {
+    startDate: null
+    endDate: null
+  }
   onClickPrevious: () => void
   onClickNext: () => void
 }): JSX.Element => {
@@ -66,41 +72,34 @@ const Calendar = ({
       month = moment(date).month() + 1,
       year = moment(date).year()
     ) => {
-      const fullDay = `${year}-${month}-${day}`
+      const fullDay = `${year}-${month}-${day >= 10 ? day : '0' + day}`
+
       let newStart
       let newEnd = null
 
-      function chosePeriod(start: string, end: string): void {
-        changeDatepickerValue({
-          startDate: moment(start).format(),
-          endDate: moment(end).format()
-        })
-      }
-
-      if (Boolean(period.start) && Boolean(period.end)) {
+      // True & True
+      if (period.start && period.end) {
         if (changeDayHover) {
           changeDayHover(null)
         }
         changePeriod({
-          start: '0',
-          end: '0'
+          start: null,
+          end: null
         })
       }
 
-      if (
-        (Boolean(period.start) && Boolean(period.end)) ||
-        (Boolean(period.start) && Boolean(period.end))
-      ) {
-        if (Boolean(period.start) && Boolean(period.end)) {
+      // True & True / False & False
+      if ((!period.start && !period.end) || (period.start && period.end)) {
+        if (!period.start && !period.end) {
           changeDayHover(fullDay)
         }
         newStart = fullDay
       } else {
-        if (Boolean(period.start) && Boolean(period.end)) {
+        if (period.start && !period.end) {
           // start not null
           // end null
           const condition =
-            moment(fullDay).isSame(moment(period.start)) ||
+            fullDay === period.start ||
             moment(fullDay).isAfter(moment(period.start))
           newStart = condition ? period.start : fullDay
           newEnd = condition ? fullDay : period.start
@@ -108,19 +107,29 @@ const Calendar = ({
           // Start null
           // End not null
           const condition =
-            moment(fullDay).isSame(moment(period.end)) ||
+            fullDay === period.end ||
             moment(fullDay).isBefore(moment(period.end))
           newStart = condition ? fullDay : period.start
           newEnd = condition ? period.end : fullDay
         }
       }
 
-      if (!(Boolean(newEnd) && Boolean(newStart))) {
+      if (!(newEnd && newStart)) {
+        changePeriod({
+          start: newStart,
+          end: newEnd
+        })
+      } else {
         changePeriod({
           start: newStart,
           end: newEnd
         })
       }
+
+      changeDatepickerValue({
+        startDate: newStart,
+        endDate: newEnd
+      })
     },
     [
       changeDatepickerValue,
@@ -132,6 +141,7 @@ const Calendar = ({
     ]
   )
 
+  // console.log(period)
   const clickPreviousDays = useCallback(
     (day: number) => {
       const newDate = previousMonth(date)
@@ -161,14 +171,18 @@ const Calendar = ({
         <div className="mx-5 mb-[36px] mt-[51px] flex flex-row items-start">
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2">
             <div className="text-[26px] font-[500] text-brand-primary">
-              {period.start}
+              {toFarsiNumber(`${value.startDate}`) === 'null'
+                ? ''
+                : `${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان شروع</p>
             <CalendarIconSvg color="#BDBDBD" />
           </div>
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2 border-r-[1px] border-[#E8EAED] pr-2">
             <div className="text-[26px] font-[500] text-brand-primary">
-              {period.end}
+              {toFarsiNumber(`${value.endDate}`) === 'null'
+                ? ''
+                : toFarsiNumber(`${value.endDate}`).slice(8, 10)}
             </div>
             <p className="text-[24px]"> زمان پایان</p>
             <CalendarIconSvg color="#BDBDBD" />

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Calendar from './Calendar'
 import moment from 'jalali-moment'
 import { nextMonth, previousMonth } from '../../helpers'
@@ -6,12 +6,26 @@ import DatepickerContext from '../../contexts/DatepickerContext'
 import { type Period } from '../../types'
 
 const DateRangePicker = (): JSX.Element => {
+  // Date Start
   moment.locale('fa')
+  // const Tdate: number = moment().seconds()
+  // const TfirstDate = useCallback(
+  //   function (Tdate: number) {
+  //     return moment().format()
+  //   },
+  //   [moment().seconds()]
+  // )
   const [firstDate, setFirstDate] = useState(moment().format())
+  // useEffect(() => {
+  //   setFirstDate(moment().format())
+  // }, [moment().seconds()])
+  // Date End
+
   const [period, setPeriod] = useState<Period>({
     start: null,
     end: null
   })
+
   const [dayHover, setDayHover] = useState<string | null>(null)
 
   const previousMonthFirst = useCallback(() => {
@@ -22,6 +36,15 @@ const DateRangePicker = (): JSX.Element => {
     setFirstDate(nextMonth(firstDate).format())
   }, [firstDate])
 
+  const [value, setValue] = useState({
+    startDate: null,
+    endDate: null
+  })
+
+  const onChange = (value: { startDate: null; endDate: null }): void => {
+    setValue(value)
+  }
+
   const contextValues = useMemo(() => {
     return {
       period,
@@ -31,13 +54,14 @@ const DateRangePicker = (): JSX.Element => {
       dayHover,
       changeDayHover: (newDay: string | null) => {
         setDayHover(newDay)
-      }
+      },
+      changeDatepickerValue: onChange
     }
-  }, [period, dayHover])
-
+  }, [period, dayHover, onChange])
   return (
     <DatepickerContext.Provider value={contextValues}>
       <Calendar
+        value={value}
         onClickPrevious={previousMonthFirst}
         onClickNext={nextMonthFirst}
         date={firstDate}

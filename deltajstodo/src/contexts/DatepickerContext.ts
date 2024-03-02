@@ -15,45 +15,13 @@ import {
 } from '../types'
 
 interface DatepickerStore {
-  input?: React.RefObject<HTMLInputElement>
-  asSingle?: boolean
-  primaryColor: ColorKeys
-  configs?: Configs
-  calendarContainer: React.RefObject<HTMLDivElement> | null
-  arrowContainer: React.RefObject<HTMLDivElement> | null
-  hideDatepicker: () => void
   period: Period
   changePeriod: (period: Period) => void
   dayHover: string | null
   changeDayHover: (day: string | null) => void
-  inputText: string
-  changeInputText: (text: string) => void
-  updateFirstDate: (date: dayjs.Dayjs) => void
-  changeDatepickerValue: (
-    value: DateValueType,
-    e?: HTMLInputElement | null | undefined
-  ) => void
-  showFooter?: boolean
-  placeholder?: string | null
-  separator: string
-  i18n: string
-  value: DateValueType
-  disabled?: boolean
-  inputClassName?: ((className: string) => string) | string | null
-  containerClassName?: ((className: string) => string) | string | null
-  toggleClassName?: ((className: string) => string) | string | null
-  toggleIcon?: (open: boolean) => React.ReactNode
-  readOnly?: boolean
-  startWeekOn?: string | null
-  displayFormat: string
-  minDate?: DateType | null
-  maxDate?: DateType | null
-  dateLooking?: 'forward' | 'backward' | 'middle'
+  changeDatepickerValue: (value: { startDate: null, endDate: null }) => void
   disabledDates?: DateRangeType[] | null
-  inputId?: string
-  inputName?: string
   classNames?: ClassNamesTypeProp
-  popoverDirection?: PopoverDirectionType
 }
 
 const DatepickerContext = createContext<DatepickerStore>({
@@ -76,10 +44,7 @@ const DatepickerContext = createContext<DatepickerStore>({
   // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
   updateFirstDate: (date) => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function,@typescript-eslint/no-unused-vars
-  changeDatepickerValue: (
-    value: DateValueType,
-    e: HTMLInputElement | null | undefined
-  ) => {},
+  changeDatepickerValue: (value: DateValueType) => {},
   showFooter: false,
   value: null,
   i18n: LANGUAGE,

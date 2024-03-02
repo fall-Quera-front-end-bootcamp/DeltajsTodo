@@ -3,20 +3,14 @@ import moment from 'jalali-moment'
 import type React from 'react'
 import { useCallback, useContext } from 'react'
 
-import { BG_COLOR, TEXT_COLOR } from '../../constants'
 import DatepickerContext from '../../contexts/DatepickerContext'
-import {
-  formatDate,
-  nextMonth,
-  previousMonth,
-  classNames as cn
-} from '../../helpers'
+import { nextMonth, previousMonth, classNames as cn } from '../../helpers'
 import { type Period } from '../../types'
 import { toFarsiNumber } from '../../utilities/toFarsiNumber'
 
 interface Props {
   calendarData: {
-    date: moment.Moment
+    date: string
     days: {
       previous: number[]
       current: number[]
@@ -36,7 +30,6 @@ const Days: React.FC<Props> = ({
 }) => {
   // Contexts
   const {
-    primaryColor,
     period,
     changePeriod,
     dayHover,
@@ -45,8 +38,10 @@ const Days: React.FC<Props> = ({
     maxDate,
     disabledDates
   } = useContext(DatepickerContext)
-
+  moment.locale('fa')
   // Functions
+
+  // Tomarow
   const currentDateClass = useCallback(
     (item: number) => {
       const itemDate = `${moment(calendarData.date).jYear()}-${moment(calendarData.date).jMonth() + 1}-${
@@ -61,41 +56,31 @@ const Days: React.FC<Props> = ({
       }
       return ''
     },
-    [calendarData.date, primaryColor]
+    [calendarData.date]
   )
 
   const activeDateData = useCallback(
     (day: number) => {
-      const fullDay = `${moment(calendarData.date).year()}-${moment(calendarData.date).month() + 1}-${day}`
-      let className = 'border border-teal-primary'
+      const fullDay = `${moment(calendarData.date).year()}-${moment(calendarData.date).month() + 1}-${
+        day >= 10 ? day : '0' + day
+      }`
+      let className = ''
 
-      if (
-        moment(fullDay).isSame(period.start) &&
-        moment(fullDay).isSame(period.end)
-      ) {
-        className = 'bg-teal-primary text-white font-medium rounded-full'
-      } else if (moment(fullDay).isSame(period.start)) {
-        className = ` bg-teal-primary text-white font-medium ${
-          moment(fullDay).isSame(dayHover) && !period.end
-            ? 'rounded-full'
-            : 'rounded-l-full'
-        }`
-      } else if (moment(fullDay).isSame(period.end)) {
-        className = ` bg-teal-primary text-white font-medium ${
-          moment(fullDay).isSame(dayHover) && !period.start
-            ? 'rounded-full'
-            : 'rounded-r-full'
-        }`
+      if (fullDay === period.start && fullDay === period.end) {
+        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
+      } else if (fullDay === period.start) {
+        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
+      } else if (fullDay === period.end) {
+        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
+      } else if (fullDay === dayHover) {
+        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
       }
-
       return {
-        active:
-          moment(fullDay).isSame(period.start) ||
-          moment(fullDay).isSame(period.end),
+        active: fullDay === period.start || fullDay === period.end,
         className
       }
     },
-    [calendarData.date, dayHover, period.end, period.start, primaryColor]
+    [calendarData.date, dayHover, period.end, period.start]
   )
 
   const hoverClassByDay = useCallback(
@@ -104,10 +89,18 @@ const Days: React.FC<Props> = ({
       const fullDay = `${moment(calendarData.date).year()}-${moment(calendarData.date).month() + 1}-${
         day >= 10 ? day : '0' + day
       }`
+      // console.log(
+      //   moment(fullDay).isBetween(period.start, dayHover, 'day', '[)'),
+      //   moment(fullDay).isBetween(period.start, period.end, 'day', '[)')
+      // )
+      // console.log(fullDay)
+      // fullDay.filter((x) => x > first && x < last) ? 'green' : ''
+      // console.log(period.start, fullDay, dayHover)
 
       if (period.start && period.end) {
         if (moment(fullDay).isBetween(period.start, period.end, 'day', '[)')) {
-          return ` bg-teal-primary ${currentDateClass(day)} dark:bg-white/10`
+          console.log('hello')
+          return `bg-teal-secondary ${currentDateClass(day)}`
         }
       }
 
@@ -119,33 +112,23 @@ const Days: React.FC<Props> = ({
         period.start &&
         moment(fullDay).isBetween(period.start, dayHover, 'day', '[)')
       ) {
-        className = ` bg-teal-primary ${currentDateClass(day)} dark:bg-white/10`
+        className = `bg-teal-secondary ${currentDateClass(day)}`
       }
 
       if (
         period.end &&
         moment(fullDay).isBetween(dayHover, period.end, 'day', '[)')
       ) {
-        className = ` bg-teal-primary ${currentDateClass(day)} dark:bg-white/10`
+        className = `bg-teal-secondary ${currentDateClass(day)}`
       }
 
       if (dayHover === fullDay) {
-        const bgColor = 'bg-teal-primary'
-        className = ` transition-all duration-500 text-white font-medium ${bgColor} ${
-          period.start ? 'rounded-r-full' : 'rounded-l-full'
-        }`
+        className = 'text-white font-medium bg-teal-primary rounded-[4px]'
       }
 
       return className
     },
-    [
-      calendarData.date,
-      currentDateClass,
-      dayHover,
-      period.end,
-      period.start,
-      primaryColor
-    ]
+    [calendarData.date, currentDateClass, dayHover, period.end, period.start]
   )
 
   const isDateTooEarly = useCallback(
@@ -282,6 +265,7 @@ const Days: React.FC<Props> = ({
 
       if (period.start && !period.end) {
         const hoverPeriod = { ...period, end: newHover }
+
         if (moment(newHover).isBefore(moment(period.start))) {
           hoverPeriod.start = newHover
           hoverPeriod.end = period.start
@@ -299,6 +283,7 @@ const Days: React.FC<Props> = ({
 
       if (!period.start && period.end) {
         const hoverPeriod = { ...period, start: newHover }
+
         if (moment(newHover).isAfter(moment(period.end))) {
           hoverPeriod.start = period.end
           hoverPeriod.end = newHover
@@ -325,36 +310,16 @@ const Days: React.FC<Props> = ({
 
   const handleClickDay = useCallback(
     (day: number, type: 'previous' | 'current' | 'next') => {
-      function continueClick() {
-        if (type === 'previous') {
-          onClickPreviousDays(day)
-        }
-
-        if (type === 'current') {
-          onClickDay(day)
-        }
-
-        if (type === 'next') {
-          onClickNextDays(day)
-        }
+      if (type === 'previous') {
+        onClickPreviousDays(day)
       }
 
-      if (disabledDates?.length) {
-        const object = getMetaData()
-        const newDate = object[type as keyof typeof object]
-        const clickDay = `${moment(newDate).jYear()}-${moment(newDate).jMonth() + 1}-${
-          day >= 10 ? day : '0' + day
-        }`
+      if (type === 'current') {
+        onClickDay(day)
+      }
 
-        if (period.start && !period.end) {
-          moment(clickDay).isSame(dayHover) && continueClick()
-        } else if (!period.start && period.end) {
-          moment(clickDay).isSame(dayHover) && continueClick()
-        } else {
-          continueClick()
-        }
-      } else {
-        continueClick()
+      if (type === 'next') {
+        onClickNextDays(day)
       }
     },
     [
