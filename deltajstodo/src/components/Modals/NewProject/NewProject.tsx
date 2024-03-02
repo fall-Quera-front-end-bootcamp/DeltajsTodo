@@ -1,3 +1,7 @@
+/* eslint-disable no-useless-return */
+/* eslint-disable tailwindcss/no-custom-classname */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent, useRef } from 'react'

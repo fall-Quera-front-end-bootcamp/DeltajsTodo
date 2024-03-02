@@ -27,6 +27,9 @@ import Button from '../components/Buttons/Button'
 import AddSecondaryIconSvg from '../components/Icons/AddSecondaryIconSvg'
 import { Workspace as W, Project as P } from '../utilities/models'
 import { UserContext } from '../contexts/UserProvider'
+import ColumnView from '../components/BoardViews/ColumnView/ColumnView'
+import RowView from '../components/BoardViews/RowView/RowView'
+import CalenderView from '../components/BoardViews/CalenderView/CalenderView'
 interface BoardProps {}
 enum Views {
   column = 643,
@@ -52,8 +55,7 @@ const Board: FunctionComponent<BoardProps> = () => {
   const [view, setViw] = useState<Views>(Views.column)
 
   const handleView = (e: any): void => {
-    console.log(e?.target?.ariaLabel)
-
+    //console.log(e?.target?.ariaLabel)
     setViw(() => Views[e?.target?.ariaLabel as keyof typeof Views])
   }
 
@@ -61,7 +63,7 @@ const Board: FunctionComponent<BoardProps> = () => {
     <>
       <div className="relative">
         {/*Header */}
-        <div className="absolute top-[41px]   h-[64px] w-[1034px]  flex flex-col gap-4">
+        <div className="absolute top-[41px] right-0  h-[64px] w-[1034px]  flex flex-col gap-4">
           <div className="">
             <div className="w-[1034px] h-[64px] flex flex-row items-center justify-between pt-4 pb-4">
               <div className="w-[118px] h-[24px] flex flex-row gap-[5px]">
@@ -172,11 +174,14 @@ const Board: FunctionComponent<BoardProps> = () => {
           </div> */}
         </div>
 
-        <div className="relative w-[1034px] left-[50px]">
-          <div className="relative">
-            <div className="absolute top-[954px]">
-              {/**buttom تسک جدید */}
-              <div
+        <div className="absolute top-[220px] w-[1034px] h-[300px]  right-0 ">
+          {/**buttom تسک جدید */}
+
+          {view === Views.column && <ColumnView />}
+          {view === Views.row && <RowView project={project} />}
+          {view === Views.calender && <CalenderView />}
+
+          {/* <div
                 className={`w-[118px] h-[40px] flex flex-row ${view === Views.calender ? 'invisible' : ''}`}
               >
                 <Button>
@@ -190,10 +195,8 @@ const Board: FunctionComponent<BoardProps> = () => {
                   </p>
                   <AddSecondaryIconSvg />
                 </Button>
-              </div>
-              {/**--------------------------------------- */}
-            </div>
-          </div>
+              </div> */}
+          {/**--------------------------------------- */}
         </div>
       </div>
     </>

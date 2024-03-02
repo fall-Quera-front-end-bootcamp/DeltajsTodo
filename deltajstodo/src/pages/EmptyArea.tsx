@@ -8,6 +8,10 @@ import { useRef, type FunctionComponent } from 'react'
 import ButtonColorIconSvg from '../components/Icons/ButtonColorIconSvg'
 import Step2 from '../components/Modals/NewWorkspace/Step2'
 import NewWorkspace from '../components/Modals/NewWorkspace/NewWorkspace'
+import Row from '../components/BoardViews/RowView/Row'
+import CalenderView from '../components/BoardViews/CalenderView/CalenderView'
+import RowView from '../components/BoardViews/RowView/RowView'
+import NewColumn from '../components/BoardViews/ColumnView/NewColumn'
 
 interface EmptyAreaProps {}
 
@@ -22,7 +26,7 @@ const EmptyArea: FunctionComponent<EmptyAreaProps> = () => {
 
   return (
     <>
-      <NewWorkspace />
+      <NewColumn />
     </>
     //  <>
     // //   <div className="flex flex-col gap-6">

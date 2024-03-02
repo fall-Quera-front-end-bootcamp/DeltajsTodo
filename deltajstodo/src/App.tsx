@@ -15,7 +15,8 @@ import {
   type User,
   Permission,
   type Workspace as W,
-  type Project as P
+  type Project as P,
+  Priorities
 } from './utilities/models'
 import { useReducer, useRef } from 'react'
 import EmptyArea from './pages/EmptyArea'
@@ -58,7 +59,83 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
-                title: '',
+                id: '1111',
+                title: 'pending',
+                color: '#F92E8F',
+                tasks: [
+                  {
+                    id: '111',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  },
+                  {
+                    id: '112',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.asa
+                  }
+                ]
+              },
+              {
+                id: '1112',
+                title: 'TO Do',
+                color: '#FD7E14',
+                tasks: [
+                  {
+                    id: '113',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2000),
+                      deadLine: new Date(1999)
+                    },
+                    priority: Priorities.asa
+                  }
+                ]
+              },
+              {
+                id: '1113',
+                title: 'In Progress',
+                color: '#FAB005',
                 tasks: []
               }
             ]
@@ -69,7 +146,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1124',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -88,7 +167,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1121',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -99,7 +180,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1122',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -118,7 +201,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1131',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -129,7 +214,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1132',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]

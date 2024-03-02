@@ -40,11 +40,11 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
 
             <div className={'absolute right-[356px] max-w-[1100px] '}>
               <div
-                className={`${localPage.value !== 0 && 'bg-gray-primary blur-md'}`}
+                className={`${localPage.value !== 0 && ' hidden  bg-gray-primary blur-md'}`}
               >
                 <Outlet />
               </div>
-              <div className="relative left-[290px] top-[200px]">
+              <div className="absolute right-[390px] top-[200px] z-100 border-black">
                 {localPage.value === 1 && <NewWorkspace />}
                 {localPage.value === 2 && (
                   <NewProject WID={localPage.WorkspaceID} />

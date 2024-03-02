@@ -1,16 +1,13 @@
+/* eslint-disable tailwindcss/no-custom-classname */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent, useRef, useState } from 'react'
 import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
-
 import { localPageDispatchContext } from '../../../pages/MainLayout'
-import {
-  UserContext,
-  UserDispatchContext
-} from '../../../contexts/UserProvider'
-import { Permission } from '../../../utilities/models'
-
+import { UserDispatchContext } from '../../../contexts/UserProvider'
 interface ChangeProjectTitleProps {
   WID: string | null
   PID: string | null
@@ -22,8 +19,6 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
 }) => {
   const stepDispatch: any = useContext(localPageDispatchContext)
   const inputRef: any = useRef()
-  const user = useContext(UserContext)
-
   const userDispatch: any = useContext(UserDispatchContext)
 
   const [inputValue, setInputValue] = useState('')

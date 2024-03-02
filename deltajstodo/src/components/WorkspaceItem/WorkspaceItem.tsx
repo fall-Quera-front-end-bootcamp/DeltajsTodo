@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom'
 import ProjectMore from '../Column-more/ProjectMore'
 
 import { localPageDispatchContext } from '../../pages/MainLayout'
-import WorkspaceItemColor from '../Icons/WorkspaceItemColor'
+import ItemColor from '../Icons/ItemColor'
 
 interface WorkspaceItemProps {
   workspaceItemID: string
@@ -71,7 +71,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
 
           <div>
             <div className={'size-[20px] rounded-[4px]  '}>
-              <WorkspaceItemColor color={workspaceItemColor} />
+              <ItemColor color={workspaceItemColor} />
             </div>
           </div>
         </div>
