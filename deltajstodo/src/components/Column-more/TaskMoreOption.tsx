@@ -8,12 +8,18 @@ interface TaskMoreOptionProps {
   color: string
   text: string
   type: string
+  workspaceID: string
+  projectID: string
+  onClickHandler?: () => any
 }
 
 function TaskMoreOption({
   color,
   text,
-  type
+  type,
+  workspaceID,
+  projectID,
+  onClickHandler = () => {}
 }: TaskMoreOptionProps): JSX.Element {
   function iconChoose(): JSX.Element {
     switch (type) {
@@ -33,7 +39,7 @@ function TaskMoreOption({
     <div className="flex items-center gap-2">
       {iconChoose()}
       <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
-        {text}
+        <button onClick={onClickHandler}>{text}</button>
       </span>
     </div>
   )

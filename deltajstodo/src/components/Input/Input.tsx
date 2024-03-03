@@ -11,7 +11,7 @@ interface InputProps {
   id: string
   placeholder?: string
   name: string
-  validation: object
+  validation?: object
   className?: string
   dir?: string
   inputDir?: string

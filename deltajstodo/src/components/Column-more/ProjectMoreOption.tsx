@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/space-before-function-paren */
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
+
 import '../../dist/output.css'
 import AddIconSvg from '../Icons/AddIconSvg'
 import ColorPaletteIconSvg from '../Icons/ColorPaletteIconSvg'
@@ -9,12 +12,16 @@ interface ProjectMoreOptionProps {
   color: string
   text: string
   type: string
+  workspaceID: string
+  onClickHandler?: (id: string) => any
 }
 
 function ProjectMoreOption({
   color,
   text,
-  type
+  type,
+  workspaceID,
+  onClickHandler = () => {}
 }: ProjectMoreOptionProps): JSX.Element {
   function iconChoose(): JSX.Element {
     switch (type) {
@@ -36,7 +43,13 @@ function ProjectMoreOption({
     <div className="flex items-center gap-2">
       {iconChoose()}
       <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
-        {text}
+        <button
+          onClick={() => {
+            onClickHandler(workspaceID)
+          }}
+        >
+          {text}
+        </button>
       </span>
     </div>
   )
