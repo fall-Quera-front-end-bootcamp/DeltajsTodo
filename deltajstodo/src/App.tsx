@@ -19,7 +19,6 @@ import { useReducer, useRef } from 'react'
 import EmptyArea from './pages/EmptyArea'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import NewProject from './components/Modals/NewProject/NewProject'
-
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   return (
