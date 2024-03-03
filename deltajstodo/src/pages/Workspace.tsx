@@ -1,15 +1,20 @@
-import { type FunctionComponent } from 'react'
-import TaskInformation from '../components/TaskInformation/TaskInformation'
+/* eslint-disable @typescript-eslint/no-empty-interface */
+import { useState, type FunctionComponent } from 'react'
+import SidebarPrimary from '../components/SideBars/SidebarPrimary'
+import { type sidebarItem } from '../utilities/models'
+interface WorkspaceProps {}
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface WorkSpaceProps {}
+interface sidebarItems {
+  items: sidebarItem[]
+}
+const Workspace: FunctionComponent<WorkspaceProps> = () => {
+  const [sidebarItems, serSidebarItens] = useState<sidebarItems>([])
 
-const WorkSpace: FunctionComponent<WorkSpaceProps> = () => {
   return (
-    <div className="flex justify-center items-center w-[100%] h-[100vh] bg-gray-dark">
-      <TaskInformation />
-    </div>
+    <>
+      <SidebarPrimary items={sidebarItems.items} />
+    </>
   )
 }
 
-export default WorkSpace
+export default Workspace
