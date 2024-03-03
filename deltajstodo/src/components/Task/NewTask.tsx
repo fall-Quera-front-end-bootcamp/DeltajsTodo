@@ -2,15 +2,62 @@ import DropdownMenu from '../DropDownMenu/DropdownMenu'
 import DisabledIconSvg from '../Icons/DisabledIconSvg'
 import { AnimatePresence, motion } from 'framer-motion'
 import ProfileAddUserIconSvg from '../Icons/ProfileAddUserIconSvg'
-import { useState } from 'react'
-import UploadButton from '../Upload/UploadButton'
+import { useRef, useState } from 'react'
 import Button from '../Buttons/Button'
 import PriorityFlag from '../Icons/PriorityFlag'
 import CalendarIconSvg from '../Icons/CalendarIconSvg'
 import BookmarkTagIconSvg from '../Icons/BookmarkTagIconSvg'
+import DateRangePicker from '../Calendar/DateRangePicker'
+import ShareIconSvg from '../Icons/ShareIconSvg'
+import LinkCopyIconSvg from '../Icons/LinkCopyIconSvg'
 
 const NewTask = (): JSX.Element => {
   const [showBox, setShowBox] = useState(true)
+  const [showCalendar, setShowCalendar] = useState(false)
+  const [showInputValue, setShowInputValue] = useState(false)
+  const [inputValue, setInputValue] = useState('')
+  const [textAreaValue, setTextAreaValue] = useState('')
+  const [selectedAttachmentFile, setSelectedAttachmentFile] = useState(null)
+  const [selectedCoverFile, setSelectedCoverFile] = useState(null)
+  const inputRefFirst = useRef(null)
+  const inputRefFirstUpload = useRef(null)
+  const inputRefSecondUpload = useRef(null)
+
+  function handleSubmit(e): void {
+    e.preventDefault()
+    if (inputRefFirst?.current.value === null) setShowInputValue(false)
+    else if (inputRefFirst?.current.value.replaceAll(' ', '') !== '') {
+      setShowInputValue(true)
+      setInputValue(inputRefFirst?.current.value)
+    }
+  }
+
+  const onChooseFileFirst = (): void => {
+    inputRefFirstUpload.current.click()
+  }
+  const onChooseFileSecond = (): void => {
+    inputRefSecondUpload.current.click()
+  }
+
+  const handleOnChangeFirst = (event): void => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedAttachmentFile(event.target.files[0])
+    }
+  }
+  const handleOnChangeSecond = (event): void => {
+    if (event.target.files && event.target.files.length > 0) {
+      setSelectedCoverFile(event.target.files[0])
+    }
+  }
+
+  const removeFileFirst = (): void => {
+    setSelectedAttachmentFile(null)
+  }
+  const removeFileSecond = (): void => {
+    setSelectedCoverFile(null)
+  }
+
+  console.log(selectedAttachmentFile, selectedCoverFile)
 
   return (
     <>
@@ -27,12 +74,34 @@ const NewTask = (): JSX.Element => {
             {/* Box 1 */}
             {/* Top New Task  */}
             <div className="flex w-full justify-between">
-              <div className="flex flex-row items-center justify-center gap-[13px]">
+              {/* Task Title Handle */}
+              <div className="relative flex flex-row items-center justify-center gap-[13px]">
                 <span className="inline-block size-4 bg-[#D9D9D9]"></span>
-                <span className="text-bodyxl font-[500] leading-8">
-                  عنوان تسک
-                </span>
+                <form onSubmit={handleSubmit}>
+                  {showInputValue ? (
+                    <span
+                      onClick={() => {
+                        setShowInputValue(false)
+                      }}
+                      className="text-bodyxl font-[500] leading-8"
+                    >
+                      {inputValue}
+                    </span>
+                  ) : (
+                    <input
+                      ref={inputRefFirst}
+                      type="text"
+                      className="absolute right-5 top-0 px-5 text-bodyxl placeholder:text-black"
+                      placeholder="عنوان تسک"
+                      value={inputValue}
+                      onChange={(e) => {
+                        setInputValue(e.target.value)
+                      }}
+                    />
+                  )}
+                </form>
               </div>
+              {/* Leave New Task Box */}
               <button
                 onClick={() => {
                   setShowBox(!showBox)
@@ -67,9 +136,12 @@ const NewTask = (): JSX.Element => {
                 <ProfileAddUserIconSvg />
               </div>
             </div>
-            {/* Box 3 */}
+            {/* Box 3 : Description */}
             <div className="">
               <textarea
+                onChange={(e) => {
+                  setTextAreaValue(e.target.value)
+                }}
                 name=""
                 id=""
                 placeholder="توضیحاتی برای این تسک بنویسید"
@@ -77,14 +149,58 @@ const NewTask = (): JSX.Element => {
               ></textarea>
             </div>
             {/* Box 4 */}
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center gap-5">
               <div className="">افزودن پیوست</div>
-              <UploadButton />
+              <Button onClickFunction={onChooseFileFirst} UploadButton>
+                <LinkCopyIconSvg color="#208D8E" />
+                آپلود فایل
+                <input
+                  type="file"
+                  ref={inputRefFirstUpload}
+                  onChange={handleOnChangeFirst}
+                  style={{ display: 'none' }}
+                />
+              </Button>
+              {selectedAttachmentFile && (
+                <>
+                  <div className="">
+                    <p>{selectedAttachmentFile.name}</p>
+                  </div>
+                  <button
+                    onClick={removeFileFirst}
+                    className="rounded-[4px] border border-red-primary px-4"
+                  >
+                    حذف کردن فایل آپلود شده
+                  </button>
+                </>
+              )}
             </div>
             {/* Box 5 */}
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center gap-5">
               <div className="">افزودن کاور</div>
-              <UploadButton />
+              <Button onClickFunction={onChooseFileSecond} UploadButton>
+                <LinkCopyIconSvg color="#208D8E" />
+                آپلود فایل
+                <input
+                  type="file"
+                  ref={inputRefSecondUpload}
+                  onChange={handleOnChangeSecond}
+                  style={{ display: 'none' }}
+                />
+              </Button>
+              {selectedCoverFile && (
+                <>
+                  <div className="">
+                    <p>{selectedCoverFile.name}</p>
+                  </div>
+                  <button
+                    onClick={removeFileSecond}
+                    className="rounded-[4px] border border-red-primary px-4"
+                  >
+                    حذف کردن فایل آپلود شده
+                  </button>
+                </>
+              )}
             </div>
             {/* Bottom Box 6 */}
             <div className="flex items-center justify-between">
@@ -92,7 +208,12 @@ const NewTask = (): JSX.Element => {
                 <div className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]">
                   <PriorityFlag className="size-[30px]" color="#C1C1C1" />
                 </div>
-                <div className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]">
+                <div
+                  onClick={() => {
+                    setShowCalendar(true)
+                  }}
+                  className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]"
+                >
                   <CalendarIconSvg className="size-[30px]" color="#C1C1C1" />
                 </div>
                 <div className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]">
@@ -101,6 +222,11 @@ const NewTask = (): JSX.Element => {
               </div>
               <Button newTask>ساختن تسک</Button>
             </div>
+            {showCalendar && (
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <DateRangePicker setShowCalendar={setShowCalendar} />
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
