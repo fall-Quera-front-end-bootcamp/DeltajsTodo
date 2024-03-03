@@ -1,10 +1,19 @@
-import DateRangePicker from '../components/Calendar/DateRangePicker'
+/* eslint-disable @typescript-eslint/no-empty-interface */
+import { useState, type FunctionComponent } from 'react'
+import SidebarPrimary from '../components/SideBars/SidebarPrimary'
+import { type sidebarItem } from '../utilities/models'
+interface WorkspaceProps {}
 
-const Workspace = (): JSX.Element => {
+interface sidebarItems {
+  items: sidebarItem[]
+}
+const Workspace: FunctionComponent<WorkspaceProps> = () => {
+  const [sidebarItems, serSidebarItens] = useState<sidebarItems>([])
+
   return (
-    <div className="relative h-screen w-full bg-gray-primary">
-      <DateRangePicker />
-    </div>
+    <>
+      <SidebarPrimary items={sidebarItems.items} />
+    </>
   )
 }
 
