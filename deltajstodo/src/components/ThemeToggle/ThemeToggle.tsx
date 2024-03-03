@@ -33,6 +33,7 @@ const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
   }
   return (
     <div
+      dir="rtl"
       className={`relative flex justify-around items-center w-[64px] h-[36px] rounded-lg ${containerDivBg} p-[3px] cursor-pointer transition-all duration-300`}
       onClick={themeChanger}
     >

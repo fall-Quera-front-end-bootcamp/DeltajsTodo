@@ -13,6 +13,7 @@ import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import WorkspaceItem from '../WorkspaceItem/WorkspaceItem'
 import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
 import { localPageDispatchContext } from '../../pages/MainLayout'
+import ThemeToggle from '../ThemeToggle/ThemeToggle'
 
 interface SidebarPrimaryProps {}
 
@@ -134,15 +135,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
         {/* -------------------------------------- */}
         {/* Exit and toggle dark Light tame */}
         <div className="flex justify-between space-x-2 p-[16px]">
-          <div className="bg-blue-secondary flex items-center justify-center transition-all delay-300 ease-in-out">
-            <button onClick={toggleDarkMode}>
-              {darkMode ? (
-                <LightModeSwitchIconSvg />
-              ) : (
-                <DarkModeSwitchIconSvg />
-              )}
-            </button>
-          </div>
+          <ThemeToggle />
           <div className="flex items-center justify-center space-x-2">
             <LogoutIconSvg />
             <p className="text-right text-[16px] font-medium text-[#818181]">

@@ -19,7 +19,7 @@ const ProfileSideBar: FunctionComponent<ProfileSideBarProps> = ({
         کوئرا تسک منیجر
       </p>
 
-      <button className="flex gap-2 mt-[85px] rounded-lg py-[4px] px-[8px] text-white bg-brand-primary">
+      <button className="flex items-center gap-2 mt-[85px] rounded-lg py-[4px] px-[8px] text-white bg-brand-primary">
         <ArrowIconSvg className="w-[24px] h-[24px]" />
         <span className="font-medium text-[20px] leading-[28.18px]">
           بازگشت
