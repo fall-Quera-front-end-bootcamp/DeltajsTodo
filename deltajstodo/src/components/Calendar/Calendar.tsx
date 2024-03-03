@@ -12,7 +12,13 @@ import {
   nextMonth,
   previousMonth
 } from '../../helpers'
-import { useCallback, useContext, useMemo } from 'react'
+import {
+  type SetStateAction,
+  useCallback,
+  useContext,
+  useMemo,
+  type Dispatch
+} from 'react'
 import Days from './Days'
 import Week from './Week'
 import moment from 'jalali-moment'
@@ -22,7 +28,8 @@ const Calendar = ({
   date,
   value,
   onClickNext,
-  onClickPrevious
+  onClickPrevious,
+  setShowCalendar
 }: {
   date: string
   value: {
@@ -31,6 +38,7 @@ const Calendar = ({
   }
   onClickPrevious: () => void
   onClickNext: () => void
+  setShowCalendar: Dispatch<SetStateAction<boolean>>
 }): JSX.Element => {
   // Contexts
   const { period, changePeriod, changeDayHover, changeDatepickerValue } =
@@ -279,7 +287,14 @@ const Calendar = ({
                 onClickNextDays={clickNextDays}
               />
             </div>
-            <Button CalendarButton>بستن</Button>
+            <Button
+              onClickFunction={() => {
+                setShowCalendar(false)
+              }}
+              CalendarButton
+            >
+              بستن
+            </Button>
           </div>
         </div>
       </div>

@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { type SetStateAction, useCallback, useMemo, useState, type Dispatch } from 'react'
 import Calendar from './Calendar'
 import moment from 'jalali-moment'
 import { nextMonth, previousMonth } from '../../helpers'
 import DatepickerContext from '../../contexts/DatepickerContext'
 import { type Period } from '../../types'
 
-const DateRangePicker = (): JSX.Element => {
+const DateRangePicker = ({
+  setShowCalendar
+}: {
+  setShowCalendar: Dispatch<SetStateAction<boolean>>
+}): JSX.Element => {
   // Date Start
   moment.locale('fa')
   // const Tdate: number = moment().seconds()
@@ -65,6 +69,7 @@ const DateRangePicker = (): JSX.Element => {
         onClickPrevious={previousMonthFirst}
         onClickNext={nextMonthFirst}
         date={firstDate}
+        setShowCalendar={setShowCalendar}
       />
     </DatepickerContext.Provider>
   )
