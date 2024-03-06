@@ -2,11 +2,11 @@ import '../../dist/output.css'
 import RedCross from '../Icons/RedCross'
 import PriorityOption from './PriorityOption'
 
-function Priority(): JSX.Element {
+function Priority ({ className }: { className?: string }): JSX.Element {
   return (
     <div
       dir="rtl"
-      className="flex w-max flex-col gap-4 rounded-lg bg-[white] p-3"
+      className={`flex w-max flex-col gap-4 rounded-lg bg-[white] p-3 ${className}`}
     >
       <div className="flex flex-col gap-4">
         <PriorityOption color="#FA5252" text="فوری" />
