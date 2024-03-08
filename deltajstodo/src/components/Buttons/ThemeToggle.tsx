@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent, useEffect } from 'react'
+import { useState, type FunctionComponent, useEffect, useContext } from 'react'
 import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import LightModeSwitchIconSvg from '../Icons/LightModeSwitchIconSvg'
+import { DarkModeContext } from '../../contexts/DarkModeContextProvider'
 
 interface ThemeToggleProps {}
 
 const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
-  const [darkTheme, setDarkTheme] = useState('light')
+  const { darkTheme, handleDarkTheme } = useContext(DarkModeContext)
+  console.log(darkTheme)
 
   const [insideDivPosition, setInsideDivPosition] = useState('left-[31px]')
   const [insideDivBg, setInsideDivBg] = useState('bg-[#FFFFFF]')
@@ -32,16 +34,11 @@ const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
     }
   }, [darkTheme])
 
-  const handleThemeSwitch = (): void => {
-    setDarkTheme(darkTheme === 'dark' ? 'light' : 'dark')
-  }
-  console.log(darkTheme)
-
   return (
     <div
       dir="rtl"
       className={`relative flex h-[36px] w-[64px] items-center justify-around rounded-lg ${containerDivBg} cursor-pointer p-[3px] transition-all duration-300`}
-      onClick={handleThemeSwitch}
+      onClick={handleDarkTheme}
     >
       <div
         className={`absolute ${insideDivPosition} size-[30px] rounded-[5px] ${insideDivBg} transition-all duration-300`}

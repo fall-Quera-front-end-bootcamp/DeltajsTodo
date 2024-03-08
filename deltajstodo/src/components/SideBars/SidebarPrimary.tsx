@@ -8,10 +8,8 @@ import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
 import SearchIconSvg from '../Icons/SearchIconSvg'
 import AddSecondaryIconSvg from '../Icons/AddSecondaryIconSvg'
 import LogoutIconSvg from '../Icons/LogoutIconSvg'
-import LightModeSwitchIconSvg from '../Icons/LightModeSwitchIconSvg'
-import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import WorkspaceItem from '../WorkspaceItem/WorkspaceItem'
-import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
+import { UserContext } from '../../contexts/UserProvider'
 import { localPageDispatchContext } from '../../pages/MainLayout'
 import HeadingMainText from '../HeadingMainText/HeadingMainText'
 import { Link } from 'react-router-dom'
@@ -20,10 +18,6 @@ import ThemeToggle from '../Buttons/ThemeToggle'
 interface SidebarPrimaryProps {}
 
 const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
-  const [darkMode, setDarkMode] = useState(false)
-  const toggleDarkMode = (): void => {
-    setDarkMode(!darkMode)
-  }
   const user = useContext(UserContext)
 
   const [filterValue, setFilterValue] = useState('')

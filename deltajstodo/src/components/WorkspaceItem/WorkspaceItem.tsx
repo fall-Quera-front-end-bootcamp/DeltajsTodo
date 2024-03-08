@@ -32,7 +32,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
 
   return (
     <>
-      <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
+      <div className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
         <div className="invisible w-[20px] group-hover:visible ">
           <button
             className="w-[30px]"
@@ -75,7 +75,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
             </div>
           </div>
         </div>
-      </button>
+      </div>
 
       {isSelected ? (
         projectItems.length > 0 ? (

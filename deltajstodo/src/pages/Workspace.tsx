@@ -2,6 +2,7 @@
 import { useState, type FunctionComponent } from 'react'
 import SidebarPrimary from '../components/SideBars/SidebarPrimary'
 import { type sidebarItem } from '../utilities/models'
+import DarkModeContextProvider from '../contexts/DarkModeContextProvider'
 interface WorkspaceProps {}
 
 interface sidebarItems {
@@ -12,7 +13,9 @@ const Workspace: FunctionComponent<WorkspaceProps> = () => {
 
   return (
     <>
-      <SidebarPrimary items={sidebarItems.items} />
+      <DarkModeContextProvider>
+        <SidebarPrimary items={sidebarItems.items} />
+      </DarkModeContextProvider>
     </>
   )
 }

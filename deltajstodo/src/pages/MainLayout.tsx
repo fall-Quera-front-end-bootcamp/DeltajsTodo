@@ -12,6 +12,7 @@ import Step1 from '../components/Modals/NewWorkspace/Step1'
 import ChangeWorkspaceTitle from '../components/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../components/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../components/Modals/NewProject/ChangeProjectTitle'
+import DarkModeContextProvider from '../contexts/DarkModeContextProvider'
 
 interface MainLayoutProps {}
 
@@ -29,45 +30,49 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
     projectID: ''
   })
   // const WIDForNewProject = useRef(null)
+
+  console.log('hello3')
   return (
     <>
-      <localPageContext.Provider value={localPage.value}>
-        <localPageDispatchContext.Provider value={dispatch}>
-          <div className="flex flex-row-reverse gap-4">
-            <div className="fixed max-h-[100vh]">
-              <SidebarPrimary />
-            </div>
+      <DarkModeContextProvider>
+        <localPageContext.Provider value={localPage.value}>
+          <localPageDispatchContext.Provider value={dispatch}>
+            <div className="flex flex-row-reverse gap-4">
+              <div className="fixed max-h-[100vh]">
+                <SidebarPrimary />
+              </div>
 
-            <div className={'absolute right-[356px] max-w-[1100px] '}>
-              <div
-                className={`${localPage.value !== 0 && ' hidden  bg-gray-primary blur-md'}`}
-              >
-                <Outlet />
-              </div>
-              <div className="z-100 absolute right-[390px] top-[200px] border-black">
-                {localPage.value === 1 && <NewWorkspace />}
-                {localPage.value === 2 && (
-                  <NewProject WID={localPage.WorkspaceID} />
-                )}
-                {/* {step === 3 && <NewTask />}??? */}
-                {localPage.value === 4 && (
-                  <ChangeWorkspaceTitle WID={localPage.WorkspaceID} />
-                )}
-                {localPage.value === 5 && (
-                  <ChangeWorkspaceColor WID={localPage.WorkspaceID} />
-                )}
-                {/**any modal for removing project ? */}
-                {localPage.value === 6 && (
-                  <ChangeProjectTitle
-                    WID={localPage.WorkspaceID}
-                    PID={localPage.projectID}
-                  />
-                )}
+              <div className={'absolute right-[356px] max-w-[1100px] '}>
+                <div
+                  className={`${localPage.value !== 0 && ' hidden  bg-gray-primary blur-md'}`}
+                >
+                  <Outlet />
+                </div>
+                <div className="z-100 absolute right-[390px] top-[200px] border-black">
+                  {localPage.value === 1 && <NewWorkspace />}
+                  {localPage.value === 2 && (
+                    <NewProject WID={localPage.WorkspaceID} />
+                  )}
+                  {/* {step === 3 && <NewTask />}??? */}
+                  {localPage.value === 4 && (
+                    <ChangeWorkspaceTitle WID={localPage.WorkspaceID} />
+                  )}
+                  {localPage.value === 5 && (
+                    <ChangeWorkspaceColor WID={localPage.WorkspaceID} />
+                  )}
+                  {/**any modal for removing project ? */}
+                  {localPage.value === 6 && (
+                    <ChangeProjectTitle
+                      WID={localPage.WorkspaceID}
+                      PID={localPage.projectID}
+                    />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </localPageDispatchContext.Provider>
-      </localPageContext.Provider>
+          </localPageDispatchContext.Provider>
+        </localPageContext.Provider>
+      </DarkModeContextProvider>
     </>
   )
 }
