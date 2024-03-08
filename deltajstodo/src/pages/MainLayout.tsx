@@ -44,7 +44,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
               >
                 <Outlet />
               </div>
-              <div className="absolute right-[390px] top-[200px] z-100 border-black">
+              <div className="z-100 absolute right-[390px] top-[200px] border-black">
                 {localPage.value === 1 && <NewWorkspace />}
                 {localPage.value === 2 && (
                   <NewProject WID={localPage.WorkspaceID} />

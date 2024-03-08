@@ -13,6 +13,9 @@ import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import WorkspaceItem from '../WorkspaceItem/WorkspaceItem'
 import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
 import { localPageDispatchContext } from '../../pages/MainLayout'
+import HeadingMainText from '../HeadingMainText/HeadingMainText'
+import { Link } from 'react-router-dom'
+import ThemeToggle from '../Buttons/ThemeToggle'
 
 interface SidebarPrimaryProps {}
 
@@ -36,11 +39,9 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
     <section className="relative right-0 top-0 ml-auto flex h-screen w-[340px] flex-col justify-between border-l-[1px] border-[#AAAAAA] bg-[#ffff]">
       <div className="flex flex-col items-center justify-center gap-y-[32px] p-6 text-right">
         {/* top text */}
-        <div>
-          <p className="text-headingl text-cyan-primary text-right">
-            کوئرا تسک منیجر
-          </p>
-        </div>
+        <Link to={'/'}>
+          <HeadingMainText />
+        </Link>
         {/* end top text */}
         {/* ------------------------------ */}
         {/* center div input... */}
@@ -55,7 +56,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
             <div className="flex items-center">
               <input
                 type="text"
-                className="placeholder: placeholder:text-bodyxs block h-[40px] w-[274px] rounded-[4px] bg-[#F6F7F9] px-10 py-4 ps-10 text-right text-[#1E1E1E]  placeholder:pr-2 placeholder:font-normal"
+                className="placeholder: block h-[40px] w-[274px] rounded-[4px] bg-[#F6F7F9] px-10 py-4 ps-10 text-right text-[#1E1E1E] placeholder:pr-2  placeholder:text-bodyxs placeholder:font-normal"
                 placeholder="جستجو کنید"
                 onChange={filterWorkspacesHandler}
               />
@@ -126,7 +127,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
       <div className="relative bottom-3 flex flex-col justify-end">
         <div className="flex justify-end space-x-2 p-[16px]">
           <p className="text-right text-[16px] font-medium">نیلوفر موجودی</p>
-          <div className="bg-blue-secondary text-bodyxs h-[33px] w-[36px] rounded-[100px] px-[8px] pb-[7px] pt-[9px] text-right font-normal text-[#4C6EF5]">
+          <div className="h-[33px] w-[36px] rounded-[100px] bg-blue-secondary px-[8px] pb-[7px] pt-[9px] text-right text-bodyxs font-normal text-[#4C6EF5]">
             NM
           </div>
           {/* <LogoutIconSvg/> */}
@@ -134,15 +135,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
         {/* -------------------------------------- */}
         {/* Exit and toggle dark Light tame */}
         <div className="flex justify-between space-x-2 p-[16px]">
-          <div className="bg-blue-secondary flex items-center justify-center transition-all delay-300 ease-in-out">
-            <button onClick={toggleDarkMode}>
-              {darkMode ? (
-                <LightModeSwitchIconSvg />
-              ) : (
-                <DarkModeSwitchIconSvg />
-              )}
-            </button>
-          </div>
+          <ThemeToggle />
           <div className="flex items-center justify-center space-x-2">
             <LogoutIconSvg />
             <p className="text-right text-[16px] font-medium text-[#818181]">

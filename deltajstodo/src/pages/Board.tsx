@@ -8,10 +8,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import {
   useState,
-  type FunctionComponent,
-  useEffect,
-  useContext,
-  useRef
+  type FunctionComponent
 } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -19,14 +16,6 @@ import ShareIconSvg from '../components/Icons/ShareIconSvg'
 import TodoListIconSvg from '../components/Icons/TodoListIconSvg'
 import ColumnArtboardIconSvg from '../components/Icons/ColumnArtboardIconSvg'
 import CalendarIconSvg from '../components/Icons/CalendarIconSvg'
-import SearchIconSvg from '../components/Icons/SearchIconSvg'
-import FilterSettingIconSvg from '../components/Icons/FilterIconSvg'
-
-import Button from '../components/Buttons/Button'
-
-import AddSecondaryIconSvg from '../components/Icons/AddSecondaryIconSvg'
-import { Workspace as W, Project as P } from '../utilities/models'
-import { UserContext } from '../contexts/UserProvider'
 import ColumnView from '../components/BoardViews/ColumnView/ColumnView'
 import RowView from '../components/BoardViews/RowView/RowView'
 import CalenderView from '../components/BoardViews/CalenderView/CalenderView'

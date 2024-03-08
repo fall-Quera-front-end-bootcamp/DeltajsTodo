@@ -84,9 +84,7 @@ const NewTask = (): JSX.Element => {
     return { period }
   }, [period])
 
-  const priorityHandle = () => {}
-
-
+  const priorityHandle = (): void => {}
 
   return (
     <>
