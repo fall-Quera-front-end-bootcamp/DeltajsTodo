@@ -67,13 +67,17 @@ const Days: React.FC<Props> = ({
       let className = ''
 
       if (fullDay === period.start && fullDay === period.end) {
-        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
+        className =
+          'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
       } else if (fullDay === period.start) {
-        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
+        className =
+          'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
       } else if (fullDay === period.end) {
-        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
+        className =
+          'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
       } else if (fullDay === dayHover) {
-        className = 'bg-teal-primary text-white font-medium rounded-[4px]'
+        className =
+          'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
       }
       return {
         active: fullDay === period.start || fullDay === period.end,
@@ -95,8 +99,7 @@ const Days: React.FC<Props> = ({
           moment(fullDay) > moment(period.start) &&
           moment(fullDay) < moment(period.end)
         ) {
-          console.log('hello')
-          return `bg-teal-secondary ${currentDateClass(day)}`
+          return `bg-teal-secondary flex items-center justify-center ${currentDateClass(day)}`
         }
       }
 
@@ -109,7 +112,7 @@ const Days: React.FC<Props> = ({
         moment(fullDay) > moment(period.start) &&
         moment(fullDay) < moment(dayHover)
       ) {
-        className = `bg-teal-secondary ${currentDateClass(day)}`
+        className = `bg-teal-secondary flex items-center justify-center ${currentDateClass(day)}`
       }
 
       if (
@@ -117,11 +120,12 @@ const Days: React.FC<Props> = ({
         moment(fullDay) > moment(dayHover) &&
         moment(fullDay) < moment(period.end)
       ) {
-        className = `bg-teal-secondary ${currentDateClass(day)}`
+        className = `bg-teal-secondary flex items-center justify-center ${currentDateClass(day)}`
       }
 
       if (dayHover === fullDay) {
-        className = 'text-white font-medium bg-teal-primary rounded-[4px]'
+        className =
+          'text-white font-medium bg-teal-primary rounded-[4px] w-[33px] h-[38px]'
       }
 
       return className
@@ -211,7 +215,7 @@ const Days: React.FC<Props> = ({
 
   const buttonClass = useCallback(
     (day: number, type: 'current' | 'next' | 'previous') => {
-      const baseClass = 'text-[24px]'
+      const baseClass = 'text-[24px] w-full'
       if (type === 'current') {
         return cn(
           baseClass,
@@ -332,59 +336,60 @@ const Days: React.FC<Props> = ({
     ]
   )
 
-  console.log(period)
-
   return (
     <>
       {calendarData.days.previous.map((item, index) => (
-        <button
-          type="button"
-          key={index}
-          disabled={isDateDisabled(item, 'previous')}
-          className={`${buttonClass(item, 'previous')}`}
-          onClick={() => {
-            handleClickDay(item, 'previous')
-          }}
-          onMouseOver={() => {
-            hoverDay(item, 'previous')
-          }}
-        >
-          {toFarsiNumber(`${item}`)}
-        </button>
+        <div className="" key={index}>
+          <button
+            type="button"
+            disabled={isDateDisabled(item, 'previous')}
+            className={`${buttonClass(item, 'previous')}`}
+            onClick={() => {
+              handleClickDay(item, 'previous')
+            }}
+            onMouseOver={() => {
+              hoverDay(item, 'previous')
+            }}
+          >
+            {toFarsiNumber(`${item}`)}
+          </button>
+        </div>
       ))}
 
       {calendarData.days.current.map((item, index) => (
-        <button
-          type="button"
-          key={index}
-          disabled={isDateDisabled(item, 'current')}
-          className={`${buttonClass(item, 'current')}`}
-          onClick={() => {
-            handleClickDay(item, 'current')
-          }}
-          onMouseOver={() => {
-            hoverDay(item, 'current')
-          }}
-        >
-          {toFarsiNumber(`${item}`)}
-        </button>
+        <div className="flex items-center justify-center" key={index}>
+          <button
+            type="button"
+            disabled={isDateDisabled(item, 'current')}
+            className={`${buttonClass(item, 'current')}`}
+            onClick={() => {
+              handleClickDay(item, 'current')
+            }}
+            onMouseOver={() => {
+              hoverDay(item, 'current')
+            }}
+          >
+            {toFarsiNumber(`${item}`)}
+          </button>
+        </div>
       ))}
 
       {calendarData.days.next.map((item, index) => (
-        <button
-          type="button"
-          key={index}
-          disabled={isDateDisabled(item, 'next')}
-          className={`${buttonClass(item, 'next')}`}
-          onClick={() => {
-            handleClickDay(item, 'next')
-          }}
-          onMouseOver={() => {
-            hoverDay(item, 'next')
-          }}
-        >
-          {toFarsiNumber(`${item}`)}
-        </button>
+        <div className="" key={index}>
+          <button
+            type="button"
+            disabled={isDateDisabled(item, 'next')}
+            className={`${buttonClass(item, 'next')}`}
+            onClick={() => {
+              handleClickDay(item, 'next')
+            }}
+            onMouseOver={() => {
+              hoverDay(item, 'next')
+            }}
+          >
+            {toFarsiNumber(`${item}`)}
+          </button>
+        </div>
       ))}
     </>
   )

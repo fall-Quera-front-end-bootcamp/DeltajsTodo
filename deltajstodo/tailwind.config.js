@@ -121,9 +121,23 @@ export default {
         xl: '2.5rem'
       },
       boxShadow: {
-        card: '0px 70px 100px -20px #32325D40, 0px 50px 60px -30px #0000004D'
+        card: '0px 70px 100px -20px #32325D40, 0px 50px 60px -30px #0000004D',
+        comment: '0px -7px 18px -10px #00000040'
       }
     }
   },
-  plugins: []
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none'
+        },
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none'
+        }
+      }
+      addUtilities(newUtilities)
+    }
+  ]
 }

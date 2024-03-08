@@ -16,6 +16,7 @@ interface ButtonProps {
   textBlack?: string | boolean
   textBrandPrimary?: string | boolean
   newTask?: string | boolean
+  UploadButton?: string | boolean
   CalendarButton?: string | boolean
   onClickFunction?: any
   children: any
@@ -33,6 +34,7 @@ const Button = ({
   headerButton,
   onClickFunction,
   newTask,
+  UploadButton,
   CalendarButton,
   children
 }: ButtonProps): JSX.Element => {
@@ -51,7 +53,9 @@ const Button = ({
     'bg-brand-primary text-white rounded-[4px] py-[4px] px-[7px] text-[12px] h-[32px] w-[125px] font-[400]':
       newTask,
     'absolute bottom-8 left-8 bg-brand-primary text-white rounded-[4px] py-[4px] px-[7px] text-[12px] h-[32px] w-[125px] font-[400]':
-      CalendarButton
+      CalendarButton,
+    'flex w-24 cursor-pointer items-center justify-center rounded-md border border-brand-primary text-center text-[16px]':
+      UploadButton
   })
   return (
     <>
@@ -74,6 +78,7 @@ Button.prototype = {
     textWhite,
     textBrandPrimary,
     newTask,
+    UploadButton,
     CalendarButton
   }: {
     formButtonLogin: string | null
@@ -85,6 +90,7 @@ Button.prototype = {
     textWhite: string | null
     textBrandPrimary: string | null
     CalendarButton: string | null
+    UploadButton: string | null
     newTask: string | null
   }) => {
     const count =
@@ -97,6 +103,7 @@ Button.prototype = {
       Number(!!textWhite) +
       Number(!!textBrandPrimary) +
       Number(!!newTask) +
+      Number(!!UploadButton) +
       Number(!!CalendarButton)
     if (count > 1) {
       return new Error('Only one of the F,H can be true.')

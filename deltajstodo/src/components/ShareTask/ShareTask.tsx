@@ -2,10 +2,10 @@ import ArrowDownIconSvg from '../Icons/ArrowDownIconSvg'
 
 const ShareTask = (): JSX.Element => {
   return (
-    <main className="bg-[#ffffff] w-[462px] rounded-[12px] p-[16px] gap-[40px] shadow-md">
+    <main className="w-[462px] gap-[40px] rounded-[12px] bg-[#ffffff] p-[16px] shadow-md">
       <section className="flex flex-col justify-center space-y-6">
         {/* top site */}
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <div>
             {/* مبین جان من این دو ایکن رو پیدا نکردم  */}
             <svg
@@ -18,20 +18,20 @@ const ShareTask = (): JSX.Element => {
               <path
                 d="M8 8L16 16"
                 stroke="#BDBDBD"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M16 8L8 16"
                 stroke="#BDBDBD"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
-          <p className="font-medium text-headingxs text-center">
+          <p className="text-center text-headingxs font-medium">
             به اشتراک‌گذاری تسک
           </p>
           <div>
@@ -45,16 +45,16 @@ const ShareTask = (): JSX.Element => {
               <path
                 d="M8 8L16 16"
                 stroke="#BDBDBD"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M16 8L8 16"
                 stroke="#BDBDBD"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
@@ -63,25 +63,25 @@ const ShareTask = (): JSX.Element => {
         {/* body input  */}
         <div className="flex items-center">
           <div className="relative">
-            <div className="pointer-events-none absolute inset-y-0 -left-3 flex items-center px-3 ps-3 cursor-pointer">
-              <button className="w-[91px] h-[40px] text-white bg-[#208D8E] rounded-l-[8px]">
+            <div className="pointer-events-none absolute inset-y-0 -left-3 flex cursor-pointer items-center px-3 ps-3">
+              <button className="h-[40px] w-[91px] rounded-l-[8px] bg-[#208D8E] text-white">
                 ارسال
               </button>
             </div>
           </div>
           <input
             type="email"
-            className="w-[430px] h-[40px] rounded-[8px] bg-[#F0F1F3] text-right placeholder:text-right placeholder:text-bodys placeholder:font-normal placeholder:pr-2"
+            className="h-[40px] w-[430px] rounded-[8px] bg-[#F0F1F3] text-right placeholder:pr-2 placeholder:text-right placeholder:text-bodys placeholder:font-normal"
             placeholder="دعوت با ایمیل"
           />
         </div>
         {/* ------------------ */}
         {/* body link  */}
         <div className="flex items-center justify-between">
-          <div className="px-[12px] pt-[3px] pb-[2px] border-solid border-[1px] border-[#E9EBF0] rounded-[6px] text-right text-bodyxs font-normal cursor-pointer">
+          <div className="cursor-pointer rounded-[6px] border-[1px] border-solid border-[#E9EBF0] px-[12px] pb-[2px] pt-[3px] text-right text-bodyxs font-normal">
             کپی لینک
           </div>
-          <div className="flex justify-between items-center space-x-1">
+          <div className="flex items-center justify-between space-x-1">
             <p>لینک خصوصی</p>
             <div>
               <svg
@@ -103,11 +103,11 @@ const ShareTask = (): JSX.Element => {
         {/* footer shareing */}
         <div className="flex flex-col">
           <div className="flex justify-end">
-            <p className="font-normal text-bodys pb-4">اشتراک‌گذاشته شده با</p>
+            <p className="pb-4 text-bodys font-normal">اشتراک‌گذاشته شده با</p>
           </div>
           <ul className="flex flex-col space-y-2">
             <li className="flex justify-between">
-              <div className="px-[12px] pt-[3px] pb-[2px] border-solid border-[1px] border-[#E9EBF0] rounded-[6px] text-right text-bodyxs font-normal cursor-pointer">
+              <div className="cursor-pointer rounded-[6px] border-[1px] border-solid border-[#E9EBF0] px-[12px] pb-[2px] pt-[3px] text-right text-bodyxs font-normal">
                 دسترسی کامل
               </div>
               <div className="flex items-center justify-between space-x-2">
@@ -127,8 +127,8 @@ const ShareTask = (): JSX.Element => {
                   </svg>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <p className="text-bodys font-normal text-center">من</p>
-                  <div className="flex justify-center items-center">
+                  <p className="text-center text-bodys font-normal">من</p>
+                  <div className="flex items-center justify-center">
                     <div className="h-[33px] w-[36px] rounded-[100px] bg-red-primary  px-[8px] pb-[7px] pt-[9px] text-right text-bodyxs font-normal text-black">
                       IMG
                     </div>
@@ -137,7 +137,7 @@ const ShareTask = (): JSX.Element => {
               </div>
             </li>
             <li className="flex justify-between">
-              <div className="px-[12px] pt-[3px] pb-[2px] border-solid border-[1px] border-[#E9EBF0] rounded-[6px] text-right text-bodyxs font-normal cursor-pointer">
+              <div className="cursor-pointer rounded-[6px] border-[1px] border-solid border-[#E9EBF0] px-[12px] pb-[2px] pt-[3px] text-right text-bodyxs font-normal">
                 {/* استایل فیگما سلکت با اررو دان سمت راست */}
                 {/* <select name="" id="">
                   <option selected>دسترسی کامل</option>
@@ -146,16 +146,16 @@ const ShareTask = (): JSX.Element => {
                 </select> */}
                 <div className="flex items-center space-x-1">
                   <ArrowDownIconSvg />
-                  <p className="text-right text-bodyxs font-normal cursor-pointer">
+                  <p className="cursor-pointer text-right text-bodyxs font-normal">
                     دسترسی کامل
                   </p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <p className="text-bodys font-normal text-center">
+                <p className="text-center text-bodys font-normal">
                   sararahimi@gmail.com
                 </p>
-                <div className="flex justify-center items-center">
+                <div className="flex items-center justify-center">
                   <div className="h-[33px] w-[36px] rounded-[100px] bg-red-primary px-[8px] pb-[7px] pt-[9px] text-center text-bodyxs font-normal text-black">
                     SR
                   </div>
