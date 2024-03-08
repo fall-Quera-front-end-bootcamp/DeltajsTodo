@@ -9,15 +9,31 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../components/Buttons/Button'
 import { motion } from 'framer-motion'
+import axios from 'axios'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
+  const onSubmit = methods.handleSubmit(async (data) => {
+    try {
+      const response = await axios.post(
+        'http://185.8.174.74:8000/accounts/login/',
+        data
+      )
+      const { access, refresh } = response.data
 
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log(data)
+      // Store the tokens in localStorage or secure cookie for later use
+      // localStorage.setItem('token', token)
+      // localStorage.setItem('refreshToken', refreshToken)
+      console.log(access, refresh)
+
+      // Redirect or perform other actions upon successful login
+    } catch (error) {
+      // Handle login error
+      console.log('ارور داره')
+    }
     methods.reset()
   })
 
@@ -26,7 +42,7 @@ const Login: FunctionComponent<LoginProps> = () => {
 
   // userName input Props
   const userNameProps = {
-    name: 'نام کاربری',
+    name: 'username',
     validation: {
       required: {
         value: true,
@@ -39,7 +55,7 @@ const Login: FunctionComponent<LoginProps> = () => {
   }
   // userPassword input Props
   const userPasswordProps = {
-    name: 'رمز عبور',
+    name: 'password',
     validation: {
       required: {
         value: true,

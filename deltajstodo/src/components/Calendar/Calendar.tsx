@@ -149,7 +149,6 @@ const Calendar = ({
     ]
   )
 
-  // console.log(period)
   const clickPreviousDays = useCallback(
     (day: number) => {
       const newDate = previousMonth(date)
@@ -202,7 +201,7 @@ const Calendar = ({
             <div className="text-[26px] font-[500] text-brand-primary">
               {toFarsiNumber(`${value.startDate}`) === 'null'
                 ? ''
-                : `${moment(date).format('MMM')} ${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
+                : `${moment(period.start === null ? date : period.start).format('MMM')} ${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان شروع</p>
             <CalendarIconSvg color="#BDBDBD" />
@@ -211,7 +210,7 @@ const Calendar = ({
             <div className="text-[26px] font-[500] text-brand-primary">
               {toFarsiNumber(`${value.endDate}`) === 'null'
                 ? ''
-                : `${moment(date).format('MMM')} ${toFarsiNumber(`${value.endDate}`).slice(8, 10)}`}
+                : `${moment(period.end === null ? date : period.end).format('MMM')} ${toFarsiNumber(`${value.endDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان پایان</p>
             <CalendarIconSvg color="#BDBDBD" />
@@ -278,7 +277,7 @@ const Calendar = ({
               </div>
               <div className="">امروز</div>
             </div>
-            <div className="absolute left-[16px] top-[160px] my-1 grid grid-cols-7 gap-x-[30px] gap-y-4">
+            <div className="absolute left-[16px] top-[160px] my-1 grid w-[600px] grid-cols-7 gap-y-4">
               <Week />
               <Days
                 calendarData={calendarData}

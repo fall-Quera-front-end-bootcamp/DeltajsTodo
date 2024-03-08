@@ -45,7 +45,7 @@ const DateRangePicker = ({
     endDate: null
   })
 
-  const onChange = (value: { startDate: null; endDate: null }): void => {
+  const onChange = (value: { startDate: null, endDate: null }): void => {
     setValue(value)
   }
 

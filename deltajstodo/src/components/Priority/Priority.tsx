@@ -1,10 +1,18 @@
+import { type MutableRefObject } from 'react'
 import '../../dist/output.css'
 import RedCross from '../Icons/RedCross'
 import PriorityOption from './PriorityOption'
 
-function Priority ({ className }: { className?: string }): JSX.Element {
+function Priority ({
+  className,
+  ref
+}: {
+  className?: string
+  ref: MutableRefObject<null>
+}): JSX.Element {
   return (
     <div
+      ref={ref}
       dir="rtl"
       className={`flex w-max flex-col gap-4 rounded-lg bg-[white] p-3 ${className}`}
     >
