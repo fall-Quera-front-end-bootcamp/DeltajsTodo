@@ -7,10 +7,10 @@
 import { useState, type FunctionComponent } from 'react'
 import ItemColor from '../../Icons/ItemColor'
 
-import { Task, type Board } from '../../../utilities/models'
+import { type Task, type Board } from '../../../utilities/models'
 import PriorityFlag from '../../Icons/PriorityFlag'
 import ParagraphsIconSvg from '../../Icons/ParagraphsIconSvg'
-
+import dekstopImg from '../../../assets/picture/1.png'
 interface RowProps {
   board: Board
 }
@@ -171,21 +171,28 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                     </p>
                   </div>
                   <div className="h-[33x] w-[490px] flex flex-row gap-[70px] items-center">
-                    <div className="w-[70px] h-[33px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                    <div className="relative w-[70px] h-[33px] flex flex-row  gap-[10px] items-center">
                       {t.sendforPeople?.map((s, i) => {
-                        return (
-                          <div
-                            key={i}
-                            className="h-[33px] w-[32px] rounded-[100px] pt-[9px] pl-[8px] pb-[7px] pr-[8px]"
-                          >
-                            <img
+                        if (i < 2) {
+                          return (
+                            <div
+                              key={i}
+                              className={`absolute h-[49px] w-[48px] ${i === 0 ? ' left-0' : ''}`}
+                            >
+                              {/* <img
                               width={'32px'}
                               height={'33px'}
                               src={s.coverImg}
                               alt=""
-                            />
-                          </div>
-                        )
+                            /> */}
+                              <img
+                                src={dekstopImg}
+                                alt="dekstopImg"
+                                className="w-[48px] h-[49px] rounded-[100px] pt-[9px] px-[8px] pb-[7px]"
+                              />
+                            </div>
+                          )
+                        }
                       })}
                     </div>
 

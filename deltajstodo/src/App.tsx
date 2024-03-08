@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './dist/output.css'
 import { Route, Routes } from 'react-router-dom'
+
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
@@ -22,10 +23,12 @@ import { useReducer, useRef } from 'react'
 import EmptyArea from './pages/EmptyArea'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import NewProject from './components/Modals/NewProject/NewProject'
+import Admin from './pages/Admin'
+import RequireAuth from './features/auth/RequireAuth'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
-    id: '1',
+    id: 1,
     gmailAccount: 'abc@gmail.com',
     coverImg: './asset/123.png',
     profile: {
@@ -69,7 +72,10 @@ function App(): JSX.Element {
                     projectTitle: 'پروژه اول',
                     status: Permission.manager,
                     archived: false,
-                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
                     describtion: '',
                     attachFiles: [''],
                     coverImg: '',
@@ -102,6 +108,52 @@ function App(): JSX.Element {
                       deadLine: new Date(2000)
                     },
                     priority: Priorities.asa
+                  },
+                  {
+                    id: '113',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  },
+                  {
+                    id: '114',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
                   }
                 ]
               },
@@ -241,16 +293,21 @@ function App(): JSX.Element {
         <UserDispatchContext.Provider value={dispatch}>
           <Routes>
             <Route path="api/auth/login" element={<Login />} />
-            <Route path="/" element={<EmptyArea />} />
-            <Route path="/workspace" element={<MainLayout />}>
-              <Route path=":projectID" element={<Board />} />
-            </Route>
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/" element={<Login />} />
             <Route path="api/auth/register" element={<Register />} />
+
             <Route
               path="api/auth/forgetPassword"
               element={<ForgetPassword />}
             />
             <Route path="api/auth/resetPassword" element={<ResetPassword />} />
+
+            <Route element={<RequireAuth />}>
+              <Route path="/workspace" element={<MainLayout />}>
+                <Route path=":projectID" element={<Board />} />
+              </Route>
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </UserDispatchContext.Provider>

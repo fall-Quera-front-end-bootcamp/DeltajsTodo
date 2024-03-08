@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
@@ -10,23 +11,91 @@ import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../components/Buttons/Button'
 import { motion } from 'framer-motion'
 
+import { useDispatch } from 'react-redux'
+import { setCredentials } from '../features/auth/authSlice'
+import {
+  useLoginMutation,
+  useForgetMutation,
+  useGetWorkspacesQuery
+} from '../features/auth/authApiSlice'
+import axios from 'axios'
+import { useGetUsersQuery } from '../features/users/usersInteractionApiSlice'
+import { setUsers } from '../features/users/usersInteractionSlice'
+import { store } from '../app/store'
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
+  const navigate = useNavigate()
+
+  const [login, { isLoading }] = useLoginMutation()
+  const getWorkspaces = useGetWorkspacesQuery(null)
+  const dispatch = useDispatch()
+  const [form, setForm] = useState(null)
+  const [formVisible, setFormVisible] = useState(true)
+  const [errMsg, setErrMsg] = useState('')
+
+  const fetch = async (data: any): Promise<any> => {
+    const accessToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5NzgxNjU4LCJpYXQiOjE3MDk3NjAwNTgsImp0aSI6Ijk1NDk2NzA0OTAzOTQxMjk4NDQwMjc5NmM0M2ExYTdmIiwidXNlcl9pZCI6NDZ9.JU9XzQztffVBzZVW1S-ISpMqMw62RitezR25Exqrgso'
+
+    await axios
+      .post('http://185.8.174.74:8000' + '/accounts/login/', {
+        ...data
+      })
+      .then((response) => {
+        console.log({ response })
+      })
+      .catch((err) => console.log(err))
+  }
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
-    methods.reset()
+    //  fetch(data)
+    handleSubmit(data)
+    // handleUsers()
   })
 
-  const [formVisible, setFormVisible] = useState(true)
-  const navigate = useNavigate()
+  const handleSubmit = async (
+    data = {
+      username: 'any',
+      password: 'any'
+    }
+  ): Promise<void> => {
+    try {
+      const userData = await login({
+        username: data.username,
+        password: data.password
+      }).unwrap()
+      console.log(userData)
+
+      dispatch(
+        setCredentials({ accessToken: userData.access, user: { ...userData } })
+      )
+      const workspaces = getWorkspaces
+      console.log(workspaces)
+
+      methods.reset()
+      navigate('/workspace')
+    } catch (err: any) {
+      if (err?.status === null) {
+        // isLoading: true until timeout occurs
+        setErrMsg('No Server Response')
+      } else if (err.originalStatus === 400) {
+        setErrMsg('Missing Username or Password')
+      } else if (err.originalStatus === 401) {
+        setErrMsg('Unauthorized')
+      } else {
+        setErrMsg('Login Failed')
+      }
+    }
+  }
 
   // userName input Props
   const userNameProps = {
-    name: 'نام کاربری',
+    name: 'username',
     validation: {
       required: {
         value: true,
@@ -39,7 +108,7 @@ const Login: FunctionComponent<LoginProps> = () => {
   }
   // userPassword input Props
   const userPasswordProps = {
-    name: 'رمز عبور',
+    name: 'password',
     validation: {
       required: {
         value: true,

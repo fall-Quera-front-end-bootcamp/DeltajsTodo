@@ -1,12 +1,28 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { type FunctionComponent } from 'react'
 
-/* eslint-disable @typescript-eslint/no-empty-interface */
-interface ColumnProps {}
+import { type Board, type Task as T } from '../../../utilities/models'
+import LargTaskCard from '../../TaskAndCheckBox/LargTaskCard'
+import ColumnHeader from './ColumnHeader'
 
-const Column: FunctionComponent<ColumnProps> = () => {
+/* eslint-disable @typescript-eslint/no-empty-interface */
+interface ColumnProps {
+  board: Board
+}
+
+const Column: FunctionComponent<ColumnProps> = ({ board }) => {
   return (
     <>
-      <div></div>
+      <div className="h-[100vh] overflow-y-scroll ">
+        <div className="z-10">
+          <ColumnHeader board={board} />
+        </div>
+        <div className="flex flex-col gap-[16px] items-center">
+          {board.tasks.map((t: T) => {
+            return <LargTaskCard key={t.id} />
+          })}
+        </div>
+      </div>
     </>
   )
 }

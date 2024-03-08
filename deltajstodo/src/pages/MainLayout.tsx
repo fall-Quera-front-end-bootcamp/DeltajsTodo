@@ -34,7 +34,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
       <localPageContext.Provider value={localPage.value}>
         <localPageDispatchContext.Provider value={dispatch}>
           <div className="flex flex-row-reverse gap-4">
-            <div className="fixed max-h-[100vh]">
+            <div className="fixed max-h-[100vh] ">
               <SidebarPrimary />
             </div>
 
