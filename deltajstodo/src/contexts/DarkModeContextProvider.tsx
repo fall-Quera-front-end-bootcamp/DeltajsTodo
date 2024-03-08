@@ -18,9 +18,7 @@ const DarkModeContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleDarkTheme = (): void => {
     setDarkTheme(darkTheme === 'dark' ? 'light' : 'dark')
-    console.log('hello1')
   }
-  console.log('hello2')
 
   return (
     <DarkModeContext.Provider value={{ darkTheme, handleDarkTheme }}>

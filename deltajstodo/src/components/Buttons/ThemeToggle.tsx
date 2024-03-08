@@ -8,7 +8,6 @@ interface ThemeToggleProps {}
 
 const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
   const { darkTheme, handleDarkTheme } = useContext(DarkModeContext)
-  console.log(darkTheme)
 
   const [insideDivPosition, setInsideDivPosition] = useState('left-[31px]')
   const [insideDivBg, setInsideDivBg] = useState('bg-[#FFFFFF]')
