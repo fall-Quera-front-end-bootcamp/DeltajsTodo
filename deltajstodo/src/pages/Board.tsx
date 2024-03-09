@@ -6,19 +6,16 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import {
-  useState,
-  type FunctionComponent
-} from 'react'
+import { useState, type FunctionComponent } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import ShareIconSvg from '../components/Icons/ShareIconSvg'
-import TodoListIconSvg from '../components/Icons/TodoListIconSvg'
-import ColumnArtboardIconSvg from '../components/Icons/ColumnArtboardIconSvg'
-import CalendarIconSvg from '../components/Icons/CalendarIconSvg'
-import ColumnView from '../components/BoardViews/ColumnView/ColumnView'
-import RowView from '../components/BoardViews/RowView/RowView'
-import CalenderView from '../components/BoardViews/CalenderView/CalenderView'
+import ShareIconSvg from '../components/Common/Icons/ShareIconSvg'
+import TodoListIconSvg from '../components/Common/Icons/TodoListIconSvg'
+import ColumnArtboardIconSvg from '../components/Common/Icons/ColumnArtboardIconSvg'
+import CalendarIconSvg from '../components/Common/Icons/CalendarIconSvg'
+import ColumnView from '../components/MainPage/BoardComponents/BoardViews/ColumnView/ColumnView'
+import RowView from '../components/MainPage/BoardComponents/BoardViews/RowView/RowView'
+import CalenderView from '../components/MainPage/BoardComponents/BoardViews/CalenderView/CalenderView'
 interface BoardProps {}
 enum Views {
   column = 643,
@@ -169,23 +166,6 @@ const Board: FunctionComponent<BoardProps> = () => {
           {view === Views.column && <ColumnView />}
           {view === Views.row && <RowView project={project} />}
           {view === Views.calender && <CalenderView />}
-
-          {/* <div
-                className={`w-[118px] h-[40px] flex flex-row ${view === Views.calender ? 'invisible' : ''}`}
-              >
-                <Button>
-                  <p
-                    className="w-[67px] h-[20px]
-                     text-right text-[14px] 
-                      leading-[19.73px] 
-                      font-medium text-[#1E1E1E] "
-                  >
-                    تسک جدید
-                  </p>
-                  <AddSecondaryIconSvg />
-                </Button>
-              </div> */}
-          {/**--------------------------------------- */}
         </div>
       </div>
     </>

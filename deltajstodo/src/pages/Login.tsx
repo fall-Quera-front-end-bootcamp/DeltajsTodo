@@ -2,12 +2,12 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { useState, type FunctionComponent } from 'react'
-import Layout from '../components/layout/Layout'
-import AuthCard from '../components/Card/AuthCard'
-import Input from '../components/Input/Input'
+import Layout from '../components/AuthPage/AuthComponents/layout/Layout'
+import AuthCard from '../components/AuthPage/AuthComponents/Card/AuthCard'
+import Input from '../components/Common/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
-import Button from '../components/Buttons/Button'
+import Button from '../components/Common/Buttons/Button'
 import { motion } from 'framer-motion'
 import axios from 'axios'
 

@@ -1,11 +1,11 @@
 import { useState, type FunctionComponent } from 'react'
 
-import Layout from '../components/layout/Layout'
-import AuthCard from '../components/Card/AuthCard'
-import Input from '../components/Input/Input'
+import Layout from '../components/AuthPage/AuthComponents/layout/Layout'
+import AuthCard from '../components/AuthPage/AuthComponents/Card/AuthCard'
+import Input from '../components/Common/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
-import Button from '../components/Buttons/Button'
+import Button from '../components/Common/Buttons/Button'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}

@@ -30,8 +30,8 @@ function App(): JSX.Element {
     coverImg: './asset/123.png',
     profile: {
       userInformatin: {
-        name: 'نیلوفر',
-        fmailyName: 'موجودی',
+        name: 'مبین',
+        fmailyName: 'کرم',
         phoneNumber: '098765432',
         profileImg: './'
       },
@@ -243,8 +243,8 @@ function App(): JSX.Element {
             <Routes>
               <Route path="api/auth/login" element={<Login />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/" element={<Workspace />} />
               <Route path="/workspace" element={<MainLayout />}>
+                <Route path="" element={<Workspace />} />
                 <Route path=":projectID" element={<Board />} />
               </Route>
               <Route path="api/auth/register" element={<Register />} />

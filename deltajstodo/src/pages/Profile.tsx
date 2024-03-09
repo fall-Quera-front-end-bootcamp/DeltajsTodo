@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, type FunctionComponent } from 'react'
-import ProfileSideBar from '../components/ProfileComponents/ProfileSideBar'
-import ProfileInfo from '../components/ProfileComponents/ProfileInfo'
-import AccountInfo from '../components/ProfileComponents/AccountInfo'
-import Setting from '../components/ProfileComponents/Setting'
+import ProfileSideBar from '../components/MainPage/ProfileComponents/ProfileSideBar'
+import ProfileInfo from '../components/MainPage/ProfileComponents/ProfileInfo'
+import AccountInfo from '../components/MainPage/ProfileComponents/AccountInfo'
+import Setting from '../components/MainPage/ProfileComponents/Setting'
 interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {
@@ -45,7 +45,7 @@ const Profile: FunctionComponent<ProfileProps> = () => {
       {/* main content */}
       <div className="grow-[2] overflow-y-scroll px-[58px] py-[170px] no-scrollbar">
         <div className={'flex flex-col gap-8 transition-[height] duration-700'}>
-          <span className="animate-fadein text-[31px] font-bold leading-[43.68px]">
+          <span className="text-[31px] font-bold leading-[43.68px]">
             {title}
           </span>
 
