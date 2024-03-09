@@ -1,17 +1,20 @@
 const ColumnArtboardIconSvg = ({
   size = '24',
   color = '#208D8E',
-  className
+  className,
+  onClick
 }: {
   size?: string
   color?: string
   className?: string
+  onClick?: (e: any) => void
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes
   return (
     <>
       <svg
+        onClick={onClick}
         className={className}
         width={size}
         height={size}

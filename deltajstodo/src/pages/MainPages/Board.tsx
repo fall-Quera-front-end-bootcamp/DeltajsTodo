@@ -38,11 +38,11 @@ const Board: FunctionComponent<BoardProps> = () => {
         projectInfoTitle={project.title}
       />
 
-      <div className="">
+      <>
         {view === Views.column && <ColumnView project={project} />}
         {view === Views.row && <RowView project={project} />}
         {view === Views.calender && <CalenderView />}
-      </div>
+      </>
     </>
   )
 }

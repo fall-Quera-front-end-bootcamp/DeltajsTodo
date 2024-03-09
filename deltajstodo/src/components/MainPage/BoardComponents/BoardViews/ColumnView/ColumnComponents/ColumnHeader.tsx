@@ -26,12 +26,13 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({ board }) => {
         className={`relative flex h-[40px] w-[250px] flex-row items-center justify-between rounded-[16px] border-t-[2px] ${board?.color}  px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]`}
       >
         <div className="invisible  flex h-[24px] w-[48px] flex-row gap-[4px] group-hover:visible ">
-          <button
+          <div
+            className="cursor-pointer"
             onMouseEnter={() => setColumnMore(true)}
             onMouseLeave={() => setColumnMore(false)}
           >
             <AddIconSvg />
-          </button>
+          </div>
 
           <DotsMenuIconSvg />
         </div>

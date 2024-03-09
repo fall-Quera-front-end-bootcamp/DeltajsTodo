@@ -8,9 +8,6 @@ const ColumnViewButton = ({
   handleView: (e: any) => void
   view: Views
 }): JSX.Element => {
-  console.log(view)
-  console.log(Views.column)
-
   return (
     <>
       <button

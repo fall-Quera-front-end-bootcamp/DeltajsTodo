@@ -22,7 +22,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
     <>
       <div className="flex h-screen w-full flex-row-reverse items-start gap-4">
         <SidebarPrimary />
-        <div className={`h-screen w-full ${value !== 0 && 'blur-md'}`}>
+        <div className={`h-screen w-full${value !== 0 ? ' blur-md' : ''}`}>
           <Outlet />
         </div>
         <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">

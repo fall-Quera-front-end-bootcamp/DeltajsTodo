@@ -10,6 +10,7 @@ import ItemColor from '../../../../Common/Icons/ItemColor'
 import { type Task, type Board } from '../../../../../utilities/models'
 import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
+import ArrowButton from './RowComponents/ArrowButton'
 
 interface RowProps {
   board: Board
@@ -20,46 +21,16 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
 
   return (
     <>
-      <div dir="rtl" className="w-[1011px] flex flex-col gap-[19px] ">
+      <div dir="rtl" className="flex flex-col gap-[19px]">
         {/**header */}
-        <div className="w-[1011px] flex flex-row justify-between">
-          <div className="h-[31px]  flex flex-row gap-[8px] items-center">
-            <div className="h-[31px] max-w-[112px] flex flex-row gap-[5px] items-center">
-              <div className={columnMore ? '' : 'rotate-[180deg]'}>
-                <button onClick={() => setColumnMore((p) => !p)}>
-                  {' '}
-                  <svg
-                    width="20"
-                    height="21"
-                    viewBox="0 0 20 21"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M2.5 10.5V10.5C2.5 6.3575 5.8575 3 10 3V3C14.1425 3 17.5 6.3575 17.5 10.5V10.5C17.5 14.6425 14.1425 18 10 18V18C5.8575 18 2.5 14.6425 2.5 10.5Z"
-                      stroke="#323232"
-                      strokeWidth="1.25"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12.5 9.66699L10 12.167L7.5 9.66699"
-                      stroke="#323232"
-                      strokeWidth="1.25"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
-
-              <div
-                className={`max-w-[200px] h-[32px] rounded-[8px] flex flex-row gap-[10px]
-               items-center justify-center
-              `}
-              >
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-row gap-[8px] items-center">
+            <div className="flex flex-row gap-[5px] items-center">
+              <ArrowButton
+                columnMore={columnMore}
+                setColumnMore={setColumnMore}
+              />
+              <div className="relative rounded-[8px] flex flex-row gap-[10px] items-center justify-center">
                 <svg
                   width="100%"
                   height="100%"
@@ -70,21 +41,10 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                 >
                   <rect width="100%" height="100%" rx="4" fill={board.color} />
                 </svg>
-                <div
-                  className="absolute z-10 pl-[12px] pr-[12px] pt-[10px] pb-[10px]
-                h-[32px]"
-                >
-                  <p
-                    className=" font-yekan 
-                  h-[32px]
-                 text-center
-                 text-[16px] font-extrabold
-                 leading-[22.55px]
-                  text-[#FFDEEB] "
-                  >
-                    {board.title}
-                  </p>
-                </div>
+
+                <p className="h-[32px] absolute top-0 z-10 px-[12px] py-[10px] text-center text-[16px] font-extrabold leading-[22.55px] text-[#FFDEEB] ">
+                  {board.title}
+                </p>
               </div>
             </div>
             <div className="h-[17px] w-[37px]">
@@ -101,7 +61,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
           </div>
 
           <div className="h-[23px] w-[473px] flex flex-row gap-[70px]">
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] pr-[10px] pl-[10px]">
+            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
               <p
                 className="font-yekan h-[23px] w-[32px] 
               text-right text-[16px]
@@ -111,7 +71,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                 اعضا
               </p>
             </div>
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] pr-[10px] pl-[10px]">
+            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
               <p
                 className="font-yekan 
                 h-[23px] w-[45px] 
@@ -122,7 +82,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                 ددلاین
               </p>
             </div>
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] pr-[10px] pl-[10px]">
+            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
               <p
                 className="font-yekan 
               h-[23px] w-[48px] 
@@ -133,7 +93,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                 اولویت
               </p>
             </div>
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] pr-[10px] pl-[10px]">
+            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
               <p
                 className="font-yekan 
               h-[23px] w-[66px] 
@@ -153,7 +113,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
               return (
                 <div
                   key={t.id}
-                  className="w-[986px] h-[47px] rounded-[4px] flex flex-row justify-between pt-[7px] pb-[7px] bg-white items-center"
+                  className="w-[986px] h-[47px] rounded-[4px] flex flex-row justify-between py-[7px] bg-white items-center"
                 >
                   <div
                     className="w-[193px] h-[17px] 
@@ -171,12 +131,12 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                     </p>
                   </div>
                   <div className="h-[33x] w-[490px] flex flex-row gap-[70px] items-center">
-                    <div className="w-[70px] h-[33px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                    <div className="w-[70px] h-[33px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                       {t.sendforPeople?.map((s, i) => {
                         return (
                           <div
                             key={i}
-                            className="h-[33px] w-[32px] rounded-[100px] pt-[9px] pl-[8px] pb-[7px] pr-[8px]"
+                            className="h-[33px] w-[32px] rounded-[100px] pt-[9px] px-[8px] pb-[7px]"
                           >
                             <img
                               width={'32px'}
@@ -189,15 +149,15 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                       })}
                     </div>
 
-                    <div className="w-[70px] h-[17px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                    <div className="w-[70px] h-[17px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                       <p className="font-yekan h-[17px] w-[31px] text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
                         ۶ آبان
                       </p>
                     </div>
-                    <div className="w-[70px] h-[16px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                    <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                       <PriorityFlag size="16" color={t.priority} />
                     </div>
-                    <div className="w-[70px] h-[16px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                    <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                       <ParagraphsIconSvg />
                       {/* <svg
                         width="16"
@@ -244,7 +204,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
             })}
 
             {/**titr 1 */}
-            <div className="w-[986px] h-[47px] rounded-[4px] flex flex-row justify-between pt-[7px] pb-[7px] bg-white items-center">
+            <div className="w-[986px] h-[47px] rounded-[4px] flex flex-row justify-between py-[7px] bg-white items-center">
               <div
                 className="w-[193px] h-[17px] 
             flex flex-row gap-[7px] 
@@ -261,15 +221,15 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                 </p>
               </div>
               <div className="h-[33x] w-[490px] flex flex-row gap-[70px] items-center">
-                <div className="w-[70px] h-[33px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
-                  <div className="h-[33px] w-[32px] rounded-[100px] pt-[9px] pl-[8px] pb-[7px] pr-[8px]">
+                <div className="w-[70px] h-[33px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
+                  <div className="h-[33px] w-[32px] rounded-[100px] pt-[9px] px-[8px] pb-[7px]">
                     <img
                       className="h-[33px] w-[32px]"
                       src="../../../assets/picture/1.png"
                       alt=""
                     />
                   </div>
-                  <div className="h-[33px] w-[32px] rounded-[100px] pt-[9px] pl-[8px] pb-[7px] pr-[8px]">
+                  <div className="h-[33px] w-[32px] rounded-[100px] pt-[9px] px-[8px] pb-[7px]">
                     <img
                       className="h-[33px] w-[32px]"
                       src="../../../assets/picture/1.png"
@@ -278,12 +238,12 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                   </div>
                 </div>
 
-                <div className="w-[70px] h-[17px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                <div className="w-[70px] h-[17px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                   <p className="font-yekan h-[17px] w-[31px] text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
                     ۶ آبان
                   </p>
                 </div>
-                <div className="w-[70px] h-[16px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                   <svg
                     width="16"
                     height="17"
@@ -317,7 +277,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                     />
                   </svg>
                 </div>
-                <div className="w-[70px] h-[16px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                   <svg
                     width="16"
                     height="17"
@@ -361,7 +321,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
             </div>
 
             {/**titr 2 */}
-            <div className="w-[986px] h-[47px] rounded-[4px] flex flex-row justify-between pt-[7px] pb-[7px] bg-white items-center">
+            <div className="w-[986px] h-[47px] rounded-[4px] flex flex-row justify-between py-[7px] bg-white items-center">
               <div
                 className="w-[193px] h-[17px] 
             flex flex-row gap-[7px] 
@@ -378,8 +338,8 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                 </p>
               </div>
               <div className="h-[33x] w-[490px] flex flex-row gap-[70px] items-center">
-                <div className="w-[70px] h-[33px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
-                  <div className="h-[33px] w-[32px] rounded-[100px] pt-[9px] pl-[8px] pb-[7px] pr-[8px]">
+                <div className="w-[70px] h-[33px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
+                  <div className="h-[33px] w-[32px] rounded-[100px] pt-[9px] px-[8px] pb-[7px]">
                     <img
                       className="h-[33px] w-[32px]"
                       src="../../../assets/picture/1.png"
@@ -388,12 +348,12 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                   </div>
                 </div>
 
-                <div className="w-[70px] h-[17px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                <div className="w-[70px] h-[17px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                   <p className="font-yekan h-[17px] w-[31px] text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
                     ۶ آبان
                   </p>
                 </div>
-                <div className="w-[70px] h-[16px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                   <svg
                     width="16"
                     height="17"
@@ -427,7 +387,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                     />
                   </svg>
                 </div>
-                <div className="w-[70px] h-[16px] pr-[10px] pl-[10px] flex flex-row gap-[10px] justify-center items-center">
+                <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
                   <svg
                     width="16"
                     height="17"

@@ -17,7 +17,7 @@ const CalendarViewButton = ({
       <p
         aria-label="calender"
         className={`h-[23px] w-[41px] text-right text-[16px] font-medium leading-[22.5px] text-[#1E1E1E] 
-                    ${view === Views.calender && 'text-[#208D8E]'}`}
+                        ${view === Views.calender && 'text-[#208D8E]'}`}
       >
         تقویم
       </p>

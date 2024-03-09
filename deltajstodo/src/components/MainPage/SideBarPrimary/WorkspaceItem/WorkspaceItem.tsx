@@ -32,7 +32,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
 
   return (
     <>
-      <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
+      <button className="group flex w-full cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF] mb-4">
         <div className="invisible w-[20px] group-hover:visible ">
           <div
             className="w-[30px] cursor-pointer"
@@ -77,26 +77,21 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
         </div>
       </button>
 
-      {isSelected ? (
-        projectItems.length > 0 ? (
-          projectItems?.map((project) => {
-            return (
-              <>
-                <div key={project.id}>
-                  <li>
-                    <ProjectItem
-                      workspaceItemID={workspaceItemID}
-                      project={project}
-                      projectItemTitle={project.title}
-                      projectItemID={project.id}
-                    />{' '}
-                  </li>
-                </div>
-              </>
-            )
-          })
-        ) : (
-          <>
+      <div className="flex flex-col gap-4">
+        {isSelected ? (
+          projectItems.length > 0 ? (
+            projectItems?.map((project) => {
+              return (
+                <ProjectItem
+                  key={project.id}
+                  workspaceItemID={workspaceItemID}
+                  project={project}
+                  projectItemTitle={project.title}
+                  projectItemID={project.id}
+                />
+              )
+            })
+          ) : (
             <button
               className=" text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] "
               onClick={() =>
@@ -105,11 +100,11 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
             >
               ساختن پروژه جدید
             </button>
-          </>
-        )
-      ) : (
-        <></>
-      )}
+          )
+        ) : (
+          <></>
+        )}
+      </div>
     </>
   )
 }

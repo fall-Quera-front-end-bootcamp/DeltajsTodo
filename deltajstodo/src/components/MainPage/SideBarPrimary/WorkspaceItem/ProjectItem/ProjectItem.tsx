@@ -25,51 +25,45 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
   const [isColumnMoreSelected, setColumnMoreSelect] = useState<boolean>(false)
 
   return (
-    <>
-      <div className=" justify-between flex w-[246px] cursor-pointer space-x-2 ">
-        <NavLink
-          key={projectItemID}
-          style={({ isActive }) => {
-            return {
-              backgroundColor: isActive ? '#E9F9FF' : '',
-              width: isActive ? '246px' : ''
-            }
-          }}
-          to={`/workspace/${projectItemID}`}
-          state={{ workspaceItemID, project }}
-        >
-          <div className="group justify-between flex w-[246px] cursor-pointer space-x-2 hover:bg-[#E9F9FF]">
-            <div className="invisible w-[20px] group-hover:visible group-hover:bg-[#E9F9FF]">
-              <button
-                className="w-[30px]"
-                onClick={() => setColumnMoreSelect((prev) => !prev)}
-              >
-                ...
-              </button>
-            </div>
-            <div className="relative">
-              <div
-                className="absolute top-[20px] right-[-100px]"
-                onMouseLeave={() => setColumnMoreSelect(false)}
-              >
-                {isColumnMoreSelected && (
-                  <TaskMore
-                    workspaceID={workspaceItemID}
-                    projectID={projectItemID}
-                  />
-                )}
-              </div>
-            </div>
-            <p className="text-right text-[16px]  font-medium text-[#1E1E1E]">
-              {projectItemTitle}
-            </p>
+    <NavLink
+      key={projectItemID}
+      style={({ isActive }) => {
+        return {
+          backgroundColor: isActive ? '#E9F9FF' : '',
+          width: isActive ? '246px' : ''
+        }
+      }}
+      to={`/workspace/${projectItemID}`}
+      state={{ workspaceItemID, project }}
+      className=" justify-between flex w-[246px] cursor-pointer"
+    >
+      <div className="group justify-between flex w-[246px] cursor-pointer space-x-2 hover:bg-[#E9F9FF]">
+        <div className="invisible w-[20px] group-hover:visible group-hover:bg-[#E9F9FF]">
+          <button
+            className="w-[30px]"
+            onClick={() => setColumnMoreSelect((prev) => !prev)}
+          >
+            ...
+          </button>
+        </div>
+        <div className="relative">
+          <div
+            className="absolute top-[20px] right-[-100px]"
+            onMouseLeave={() => setColumnMoreSelect(false)}
+          >
+            {isColumnMoreSelected && (
+              <TaskMore
+                workspaceID={workspaceItemID}
+                projectID={projectItemID}
+              />
+            )}
           </div>
-        </NavLink>
-        {/* <div>
-          <div className="size-[20px] rounded-[4px]"></div>
-        </div> */}
+        </div>
+        <p className="text-right text-[16px] p-1 font-medium text-[#1E1E1E]">
+          {projectItemTitle}
+        </p>
       </div>
-    </>
+    </NavLink>
   )
 }
 
