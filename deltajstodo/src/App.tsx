@@ -3,13 +3,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './dist/output.css'
 import { Route, Routes } from 'react-router-dom'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import ForgetPassword from './pages/ForgetPassword'
-import ResetPassword from './pages/ResetPassword'
+import Login from './pages/AuthPages/Login'
+import Register from './pages/AuthPages/Register'
+import ForgetPassword from './pages/AuthPages/ForgetPassword'
+import ResetPassword from './pages/AuthPages/ResetPassword'
 import NotFound from './pages/NotFound'
-import MainLayout from './pages/MainLayout'
-import Board from './pages/Board'
+import MainLayout from './pages/MainPages/MainLayout'
+import Board from './pages/MainPages/Board'
 import {
   type User,
   Permission,
@@ -19,9 +19,10 @@ import {
 } from './utilities/models'
 import { useReducer, useRef } from 'react'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
-import Workspace from './pages/Workspace'
-import Profile from './pages/Profile'
+import Workspace from './pages/MainPages/Workspace'
+import Profile from './pages/MainPages/Profile'
 import DarkModeContextProvider from './contexts/DarkModeContextProvider'
+import coverImg from './components/Common/Imgs/dekstopImgpng.png'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -68,7 +69,7 @@ function App(): JSX.Element {
                     projectTitle: 'پروژه اول',
                     status: Permission.manager,
                     archived: false,
-                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    sendforPeople: [{ gmailAccount: '', coverImg }],
                     describtion: '',
                     attachFiles: [''],
                     coverImg: '',

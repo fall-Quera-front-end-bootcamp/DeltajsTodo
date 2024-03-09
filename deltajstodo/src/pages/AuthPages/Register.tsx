@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable tailwindcss/no-custom-classname */
-import Layout from '../components/AuthPage/AuthComponents/layout/Layout'
-import AuthCard from '../components/AuthPage/AuthComponents/Card/AuthCard'
-import Input from '../components/Common/Input/Input'
+import Layout from '../../components/AuthPage/AuthComponents/layout/Layout'
+import AuthCard from '../../components/AuthPage/AuthComponents/Card/AuthCard'
+import Input from '../../components/Common/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { useState, type FunctionComponent } from 'react'
-import Checkbox from '../components/AuthPage/AuthComponents/Checkbox'
+import Checkbox from '../../components/AuthPage/AuthComponents/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
-import TermsConditions from '../components/Common/Modals/TermsConditions'
-import Button from '../components/Common/Buttons/Button'
+import TermsConditions from '../../components/Common/Modals/TermsConditions'
+import Button from '../../components/Common/Buttons/Button'
 import { AnimatePresence, motion } from 'framer-motion'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -27,7 +27,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
     // setSuccess(true)
   })
 
-  function showBoxFunction (): void {
+  function showBoxFunction(): void {
     setShowBox((prev) => !prev)
   }
 

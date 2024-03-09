@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent } from 'react'
-import DarkModeContextProvider from '../contexts/DarkModeContextProvider'
-import { UserContext } from '../contexts/UserProvider'
+import DarkModeContextProvider from '../../contexts/DarkModeContextProvider'
+import { UserContext } from '../../contexts/UserProvider'
 import LocalPageContextProvider, {
   localPageContext
-} from '../contexts/LocalPageContextProvider'
-import NewWorkspace from '../components/Common/Modals/NewWorkspace/NewWorkspace'
-import NewProject from '../components/Common/Modals/NewProject/NewProject'
-import ChangeWorkspaceTitle from '../components/Common/Modals/NewWorkspace/ChangeWorkspaceTitle'
-import ChangeWorkspaceColor from '../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
-import ChangeProjectTitle from '../components/Common/Modals/NewProject/ChangeProjectTitle'
+} from '../../contexts/LocalPageContextProvider'
+import NewWorkspace from '../../components/Common/Modals/NewWorkspace/NewWorkspace'
+import NewProject from '../../components/Common/Modals/NewProject/NewProject'
+import ChangeWorkspaceTitle from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceTitle'
+import ChangeWorkspaceColor from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
+import ChangeProjectTitle from '../../components/Common/Modals/NewProject/ChangeProjectTitle'
 import { Outlet } from 'react-router-dom'
-import ProjectItemWorkspace from '../components/WorkspaceComponents/ProjectItemWorkspace'
+import ProjectItemWorkspace from '../../components/WorkspaceComponents/ProjectItemWorkspace'
 interface WorkspaceProps {}
 
 const Workspace: FunctionComponent<WorkspaceProps> = () => {

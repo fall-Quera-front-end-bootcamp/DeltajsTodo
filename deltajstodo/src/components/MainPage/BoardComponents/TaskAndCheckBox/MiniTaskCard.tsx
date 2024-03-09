@@ -1,8 +1,8 @@
-// import dekstopImgpng from '..Imgs/dekstopImgpng.png'
-import Checkbox from '../Checkbox'
+import Checkbox from '../../../AuthPage/AuthComponents/Checkbox'
+
 function MiniTaskCard (): JSX.Element {
   return (
-    <section className="w-[249px] h-[298px] rounded-[16px] p-[16px] gap-[16px] bg-[#ffff] shadow-[0px_50px_100px_-20px_#32325D40,0px_30px_60px_-30px_#0000004D]">
+    <section className="h-[298px] w-[249px] gap-[16px] rounded-[16px] bg-[#ffff] p-[16px] shadow-[0px_50px_100px_-20px_#32325D40,0px_30px_60px_-30px_#0000004D]">
       <div className="flex flex-col justify-center ">
         {/* ---------------------heder------------------------------------ */}
         {/* <img
@@ -10,16 +10,16 @@ function MiniTaskCard (): JSX.Element {
           alt="dekstopImg"
           className="w-[217px] h-[134px] rounded-[4px]"
         /> */}
-        <div className="bg-red-primary w-[217px] h-[134px] rounded-[4px]"></div>
+        <div className="h-[134px] w-[217px] rounded-[4px] bg-red-primary"></div>
         {/* -----------------body-------------------------- */}
-        <div className="flex flex-col justify-end text-right space-y-2 mt-3">
+        <div className="mt-3 flex flex-col justify-end space-y-2 text-right">
           {/* -------------div 1--------------------------- */}
           <div className="flex justify-end space-y-3">
-            <div className="flex flex-col justify-end text-right gap-[9px]">
-              <p className="font-normal text-bodyxs text-right text-[#534D60]">
+            <div className="flex flex-col justify-end gap-[9px] text-right">
+              <p className="text-right text-bodyxs font-normal text-[#534D60]">
                 اسم لیست
               </p>
-              <div className="flex justify-center items-center space-x-2">
+              <div className="flex items-center justify-center space-x-2">
                 <svg
                   width="12"
                   height="13"
@@ -30,52 +30,52 @@ function MiniTaskCard (): JSX.Element {
                   <path
                     d="M1.99902 2.49864H10.0024"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M3.49951 4.49962H10.0022"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M3.49951 6.50035H10.0022"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M1.99902 8.50132H10.0024"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M6.00098 10.5021H10.0026"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
-                <p className="font-normal text-bodyxs text-right text-[#0E0E0E]">
+                <p className="text-right text-bodyxs font-normal text-[#0E0E0E]">
                   .این یک تیتر برای این تسک است
                 </p>
               </div>
             </div>
           </div>
-          {/* -----div 2 -------*/}
-          <div className="flex justify-end items-center space-x-1">
+          {/* -----div 2 ------- */}
+          <div className="flex items-center justify-end space-x-1">
             <p className="text-bodyxs font-normal text-gray-primary">۲ / ۱۲</p>
             <div className="mt-1">
               <Checkbox />
             </div>
-            <div className="font-normal text-bodyxs text-right text-[#343434]">
+            <div className="text-right text-bodyxs font-normal text-[#343434]">
               ۵ مهر - فردا
             </div>
             <div>
@@ -89,26 +89,26 @@ function MiniTaskCard (): JSX.Element {
                 <path
                   d="M3.33333 14.4999V3.11987"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M12.6668 9.84675V3.16675"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M3.3335 9.8333C3.3335 9.8333 3.91683 9.34863 5.66683 9.34863C7.41683 9.34863 8.5835 10.5 10.3335 10.5C12.0835 10.5 12.6668 9.84863 12.6668 9.84863"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M3.3335 3.12133C3.3335 3.12133 3.91683 2.5 5.66683 2.5C7.41683 2.5 8.5835 3.65133 10.3335 3.65133C12.0835 3.65133 12.6668 3.16667 12.6668 3.16667"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>

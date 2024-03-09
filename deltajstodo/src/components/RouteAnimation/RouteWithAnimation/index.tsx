@@ -1,10 +1,10 @@
 import { type FunctionComponent } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import Login from '../../../pages/Login'
+import Login from '../../../pages/AuthPages/Login'
 import NotFound from '../../../pages/NotFound'
-import ResetPassword from '../../../pages/ResetPassword'
-import Register from '../../../pages/Register'
-import ForgetPassword from '../../../pages/ForgetPassword'
+import ResetPassword from '../../../pages/AuthPages/ResetPassword'
+import Register from '../../../pages/AuthPages/Register'
+import ForgetPassword from '../../../pages/AuthPages/ForgetPassword'
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface RoutesWithAnimationProps {}

@@ -1,4 +1,4 @@
-const CalendarIconSvg = ({
+const CalendarStartIconSvg = ({
   size = '32',
   color = '#323232',
   className
@@ -26,14 +26,14 @@ const CalendarIconSvg = ({
         strokeLinejoin="round"
       />
       <path
-        d="M10.6657 2.66699V8.00032"
+        d="M10.6667 2.66699V8.00032"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M3.99902 12.0007H27.999"
+        d="M4 12.0007H28"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
@@ -42,14 +42,14 @@ const CalendarIconSvg = ({
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M25.3324 5.33398H6.66569C5.19236 5.33398 3.99902 6.52732 3.99902 8.00065V25.334C3.99902 26.8073 5.19236 28.0007 6.66569 28.0007H25.3324C26.8057 28.0007 27.999 26.8073 27.999 25.334V8.00065C27.999 6.52732 26.8057 5.33398 25.3324 5.33398Z"
+        d="M25.3333 5.33398H6.66667C5.19333 5.33398 4 6.52732 4 8.00065V25.334C4 26.8073 5.19333 28.0007 6.66667 28.0007H25.3333C26.8067 28.0007 28 26.8073 28 25.334V8.00065C28 6.52732 26.8067 5.33398 25.3333 5.33398Z"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M8.66534 22.8333C8.48134 22.8333 8.332 22.9827 8.33334 23.1667C8.33334 23.3507 8.48267 23.5 8.66667 23.5C8.85067 23.5 9 23.3507 9 23.1667C9 22.9827 8.85067 22.8333 8.66534 22.8333"
+        d="M23.6653 15.8333C23.4813 15.8333 23.332 15.9827 23.3333 16.1667C23.3333 16.3507 23.4827 16.5 23.6667 16.5C23.8507 16.5 24 16.3507 24 16.1667C24 15.9827 23.8507 15.8333 23.6653 15.8333"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
@@ -59,4 +59,4 @@ const CalendarIconSvg = ({
   )
 }
 
-export default CalendarIconSvg
+export default CalendarStartIconSvg

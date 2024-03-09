@@ -2,6 +2,7 @@
 import { type FunctionComponent } from 'react'
 import { type Project } from '../../../../../utilities/models'
 import LargTaskCard from '../../TaskAndCheckBox/LargTaskCard'
+import Column from './Column'
 
 interface ColumnViewProps {
   project: Project
@@ -12,19 +13,19 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
     <div dir="rtl" className="flex flex-row">
       {project.boards.map((board) => {
         return (
-          <div key={board.id} className="">
-            <h1 className="">{board.title}</h1>
-            <div className="flex flex-col">
-              {board.tasks.map((task) => {
-                return (
-                  <div key={task.id} className="">
-                    {task.title}
-                    <LargTaskCard />
-                  </div>
-                )
-              })}
+          <Column key={board.id} title={board.title}>
+            <div className="">
+              <div className="flex flex-col">
+                {board.tasks.map((task) => {
+                  return (
+                    <div key={task.id} className="">
+                      <LargTaskCard title={task.title} />
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          </Column>
         )
       })}
     </div>

@@ -2,7 +2,7 @@
 import { toFarsiNumber } from '../../../../utilities/toFarsiNumber'
 import Button from '../../../Common/Buttons/Button'
 import ArrowDownIconSvg from '../../../Common/Icons/ArrowDownIconSvg'
-import CalendarIconSvg from '../../../Common/Icons/CalendarIconSvg'
+import CalelndarEndIconSvg from '../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
 import {
   getDaysInMonth,
   getFirstDayInMonth,
@@ -204,7 +204,7 @@ const Calendar = ({
                 : `${moment(period.start === null ? date : period.start).format('MMM')} ${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان شروع</p>
-            <CalendarIconSvg color="#BDBDBD" />
+            <CalelndarEndIconSvg color="#BDBDBD" />
           </div>
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2 border-r-[1px] border-[#E8EAED] pr-2">
             <div className="text-[26px] font-[500] text-brand-primary">
@@ -213,7 +213,7 @@ const Calendar = ({
                 : `${moment(period.end === null ? date : period.end).format('MMM')} ${toFarsiNumber(`${value.endDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان پایان</p>
-            <CalendarIconSvg color="#BDBDBD" />
+            <CalelndarEndIconSvg color="#BDBDBD" />
           </div>
         </div>
         {/* border center  */}

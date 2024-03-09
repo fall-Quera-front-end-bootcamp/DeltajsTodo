@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, type FunctionComponent } from 'react'
-import ProfileSideBar from '../components/MainPage/ProfileComponents/ProfileSideBar'
-import ProfileInfo from '../components/MainPage/ProfileComponents/ProfileInfo'
-import AccountInfo from '../components/MainPage/ProfileComponents/AccountInfo'
-import Setting from '../components/MainPage/ProfileComponents/Setting'
+import ProfileSideBar from '../../components/MainPage/ProfileComponents/ProfileSideBar'
+import ProfileInfo from '../../components/MainPage/ProfileComponents/ProfileInfo'
+import AccountInfo from '../../components/MainPage/ProfileComponents/AccountInfo'
+import Setting from '../../components/MainPage/ProfileComponents/Setting'
 interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {

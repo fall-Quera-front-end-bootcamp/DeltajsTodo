@@ -1,5 +1,5 @@
 import Checkbox from '../../../AuthPage/AuthComponents/Checkbox'
-function LargTaskCard(): JSX.Element {
+function LargTaskCard ({ title }: { title: string }): JSX.Element {
   return (
     <section className="h-[350px] w-[249px] gap-[16px] rounded-[16px] bg-[#ffff] p-[16px] shadow-[0px_50px_100px_-20px_#32325D40,0px_30px_60px_-30px_#0000004D]">
       <div className="flex flex-col items-center justify-center">
@@ -64,7 +64,7 @@ function LargTaskCard(): JSX.Element {
                   />
                 </svg>
                 <p className="text-right text-bodyxs font-normal text-[#0E0E0E]">
-                  .این یک تیتر برای این تسک است
+                  {title}
                 </p>
               </div>
             </div>
