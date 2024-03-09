@@ -15,8 +15,8 @@ export interface sidebarItem {
 }
 export enum Views {
   column = 0,
-  row,
-  calender
+  row = 0,
+  calender = 0
 }
 interface Profile {
   userInformatin: {

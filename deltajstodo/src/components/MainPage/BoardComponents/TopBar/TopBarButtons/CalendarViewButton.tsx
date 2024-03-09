@@ -1,4 +1,4 @@
-import { Views } from '../../../../../utilities/models'
+import { Views } from '../../../../../pages/MainPages/Board'
 import CalendarIconSvg from '../../../../Common/Icons/CalendarIcons/CalendarIconSvg'
 
 const CalendarViewButton = ({
@@ -12,7 +12,7 @@ const CalendarViewButton = ({
     <button
       onClick={handleView}
       name="calender"
-      className="my-[5px] flex flex-row justify-between gap-[5px]"
+      className="relative my-[5px] flex flex-row justify-between gap-[5px]"
     >
       <p
         aria-label="calender"
@@ -25,6 +25,13 @@ const CalendarViewButton = ({
         className="size-6"
         color={view === Views.calender ? '#208D8E' : '#323232'}
       />
+      <div
+        className={
+          view === Views.calender
+            ? 'absolute bottom-[-22px] w-full rounded-full border-b-[3px] border-[#208D8E]'
+            : 'hidden'
+        }
+      ></div>
     </button>
   )
 }

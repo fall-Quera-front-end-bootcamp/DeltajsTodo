@@ -1,4 +1,4 @@
-import { Views } from '../../../../../utilities/models'
+import { Views } from '../../../../../pages/MainPages/Board'
 import ColumnArtboardIconSvg from '../../../../Common/Icons/ColumnArtboardIconSvg'
 
 const ColumnViewButton = ({
@@ -8,12 +8,15 @@ const ColumnViewButton = ({
   handleView: (e: any) => void
   view: Views
 }): JSX.Element => {
+  console.log(view)
+  console.log(Views.column)
+
   return (
     <>
       <button
         onClick={handleView}
         name="column"
-        className="my-[5px] flex flex-row justify-between gap-[5px] "
+        className="relative my-[5px] flex flex-row justify-between gap-[5px]"
       >
         <p
           aria-label="column"
@@ -25,8 +28,14 @@ const ColumnViewButton = ({
         <ColumnArtboardIconSvg
           color={view === Views.column ? '#208D8E' : '#323232'}
         />
+        <div
+          className={
+            view === Views.column
+              ? 'absolute bottom-[-22px] w-full rounded-full border-b-[3px] border-[#208D8E]'
+              : 'hidden'
+          }
+        ></div>
       </button>
-      <div className="border-b-[2px] border-[#208D8E]"></div>
     </>
   )
 }

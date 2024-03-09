@@ -2,13 +2,13 @@
 /* eslint-disable tailwindcss/no-contradicting-classname */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { type FunctionComponent } from 'react'
-import { type Views } from '../../../../utilities/models'
 import ShareTaskButton from '../Task/ShareTask/ShareTaskButton'
 import ListViewButton from './TopBarButtons/ListViewButton'
 import ColumnViewButton from './TopBarButtons/ColumnViewButton'
 import CalendarViewButton from './TopBarButtons/CalendarViewButton'
 import VerticalLine from './LineComponents/VerticalLine'
 import TopBarTitle from './TopBarTitle/TopBarTitle'
+import { type Views } from '../../../../pages/MainPages/Board'
 
 interface TopBarProps {
   projectInfoTitle: string

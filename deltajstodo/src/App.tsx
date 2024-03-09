@@ -149,14 +149,7 @@ function App(): JSX.Element {
             id: '12',
             title: 'پروژه دوم',
             status: Permission.manager,
-            boards: [
-              {
-                id: '1124',
-                title: '',
-                color: '',
-                tasks: []
-              }
-            ]
+            boards: []
           }
         ]
       },
@@ -170,27 +163,13 @@ function App(): JSX.Element {
             id: '21',
             title: '  پروژه اول',
             status: Permission.manager,
-            boards: [
-              {
-                id: '1121',
-                title: '',
-                color: '',
-                tasks: []
-              }
-            ]
+            boards: []
           },
           {
             id: '22',
             title: 'پروژه دوم',
             status: Permission.manager,
-            boards: [
-              {
-                id: '1122',
-                title: '',
-                color: '',
-                tasks: []
-              }
-            ]
+            boards: []
           }
         ]
       },
@@ -204,27 +183,13 @@ function App(): JSX.Element {
             id: '31',
             title: 'پروژه اول',
             status: Permission.manager,
-            boards: [
-              {
-                id: '1131',
-                title: '',
-                color: '',
-                tasks: []
-              }
-            ]
+            boards: []
           },
           {
             id: '32',
             title: 'پروژه دوم',
             status: Permission.manager,
-            boards: [
-              {
-                id: '1132',
-                title: '',
-                color: '',
-                tasks: []
-              }
-            ]
+            boards: []
           }
         ]
       },
