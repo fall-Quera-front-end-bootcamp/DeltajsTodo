@@ -22,7 +22,6 @@ import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import Workspace from './pages/MainPages/Workspace'
 import Profile from './pages/MainPages/Profile'
 import DarkModeContextProvider from './contexts/DarkModeContextProvider'
-import coverImg from './components/Common/Imgs/dekstopImgpng.png'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -65,11 +64,16 @@ function App(): JSX.Element {
                 tasks: [
                   {
                     id: '111',
-                    title: 'این یک تیتر برای این تسک است.',
+                    title: 'این  با عکس هست یک تیتر برای این تسک است.',
                     projectTitle: 'پروژه اول',
                     status: Permission.manager,
                     archived: false,
-                    sendforPeople: [{ gmailAccount: '', coverImg }],
+                    sendforPeople: [
+                      {
+                        gmailAccount: '',
+                        coverImg: './components/Common/Imgs/dekstopImgpng.png'
+                      }
+                    ],
                     describtion: '',
                     attachFiles: [''],
                     coverImg: '',

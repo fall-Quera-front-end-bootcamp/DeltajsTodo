@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { type FunctionComponent } from 'react'
 import { type Views } from '../../../../utilities/models'
-import ShareTaskButton from '../ShareTask/ShareTaskButton'
+import ShareTaskButton from '../Task/ShareTask/ShareTaskButton'
 import ListViewButton from './TopBarButtons/ListViewButton'
 import ColumnViewButton from './TopBarButtons/ColumnViewButton'
 import CalendarViewButton from './TopBarButtons/CalendarViewButton'
@@ -38,7 +38,7 @@ const TopBar: FunctionComponent<TopBarProps> = ({
             <VerticalLine />
           </div>
         </div>
-        <div className="border-b-[0.5px] w-full pt-4 border-[#AAAAAA]"></div>
+        <div className="w-full border-b-[0.5px] border-[#AAAAAA] pt-4"></div>
       </div>
       {/* <div className="flex flex-row-reverse gap-[40px]">
         <div className=" flex h-[24px] w-[200px] flex-row justify-items-start gap-[4px]">

@@ -1,6 +1,6 @@
 import { type Dispatch, type SetStateAction } from 'react'
-import ArrowDownIconSvg from '../../../Common/Icons/ArrowDownIconSvg'
-import Close from '../../../Common/Icons/Close'
+import ArrowDownIconSvg from '../../../../Common/Icons/ArrowDownIconSvg'
+import Close from '../../../../Common/Icons/Close'
 
 const ShareTask = ({
   className,

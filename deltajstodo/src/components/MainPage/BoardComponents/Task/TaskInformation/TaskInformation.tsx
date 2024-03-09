@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import '../../../../dist/output.css'
-import DisabledIconSvg from '../../../Common/Icons/DisabledIconSvg'
+import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
 import BottomLeftSide from './BottomLeftSide'
 import TaskInfoComment from './TaskInfoComment'
 import TopLeftSide from './TopLeftSide'
 import TopRightSide from './TopRightSide'
 import BottomRightSide from './BottomRightSide'
 
-function TaskInformation (): JSX.Element {
+function TaskInformation(): JSX.Element {
   const [commentOpen, setCommentOpen] = useState(false)
   const [commentClassNames, setCommentClassNames] = useState('h-[67px]')
   const [bottomLeftHeight, setBottomLeftHeight] = useState('h-[439px]')

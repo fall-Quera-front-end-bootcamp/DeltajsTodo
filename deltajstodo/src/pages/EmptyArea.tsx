@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { type FunctionComponent } from 'react'
-import NewTask from '../components/MainPage/BoardComponents/Task/NewTask'
+import NewTask from '../components/MainPage/BoardComponents/Task/NewTask/NewTask'
 
 interface EmptyAreaProps {}
 

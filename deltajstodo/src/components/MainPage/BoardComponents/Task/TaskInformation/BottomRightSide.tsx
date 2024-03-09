@@ -1,6 +1,6 @@
 import '../../../../dist/output.css'
-import AddSecondaryIconSvg from '../../../Common/Icons/AddSecondaryIconSvg'
-import BookmarkTagIconSvg from '../../../Common/Icons/BookmarkTagIconSvg'
+import AddSecondaryIconSvg from '../../../../Common/Icons/AddSecondaryIconSvg'
+import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
 function BottomRightSide(): JSX.Element {
   return (
     <div dir="rtl" className="flex flex-col gap-6 px-[20px]">

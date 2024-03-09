@@ -1,15 +1,15 @@
-import DropdownMenu from '../DropDownMenu/DropdownMenu'
-import DisabledIconSvg from '../../../Common/Icons/DisabledIconSvg'
+import DropdownMenu from '../../DropDownMenu/DropdownMenu'
+import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
 import { AnimatePresence, motion } from 'framer-motion'
-import ProfileAddUserIconSvg from '../../../Common/Icons/ProfileAddUserIconSvg'
+import ProfileAddUserIconSvg from '../../../../Common/Icons/ProfileAddUserIconSvg'
 import { useCallback, useContext, useMemo, useRef, useState } from 'react'
-import Button from '../../Buttons/Button'
-import PriorityFlag from '../../../Common/Icons/PriorityFlag'
-import CalelndarEndIconSvg from '../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
-import BookmarkTagIconSvg from '../../../Common/Icons/BookmarkTagIconSvg'
-import DateRangePicker from '../Calendar/DateRangePicker'
-import LinkCopyIconSvg from '../../../Common/Icons/LinkCopyIconSvg'
-import DatepickerContext from '../../../../contexts/DatepickerContext'
+import Button from '../../../../Common/Buttons/Button'
+import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
+import CalelndarEndIconSvg from '../../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
+import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
+import DateRangePicker from '../../Calendar/DateRangePicker'
+import LinkCopyIconSvg from '../../../../Common/Icons/LinkCopyIconSvg'
+import DatepickerContext from '../../../../../contexts/DatepickerContext'
 import axios from 'axios'
 
 const NewTask = (): JSX.Element => {
@@ -31,18 +31,18 @@ const NewTask = (): JSX.Element => {
 
   function handleSubmit(e): void {
     e.preventDefault()
-    if (inputRefFirst?.current.value === null) setShowInputValue(false)
-    else if (inputRefFirst?.current.value.replaceAll(' ', '') !== '') {
+    if (inputRefFirst?.current?.value === null) setShowInputValue(false)
+    else if (inputRefFirst.current?.value.replaceAll(' ', '') !== '') {
       setShowInputValue(true)
-      setInputValue(inputRefFirst?.current.value)
+      setInputValue(inputRefFirst.current?.value)
     }
   }
 
   const onChooseFileFirst = (): void => {
-    inputRefFirstUpload.current.click()
+    inputRefFirstUpload.current?.click()
   }
   const onChooseFileSecond = (): void => {
-    inputRefSecondUpload.current.click()
+    inputRefSecondUpload.current?.click()
   }
 
   const handleOnChangeFirst = (event): void => {

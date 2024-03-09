@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { type FunctionComponent } from 'react'
 import { type Project } from '../../../../../utilities/models'
-import LargTaskCard from '../../TaskAndCheckBox/LargTaskCard'
-import Column from './Column'
+import TaskCard from '../../Task/TaskCard/TaskCard'
+import Column from './ColumnComponents/Column'
+import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
+import NewTask from '../../Task/NewTask/NewTask'
 
 interface ColumnViewProps {
   project: Project
@@ -10,24 +12,29 @@ interface ColumnViewProps {
 
 const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
   return (
-    <div dir="rtl" className="flex flex-row">
+    <div dir="rtl" className="flex flex-row gap-4">
       {project.boards.map((board) => {
         return (
-          <Column key={board.id} title={board.title}>
-            <div className="">
-              <div className="flex flex-col">
+          <Column key={board.id} board={board}>
+            <>
+              <div className="flex flex-col gap-3">
                 {board.tasks.map((task) => {
                   return (
                     <div key={task.id} className="">
-                      <LargTaskCard title={task.title} />
+                      <TaskCard task={task} />
                     </div>
                   )
                 })}
               </div>
-            </div>
+            </>
           </Column>
         )
       })}
+      <BuildTaskButtonPrimary
+        className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
+        IconColor="#ffffff"
+      />
+      <NewTask />
     </div>
   )
 }

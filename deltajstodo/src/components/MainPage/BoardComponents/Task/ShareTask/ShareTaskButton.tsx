@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ShareIconSvg from '../../../Common/Icons/ShareIconSvg'
+import ShareIconSvg from '../../../../Common/Icons/ShareIconSvg'
 import ShareTask from './ShareTask'
 
 const ShareTaskButton = ({

@@ -1,9 +1,15 @@
-import { type SetStateAction, useCallback, useMemo, useState, type Dispatch } from 'react'
+import {
+  type SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+  type Dispatch
+} from 'react'
 import Calendar from './Calendar'
 import moment from 'jalali-moment'
-import { nextMonth, previousMonth } from '../../helpers'
-import DatepickerContext from '../../contexts/DatepickerContext'
-import { type Period } from '../../types'
+import { nextMonth, previousMonth } from '../../../../helpers'
+import DatepickerContext from '../../../../contexts/DatepickerContext'
+import { type Period } from '../../../../types'
 
 const DateRangePicker = ({
   setShowCalendar
@@ -45,7 +51,7 @@ const DateRangePicker = ({
     endDate: null
   })
 
-  const onChange = (value: { startDate: null, endDate: null }): void => {
+  const onChange = (value: { startDate: null; endDate: null }): void => {
     setValue(value)
   }
 
