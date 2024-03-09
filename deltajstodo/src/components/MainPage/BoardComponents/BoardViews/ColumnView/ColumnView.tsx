@@ -4,7 +4,7 @@ import { type Project } from '../../../../../utilities/models'
 import TaskCard from '../../Task/TaskCard/TaskCard'
 import Column from './ColumnComponents/Column'
 import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
-import NewTask from '../../Task/NewTask/NewTask'
+import NewColumn from './ColumnComponents/NewColumn'
 
 interface ColumnViewProps {
   project: Project
@@ -26,13 +26,20 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
                   )
                 })}
               </div>
+              <BuildTaskButtonPrimary
+                className="hidden w-full flex-row-reverse items-center justify-center gap-1 rounded-lg border-2 border-brand-primary px-3 py-2 text-brand-primary group-hover:flex"
+                IconColor="#208D8E"
+                title="ساختن تسک جدید"
+              />
             </>
           </Column>
         )
       })}
+      <NewColumn />
       <BuildTaskButtonPrimary
         className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
         IconColor="#ffffff"
+        title="تسک جدید"
       />
     </div>
   )

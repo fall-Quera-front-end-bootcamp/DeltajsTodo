@@ -1,8 +1,5 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable tailwindcss/no-custom-classname */
-/* eslint-disable tailwindcss/classnames-order */
 import { type FunctionComponent } from 'react'
-import AddIconSvg from '../../Icons/AddIconSvg'
+import AddIconSvg from '../../../../../Common/Icons/AddIconSvg'
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface NewColumnProps {}
@@ -10,29 +7,13 @@ interface NewColumnProps {}
 const NewColumn: FunctionComponent<NewColumnProps> = () => {
   return (
     <>
-      <div
-        className="w-[250px] h-[40px]
-  rounded-2xl border-[2px_12px_8px_12px] flex flex-row justify-between p-[8px_12px_8px_12px]
-  items-center"
-      >
-        <div className="w-[125px] h-[23px] flex flex-row gap-[4px]">
-          <p
-            className="w-[125px] h-[23px] 
-    font-yekan text-right
-                 text-[16px] font-medium
-                 leading-[22.55px]
-                  text-[#1E1E1E]                ] "
-          >
-            + ساختن برد جدید
-          </p>
-        </div>
-        <div className="w-[48px] h-[24px] flex flex-row gap-[4px]">
-          <div>
-            <AddIconSvg />
-          </div>
-          <div></div>
-        </div>
-      </div>
+      <button className="relative flex h-[40px] w-[250px] flex-row items-center justify-between rounded-[16px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]">
+        <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+          ساختن برد جدید
+        </p>
+
+        <AddIconSvg />
+      </button>
     </>
   )
 }

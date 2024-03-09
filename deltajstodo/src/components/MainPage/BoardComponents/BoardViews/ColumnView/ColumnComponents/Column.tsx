@@ -10,7 +10,7 @@ interface ColumnProps {
 
 const Column: FunctionComponent<ColumnProps> = ({ board, children }) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="group flex flex-col gap-4 min-h-[400px]">
       <ColumnHeader board={board} />
       {children}
     </div>

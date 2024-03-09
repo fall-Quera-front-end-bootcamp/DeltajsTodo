@@ -2,14 +2,16 @@ import AddSecondaryIconSvg from '../../../../Common/Icons/AddSecondaryIconSvg'
 
 const BuildTaskButtonPrimary = ({
   className,
-  IconColor
+  IconColor,
+  title
 }: {
   className: string
   IconColor: string
+  title: string
 }): JSX.Element => {
   return (
     <button className={className}>
-      <p className="">ساختن تسک</p>
+      <p className="">{title}</p>
       <AddSecondaryIconSvg color={IconColor} />
     </button>
   )

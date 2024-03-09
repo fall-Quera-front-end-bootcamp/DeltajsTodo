@@ -25,7 +25,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
         <div className={`h-screen w-full ${value !== 0 && 'blur-md'}`}>
           <Outlet />
         </div>
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+        <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
           {value === 1 && <NewWorkspace />}
           {value === 2 && <NewProject WID={WorkspaceID} />}
           {/* {step === 3 && <NewTask />}??? */}
