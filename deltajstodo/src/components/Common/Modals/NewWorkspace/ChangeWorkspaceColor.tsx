@@ -142,7 +142,7 @@ leading-[32px]  text-[#1E1E1E]
               <div className="w-[97px] h-[20px]">
                 <p
                   className="font-yekan w-[97px] h-[20px]
-text-right text-[14px] font-[400px] 
+text-right text-[14px]
 leading-[19.73px]  text-[#1E1E1E] "
                 >
                   رنگ ورک‌اسپیس

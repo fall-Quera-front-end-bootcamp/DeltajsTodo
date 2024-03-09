@@ -1,18 +1,19 @@
 import { type MutableRefObject, useEffect, useRef } from 'react'
 import '../../../dist/output.css'
 import { motion } from 'framer-motion'
+import Close from '../Icons/Close'
 
 interface TermProps {
   onClickFunction: any
   className?: string
 }
 
-function useOutsideAlerter(ref: MutableRefObject<null>): void {
+function useOutsideAlerter (ref: MutableRefObject<null>): void {
   useEffect(() => {
     /**
      * Alert if clicked on outside of element
      */
-    function handleClickOutside(event: unknown): void {
+    function handleClickOutside (event: unknown): void {
       if (Boolean(ref.current) && !ref.current.contains(event.target)) {
         alert('You clicked outside of me!')
       }
@@ -44,30 +45,10 @@ const TermsConditions = ({
     >
       <div className="relative m-auto flex w-[800px] flex-col items-center justify-center gap-[32px] rounded-[20px] bg-white p-6 px-[24px] pb-[32px] pt-[24px]">
         <div className=" flex w-full flex-row-reverse items-center justify-center">
-          <svg
-            onClick={onClickFunction}
-            className="absolute left-[16px] top-[16px] cursor-pointer"
-            width="32"
-            height="33"
-            viewBox="0 0 32 33"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10.6666 11.1666L21.3333 21.8333"
-              stroke="#323232"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M21.3333 11.1666L10.6666 21.8333"
-              stroke="#323232"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Close
+            onClickFunction={onClickFunction}
+            className="absolute left-[16px] top-[16px] size-10 cursor-pointer"
+          />
           <h1 className="text-right text-headingl font-[800] leading-[45px] text-[#1E1E1E]">
             قوانین و مقررات
           </h1>

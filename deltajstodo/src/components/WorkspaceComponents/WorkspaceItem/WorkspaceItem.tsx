@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, type FunctionComponent, useContext } from 'react'
 import { type Project } from '../../../utilities/models'
-import ProjectItem from '../../SideBarPrimary/WorkspaceItem/ProjectItem/ProjectItem'
+import ProjectItem from '../../MainPage/SideBarPrimary/WorkspaceItem/ProjectItem/ProjectItem'
 import { NavLink } from 'react-router-dom'
 import ProjectMore from '../../MainPage/BoardComponents/Column-more/ProjectMore'
 

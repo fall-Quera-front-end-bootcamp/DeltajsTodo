@@ -16,6 +16,8 @@ import CalendarIconSvg from '../components/Common/Icons/CalendarIconSvg'
 import ColumnView from '../components/MainPage/BoardComponents/BoardViews/ColumnView/ColumnView'
 import RowView from '../components/MainPage/BoardComponents/BoardViews/RowView/RowView'
 import CalenderView from '../components/MainPage/BoardComponents/BoardViews/CalenderView/CalenderView'
+import ShareButton from '../components/Common/Buttons/ShareButton'
+import ShareTaskButton from '../components/MainPage/BoardComponents/ShareTask/ShareTaskButton'
 interface BoardProps {}
 enum Views {
   column = 643,
@@ -41,7 +43,6 @@ const Board: FunctionComponent<BoardProps> = () => {
   const [view, setViw] = useState<Views>(Views.column)
 
   const handleView = (e: any): void => {
-    //console.log(e?.target?.ariaLabel)
     setViw(() => Views[e?.target?.ariaLabel as keyof typeof Views])
   }
 
@@ -52,14 +53,7 @@ const Board: FunctionComponent<BoardProps> = () => {
         <div className="absolute top-[41px] right-0  h-[64px] w-[1034px]  flex flex-col gap-4">
           <div className="">
             <div className="w-[1034px] h-[64px] flex flex-row items-center justify-between pt-4 pb-4">
-              <div className="w-[118px] h-[24px] flex flex-row gap-[5px]">
-                <button onClick={() => {}}>
-                  <p className=" w-[89px] h-[23px] text-right text-[16px]   font-medium text-[#1E1E1E]">
-                    اشتراک گذاری
-                  </p>
-                </button>
-                <ShareIconSvg color="black" />
-              </div>
+              <ShareTaskButton ShareTaskClass="absolute left-0 top-0 z-50" />
 
               <div className="flex h-[32px] w-[511px] flex-row-reverse gap-4">
                 <div className=" flex h-[32px] w-[77px] flex-row justify-between  ">
@@ -131,33 +125,6 @@ const Board: FunctionComponent<BoardProps> = () => {
               ></div>
             </div>
           </div>
-
-          {/*filterbar */}
-          {/* <div className="h-[28px] w-[1034px] bg-indigo-primary flex flex-row-reverse gap-[40px]">
-            <div className=" flex h-[24px] w-[200px] flex-row justify-items-start gap-[4px]">
-              <input
-                className=" w-[172px]"
-                type="text"
-                placeholder="جستجو بین تسک‌ها"
-              />
-              <SearchIconSvg />
-            </div>
-            <div className=" h-[22px] border-[1px] border-[#999999] self-center"></div>
-
-            <div className="w-[754px] h-[28px] flex flex-row justify-between">
-              <div className="w-[238px] h-[25px] flex flex-row gap-4">
-                <div className="w-[67px] h-[24px] flex flex-row gap-[6px]">
-                  <p className=" w-[37px] h-[17px] text-right text-[12px]   font-normal leading-[16.91px] text-[#1E1E1E]">
-                    فیلترها
-                  </p>
-                  <FilterSettingIconSvg />
-                </div>
-                <div className="w-[155px] h-[25px] border-[4px]"></div>
-              </div>
-
-              <div></div>
-            </div>
-          </div> */}
         </div>
 
         <div className="absolute top-[220px] w-[1034px] h-[300px]  right-0 ">

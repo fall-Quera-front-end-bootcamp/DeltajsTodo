@@ -11,7 +11,7 @@ import ChangeWorkspaceTitle from '../components/Common/Modals/NewWorkspace/Chang
 import ChangeWorkspaceColor from '../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../components/Common/Modals/NewProject/ChangeProjectTitle'
 import { Outlet } from 'react-router-dom'
-import ProjectItemWorkspace from '../components/MainPage/WorkspaceComponents/ProjectItemWorkspace'
+import ProjectItemWorkspace from '../components/WorkspaceComponents/ProjectItemWorkspace'
 interface WorkspaceProps {}
 
 const Workspace: FunctionComponent<WorkspaceProps> = () => {
