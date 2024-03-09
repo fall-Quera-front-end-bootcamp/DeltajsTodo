@@ -4,9 +4,9 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent } from 'react'
-import LeftArrow from '../../Icons/LeftArrow' 
+import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider' 
+import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
 import { CreationWorkspaceStepDispatchContext } from './NewWorkspace'
 import { type Workspace } from '../../../../utilities/models'
 
@@ -22,11 +22,11 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
   )
   return (
     <>
-      <div className="w-[501px] h-[365px]">
+      <div className="h-[365px] w-[501px]">
         <div
           className="flex 
         h-[365px] w-[501px]
-        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px]
+        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0_3px_4px_0] shadow-[#00000033]
         "
         >
           <div
@@ -45,7 +45,7 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
                 </button>
               </div>
               <div>
-                <p className="font-yekan h-[32px] w-[129px] text-center text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
+                <p className="h-[32px] w-[129px] text-center font-yekan text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
                   مرور اطلاعات‌
                 </p>
               </div>
@@ -61,31 +61,31 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
             <div
               className="flex h-[165px]
             w-[453px] flex-col gap-[16px] rounded-lg border-[0.5px] border-[#AAAAAA] 
-            pb-[16px]  pl-[12px]  pr-[12px]  pt-[16px]
+            px-[12px]  py-[16px]
             "
             >
               {/*title */}
               <div className="flex h-[34px] w-[429px] flex-row justify-between">
                 <div className="h-[20px] w-[93px]">
-                  <p className="font-yekan h-[20px] w-[93px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] w-[93px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     نام ورک‌اسپیس‌
                   </p>
                 </div>
                 <div className="h-[20px] min-w-[64px]">
-                  <p className="font-yekan h-[20px] min-w-[64px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] min-w-[64px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     {form.title}‌
                   </p>
                 </div>
               </div>
 
               {/*color */}
-              <div className="w-[429px] h-[34px] flex flex-row justify-between">
+              <div className="flex h-[34px] w-[429px] flex-row justify-between">
                 <div className="h-[20px] w-[98px]">
-                  <p className="font-yekan h-[20px] w-[98px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] w-[98px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     رنگ ورک‌اسپیس‌
                   </p>
                 </div>
-                <div className="h-[15px] w-[15px]">
+                <div className="size-[15px]">
                   <svg
                     width="15"
                     height="16"
@@ -105,16 +105,16 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
               </div>
 
               {/*teamworkers */}
-              <div className="w-[429px] h-[33px] flex flex-row justify-between">
+              <div className="flex h-[33px] w-[429px] flex-row justify-between">
                 <div className="h-[20px] w-[27px]">
-                  <p className="font-yekan h-[20px] w-[27px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] w-[27px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     اعضا‌
                   </p>
                 </div>
                 <div
-                  className="w-[36px] h-[33px] 
+                  className="h-[33px] w-[36px] 
                   rounded-[100px]
-               pt-[9px]  pl-[8px]  pb-[7px]  pr-[8px]
+               px-[8px]  pb-[7px]  pt-[9px]
               "
                 >
                   <img
@@ -136,9 +136,9 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
                   onSubmitWSCreation()
                   localPageDispatch({ type: 'closeModal' })
                 }}
-                className="flex h-[40px] w-[415px] flex-row items-center justify-center rounded-md bg-[#208D8E] gap-[10px]"
+                className="flex h-[40px] w-[415px] flex-row items-center justify-center gap-[10px] rounded-md bg-[#208D8E]"
               >
-                <p className="font-yekan h-[20px] w-[117px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
+                <p className="h-[20px] w-[117px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
                   ساختن ورک‌اسپیس
                 </p>
               </button>

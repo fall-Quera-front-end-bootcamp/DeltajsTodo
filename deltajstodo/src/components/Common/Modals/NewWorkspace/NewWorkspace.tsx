@@ -92,7 +92,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px]"
+            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px] "
           >
             {creationStep === 1 && (
               <Step1 value={form.title} onchangeHandler={onchangeHandler} />
@@ -161,117 +161,6 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
           </div>
         </CreationWorkspaceStepDispatchContext.Provider>
       </CreationWorkspaceStepContext.Provider>
-
-      {/* <div
-        dir="rtl"
-        className="bg-red-primary
-       relative left-[290px] top-[200px]
-        flex h-[316px] w-[500px] flex-col items-center gap-[40px]"
-      >
-        <div
-          className="flex 
-        h-[268px] w-[500px]
-        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px]
-        "
-        >
-          <div
-            className="flex 
-        h-[140px] w-[452px] flex-col items-center gap-[40px] bg-white"
-          >
-            <div
-              className="flex 
-        h-[32px] w-[452px] flex-row justify-between bg-white "
-            >
-              <div>
-                <button onClick={() => stepDispatch({ type: 'closeModal' })}>
-                  <Close />
-                </button>
-              </div>
-              <div>
-                <p className="font-yekan h-[32px] w-[261px] text-center text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
-                  ساختن ورک‌اسپیس جدید‌
-                </p>
-              </div>{' '}
-              <div>
-                <button>
-                  <LeftArrow />
-                </button>
-              </div>
-            </div>
-
-            <div
-              className="flex h-[68px]
-            w-[415px] flex-col gap-[8px]
-            "
-            >
-              <p
-                className="font-yekan h-[20px]
-               w-[92px] text-right text-[14px] font-[400px] 
-              leading-[19.73px]  text-[#1E1E1E] "
-              >
-                نام ورک‌اسپیس
-              </p>
-
-              <div
-                className="h-[40px] w-[415px]
-rounded-md border-[1px] border-[#AAAAAA]
-"
-              ></div>
-            </div>
-          </div>
-
-          <div
-            className="flex 
-        h-[40px] w-[415px] gap-[10px]    rounded-md bg-white "
-          >
-            <button className="flex h-[40px] w-[415px] flex-row items-center justify-center rounded-md bg-[#208D8E]">
-              <p className="font-yekan h-[20px] w-[30px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
-                ادامه
-              </p>
-            </button>
-          </div>
-        </div>
-
-        <div
-          className="bg-cyan-primary
-         flex h-[8px] w-[40px] flex-row-reverse gap-[8px]"
-        >
-          <div>
-            <svg
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="4" cy="4" r="4" fill="white" />
-            </svg>
-          </div>
-          <div>
-            <svg
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="4" cy="4" r="4" fill="#8A8989" />
-            </svg>
-          </div>
-
-          <div>
-            <svg
-              width="8"
-              height="8"
-              viewBox="0 0 8 8"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="4" cy="4" r="4" fill="#8A8989" />
-            </svg>
-          </div>
-        </div>
-      </div> */}
     </>
   )
 }

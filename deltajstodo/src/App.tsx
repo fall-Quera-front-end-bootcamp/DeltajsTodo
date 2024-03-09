@@ -22,6 +22,7 @@ import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import Workspace from './pages/MainPages/Workspace'
 import Profile from './pages/MainPages/Profile'
 import DarkModeContextProvider from './contexts/DarkModeContextProvider'
+import LocalPageContextProvider from './contexts/LocalPageContextProvider'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -242,30 +243,32 @@ function App(): JSX.Element {
 
   return (
     <>
-      <DarkModeContextProvider>
-        <UserContext.Provider value={user}>
-          <UserDispatchContext.Provider value={dispatch}>
-            <Routes>
-              <Route path="api/auth/login" element={<Login />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/workspace" element={<MainLayout />}>
-                <Route path="" element={<Workspace />} />
-                <Route path=":projectID" element={<Board />} />
-              </Route>
-              <Route path="api/auth/register" element={<Register />} />
-              <Route
-                path="api/auth/forgetPassword"
-                element={<ForgetPassword />}
-              />
-              <Route
-                path="api/auth/resetPassword"
-                element={<ResetPassword />}
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </UserDispatchContext.Provider>
-        </UserContext.Provider>
-      </DarkModeContextProvider>
+      <LocalPageContextProvider>
+        <DarkModeContextProvider>
+          <UserContext.Provider value={user}>
+            <UserDispatchContext.Provider value={dispatch}>
+              <Routes>
+                <Route path="api/auth/login" element={<Login />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/workspace" element={<MainLayout />}>
+                  <Route path="" element={<Workspace />} />
+                  <Route path=":projectID" element={<Board />} />
+                </Route>
+                <Route path="api/auth/register" element={<Register />} />
+                <Route
+                  path="api/auth/forgetPassword"
+                  element={<ForgetPassword />}
+                />
+                <Route
+                  path="api/auth/resetPassword"
+                  element={<ResetPassword />}
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </UserDispatchContext.Provider>
+          </UserContext.Provider>
+        </DarkModeContextProvider>
+      </LocalPageContextProvider>
     </>
   )
 }

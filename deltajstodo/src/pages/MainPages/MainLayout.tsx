@@ -11,9 +11,7 @@ import NewWorkspace from '../../components/Common/Modals/NewWorkspace/NewWorkspa
 import ChangeWorkspaceTitle from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../../components/Common/Modals/NewProject/ChangeProjectTitle'
-import LocalPageContextProvider, {
-  localPageContext
-} from '../../contexts/LocalPageContextProvider'
+import { localPageContext } from '../../contexts/LocalPageContextProvider'
 
 interface MainLayoutProps {}
 
@@ -22,27 +20,22 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
 
   return (
     <>
-      <LocalPageContextProvider>
-        <div className="flex h-screen w-full flex-row-reverse items-start gap-4">
-          <SidebarPrimary />
-          <div
-            className={`h-screen w-full ${value !== 0 && ' hidden bg-gray-primary blur-md'}`}
-          >
-            <Outlet />
-          </div>
-          <div className="z-100 absolute right-[390px] top-[200px] border-black">
-            {value === 1 && <NewWorkspace />}
-            {value === 2 && <NewProject WID={WorkspaceID} />}
-            {/* {step === 3 && <NewTask />}??? */}
-            {value === 4 && <ChangeWorkspaceTitle WID={WorkspaceID} />}
-            {value === 5 && <ChangeWorkspaceColor WID={WorkspaceID} />}
-            {/**any modal for removing project ? */}
-            {value === 6 && (
-              <ChangeProjectTitle WID={WorkspaceID} PID={projectID} />
-            )}
-          </div>
+      <div className="flex h-screen w-full flex-row-reverse items-start gap-4">
+        <SidebarPrimary />
+        <div className={`h-screen w-full ${value !== 0 && 'blur-md'}`}>
+          <Outlet />
         </div>
-      </LocalPageContextProvider>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+          {value === 1 && <NewWorkspace />}
+          {value === 2 && <NewProject WID={WorkspaceID} />}
+          {/* {step === 3 && <NewTask />}??? */}
+          {value === 4 && <ChangeWorkspaceTitle WID={WorkspaceID} />}
+          {value === 5 && <ChangeWorkspaceColor WID={WorkspaceID} />}
+          {value === 6 && (
+            <ChangeProjectTitle WID={WorkspaceID} PID={projectID} />
+          )}
+        </div>
+      </div>
     </>
   )
 }

@@ -34,7 +34,6 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
         className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
         IconColor="#ffffff"
       />
-      <NewTask />
     </div>
   )
 }

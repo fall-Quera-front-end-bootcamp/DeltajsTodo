@@ -51,7 +51,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
             h-[286px] w-[501px]
             rounded-lg p-[24px]
              flex flex-col items-center
-              gap-[40px]
+              gap-[40px] shadow-[0_3px_4px_0] shadow-[#00000033]
             "
       >
         <div
