@@ -3,7 +3,6 @@
 import '../../dist/output.css'
 import ShareButton from '../Buttons/ShareButton'
 import ProjectMoreOption from './ProjectMoreOption'
-import { UserDispatchContext } from '../../contexts/UserProvider'
 import { useContext } from 'react'
 import { localPageDispatchContext } from '../../pages/MainLayout'
 
@@ -11,7 +10,6 @@ interface ProjectMoreProps {
   id: string
 }
 function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
-  const dispatch: any = useContext(UserDispatchContext)
   const localPageDispatch: any = useContext(localPageDispatchContext)
 
   return (
@@ -67,7 +65,14 @@ function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
         color="text-[#FA5252]"
         text="حذف"
         type="remove"
-        onClickHandler={(id) => dispatch({ type: 'DeleteWorkspace', id: id })}
+        onClickHandler={
+          (id) => localPageDispatch({ type: 'openDeleteWorkspace', WID: id })
+          // dispatch({
+          //   type: 'changeColorWorkspace',
+          //   id: id,
+          //   new_color: '#40C057'
+          // })
+        }
       />
       <ShareButton />
     </div>

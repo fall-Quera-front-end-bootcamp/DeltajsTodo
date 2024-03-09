@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -81,5 +82,6 @@ const baseQueryWithReauth = async (
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['workspaces'],
   endpoints: (builder) => ({})
 })

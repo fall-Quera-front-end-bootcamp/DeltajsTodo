@@ -24,7 +24,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
   workspaceItemID,
   workspaceItemColor,
   workspaceItemTitle,
-  projectItems
+  projectItems = []
 }) => {
   const [isSelected, setSelect] = useState<boolean>(false)
   const [isColumnMoreSelected, setColumnMoreSelect] = useState<boolean>(false)

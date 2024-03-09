@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
@@ -16,7 +17,8 @@ import { setCredentials } from '../features/auth/authSlice'
 import {
   useLoginMutation,
   useForgetMutation,
-  useGetWorkspacesQuery
+  useGetWorkspacesQuery,
+  useCreateWorkspacesMutation
 } from '../features/auth/authApiSlice'
 import axios from 'axios'
 import { useGetUsersQuery } from '../features/users/usersInteractionApiSlice'
@@ -29,35 +31,12 @@ interface LoginProps {}
 const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
   const navigate = useNavigate()
-
-  const [login, { isLoading }] = useLoginMutation()
-  const getWorkspaces = useGetWorkspacesQuery(null)
-  const dispatch = useDispatch()
   const [form, setForm] = useState(null)
   const [formVisible, setFormVisible] = useState(true)
-  const [errMsg, setErrMsg] = useState('')
-
-  const fetch = async (data: any): Promise<any> => {
-    const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5NzgxNjU4LCJpYXQiOjE3MDk3NjAwNTgsImp0aSI6Ijk1NDk2NzA0OTAzOTQxMjk4NDQwMjc5NmM0M2ExYTdmIiwidXNlcl9pZCI6NDZ9.JU9XzQztffVBzZVW1S-ISpMqMw62RitezR25Exqrgso'
-
-    await axios
-      .post('http://185.8.174.74:8000' + '/accounts/login/', {
-        ...data
-      })
-      .then((response) => {
-        console.log({ response })
-      })
-      .catch((err) => console.log(err))
-  }
-
-  const onSubmit = methods.handleSubmit((data) => {
-    console.log(data)
-    //  fetch(data)
-    handleSubmit(data)
-    // handleUsers()
-  })
-
+  /////////////////////////////////////////////////////////////////////////////
+  const [login, { isLoading }] = useLoginMutation()
+  const dispatch = useDispatch()
+  const [err, setErr] = useState()
   const handleSubmit = async (
     data = {
       username: 'any',
@@ -74,24 +53,19 @@ const Login: FunctionComponent<LoginProps> = () => {
       dispatch(
         setCredentials({ accessToken: userData.access, user: { ...userData } })
       )
-      const workspaces = getWorkspaces
-      console.log(workspaces)
 
       methods.reset()
       navigate('/workspace')
     } catch (err: any) {
-      if (err?.status === null) {
-        // isLoading: true until timeout occurs
-        setErrMsg('No Server Response')
-      } else if (err.originalStatus === 400) {
-        setErrMsg('Missing Username or Password')
-      } else if (err.originalStatus === 401) {
-        setErrMsg('Unauthorized')
-      } else {
-        setErrMsg('Login Failed')
-      }
+      setErr(err)
     }
   }
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data)
+    //  fetch(data)
+    handleSubmit(data)
+    // handleUsers()
+  })
 
   // userName input Props
   const userNameProps = {
