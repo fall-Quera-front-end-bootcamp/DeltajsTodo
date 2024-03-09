@@ -1,9 +1,9 @@
-import '../../dist/output.css'
-import ChatMessageIconSvg from '../Common/Icons/ChatMessageIconSvg'
-import SmileysIconSvg from '../Common/Icons/SmileysIconSvg'
-import DocumentsIconSvg from '../Common/Icons/DocumentsIconSvg'
-import LinkCopyIconSvg from '../Common/Icons/LinkCopyIconSvg'
-import MailIconSvg from '../Common/Icons/MailIconSvg'
+import '../../../../dist/output.css'
+import ChatMessageIconSvg from '../../../Common/Icons/ChatMessageIconSvg'
+import SmileysIconSvg from '../../../Common/Icons/SmileysIconSvg'
+import DocumentsIconSvg from '../../../Common/Icons/DocumentsIconSvg'
+import LinkCopyIconSvg from '../../../Common/Icons/LinkCopyIconSvg'
+import MailIconSvg from '../../../Common/Icons/MailIconSvg'
 
 interface TaskInfoCommentProps {
   onClick: any

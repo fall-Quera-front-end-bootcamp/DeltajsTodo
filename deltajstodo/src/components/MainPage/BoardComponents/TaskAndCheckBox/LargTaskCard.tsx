@@ -1,14 +1,10 @@
 import Checkbox from '../../../AuthPage/AuthComponents/Checkbox'
-function LargTaskCard (): JSX.Element {
+function LargTaskCard(): JSX.Element {
   return (
     <section className="h-[350px] w-[249px] gap-[16px] rounded-[16px] bg-[#ffff] p-[16px] shadow-[0px_50px_100px_-20px_#32325D40,0px_30px_60px_-30px_#0000004D]">
       <div className="flex flex-col items-center justify-center">
         {/* ---------------------heder------------------------------------ */}
-        {/* <img
-          src={dekstopImg}
-          alt="dekstopImg"
-          className="w-[217px] h-[134px] rounded-[4px]"
-        /> */}
+
         <div className="h-[134px] w-[217px] rounded-[4px] bg-red-primary"></div>
         {/* -----------------body-------------------------- */}
         <div className="mb-3 flex flex-col justify-end space-y-2 text-right">

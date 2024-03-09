@@ -1,17 +1,17 @@
 import { useState } from 'react'
-import '../../dist/output.css'
-import DisabledIconSvg from '../Common/Icons/DisabledIconSvg'
+import '../../../../dist/output.css'
+import DisabledIconSvg from '../../../Common/Icons/DisabledIconSvg'
 import BottomLeftSide from './BottomLeftSide'
 import TaskInfoComment from './TaskInfoComment'
 import TopLeftSide from './TopLeftSide'
 import TopRightSide from './TopRightSide'
 import BottomRightSide from './BottomRightSide'
 
-function TaskInformation(): JSX.Element {
+function TaskInformation (): JSX.Element {
   const [commentOpen, setCommentOpen] = useState(false)
   const [commentClassNames, setCommentClassNames] = useState('h-[67px]')
   const [bottomLeftHeight, setBottomLeftHeight] = useState('h-[439px]')
-  const openComment = () => {
+  const openComment = (): void => {
     if (!commentOpen) {
       setCommentClassNames('h-[209px] shadow-comment rounded-t-[12px]')
       setBottomLeftHeight('h-[297px]')
@@ -23,19 +23,19 @@ function TaskInformation(): JSX.Element {
   }
 
   return (
-    <div className="relative w-[1352px] h-[596px] rounded-[20px] bg-white overflow-hidden">
+    <div className="relative h-[596px] w-[1352px] overflow-hidden rounded-[20px] bg-white">
       {/* close icon */}
-      <DisabledIconSvg className="absolute top-[36px] left-[1292px] w-[24px] h-[24px] cursor-pointer" />
+      <DisabledIconSvg className="absolute left-[1292px] top-[36px] size-[24px] cursor-pointer" />
 
       {/* vertical line */}
-      <div className="absolute top-[30px] left-[659px] w-[1px] h-[566px] border-r-[1px] border-[#F4F4F4] z-10"></div>
+      <div className="absolute left-[659px] top-[30px] z-10 h-[566px] w-[1px] border-r-[1px] border-[#F4F4F4]"></div>
 
       {/* main content */}
-      <div className="flex w-[1316px] h-[506px] relative top-[90px]">
+      <div className="relative top-[90px] flex h-[506px] w-[1316px]">
         {/* left side */}
-        <div className="shrink-0 flex flex-col justify-between w-[659px] h-[506px]">
+        <div className="flex h-[506px] w-[659px] shrink-0 flex-col justify-between">
           <div
-            className={`${bottomLeftHeight} flex flex-col gap-6 transition-all ease-linear duration-700`}
+            className={`${bottomLeftHeight} flex flex-col gap-6 transition-all duration-700 ease-linear`}
           >
             <TopLeftSide />
 
@@ -51,7 +51,7 @@ function TaskInformation(): JSX.Element {
         </div>
 
         {/* right side */}
-        <div className="w-[100%] flex flex-col gap-6">
+        <div className="flex w-[100%] flex-col gap-6">
           <TopRightSide />
 
           <hr className="border-[1px] border-[#F4F4F4]" />
