@@ -46,11 +46,12 @@ interface TimeLine {
   start: Date
   deadLine: Date
 }
-enum Priorities {
-  asa,
-  high,
-  middle,
-  low
+export enum Priorities {
+  asa = '#FA5252',
+  high = '#FAB005',
+  middle = '#15AABF',
+  low = '#82C91E',
+  nothing = '#C1C1C1'
 }
 interface Comment {
   userName: string
@@ -58,13 +59,13 @@ interface Comment {
   gmailAccount?: string
   commentDescription: string
 }
-interface Task {
- readonly id: string
+export interface Task {
+  readonly id: string
   title: string
   projectTitle: string
   status: Permission.manager
   archived: false
-  sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
+  sendforPeople?: Array<Pick<User, 'gmailAccount' | 'coverImg'>>
   describtion?: string
   attachFiles?: string[]
   coverImg?: string
@@ -74,8 +75,10 @@ interface Task {
   comments?: Comment[]
 }
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
-interface Board {
+export interface Board {
+  readonly id: string
   title: string
+  color: string
   tasks: Task[]
 }
 
@@ -103,21 +106,25 @@ export interface Workspace {
   title: string
   color: string
   link?: string
-  status: Permission.manager
-  projects: Project[]
+  status?: Permission.manager
+  projects?: Project[]
 }
 /*--------------------------------- User--------------------------------------- */
 export interface User {
-  id: string
-  gmailAccount: string
-  coverImg: string
-  profile: Profile
-  workspaces: Workspace[]
+  readonly id: number
+  username: string
+  email?: string
+  first_name?: string
+  last_name?: string
+  phone_number?: string
+  tumbnail?: string
+  profile?: Profile
+  workspaces?: Workspace[]
 }
 /*----------------------------  Users----------------------------------- */
 /**
  * whole users have account on quera Task manager
  */
-interface Users {
-  people: User[]
+export interface Users {
+  users: User[]
 }

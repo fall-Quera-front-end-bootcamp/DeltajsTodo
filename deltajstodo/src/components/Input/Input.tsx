@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import '../../dist/output.css'
-import cn from 'classnames'
 import { findInputError, isFormInvalid } from '../../utilities'
 import { useFormContext } from 'react-hook-form'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -15,6 +14,8 @@ interface InputProps {
   className?: string
   dir?: string
   inputDir?: string
+  value?: string
+  autocomplete?: string
 }
 
 const Input = ({
@@ -26,7 +27,9 @@ const Input = ({
   validation,
   className,
   dir = 'rtl',
-  inputDir = 'ltr'
+  inputDir = 'ltr',
+  value,
+  autocomplete
 }: InputProps): JSX.Element => {
   const {
     register,
@@ -45,7 +48,7 @@ const Input = ({
         {label}
       </label>
       <AnimatePresence mode="wait" initial={false}>
-        {isInvalid && (
+        {!value && isInvalid && (
           <InputError
             message={inputError.error.message}
             key={inputError.error.message}
@@ -58,7 +61,9 @@ const Input = ({
         placeholder={placeholder}
         dir={inputDir}
         className={`w-[100%] rounded-[6px] border-[1px] border-solid border-gray-primary bg-[white] p-2  ${className}`}
-        required
+        // required
+        defaultValue={value}
+        autoComplete={autocomplete}
         {...register(name, validation)}
       />
     </div>

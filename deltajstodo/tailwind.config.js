@@ -125,7 +125,7 @@ export default {
         comment: '0px -7px 18px -10px #00000040'
       },
       animation: {
-        fadein: 'fadein 2s linear'
+        fadein: 'fadein 1s linear'
       },
       keyframes: {
         fadein: {

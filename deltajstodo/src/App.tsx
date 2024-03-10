@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './dist/output.css'
 import { Route, Routes } from 'react-router-dom'
+import { atom } from 'jotai'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
@@ -15,17 +16,23 @@ import {
   type User,
   Permission,
   type Workspace as W,
-  type Project as P
+  type Project as P,
+  Priorities
 } from './utilities/models'
 import { useReducer, useRef } from 'react'
 import EmptyArea from './pages/EmptyArea'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import NewProject from './components/Modals/NewProject/NewProject'
+import Admin from './pages/Admin'
+import RequireAuth from './features/auth/RequireAuth'
 import Profile from './pages/Profile'
+
+export const userId = atom(0)
+
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
-    id: '1',
+    id: 1,
     gmailAccount: 'abc@gmail.com',
     coverImg: './asset/123.png',
     profile: {
@@ -59,7 +66,132 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
-                title: '',
+                id: '1111',
+                title: 'pending',
+                color: '#F92E8F',
+                tasks: [
+                  {
+                    id: '111',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  },
+                  {
+                    id: '112',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.asa
+                  },
+                  {
+                    id: '113',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  },
+                  {
+                    id: '114',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  }
+                ]
+              },
+              {
+                id: '1112',
+                title: 'TO Do',
+                color: '#FD7E14',
+                tasks: [
+                  {
+                    id: '113',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2000),
+                      deadLine: new Date(1999)
+                    },
+                    priority: Priorities.asa
+                  }
+                ]
+              },
+              {
+                id: '1113',
+                title: 'In Progress',
+                color: '#FAB005',
                 tasks: []
               }
             ]
@@ -70,7 +202,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1124',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -89,7 +223,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1121',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -100,7 +236,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1122',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -119,7 +257,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1131',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -130,7 +270,9 @@ function App(): JSX.Element {
             status: Permission.manager,
             boards: [
               {
+                id: '1132',
                 title: '',
+                color: '',
                 tasks: []
               }
             ]
@@ -155,17 +297,22 @@ function App(): JSX.Element {
         <UserDispatchContext.Provider value={dispatch}>
           <Routes>
             <Route path="api/auth/login" element={<Login />} />
-            <Route path="/" element={<EmptyArea />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/workspace" element={<MainLayout />}>
-              <Route path=":projectID" element={<Board />} />
-            </Route>
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/" element={<Login />} />
             <Route path="api/auth/register" element={<Register />} />
+
             <Route
               path="api/auth/forgetPassword"
               element={<ForgetPassword />}
             />
             <Route path="api/auth/resetPassword" element={<ResetPassword />} />
+
+            <Route element={<RequireAuth />}>
+              <Route path="/workspace" element={<MainLayout />}>
+                <Route path=":projectID" element={<Board />} />
+              </Route>
+              <Route path="/profile" element={<Profile />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </UserDispatchContext.Provider>

@@ -14,6 +14,7 @@ import WorkspaceItem from '../WorkspaceItem/WorkspaceItem'
 import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
 import { localPageDispatchContext } from '../../pages/MainLayout'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
+import { Link } from 'react-router-dom'
 
 interface SidebarPrimaryProps {}
 
@@ -126,7 +127,9 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
       {/* account information */}
       <div className="relative bottom-3 flex flex-col justify-end">
         <div className="flex justify-end space-x-2 p-[16px]">
-          <p className="text-right text-[16px] font-medium">نیلوفر موجودی</p>
+          <Link to="/profile">
+            <p className="text-right text-[16px] font-medium">نیلوفر موجودی</p>
+          </Link>
           <div className="bg-blue-secondary text-bodyxs h-[33px] w-[36px] rounded-[100px] px-[8px] pb-[7px] pt-[9px] text-right font-normal text-[#4C6EF5]">
             NM
           </div>

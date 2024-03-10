@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useState, type FunctionComponent } from 'react'
 
 import Layout from '../components/layout/Layout'
@@ -6,6 +7,8 @@ import Input from '../components/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../components/Buttons/Button'
+import { useDispatch } from 'react-redux'
+import { useResetMutation } from '../features/users/usersInteractionApiSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}
@@ -15,14 +18,41 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
   const navigate: NavigateFunction = useNavigate()
 
   const methods = useForm()
+  const [forget] = useForgetMutation()
+  const [reset] = useResetMutation()
+  const dispatch = useDispatch()
+  const [errMsg, setErrMsg] = useState('')
 
-  const onSubmit = methods.handleSubmit(() => {
+  const onSubmit = methods.handleSubmit((data) => {
     setFormVisible(false)
-    // console.log(data)
+    console.log(data)
+    handleSubmit(data)
   })
+
+  const handleSubmit = async (data: any): Promise<void> => {
+    try {
+      const userData = await forget(data).unwrap()
+      console.log(userData)
+
+      methods.reset()
+      //   navigate('/welcome')
+    } catch (err: any) {
+      if (err?.status === null) {
+        // isLoading: true until timeout occurs
+        setErrMsg('No Server Response')
+      } else if (err.originalStatus === 400) {
+        setErrMsg('Missing Username or Password')
+      } else if (err.originalStatus === 401) {
+        setErrMsg('Unauthorized')
+      } else {
+        setErrMsg('Login Failed')
+      }
+    }
+  }
+
   // userEmail input Props
   const userEmailProps = {
-    name: 'ایمیل',
+    name: 'email',
     validation: {
       required: {
         value: true,

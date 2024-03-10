@@ -1,49 +1,130 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type FunctionComponent } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import ButtonColorIconSvg from '../Icons/ButtonColorIconSvg'
 import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import { motion } from 'framer-motion'
+import {
+  useGetSettingsQuery,
+  useSetSettingsMutation
+} from '../../features/users/usersInteractionApiSlice'
+import Loading from '../Loading/Loading'
 
-interface SettingProps {}
+interface SettingProps {
+  messageFunction: Function
+}
 
-const Setting: FunctionComponent<SettingProps> = () => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      exit={{
-        opacity: 1,
-        transition: { duration: 1 }
-      }}
-      onSubmit={(e) => e.preventDefault()}
-      className="flex flex-col gap-6"
-    >
-      <div className="flex flex-col gap-2 w-[354px]">
-        <span className="font-normal text-[14px] leading-[19.73px]">
-          انتخاب تم
-        </span>
+const Setting = ({ messageFunction }: SettingProps) => {
+  const getSettings = useGetSettingsQuery(1)
+  const [setSettings] = useSetSettingsMutation()
+  console.log(getSettings.data)
 
-        <div className="flex gap-[20.36px]">
-          <ButtonColorIconSvg color="#FD7E14" name="radio" />
-          <ButtonColorIconSvg color="#FAB005" name="radio" />
-          <ButtonColorIconSvg color="#82C91E" name="radio" />
-          <ButtonColorIconSvg color="#40C057" name="radio" />
-          <ButtonColorIconSvg color="#208D8E" name="radio" />
-          <ButtonColorIconSvg color="#12B886" name="radio" />
-          <ButtonColorIconSvg color="#15AABF" name="radio" />
-          <ButtonColorIconSvg color="#228BE6" name="radio" />
-          <ButtonColorIconSvg color="#4C6EF5" name="radio" />
-          <ButtonColorIconSvg color="#7950F2" name="radio" />
-          <ButtonColorIconSvg color="#BE4BDB" name="radio" />
-          <ButtonColorIconSvg color="#E64980" name="radio" />
-          <ButtonColorIconSvg color="#FA5252" name="radio" />
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSending, setIsSending] = useState(false)
+
+  const [chosedColor, setChosedColor] = useState('#208D8E')
+  const [darkTheme, setDarkTheme] = useState(false)
+
+  const colorsPalet = useRef<any>([
+    '#FD7E14',
+    '#FAB005',
+    '#82C91E',
+    '#40C057',
+    '#208D8E',
+    '#12B886',
+    '#15AABF',
+    '#228BE6',
+    '#4C6EF5',
+    '#7950F2',
+    '#BE4BDB',
+    '#E64980',
+    '#FA5252'
+  ])
+
+  const changeThemeHandler = (e: any) => {
+    setChosedColor(e.target.value)
+  }
+
+  const DarkModeTheme = () => {
+    setDarkTheme((prev) => !prev)
+  }
+
+  useEffect(() => {
+    if (getSettings.status === 'fulfilled') {
+      setChosedColor(getSettings.data[0].theme)
+      setIsLoading(false)
+    }
+  }, [getSettings])
+
+  const onSubmit = () => {
+    setIsSending(true)
+    const updateData = {
+      theme: chosedColor
+    }
+    handleSubmit(updateData)
+  }
+
+  const handleSubmit = async (data: { theme: string }): Promise<void> => {
+    try {
+      await setSettings(data).unwrap()
+      messageFunction('تغییرات با موفقیت اعمال شد', 'success')
+    } catch (err: any) {
+      messageFunction('تغییرات موفقیت آمیز نبود', 'fail')
+    }
+    setIsSending(false)
+  }
+
+  if (isLoading) {
+    return (
+      <Loading classNames="bg-brand-primary rounded-[30px]">
+        <span className="text-white">Loading</span>
+        <></>
+      </Loading>
+    )
+  } else {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        exit={{
+          opacity: 1,
+          transition: { duration: 1 }
+        }}
+        className="flex flex-col gap-6"
+      >
+        <div className="flex flex-col gap-2 w-[354px]">
+          <span className="font-normal text-[14px] leading-[19.73px]">
+            انتخاب تم
+          </span>
+
+          <div className="flex gap-[20.36px]">
+            {colorsPalet.current.map((color: string) => {
+              const checked = color === chosedColor
+              return (
+                <ButtonColorIconSvg
+                  id={color}
+                  name={'color'}
+                  color={color}
+                  value={color}
+                  checked={checked}
+                  onChangeHandler={changeThemeHandler}
+                />
+              )
+            })}
+          </div>
         </div>
-      </div>
 
-      <ThemeToggle />
-    </motion.div>
-  )
+        <ThemeToggle DarkModeTheme={DarkModeTheme} />
+
+        <button
+          className="flex justify-center w-[354px] rounded-md mt-[40px] py-[8px] px-[12px] bg-brand-primary text-white font-extrabold text-[14px] leading-[19.73px]"
+          onClick={onSubmit}
+        >
+          {isSending ? <Loading /> : <span>ثبت تغییرات</span>}
+        </button>
+      </motion.div>
+    )
+  }
 }
 
 export default Setting

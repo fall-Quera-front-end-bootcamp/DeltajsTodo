@@ -1,10 +1,13 @@
-// import dekstopImg from '..Imgs/dekstopImgpng.png'
+/* eslint-disable tailwindcss/enforces-shorthand */
+/* eslint-disable tailwindcss/no-custom-classname */
+/* eslint-disable @typescript-eslint/space-before-function-paren */
+/* eslint-disable spaced-comment */
+/* eslint-disable tailwindcss/classnames-order */
+import dekstopImg from '../Imgs/dekstopImgpng.png'
 import Checkbox from '../Checkbox'
 function LargTaskCard(): JSX.Element {
   return (
-    <section
-      className="w-[249px] h-[350px] rounded-[16px] p-[16px] gap-[16px] bg-[#ffff] shadow-[0px_50px_100px_-20px_#32325D40,0px_30px_60px_-30px_#0000004D]"
-    >
+    <section className="w-[249px] h-[350px] rounded-[16px] p-[16px] gap-[16px] bg-[#ffff] shadow-[0px_50px_100px_-20px_#32325D40,0px_30px_60px_-30px_#0000004D]">
       <div className="flex flex-col justify-center items-center">
         {/* ---------------------heder------------------------------------ */}
         {/* <img
@@ -37,37 +40,37 @@ function LargTaskCard(): JSX.Element {
                   <path
                     d="M1.99902 2.49864H10.0024"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M3.49951 4.49962H10.0022"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M3.49951 6.50035H10.0022"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M1.99902 8.50132H10.0024"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M6.00098 10.5021H10.0026"
                     stroke="#BDC0C6"
-                    stroke-width="0.75"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <p className="font-normal text-bodyxs text-right text-[#0E0E0E]">
@@ -96,26 +99,26 @@ function LargTaskCard(): JSX.Element {
                 <path
                   d="M3.33333 14.4999V3.11987"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M12.6668 9.84675V3.16675"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M3.3335 9.8333C3.3335 9.8333 3.91683 9.34863 5.66683 9.34863C7.41683 9.34863 8.5835 10.5 10.3335 10.5C12.0835 10.5 12.6668 9.84863 12.6668 9.84863"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M3.3335 3.12133C3.3335 3.12133 3.91683 2.5 5.66683 2.5C7.41683 2.5 8.5835 3.65133 10.3335 3.65133C12.0835 3.65133 12.6668 3.16667 12.6668 3.16667"
                   stroke="#FA5252"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>
@@ -170,23 +173,23 @@ function LargTaskCard(): JSX.Element {
                 <path
                   d="M15.4191 10.0001C15.4191 10.2303 15.2325 10.4169 15.0023 10.4169C14.7721 10.4169 14.5854 10.2303 14.5854 10.0001C14.5854 9.76988 14.7721 9.58325 15.0023 9.58325C15.2325 9.58325 15.4191 9.76988 15.4191 10.0001"
                   stroke="#323232"
-                  stroke-width="1.25"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M10.4172 10.0001C10.4172 10.2303 10.2306 10.4169 10.0003 10.4169C9.77012 10.4169 9.5835 10.2303 9.5835 10.0001C9.5835 9.76988 9.77012 9.58325 10.0003 9.58325C10.2306 9.58325 10.4172 9.76988 10.4172 10.0001"
                   stroke="#323232"
-                  stroke-width="1.25"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M5.41474 10.0001C5.41474 10.2303 5.22811 10.4169 4.99789 10.4169C4.76768 10.4169 4.58105 10.2303 4.58105 10.0001C4.58105 9.76988 4.76768 9.58325 4.99789 9.58325C5.22811 9.58325 5.41474 9.76988 5.41474 10.0001"
                   stroke="#323232"
-                  stroke-width="1.25"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>
@@ -201,9 +204,9 @@ function LargTaskCard(): JSX.Element {
                 <path
                   d="M6.85667 9.35167L10.0042 12.5L16.4 6.10417C15.0833 3.94583 12.7133 2.5 10 2.5C5.8575 2.5 2.5 5.8575 2.5 10C2.5 14.1425 5.8575 17.5 10 17.5C13.86 17.5 17.0358 14.5833 17.4508 10.8333"
                   stroke="#323232"
-                  stroke-width="1.25"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.25"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </div>

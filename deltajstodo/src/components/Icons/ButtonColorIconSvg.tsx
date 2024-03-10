@@ -3,14 +3,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { color } from 'framer-motion'
-import { useState, type FunctionComponent, useRef } from 'react'
+import { type FunctionComponent, useRef } from 'react'
 
 interface ButtonColorIconSvgProps {
   id: string
   name: string
   color: string
   value: string
+  checked?: boolean
   onChangeHandler: (e: any) => void
 }
 
@@ -19,25 +19,36 @@ const ButtonColorIconSvg: FunctionComponent<ButtonColorIconSvgProps> = ({
   name,
   color,
   value,
+  checked,
   onChangeHandler
 }) => {
   const inputRef: any = useRef()
-  const [hovered, setHover] = useState<boolean>(false)
-  const [selected, setSelected] = useState<boolean>(true)
-  const [selected2, setSelected2] = useState<boolean>(false)
-
   return (
     <>
       <div className="relative flex size-[20px] items-center justify-center ">
-        <input
-          ref={inputRef}
-          type="radio"
-          id={id}
-          name={name}
-          value={value}
-          onChange={(e) => onChangeHandler(e)}
-          className="opacity-0  peer z-10 size-full cursor-pointer"
-        />
+        {checked ? (
+          <input
+            ref={inputRef}
+            type="radio"
+            id={id}
+            name={name}
+            value={value}
+            checked
+            onChange={(e) => onChangeHandler(e)}
+            className="opacity-0  peer z-10 size-full cursor-pointer"
+          />
+        ) : (
+          <input
+            ref={inputRef}
+            type="radio"
+            id={id}
+            name={name}
+            value={value}
+            onChange={(e) => onChangeHandler(e)}
+            className="opacity-0  peer z-10 size-full cursor-pointer"
+          />
+        )}
+
         <div className="absolute">
           <svg
             width="20"

@@ -4,11 +4,24 @@ import ProfileSideBar from '../components/ProfileComponents/ProfileSideBar'
 import ProfileInfo from '../components/ProfileComponents/ProfileInfo'
 import AccountInfo from '../components/ProfileComponents/AccountInfo'
 import Setting from '../components/ProfileComponents/Setting'
+import { Theme } from './MainLayout'
+import { useAtom } from 'jotai'
+import { string } from 'prop-types'
+import Message from '../components/Message/Message'
 interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {
+  const [theme, setTheme] = useAtom(Theme)
+
   const [section, setSection] = useState('info')
   const [title, setTitle] = useState('اطلاعات فردی')
+  const [messages, setMessages] = useState<string[][]>([])
+
+  const setMessage = (text: string, type: string) => {
+    const newValue = [...messages, [text, type]]
+    setMessages(newValue)
+    setTimeout(() => {}, 5000)
+  }
 
   const changeSection = (e: any) => {
     setSection(e.target.ariaLabel)
@@ -27,35 +40,37 @@ const Profile: FunctionComponent<ProfileProps> = () => {
   const sectionRendering = () => {
     switch (section) {
       case 'info':
-        return <ProfileInfo />
+        return <ProfileInfo messageFunction={setMessage} />
       case 'account':
-        return <AccountInfo />
+        return <AccountInfo messageFunction={setMessage} />
       default:
-        return <Setting />
+        return <Setting messageFunction={setMessage} />
     }
   }
 
   return (
-    <div dir="rtl" className="flex w-[100%] h-[100vh]">
+    <div
+      dir="rtl"
+      className={`flex w-[100%] h-[100vh] ${theme.bgColor} ${theme.textColor}`}
+    >
+      <div className="fixed top-3 left-[50%] translate-x-[-50%]">
+        {messages.map((item) => {
+          return <Message text={item[0]} type={item[1]} />
+        })}
+      </div>
       {/* sidebar */}
       <div className="w-[340px] h-[100%]">
         <ProfileSideBar onClickFunction={changeSection} selected={section} />
       </div>
 
       {/* main content */}
-      <div className="flex-grow-[2] py-[170px] px-[58px] overflow-y-scroll no-scrollbar">
+      <div className="relative flex-grow-[2] py-[170px] px-[58px] overflow-y-scroll no-scrollbar">
         <div className={`flex flex-col gap-8 transition-[height] duration-700`}>
           <span className="font-bold text-[31px] leading-[43.68px] animate-fadein">
             {title}
           </span>
 
-          <div className="flex flex-col gap-10">
-            {sectionRendering()}
-
-            <button className="w-[354px] rounded-md py-[8px] px-[12px] bg-brand-primary text-white font-extrabold text-[14px] leading-[19.73px]">
-              ثبت تغییرات
-            </button>
-          </div>
+          {sectionRendering()}
         </div>
       </div>
     </div>

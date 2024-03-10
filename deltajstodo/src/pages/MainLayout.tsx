@@ -3,7 +3,12 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type FunctionComponent, useReducer, createContext } from 'react'
+import {
+  type FunctionComponent,
+  useReducer,
+  createContext,
+  useEffect
+} from 'react'
 import SidebarPrimary from '../components/SideBars/SidebarPrimary'
 import { Outlet } from 'react-router-dom'
 import NewProject from '../components/Modals/NewProject/NewProject'
@@ -12,6 +17,7 @@ import Step1 from '../components/Modals/NewWorkspace/Step1'
 import ChangeWorkspaceTitle from '../components/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../components/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../components/Modals/NewProject/ChangeProjectTitle'
+import { atom, useAtom } from 'jotai'
 
 interface MainLayoutProps {}
 
@@ -22,7 +28,31 @@ interface MainLayoutContext {
 }
 
 let WIDForNewProject: null | string = null
+
+export const Theme = atom({
+  bgColor: 'bg-white',
+  textColor: 'text-black'
+})
+
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
+  const [theme, setTheme] = useAtom(Theme)
+
+  useEffect(() => {
+    console.log('initial')
+    const DarkTheme = localStorage.getItem('Darktheme')
+    console.log({ DarkTheme: DarkTheme })
+    if (DarkTheme && DarkTheme === 'true') {
+      console.log('theme is exist')
+      setTheme({
+        bgColor: 'bg-[#202124]',
+        textColor: 'text-[#f1f1f1]'
+      })
+    } else if (!DarkTheme) {
+      console.log('theme does not exist')
+      localStorage.setItem('DarkTheme', 'false')
+    }
+  }, [])
+
   const [localPage, dispatch] = useReducer(StepReducer, {
     value: 0,
     WorkspaceID: '',
@@ -34,17 +64,17 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
       <localPageContext.Provider value={localPage.value}>
         <localPageDispatchContext.Provider value={dispatch}>
           <div className="flex flex-row-reverse gap-4">
-            <div className="fixed max-h-[100vh]">
+            <div className="fixed max-h-[100vh] ">
               <SidebarPrimary />
             </div>
 
             <div className={'absolute right-[356px] max-w-[1100px] '}>
               <div
-                className={`${localPage.value !== 0 && 'bg-gray-primary blur-md'}`}
+                className={`${localPage.value !== 0 && ' hidden  bg-gray-primary blur-md'}`}
               >
                 <Outlet />
               </div>
-              <div className="relative left-[290px] top-[200px]">
+              <div className="absolute right-[390px] top-[200px] z-100 border-black">
                 {localPage.value === 1 && <NewWorkspace />}
                 {localPage.value === 2 && (
                   <NewProject WID={localPage.WorkspaceID} />
