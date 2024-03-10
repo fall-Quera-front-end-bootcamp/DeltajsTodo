@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable spaced-comment */
@@ -22,6 +23,7 @@ import {
   UserDispatchContext
 } from '../../../contexts/UserProvider'
 import { useNavigate } from 'react-router-dom'
+import { useCreateWorkspaceMutation } from '../../../features/auth/authApiSlice'
 
 export const CreationWorkspaceStepContext = createContext<number | null>(null)
 export const CreationWorkspaceStepDispatchContext = createContext<unknown>(null)
@@ -53,7 +55,7 @@ interface NewWorkspaceProps {}
 const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   const [creationStep, dispatch] = useReducer(CreationWorkspaceStepReducer, 1)
   const [form, setForm] = useState<Workspace>({
-    id: '',
+    id: -1,
     title: '',
     color: '#7D828C',
     status: Permission.manager,
@@ -61,6 +63,8 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   })
   const user = useContext(UserContext)
   const userDispatch: any = useContext(UserDispatchContext)
+  const [createWorkspace] = useCreateWorkspaceMutation()
+  const [err, setErr] = useState()
 
   const onchangeHandler = (e: any): void => {
     setForm((prev) => {
@@ -68,22 +72,35 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
     })
   }
   const navigate = useNavigate()
-  useEffect(() => {
-    console.log(form)
-  }, [])
-  const onSubmitWSCreation = (): void => {
+
+  const handelCreatWorkspaces = async (data: any): Promise<void> => {
+    try {
+      const newWS = await createWorkspace({
+        name: data?.name,
+        color: data?.color
+      }).unwrap()
+      console.log(newWS)
+    } catch (err: any) {
+      setErr(err)
+    }
+  }
+
+  const onSubmitWSCreation = async (): Promise<void> => {
     console.log(form)
 
-    userDispatch({
-      type: 'AddWorkspace',
-      new_workspace: {
-        id: ((user?.workspaces?.length ?? 0) + 1).toString(),
-        title: form.title,
-        color: form.color,
-        status: Permission.manager,
-        projects: []
-      }
-    })
+    /////// api//////////////////
+    await handelCreatWorkspaces({ name: form.title, color: form.color })
+    //////////////////////////
+    // userDispatch({
+    //   type: 'AddWorkspace',
+    //   new_workspace: {
+    //     id: ((user?.workspaces?.length ?? 0) + 1).toString(),
+    //     title: form.title,
+    //     color: form.color,
+    //     status: Permission.manager,
+    //     projects: []
+    //   }
+    // })
     navigate('/workspace')
   }
   return (

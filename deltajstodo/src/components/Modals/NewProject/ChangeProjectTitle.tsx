@@ -9,8 +9,8 @@ import Close from '../../Icons/Close'
 import { localPageDispatchContext } from '../../../pages/MainLayout'
 import { UserDispatchContext } from '../../../contexts/UserProvider'
 interface ChangeProjectTitleProps {
-  WID: string | null
-  PID: string | null
+  WID: number | null
+  PID: number | null
 }
 
 const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({

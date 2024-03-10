@@ -9,7 +9,7 @@ import { localPageDispatchContext } from '../../../pages/MainLayout'
 import { UserDispatchContext } from '../../../contexts/UserProvider'
 
 interface ChangeWorkspaceTitleProps {
-  WID: string
+  WID: number
 }
 
 const ChangeWorkspaceTitle: FunctionComponent<ChangeWorkspaceTitleProps> = ({

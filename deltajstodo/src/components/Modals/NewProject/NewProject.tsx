@@ -16,7 +16,7 @@ import {
 import { Permission } from '../../../utilities/models'
 
 interface NewProjectProps {
-  WID: string | null
+  WID: number | null
 }
 
 const NewProject: FunctionComponent<NewProjectProps> = ({ WID }) => {

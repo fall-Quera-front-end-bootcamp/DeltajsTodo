@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-delimiter-style */
 /* eslint-disable spaced-comment */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
@@ -12,21 +13,24 @@ import Step1 from '../components/Modals/NewWorkspace/Step1'
 import ChangeWorkspaceTitle from '../components/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../components/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../components/Modals/NewProject/ChangeProjectTitle'
-
+import DeleteWorkspace from '../components/Modals/NewWorkspace/DeleteWorkspace'
+import Response from '../components/Modals/ResponseModales/Response'
 interface MainLayoutProps {}
 
 interface MainLayoutContext {
   value: number
-  WorkspaceID: string
-  projectID: string
+  WorkspaceID: number
+  projectID: number
+  responseData?: { type: 'success' | 'fail'; message: string } | undefined
 }
 
 let WIDForNewProject: null | string = null
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   const [localPage, dispatch] = useReducer(StepReducer, {
     value: 0,
-    WorkspaceID: '',
-    projectID: ''
+    WorkspaceID: -1,
+    projectID: -1,
+    responseData: { type: 'success', message: '' }
   })
   // const WIDForNewProject = useRef(null)
   return (
@@ -34,7 +38,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
       <localPageContext.Provider value={localPage.value}>
         <localPageDispatchContext.Provider value={dispatch}>
           <div className="flex flex-row-reverse gap-4">
-            <div className="fixed max-h-[100vh]">
+            <div className="fixed max-h-[100vh] overflow-hidden">
               <SidebarPrimary />
             </div>
 
@@ -56,11 +60,20 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                 {localPage.value === 5 && (
                   <ChangeWorkspaceColor WID={localPage.WorkspaceID} />
                 )}
+                {localPage.value === 7 && (
+                  <DeleteWorkspace WID={localPage.WorkspaceID} />
+                )}
                 {/**any modal for removing project ? */}
                 {localPage.value === 6 && (
                   <ChangeProjectTitle
                     WID={localPage.WorkspaceID}
                     PID={localPage.projectID}
+                  />
+                )}{' '}
+                {localPage.value === -1 && (
+                  <Response
+                    responsetype={localPage.responseData?.type}
+                    message={localPage.responseData?.message}
                   />
                 )}
               </div>
@@ -99,8 +112,15 @@ function StepReducer(
     case 'openNewWorkspaceColor': {
       return { ...localPage, value: 5, WorkspaceID: action?.WID }
     }
+    case 'openDeleteWorkspace': {
+      return { ...localPage, value: 7, WorkspaceID: action?.WID }
+    }
+
     case 'openNewProjectTitle': {
       return { value: 6, WorkspaceID: action?.WID, projectID: action?.PID }
+    }
+    case 'openResponseModal': {
+      return { ...localPage, value: -1, responseData: action?.responseData }
     }
     default: {
       throw Error('Unknown action: ' + action.type)

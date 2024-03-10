@@ -61,7 +61,7 @@ const Board: FunctionComponent<BoardProps> = () => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative ">
         {/*Header */}
         <div className="absolute top-[41px] right-0  h-[64px] w-[1034px]  flex flex-col gap-4">
           <div className="">
@@ -174,10 +174,10 @@ const Board: FunctionComponent<BoardProps> = () => {
           </div> */}
         </div>
 
-        <div className="absolute top-[220px] w-[1034px] h-[300px]  right-0 ">
+        <div className="relative ">
           {/**buttom تسک جدید */}
 
-          {view === Views.column && <ColumnView />}
+          {view === Views.column && <ColumnView project={project} />}
           {view === Views.row && <RowView project={project} />}
           {view === Views.calender && <CalenderView />}
 

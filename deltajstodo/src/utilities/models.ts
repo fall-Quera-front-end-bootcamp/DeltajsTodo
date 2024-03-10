@@ -60,7 +60,7 @@ interface Comment {
   commentDescription: string
 }
 export interface Task {
-  readonly id: string
+  readonly id: number
   title: string
   projectTitle: string
   status: Permission.manager
@@ -76,14 +76,14 @@ export interface Task {
 }
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
 export interface Board {
-  readonly id: string
+  readonly id: number
   title: string
   color: string
   tasks: Task[]
 }
 
 export interface Project {
-  readonly id: string
+  readonly id: number
   title: string
   status: Permission.manager
   sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
@@ -102,25 +102,29 @@ export enum Permission {
  * * Every time should created from contex api or localstorage
  */
 export interface Workspace {
-  readonly id: string
+  readonly id: number
   title: string
   color: string
   link?: string
-  status: Permission.manager
-  projects: Project[]
+  status?: Permission.manager
+  projects?: Project[]
 }
 /*--------------------------------- User--------------------------------------- */
 export interface User {
-  id: string
-  gmailAccount: string
-  coverImg: string
-  profile: Profile
-  workspaces: Workspace[]
+  readonly id: number
+  username: string
+  email?: string
+  first_name?: string
+  last_name?: string
+  phone_number?: string
+  tumbnail?: string
+  profile?: Profile
+  workspaces?: Workspace[]
 }
 /*----------------------------  Users----------------------------------- */
 /**
  * whole users have account on quera Task manager
  */
-interface Users {
-  people: User[]
+export interface Users {
+  users: User[]
 }

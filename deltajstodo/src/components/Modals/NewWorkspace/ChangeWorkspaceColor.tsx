@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable tailwindcss/enforces-shorthand */
@@ -12,30 +13,45 @@ import Close from '../../Icons/Close'
 
 import { localPageDispatchContext } from '../../../pages/MainLayout'
 import ButtonColorIconSvg from '../../Icons/ButtonColorIconSvg'
-import { UserDispatchContext } from '../../../contexts/UserProvider'
+import { useUpdataWorkspaceMutation } from '../../../features/auth/authApiSlice'
 
 interface ChangeWorkspaceColorProps {
-  WID: string
+  WID: number
 }
 
 const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
   WID
 }) => {
+  ////////////////////////////////////////////////////////////////
+  const [updataWorkspace, { isLoading }] = useUpdataWorkspaceMutation()
+
+  const [err, setErr] = useState()
+  const handleApiSubmit = async (data): Promise<void> => {
+    try {
+      const userData = await updataWorkspace(data).unwrap()
+      console.log(userData)
+    } catch (err: any) {
+      setErr(err)
+    }
+  }
+
+  ///////////////////////////////////////////////////
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const userDispatch: any = useContext(UserDispatchContext)
 
   const [WScolor, setWSColor] = useState<string>('#7D828C')
 
   const onChangeHandler = (e: any): void => {
     setWSColor((p) => e?.target?.value)
   }
-  const onSubmitHandler = (): void => {
+  const onSubmitHandler = async (): Promise<void> => {
     if (WScolor !== '') {
-      userDispatch({
-        type: 'changeWorkspaceColor',
-        id: WID,
-        new_color: WScolor
-      })
+      await handleApiSubmit({ id: WID, color: WScolor })
+
+      // userDispatch({
+      //   type: 'changeWorkspaceColor',
+      //   id: WID,
+      //   new_color: WScolor
+      // })
     }
     localPageDispatch({ type: 'closeModal' })
   }
@@ -201,7 +217,7 @@ leading-[19.73px]  text-[#1E1E1E] "
             h-[40px] w-[415px] rounded-md    flex gap-[10px] "
         >
           <button
-            onClick={() => onSubmitHandler()}
+            onClick={onSubmitHandler}
             className="bg-[#208D8E] h-[40px] w-[415px] rounded-md flex flex-row items-center justify-center"
           >
             <p className="font-yekan w-[30px] h-[20px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
