@@ -10,6 +10,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../../components/Common/Buttons/Button'
 import { motion } from 'framer-motion'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
+import { useDispatch } from 'react-redux'
+import { setCredentials } from '../../features/auth/authSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
