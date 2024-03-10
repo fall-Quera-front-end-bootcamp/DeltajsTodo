@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../../components/Common/Buttons/Button'
 import { motion } from 'framer-motion'
-import axios from 'axios'
+import { useLoginMutation } from '../../features/auth/authApiSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
