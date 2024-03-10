@@ -38,11 +38,11 @@ const Board: FunctionComponent<BoardProps> = () => {
         projectInfoTitle={project.title}
       />
 
-      <>
+      <div className="flex items-center justify-end">
         {view === Views.column && <ColumnView project={project} />}
         {view === Views.row && <RowView project={project} />}
-        {view === Views.calender && <CalenderView />}
-      </>
+        {view === Views.calender && <CalenderView project={project} />}
+      </div>
     </>
   )
 }

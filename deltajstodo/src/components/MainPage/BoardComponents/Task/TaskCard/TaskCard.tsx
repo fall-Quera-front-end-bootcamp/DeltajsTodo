@@ -1,5 +1,6 @@
 import { type Task } from '../../../../../utilities/models'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
+import Tag from '../Tags/Tag'
 
 function TaskCard({ task }: { task: Task }): JSX.Element {
   return (
@@ -9,6 +10,9 @@ function TaskCard({ task }: { task: Task }): JSX.Element {
       <div className="flex flex-row">
         <div className="text-[12px]">{task.title}</div>
         <ParagraphsIconSvg className="size-3" />
+      </div>
+      <div className="flex w-full flex-row">
+        {/* <Tag taskTags={task.tags} /> */}
       </div>
     </section>
   )

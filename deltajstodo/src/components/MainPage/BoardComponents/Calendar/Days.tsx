@@ -3,7 +3,7 @@ import moment from 'jalali-moment'
 import type React from 'react'
 import { useCallback, useContext } from 'react'
 
-import DatepickerContext from '../../../../contexts/DatepickerContext'
+import { DatepickerContext } from '../../../../contexts/DateContextProvider'
 import { nextMonth, previousMonth, classNames as cn } from '../../../../helpers'
 import { type Period } from '../../../../types'
 import { toFarsiNumber } from '../../../../utilities/toFarsiNumber'

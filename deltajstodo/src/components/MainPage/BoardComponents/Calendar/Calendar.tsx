@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { toFarsiNumber } from '../../../../utilities/toFarsiNumber'
 import Button from '../../../Common/Buttons/Button'
-import ArrowDownIconSvg from '../../../Common/Icons/ArrowDownIconSvg'
-import CalelndarEndIconSvg from '../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
 import {
   getDaysInMonth,
   getFirstDayInMonth,
@@ -17,32 +15,37 @@ import {
   useCallback,
   useContext,
   useMemo,
-  type Dispatch
+  type Dispatch,
+  useEffect
 } from 'react'
 import Days from './Days'
 import Week from './Week'
 import moment from 'jalali-moment'
-import DatepickerContext from '../../../../contexts/DatepickerContext'
-
+import { DatepickerContext } from '../../../../contexts/DateContextProvider'
+import CalendarStartIconSvg from '../../../Common/Icons/CalendarIcons/CalendarStartIconSvg'
+import CalendarEndIconSvg from '../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
+import CalendarBoxRight from './CalendarComponents/CalendarBoxRight'
+import CalendarNextPrev from './CalendarComponents/CalendarNextPrev'
 const Calendar = ({
   date,
-  value,
   onClickNext,
   onClickPrevious,
   setShowCalendar
 }: {
   date: string
-  value: {
-    startDate: null
-    endDate: null
-  }
   onClickPrevious: () => void
   onClickNext: () => void
   setShowCalendar: Dispatch<SetStateAction<boolean>>
 }): JSX.Element => {
   // Contexts
-  const { period, changePeriod, changeDayHover, changeDatepickerValue } =
-    useContext(DatepickerContext)
+  const {
+    period,
+    changePeriod,
+    changeDayHover,
+    changeDatepickerValue,
+    value,
+    daysChangeF
+  } = useContext(DatepickerContext)
   // Functions
   const previous = useCallback(() => {
     return getLastDaysInMonth(
@@ -74,6 +77,10 @@ const Calendar = ({
     }
   }, [current, date, previous])
 
+  useEffect(() => {
+    daysChangeF(calendarData.days)
+  }, [calendarData.days])
+
   const clickDay = useCallback(
     (
       day: number,
@@ -86,7 +93,7 @@ const Calendar = ({
       let newEnd = null
 
       // True & True
-      if (period.start && period.end) {
+      if (period?.start && period?.end) {
         if (changeDayHover) {
           changeDayHover(null)
         }
@@ -97,8 +104,8 @@ const Calendar = ({
       }
 
       // True & True / False & False
-      if ((!period.start && !period.end) || (period.start && period.end)) {
-        if (!period.start && !period.end) {
+      if ((!period?.start && !period?.end) || (period?.start && period?.end)) {
+        if (!period?.start && !period?.end) {
           changeDayHover(fullDay)
         }
         newStart = fullDay
@@ -144,8 +151,8 @@ const Calendar = ({
       changeDayHover,
       changePeriod,
       date,
-      period.end,
-      period.start
+      period?.end,
+      period?.start
     ]
   )
 
@@ -167,27 +174,6 @@ const Calendar = ({
     [clickDay, date, onClickNext]
   )
 
-  const weekDays = useCallback((number: number) => {
-    switch (number) {
-      case 2:
-        return 'دوشنبه'
-      case 3:
-        return 'سه‌شنبه'
-      case 4:
-        return 'چهارشنبه'
-      case 5:
-        return 'پنجشنبه'
-      case 6:
-        return 'جمعه'
-      case 0:
-        return 'شنبه'
-      case 1:
-        return 'یکشنبه'
-      default:
-        break
-    }
-  }, [])
-
   return (
     <div
       dir="rtl"
@@ -201,90 +187,42 @@ const Calendar = ({
             <div className="text-[26px] font-[500] text-brand-primary">
               {toFarsiNumber(`${value.startDate}`) === 'null'
                 ? ''
-                : `${moment(period.start === null ? date : period.start).format('MMM')} ${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
+                : `${moment(period?.start === null ? date : period?.start).format('MMM')} ${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان شروع</p>
-            <CalelndarEndIconSvg color="#BDBDBD" />
+            <CalendarStartIconSvg color="#BDBDBD" />
           </div>
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2 border-r-[1px] border-[#E8EAED] pr-2">
             <div className="text-[26px] font-[500] text-brand-primary">
               {toFarsiNumber(`${value.endDate}`) === 'null'
                 ? ''
-                : `${moment(period.end === null ? date : period.end).format('MMM')} ${toFarsiNumber(`${value.endDate}`).slice(8, 10)}`}
+                : `${moment(period?.end === null ? date : period?.end).format('MMM')} ${toFarsiNumber(`${value.endDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان پایان</p>
-            <CalelndarEndIconSvg color="#BDBDBD" />
+            <CalendarEndIconSvg color="#BDBDBD" />
           </div>
         </div>
         {/* border center  */}
         <div className="w-full border-t-[1px] border-gray-secondary"></div>
         <div className="flex w-full flex-row">
           {/* box right  */}
-          <div className="flex h-[510px] w-[293px] flex-col gap-6 rounded-br-[20px] bg-gray-secondary px-[23px] py-[24px]">
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">امروز</span>
-              <span className="text-gray-primary">
-                {weekDays(moment(date).jDay())}
-              </span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">کمی بعد</span>
-              <span className="text-[16px] text-gray-primary ">
-                {toFarsiNumber('17:39')}
-              </span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">فردا</span>
-              <span className="text-gray-primary">
-                {weekDays(moment(date).jDay())}
-              </span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">این آخر هفته</span>
-              <span className="text-gray-primary">جمعه</span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">هفته‌ی آینده</span>
-              <span className="text-gray-primary">شنبه</span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">آخرهفته‌ی آینده</span>
-              <span className="text-gray-primary">۴ تیر</span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">دو هفته دیگر</span>
-              <span className="text-gray-primary">۱۱ تیر</span>
-            </div>
-            <div className="flex flex-row justify-between">
-              <span className="text-[20px] font-[500]">۴ هفته دیگر</span>
-              <span className="text-gray-primary">۱ مرداد</span>
-            </div>
-          </div>
+          <CalendarBoxRight date={date} />
           {/* calendar number & week left  */}
           <div className="">
-            <div className="absolute left-[390px] top-[100px] flex flex-row items-center justify-center gap-5 text-[24px]">
-              <div className="">
-                {' '}
-                {`${moment(date).format('MMM')} ${toFarsiNumber(`${moment(date).format('YYYY')}`)}`}
-              </div>
-              <div className="flex flex-row">
-                <button onClick={onClickPrevious}>
-                  <ArrowDownIconSvg className="-rotate-90" color="#7D828C" />
-                </button>
-                <button onClick={onClickNext}>
-                  <ArrowDownIconSvg className="rotate-90" color="#7D828C" />
-                </button>
-              </div>
-              <div className="">امروز</div>
-            </div>
+            <CalendarNextPrev
+              date={date}
+              onClickNext={onClickNext}
+              onClickPrevious={onClickPrevious}
+            />
             <div className="absolute left-[16px] top-[160px] my-1 grid w-[600px] grid-cols-7 gap-y-4">
-              <Week />
+              <Week className='text-gray-primary' />
               <Days
                 calendarData={calendarData}
                 onClickPreviousDays={clickPreviousDays}
                 onClickDay={clickDay}
                 onClickNextDays={clickNextDays}
               />
+              C
             </div>
             <Button
               onClickFunction={() => {

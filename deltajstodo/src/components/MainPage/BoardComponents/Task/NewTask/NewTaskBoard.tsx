@@ -1,4 +1,3 @@
-/* eslint-disable multiline-ternary */
 import DropdownMenu from '../../DropDownMenu/DropdownMenu'
 import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -11,42 +10,37 @@ import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
 import DateRangePicker from '../../Calendar/DateRangePicker'
 import LinkCopyIconSvg from '../../../../Common/Icons/LinkCopyIconSvg'
 import { UserContext } from '../../../../../contexts/UserProvider'
-import NewTaskDropDownMenu from './NewTaskDropDownMenu'
-import { Project } from '../../../../../utilities/models'
 
 interface NewTaskProps {
   handle: () => void
-  project: Project
 }
 
-const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
+const NewTask = ({ handle }: NewTaskProps): JSX.Element => {
   // Context
   const user = useContext(UserContext)
   // UseState hook
   const [showCalendar, setShowCalendar] = useState(false)
   const [showInputValue, setShowInputValue] = useState(false)
   const [inputValue, setInputValue] = useState('')
-  const [inputValueSecond, setInputValueSecond] = useState('')
   const [textAreaValue, setTextAreaValue] = useState('')
   const [selectedAttachmentFile, setSelectedAttachmentFile] =
     useState<File | null>(null)
   const [selectedCoverFile, setSelectedCoverFile] = useState<File | null>(null)
   // Ref hook
   const inputRefFirst = useRef<HTMLInputElement | null>(null)
-  const inputRefSecond = useRef<HTMLInputElement | null>(null)
   const inputRefFirstUpload = useRef<HTMLInputElement | null>(null)
   const inputRefSecondUpload = useRef<HTMLInputElement | null>(null)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  function handleSubmit (e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault()
 
     const inputValue = inputRefFirst.current?.value
 
     if (inputValue !== undefined && inputValue.replaceAll(' ', '') !== '') {
-      setShowInputValue(false)
+      setShowInputValue(true)
       setInputValue(inputValue)
     } else {
-      setShowInputValue(true)
+      setShowInputValue(false)
     }
   }
 
@@ -98,18 +92,30 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
           <div className="relative flex flex-row items-center justify-center gap-[13px]">
             <span className="inline-block size-4 bg-[#D9D9D9]"></span>
             <form onSubmit={handleSubmit}>
-              <input
-                ref={inputRefFirst}
-                type="text"
-                className="absolute right-5 top-0 px-5 text-bodyxl placeholder:text-black"
-                placeholder="عنوان تسک"
-                value={inputValue}
-                onChange={(e) => {
-                  setInputValue(e.target.value)
-                }}
-              />
+              {showInputValue
+                ? (
+                <span
+                  onClick={() => {
+                    setShowInputValue(false)
+                  }}
+                  className="text-bodyxl font-[500] leading-8"
+                >
+                  {inputValue}
+                </span>
+                  )
+                : (
+                <input
+                  ref={inputRefFirst}
+                  type="text"
+                  className="absolute right-5 top-0 px-5 text-bodyxl placeholder:text-black"
+                  placeholder="عنوان تسک"
+                  value={inputValue}
+                  onChange={(e) => {
+                    setInputValue(e.target.value)
+                  }}
+                />
+                  )}
             </form>
-            <NewTaskDropDownMenu placeHolderText="پروژه" project={project} />
           </div>
           {/* Leave New Task Box */}
           <button onClick={handle}>
@@ -228,11 +234,11 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
           </div>
           <Button newTask>ساختن تسک</Button>
         </div>
-        <div
-          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${showCalendar ? '' : 'hidden'}`}
-        >
-          <DateRangePicker setShowCalendar={setShowCalendar} />
-        </div>
+        {showCalendar && (
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <DateRangePicker setShowCalendar={setShowCalendar} />
+          </div>
+        )}
       </motion.div>
     </AnimatePresence>
   )

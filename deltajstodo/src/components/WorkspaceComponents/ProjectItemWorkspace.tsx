@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { type Project } from '../../utilities/models'
+import { hexColors } from '../../constants'
+import getKeyByValue from '../../utilities/getKeyByValue'
 
 interface ProjectItemWorkspaceProps {
   projectID: string
@@ -16,17 +18,15 @@ const ProjectItemWorkspace = ({
   projectTitle,
   workspaceID
 }: ProjectItemWorkspaceProps): JSX.Element => {
+  const bgColor = 'bg-' + getKeyByValue(hexColors, workspaceItemColor)
   return (
     <NavLink
       key={projectID}
       to={`/workspace/${projectID}`}
       state={{ workspaceID, project }}
+      className={`h-20 w-[200px] rounded-2xl ${bgColor} flex items-center justify-center`}
     >
-      <div
-        className={`${'bg-[' + workspaceItemColor + ']'}  flex h-[80px] w-[200px] items-center justify-center rounded-2xl bg-gradient-to-r ${'from-[' + workspaceItemColor + '00]'} ${'to-[' + workspaceItemColor + '00]'}`}
-      >
-        <div className="">{projectTitle}</div>
-      </div>
+      <h3 className="text-boldm text-white">{projectTitle}</h3>
     </NavLink>
   )
 }

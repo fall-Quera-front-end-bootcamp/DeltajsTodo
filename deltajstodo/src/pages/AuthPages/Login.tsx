@@ -16,25 +16,39 @@ interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
-  const onSubmit = methods.handleSubmit(async (data) => {
-    try {
-      const response = await axios.post(
-        'http://185.8.174.74:8000/accounts/login/',
-        data
-      )
-      const { access, refresh } = response.data
 
-      // Store the tokens in localStorage or secure cookie for later use
-      // localStorage.setItem('token', token)
-      // localStorage.setItem('refreshToken', refreshToken)
-      console.log(access, refresh)
-
-      // Redirect or perform other actions upon successful login
-    } catch (error) {
-      // Handle login error
-      console.log('ارور داره')
+  // ---------------
+  const [login, { isLoading }] = useLoginMutation()
+  const dispatch = useDispatch()
+  const [err, setErr] = useState()
+  const handleSubmit = async (
+    data = {
+      username: 'any',
+      password: 'any'
     }
-    methods.reset()
+  ): Promise<void> => {
+    try {
+      const userData = await login({
+        username: data.username,
+        password: data.password
+      }).unwrap()
+      console.log(userData)
+
+      dispatch(
+        setCredentials({ accessToken: userData.access, user: { ...userData } })
+      )
+
+      methods.reset()
+      navigate('/workspace')
+    } catch (err: any) {
+      setErr(err)
+    }
+  }
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data)
+    //  fetch(data)
+    handleSubmit(data)
+    // handleUsers()
   })
 
   const [formVisible, setFormVisible] = useState(true)

@@ -77,7 +77,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
             </button>
 
             {/* list workspace */}
-            <ul className="flex flex-col gap-[8px] space-y-[8px]">
+            <ul className="flex max-h-96 flex-col gap-[8px] overflow-y-auto">
               {/* ***********!!!  Need typescript to display remove and add list !!!******************************************** */}
 
               {filterValue === ''

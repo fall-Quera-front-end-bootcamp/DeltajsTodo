@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './dist/output.css'
+import './styles/global.css'
 import { BrowserRouter } from 'react-router-dom'
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

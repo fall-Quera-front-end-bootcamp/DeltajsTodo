@@ -68,12 +68,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
     })
   }
   const navigate = useNavigate()
-  useEffect(() => {
-    console.log(form)
-  }, [])
   const onSubmitWSCreation = (): void => {
-    console.log(form)
-
     userDispatch({
       type: 'AddWorkspace',
       new_workspace: {

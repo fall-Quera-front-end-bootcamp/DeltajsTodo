@@ -10,9 +10,13 @@ import { toFarsiNumber } from '../../../../../../utilities/toFarsiNumber'
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface ColumnHeaderProps {
   board?: Board
+  handleNewTask: () => void
 }
 
-const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({ board }) => {
+const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
+  board,
+  handleNewTask
+}) => {
   const [columnMore, setColumnMore] = useState(false)
 
   return (
@@ -30,6 +34,7 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({ board }) => {
             className="cursor-pointer"
             onMouseEnter={() => setColumnMore(true)}
             onMouseLeave={() => setColumnMore(false)}
+            onClick={handleNewTask}
           >
             <AddIconSvg />
           </div>

@@ -1,11 +1,11 @@
 import { dayOfWeek } from '../../../../constants'
 
-const Week: React.FC = () => {
+const Week = ({ className }: { className?: string }): JSX.Element => {
   return (
     <>
       {dayOfWeek.map((day, x) => {
         return (
-          <div className="w-[60px] text-[20px] text-gray-primary" key={x}>
+          <div className={`text-[20px] ${className}`} key={x}>
             {day}
           </div>
         )

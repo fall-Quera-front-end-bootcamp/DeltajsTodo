@@ -6,12 +6,13 @@ import { type Board } from '../../../../../../utilities/models'
 interface ColumnProps {
   board: Board
   children: JSX.Element
+  handleNewTask: () => void
 }
 
-const Column: FunctionComponent<ColumnProps> = ({ board, children }) => {
+const Column: FunctionComponent<ColumnProps> = ({ board, children, handleNewTask }) => {
   return (
     <div className="group flex flex-col gap-4 min-h-[400px]">
-      <ColumnHeader board={board} />
+      <ColumnHeader handleNewTask={handleNewTask} board={board} />
       {children}
     </div>
   )

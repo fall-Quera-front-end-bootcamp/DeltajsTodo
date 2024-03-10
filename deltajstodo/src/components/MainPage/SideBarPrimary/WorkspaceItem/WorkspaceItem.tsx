@@ -93,7 +93,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
             })
           ) : (
             <button
-              className=" text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] "
+              className=" text-bodys gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] "
               onClick={() =>
                 stepDispatch({ type: 'openNewProject', WID: workspaceItemID })
               }
