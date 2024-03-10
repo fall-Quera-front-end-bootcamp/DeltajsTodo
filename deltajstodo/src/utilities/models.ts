@@ -15,8 +15,8 @@ export interface sidebarItem {
 }
 export enum Views {
   column = 0,
-  row,
-  calander
+  row = 0,
+  calender = 0
 }
 interface Profile {
   userInformatin: {
@@ -60,7 +60,7 @@ interface Comment {
   commentDescription: string
 }
 export interface Task {
-  readonly id: number
+  readonly id: string
   title: string
   projectTitle: string
   status: Permission.manager
@@ -76,14 +76,14 @@ export interface Task {
 }
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
 export interface Board {
-  readonly id: number
+  readonly id: string
   title: string
   color: string
   tasks: Task[]
 }
 
 export interface Project {
-  readonly id: number
+  readonly id: string
   title: string
   status: Permission.manager
   sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
@@ -102,29 +102,25 @@ export enum Permission {
  * * Every time should created from contex api or localstorage
  */
 export interface Workspace {
-  readonly id: number
+  readonly id: string
   title: string
   color: string
   link?: string
-  status?: Permission.manager
-  projects?: Project[]
+  status: Permission.manager
+  projects: Project[]
 }
 /*--------------------------------- User--------------------------------------- */
 export interface User {
-  readonly id: number
-  username: string
-  email?: string
-  first_name?: string
-  last_name?: string
-  phone_number?: string
-  tumbnail?: string
-  profile?: Profile
-  workspaces?: Workspace[]
+  id: string
+  gmailAccount: string
+  coverImg: string
+  profile: Profile
+  workspaces: Workspace[]
 }
 /*----------------------------  Users----------------------------------- */
 /**
  * whole users have account on quera Task manager
  */
-export interface Users {
-  users: User[]
+interface Users {
+  people: User[]
 }
