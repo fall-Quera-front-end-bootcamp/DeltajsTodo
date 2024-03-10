@@ -25,6 +25,7 @@ import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import NewProject from './components/Modals/NewProject/NewProject'
 import Admin from './pages/Admin'
 import RequireAuth from './features/auth/RequireAuth'
+import AllContext from './contexts/AllContext'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -289,29 +290,34 @@ function App(): JSX.Element {
 
   return (
     <>
-      <UserContext.Provider value={user}>
-        <UserDispatchContext.Provider value={dispatch}>
-          <Routes>
-            <Route path="api/auth/login" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/" element={<Login />} />
-            <Route path="api/auth/register" element={<Register />} />
+      <AllContext>
+        <UserContext.Provider value={user}>
+          <UserDispatchContext.Provider value={dispatch}>
+            <Routes>
+              <Route path="api/auth/login" element={<Login />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/" element={<Login />} />
+              <Route path="api/auth/register" element={<Register />} />
 
-            <Route
-              path="api/auth/forgetPassword"
-              element={<ForgetPassword />}
-            />
-            <Route path="api/auth/resetPassword" element={<ResetPassword />} />
+              <Route
+                path="api/auth/forgetPassword"
+                element={<ForgetPassword />}
+              />
+              <Route
+                path="api/auth/resetPassword"
+                element={<ResetPassword />}
+              />
 
-            <Route element={<RequireAuth />}>
-              <Route path="/workspace" element={<MainLayout />}>
-                <Route path=":projectID" element={<Board />} />
+              <Route element={<RequireAuth />}>
+                <Route path="/workspace" element={<MainLayout />}>
+                  <Route path=":projectID" element={<Board />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </UserDispatchContext.Provider>
-      </UserContext.Provider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </UserDispatchContext.Provider>
+        </UserContext.Provider>
+      </AllContext>
     </>
   )
 }
