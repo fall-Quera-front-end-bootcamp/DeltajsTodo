@@ -7,8 +7,8 @@ import NewProject from '../../components/Common/Modals/NewProject/NewProject'
 import ChangeWorkspaceTitle from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../../components/Common/Modals/NewProject/ChangeProjectTitle'
-import ProjectItemWorkspace from '../../components/WorkspaceComponents/ProjectItemWorkspace'
-import BuildProjectItemWorkspaceButton from '../../components/WorkspaceComponents/BuildProjectItemWorkspaceButton'
+import ProjectItemWorkspace from '../../components/MainPage/WorkspaceComponents/ProjectItemWorkspace'
+import BuildProjectItemWorkspaceButton from '../../components/MainPage/WorkspaceComponents/BuildProjectItemWorkspaceButton'
 interface WorkspaceProps {}
 
 const Workspace: FunctionComponent<WorkspaceProps> = () => {

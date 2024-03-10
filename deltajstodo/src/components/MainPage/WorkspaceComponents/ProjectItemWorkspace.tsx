@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
-import { type Project } from '../../utilities/models'
-import { hexColors } from '../../constants'
-import getKeyByValue from '../../utilities/getKeyByValue'
+import { type Project } from '../../../utilities/models'
+import { hexColors } from '../../../constants'
+import getKeyByValue from '../../../utilities/getKeyByValue'
 
 interface ProjectItemWorkspaceProps {
   projectID: number
