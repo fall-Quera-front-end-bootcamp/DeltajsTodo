@@ -23,6 +23,7 @@ import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import Admin from './pages/Admin'
 import RequireAuth from './features/auth/RequireAuth'
 import AllContext from './contexts/AllContext'
+import Workspace from './pages/MainPages/Workspace'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -307,6 +308,7 @@ function App(): JSX.Element {
 
               <Route element={<RequireAuth />}>
                 <Route path="/workspace" element={<MainLayout />}>
+                  <Route path="" element={<Workspace />} />
                   <Route path=":projectID" element={<Board />} />
                 </Route>
               </Route>

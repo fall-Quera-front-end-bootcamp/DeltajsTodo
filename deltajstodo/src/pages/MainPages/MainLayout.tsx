@@ -19,56 +19,12 @@ import BuildProjectItemWorkspaceButton from '../../components/WorkspaceComponent
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
-  const user = useContext(UserContext)
   const { value, WorkspaceID, projectID } = useContext(localPageContext)
 
   return (
     <>
       <div className="flex h-screen w-full flex-row-reverse items-start gap-4 overflow-hidden">
         <SidebarPrimary />
-        <div className="flex h-screen w-full flex-col gap-8 overflow-auto pr-20 pt-20">
-          {user?.workspaces?.length === 0
-            ? (
-            <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
-              <NewWorkspace />
-            </div>
-              )
-            : (
-                user?.workspaces?.map((w) => {
-                  return (
-                <>
-                  <div key={w?.id} className="flex flex-col items-end gap-8">
-                    <h3 className="text-boldxl">{w.title}</h3>
-                    <div className="flex flex-row-reverse gap-8">
-                      {w?.projects?.length > 0
-                        ? (
-                            w?.projects?.map((p) => {
-                              return (
-                            <ProjectItemWorkspace
-                              workspaceItemColor={w?.color}
-                              project={p}
-                              projectID={p?.id}
-                              projectTitle={p?.title}
-                              workspaceID={w?.id}
-                              key={p.id}
-                            />
-                              )
-                            })
-                          )
-                        : (
-                        <BuildProjectItemWorkspaceButton
-                          key={w?.id}
-                          workspace={w}
-                        />
-                          )}
-                    </div>
-                    <div className="w-full border-[1px] border-gray-primary opacity-30"></div>
-                  </div>
-                </>
-                  )
-                })
-              )}
-        </div>
         <div className={`h-screen w-full ${value !== 0 ? ' blur-md' : ''}`}>
           <Outlet />
         </div>

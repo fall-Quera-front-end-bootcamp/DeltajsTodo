@@ -4,11 +4,11 @@ import { hexColors } from '../../constants'
 import getKeyByValue from '../../utilities/getKeyByValue'
 
 interface ProjectItemWorkspaceProps {
-  projectID: string
+  projectID: number
   project: Project
   workspaceItemColor: string
   projectTitle: string
-  workspaceID: string
+  workspaceID: number
 }
 
 const ProjectItemWorkspace = ({

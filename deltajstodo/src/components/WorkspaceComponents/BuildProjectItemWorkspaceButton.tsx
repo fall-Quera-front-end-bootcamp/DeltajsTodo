@@ -1,5 +1,5 @@
 import { hexColors } from '../../constants'
-import getKeyByValue from 
+import getKeyByValue from '../../utilities/getKeyByValue'
 import { type Workspace } from '../../utilities/models'
 import AddSecondaryIconSvg from '../Common/Icons/AddSecondaryIconSvg'
 
