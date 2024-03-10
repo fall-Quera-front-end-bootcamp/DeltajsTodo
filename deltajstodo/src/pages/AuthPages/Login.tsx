@@ -1,39 +1,23 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { useState, type FunctionComponent } from 'react'
-import Layout from '../components/layout/Layout'
-import AuthCard from '../components/Card/AuthCard'
-import Input from '../components/Input/Input'
+import Layout from '../../components/AuthPage/AuthComponents/layout/Layout'
+import AuthCard from '../../components/AuthPage/AuthComponents/Card/AuthCard'
+import Input from '../../components/Common/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
-import Button from '../components/Buttons/Button'
+import Button from '../../components/Common/Buttons/Button'
 import { motion } from 'framer-motion'
-
-import { useDispatch } from 'react-redux'
-import { setCredentials } from '../features/auth/authSlice'
-import {
-  useLoginMutation,
-  useForgetMutation,
-  useGetWorkspacesQuery,
-  useCreateWorkspacesMutation
-} from '../features/auth/authApiSlice'
 import axios from 'axios'
-import { useGetUsersQuery } from '../features/users/usersInteractionApiSlice'
-import { setUsers } from '../features/users/usersInteractionSlice'
-import { store } from '../app/store'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
-  const navigate = useNavigate()
-  const [form, setForm] = useState(null)
-  const [formVisible, setFormVisible] = useState(true)
-  /////////////////////////////////////////////////////////////////////////////
+
+  // ---------------
   const [login, { isLoading }] = useLoginMutation()
   const dispatch = useDispatch()
   const [err, setErr] = useState()
@@ -66,6 +50,9 @@ const Login: FunctionComponent<LoginProps> = () => {
     handleSubmit(data)
     // handleUsers()
   })
+
+  const [formVisible, setFormVisible] = useState(true)
+  const navigate = useNavigate()
 
   // userName input Props
   const userNameProps = {

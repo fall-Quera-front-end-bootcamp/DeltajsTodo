@@ -4,14 +4,13 @@
 import './dist/output.css'
 import { Route, Routes } from 'react-router-dom'
 
-import Login from './pages/Login'
-import Register from './pages/Register'
-import ForgetPassword from './pages/ForgetPassword'
-import ResetPassword from './pages/ResetPassword'
+import Login from './pages/AuthPages/Login'
+import Register from './pages/AuthPages/Register'
+import ForgetPassword from './pages/AuthPages/ForgetPassword'
+import ResetPassword from './pages/AuthPages/ResetPassword'
 import NotFound from './pages/NotFound'
-import Workspace from './pages/Workspace'
-import MainLayout from './pages/MainLayout'
-import Board from './pages/Board'
+import MainLayout from './pages/MainPages/MainLayout'
+import Board from './pages/MainPages/Board'
 import {
   type User,
   Permission,
@@ -20,9 +19,7 @@ import {
   Priorities
 } from './utilities/models'
 import { useReducer, useRef } from 'react'
-import EmptyArea from './pages/EmptyArea'
 import { UserContext, UserDispatchContext } from './contexts/UserProvider'
-import NewProject from './components/Modals/NewProject/NewProject'
 import Admin from './pages/Admin'
 import RequireAuth from './features/auth/RequireAuth'
 import AllContext from './contexts/AllContext'

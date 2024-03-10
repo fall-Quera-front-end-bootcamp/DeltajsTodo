@@ -1,23 +1,15 @@
-/* eslint-disable @typescript-eslint/space-before-function-paren */
-/* eslint-disable no-extra-boolean-cast */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable spaced-comment */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable tailwindcss/no-custom-classname */
-import Layout from '../components/layout/Layout'
-import AuthCard from '../components/Card/AuthCard'
-import Input from '../components/Input/Input'
+import Layout from '../../components/AuthPage/AuthComponents/layout/Layout'
+import AuthCard from '../../components/AuthPage/AuthComponents/Card/AuthCard'
+import Input from '../../components/Common/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { useState, type FunctionComponent } from 'react'
-import Checkbox from '../components/Checkbox'
+import Checkbox from '../../components/AuthPage/AuthComponents/Checkbox'
 import { FormProvider, useForm } from 'react-hook-form'
-import TermsConditions from '../components/Modals/TermsConditions'
-import Button from '../components/Buttons/Button'
+import TermsConditions from '../../components/Common/Modals/TermsConditions'
+import Button from '../../components/Common/Buttons/Button'
 import { AnimatePresence, motion } from 'framer-motion'
-import axios from 'axios'
-import { useRegisterMutation } from '../features/users/usersInteractionApiSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
@@ -25,57 +17,15 @@ interface RegisterProps {}
 const Register: FunctionComponent<RegisterProps> = () => {
   const navigate: NavigateFunction = useNavigate()
   const methods = useForm()
-  const [showBox, setShowBox] = useState(false)
-  const [register] = useRegisterMutation()
-  const [errs, setErrs] = useState(null)
-  const [successMsg, setSuccessMsg] = useState('')
-  const fetch = async (data: any): Promise<any> => {
-    const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5NzgxNjU4LCJpYXQiOjE3MDk3NjAwNTgsImp0aSI6Ijk1NDk2NzA0OTAzOTQxMjk4NDQwMjc5NmM0M2ExYTdmIiwidXNlcl9pZCI6NDZ9.JU9XzQztffVBzZVW1S-ISpMqMw62RitezR25Exqrgso'
-    console.log(data)
+  // const [success, setSuccess] = useState(false)
 
-    await axios
-      .post('http://185.8.174.74:8000' + '/accounts/', {
-        ...data
-      })
-      .then((response) => {
-        console.log({ response })
-      })
-      .catch((err) => console.log(err))
-  }
+  const [showBox, setShowBox] = useState(false)
+
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data)
-    //fetch(data)
-    handleSubmit(data)
+    methods.reset()
+    // setSuccess(true)
   })
-
-  const handleSubmit = async (data: {
-    username: string
-    email: string
-    password: string
-  }): Promise<void> => {
-    try {
-      const userData = await register(data).unwrap()
-      console.log(userData)
-      setSuccessMsg('ثبت نام با موفقیت انجام شد')
-      //dispatch(setCredentials({ ...userData, user: data.password }))
-      methods.reset()
-      //   navigate('/welcome')
-    } catch (err: any) {
-      console.log('Error in Registering', err)
-      setErrs(err?.data)
-      // if (err?.status === null) {
-      //   // isLoading: true until timeout occurs
-      //   setErrMsg('No Server Response')
-      // } else if (err.originalStatus === 400) {
-      //   setErrMsg('Missing Username or Password')
-      // } else if (err.originalStatus === 401) {
-      //   setErrMsg('Unauthorized')
-      // } else {
-      //   setErrMsg('Login Failed')
-      // }
-    }
-  }
 
   function showBoxFunction(): void {
     setShowBox((prev) => !prev)
@@ -83,7 +33,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
   // userName input Props
   const userNameProps = {
-    name: 'username',
+    name: 'نام کاربری',
     validation: {
       required: {
         value: true,
@@ -96,7 +46,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
   }
   // userPassword input Props
   const userPasswordProps = {
-    name: 'password',
+    name: 'رمز عبور',
     validation: {
       required: {
         value: true,
@@ -113,7 +63,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
   }
   // userEmail input Props
   const userEmailProps = {
-    name: 'email',
+    name: 'ایمیل',
     validation: {
       required: {
         value: true,
