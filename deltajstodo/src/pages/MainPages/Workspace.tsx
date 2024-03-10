@@ -29,7 +29,7 @@ const Workspace: FunctionComponent<WorkspaceProps> = () => {
               <div key={w?.id} className="flex flex-col items-end gap-8">
                 <h3 className="text-boldxl">{w.title}</h3>
                 <div className="flex flex-row-reverse gap-8">
-                  {w?.projects?.length > 0
+                  {w?.projects?.length !== undefined && w?.projects?.length > 0
                     ? (
                         w?.projects?.map((p) => {
                           return (
