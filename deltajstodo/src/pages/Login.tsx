@@ -1,3 +1,5 @@
+/* eslint-disable spaced-comment */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
@@ -9,36 +11,61 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../components/Buttons/Button'
 import { motion } from 'framer-motion'
+
+import { useDispatch } from 'react-redux'
+import { setCredentials } from '../features/auth/authSlice'
+import {
+  useLoginMutation,
+  useForgetMutation,
+  useGetWorkspacesQuery,
+  useCreateWorkspacesMutation
+} from '../features/auth/authApiSlice'
 import axios from 'axios'
+import { useGetUsersQuery } from '../features/users/usersInteractionApiSlice'
+import { setUsers } from '../features/users/usersInteractionSlice'
+import { store } from '../app/store'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
-  const onSubmit = methods.handleSubmit(async (data) => {
-    try {
-      const response = await axios.post(
-        'http://185.8.174.74:8000/accounts/login/',
-        data
-      )
-      const { access, refresh } = response.data
-
-      // Store the tokens in localStorage or secure cookie for later use
-      // localStorage.setItem('token', token)
-      // localStorage.setItem('refreshToken', refreshToken)
-      console.log(access, refresh)
-
-      // Redirect or perform other actions upon successful login
-    } catch (error) {
-      // Handle login error
-      console.log('ارور داره')
-    }
-    methods.reset()
-  })
-
-  const [formVisible, setFormVisible] = useState(true)
   const navigate = useNavigate()
+  const [form, setForm] = useState(null)
+  const [formVisible, setFormVisible] = useState(true)
+  /////////////////////////////////////////////////////////////////////////////
+  const [login, { isLoading }] = useLoginMutation()
+  const dispatch = useDispatch()
+  const [err, setErr] = useState()
+  const handleSubmit = async (
+    data = {
+      username: 'any',
+      password: 'any'
+    }
+  ): Promise<void> => {
+    try {
+      const userData = await login({
+        username: data.username,
+        password: data.password
+      }).unwrap()
+      console.log(userData)
+
+      dispatch(
+        setCredentials({ accessToken: userData.access, user: { ...userData } })
+      )
+
+      methods.reset()
+      navigate('/workspace')
+    } catch (err: any) {
+      setErr(err)
+    }
+  }
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data)
+    //  fetch(data)
+    handleSubmit(data)
+    // handleUsers()
+  })
 
   // userName input Props
   const userNameProps = {

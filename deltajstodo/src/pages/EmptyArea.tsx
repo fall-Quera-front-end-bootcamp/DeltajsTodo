@@ -12,9 +12,7 @@ import Row from '../components/BoardViews/RowView/Row'
 import CalenderView from '../components/BoardViews/CalenderView/CalenderView'
 import RowView from '../components/BoardViews/RowView/RowView'
 import NewColumn from '../components/BoardViews/ColumnView/NewColumn'
-import NewTask from '../components/Task/NewTask'
 import LargTaskCard from '../components/TaskAndCheckBox/LargTaskCard'
-import MiniTaskCard from '../components/TaskAndCheckBox/MiniTaskCard'
 
 interface EmptyAreaProps {}
 
@@ -29,10 +27,8 @@ const EmptyArea: FunctionComponent<EmptyAreaProps> = () => {
 
   return (
     <>
-      {/* <NewColumn /> */}
-      <div className="h-screen w-full bg-gray-primary">
-        <NewTask />
-      </div>
+      <NewColumn />
+      <LargTaskCard />
     </>
     //  <>
     // //   <div className="flex flex-col gap-6">
