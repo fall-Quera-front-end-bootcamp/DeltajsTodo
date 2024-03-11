@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { localPageDispatchContext } from '../../pages/MainLayout'
 
 interface ProjectMoreProps {
-  id: string
+  id: number
 }
 function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
   const localPageDispatch: any = useContext(localPageDispatchContext)

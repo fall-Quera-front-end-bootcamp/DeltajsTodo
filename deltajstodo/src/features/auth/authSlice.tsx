@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/member-delimiter-style */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createSlice } from '@reduxjs/toolkit'
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: { user: null, token: null, resetURL: null },

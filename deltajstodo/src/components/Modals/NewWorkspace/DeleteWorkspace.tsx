@@ -28,36 +28,25 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
   ////////////////////////////////////////////////////////////////
   const [deleteWorkspace, { isLoading }] = useDeleteWorkspaceMutation()
 
-  const [msg, setMsg] = useState('')
-  const handleApiSubmit = async (data: { id: number }): Promise<void> => {
-    try {
-      const res = await deleteWorkspace(data).unwrap()
-      console.log(res)
-      setMsg(res?.message ?? '')
-    } catch (err: any) {
-      setMsg(err?.message ?? '')
-    }
-  }
-
   ///////////////////////////////////////////////////
   const localPageDispatch: any = useContext(localPageDispatchContext)
 
   const onSubmitHandler = async (): Promise<void> => {
-    await handleApiSubmit({ id: WID })
-    console.log('helllo')
+    try {
+      const res = await deleteWorkspace({ id: WID }).unwrap()
+      //console.log(res)
 
-    localPageDispatch({
-      type: 'openResponseModal',
-      responseData: { type: 'success', message: msg ?? '' }
-    })
-
-    localPageDispatch({ type: 'closeModal' })
-
-    // userDispatch({
-    //   type: 'changeWorkspaceColor',
-    //   id: WID,
-    //   new_color: WScolor
-    // })
+      localPageDispatch({
+        type: 'openResponseModal',
+        responseData: { type: 'success', message: res?.message ?? '' }
+      })
+    } catch (error: any) {
+      // console.log(error)
+      localPageDispatch({
+        type: 'openResponseModal',
+        responseData: { type: 'fail', message: error?.error ?? '' }
+      })
+    }
   }
 
   return (
@@ -124,6 +113,7 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
             h-[40px] w-[415px] rounded-md    flex gap-[15px] "
         >
           <button
+            disabled={isLoading}
             onClick={onSubmitHandler}
             className="bg-[#208D8E] h-[40px] w-[200px] rounded-md flex flex-row items-center justify-center"
           >

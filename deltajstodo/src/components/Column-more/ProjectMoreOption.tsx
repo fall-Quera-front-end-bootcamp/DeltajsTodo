@@ -12,8 +12,8 @@ interface ProjectMoreOptionProps {
   color: string
   text: string
   type: string
-  workspaceID: string
-  onClickHandler?: (id: string) => any
+  workspaceID: number
+  onClickHandler?: (id: number) => any
 }
 
 function ProjectMoreOption({

@@ -21,6 +21,7 @@ import { UserContext, UserDispatchContext } from '../../contexts/UserProvider'
 import { localPageDispatchContext } from '../../pages/MainLayout'
 import { store } from '../../app/store'
 import { useGetWorkspacesQuery } from '../../features/auth/authApiSlice'
+import { type Workspace as W } from '../../utilities/models'
 
 interface SidebarPrimaryProps {}
 
@@ -112,59 +113,39 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
               <ul className="flex h-[45vh] flex-col gap-[8px] space-y-[8px] overflow-y-scroll">
                 {/* ***********!!!  Need typescript to display remove and add list !!!******************************************** */}
                 {filterValue === ''
-                  ? workspaces?.map((item: any) => {
+                  ? workspaces?.map((item: W) => {
                       return (
                         <li key={item.id}>
-                          <WorkspaceItem
-                            workspaceItemID={item.id}
-                            workspaceItemColor={item.color}
-                            workspaceItemTitle={item.name}
-                            projectItems={item?.projects}
-                          />
+                          <WorkspaceItem workspace={item} />
                         </li>
                       )
                     })
                   : workspaces
-                      .filter((i: any) => i?.name?.startsWith(filterValue))
-                      .map((item: any) => {
+                      .filter((i: W) => i?.name?.startsWith(filterValue))
+                      .map((item: W) => {
                         return (
                           <li key={item.id}>
-                            <WorkspaceItem
-                              workspaceItemID={item.id}
-                              workspaceItemColor={item.color}
-                              workspaceItemTitle={item.title}
-                              projectItems={item?.projects}
-                            />
+                            <WorkspaceItem workspace={item} />
                           </li>
                         )
                       })}
-                {filterValue === ''
+                {/* {filterValue === ''
                   ? user?.workspaces.map((item) => {
                       return (
                         <li key={item.id}>
-                          <WorkspaceItem
-                            workspaceItemID={item.id}
-                            workspaceItemColor={item.color}
-                            workspaceItemTitle={item.title}
-                            projectItems={item.projects}
-                          />
+                          <WorkspaceItem workspace={item} />
                         </li>
                       )
                     })
                   : user?.workspaces
-                      .filter((i) => i?.title?.startsWith(filterValue))
+                      .filter((i) => i?.name?.startsWith(filterValue))
                       .map((item) => {
                         return (
                           <li key={item.id}>
-                            <WorkspaceItem
-                              workspaceItemID={item.id}
-                              workspaceItemColor={item.color}
-                              workspaceItemTitle={item.title}
-                              projectItems={item.projects}
-                            />
+                            <WorkspaceItem workspace={item} />
                           </li>
                         )
-                      })}
+                      })} */}
               </ul>
             </div>
           </div>

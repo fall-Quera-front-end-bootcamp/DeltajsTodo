@@ -4,17 +4,23 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type FunctionComponent, useReducer, createContext } from 'react'
+import {
+  type FunctionComponent,
+  useReducer,
+  createContext,
+  useEffect
+} from 'react'
 import SidebarPrimary from '../components/SideBars/SidebarPrimary'
 import { Outlet } from 'react-router-dom'
 import NewProject from '../components/Modals/NewProject/NewProject'
 import NewWorkspace from '../components/Modals/NewWorkspace/NewWorkspace'
-import Step1 from '../components/Modals/NewWorkspace/Step1'
+
 import ChangeWorkspaceTitle from '../components/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../components/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../components/Modals/NewProject/ChangeProjectTitle'
 import DeleteWorkspace from '../components/Modals/NewWorkspace/DeleteWorkspace'
 import Response from '../components/Modals/ResponseModales/Response'
+import { store } from '../app/store'
 interface MainLayoutProps {}
 
 interface MainLayoutContext {
@@ -33,6 +39,10 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
     responseData: { type: 'success', message: '' }
   })
   // const WIDForNewProject = useRef(null)
+
+  useEffect(() => {
+    confirm(`Welcom ${store.getState().auth.user?.username ?? 'you'}`)
+  }, [])
   return (
     <>
       <localPageContext.Provider value={localPage.value}>

@@ -13,16 +13,21 @@ import { type Workspace } from '../../../utilities/models'
 interface Step3Props {
   form: Workspace
   onSubmitWSCreation: () => void
+  disablity: boolean
 }
 
-const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
+const Step3: FunctionComponent<Step3Props> = ({
+  form,
+  onSubmitWSCreation,
+  disablity
+}) => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const creationWorkspaceDispatch: any = useContext(
     CreationWorkspaceStepDispatchContext
   )
   return (
     <>
-      <div className="w-[501px] h-[365px]">
+      <div className="h-[365px] w-[501px]">
         <div
           className="flex 
         h-[365px] w-[501px]
@@ -61,31 +66,31 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
             <div
               className="flex h-[165px]
             w-[453px] flex-col gap-[16px] rounded-lg border-[0.5px] border-[#AAAAAA] 
-            pb-[16px]  pl-[12px]  pr-[12px]  pt-[16px]
+            px-[12px]  py-[16px]
             "
             >
               {/*title */}
-              <div className="flex h-[34px] w-[429px] flex-row justify-between">
+              <div className="flex h-[34px] w-[429px] flex-row items-center justify-between">
                 <div className="h-[20px] w-[93px]">
                   <p className="font-yekan h-[20px] w-[93px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     نام ورک‌اسپیس‌
                   </p>
                 </div>
                 <div className="h-[20px] min-w-[64px]">
-                  <p className="font-yekan h-[20px] min-w-[64px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="font-yekan h-[20px] max-w-[164px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     {form.title}‌
                   </p>
                 </div>
               </div>
 
               {/*color */}
-              <div className="w-[429px] h-[34px] flex flex-row justify-between">
+              <div className="flex h-[34px] w-[429px] flex-row items-center justify-between">
                 <div className="h-[20px] w-[98px]">
                   <p className="font-yekan h-[20px] w-[98px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     رنگ ورک‌اسپیس‌
                   </p>
                 </div>
-                <div className="h-[15px] w-[15px]">
+                <div className="size-[15px] mx-[8px] mb-[7px] mt-[9px]">
                   <svg
                     width="15"
                     height="16"
@@ -105,7 +110,7 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
               </div>
 
               {/*teamworkers */}
-              <div className="w-[429px] h-[33px] flex flex-row justify-between">
+              <div className="flex h-[33px] w-[429px] flex-row items-center justify-between">
                 <div className="h-[20px] w-[27px]">
                   <p className="font-yekan h-[20px] w-[27px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     اعضا‌
@@ -126,11 +131,9 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
         h-[40px] w-[415px] gap-[29px]    rounded-md bg-white "
             >
               <button
-                onClick={() => {
-                  onSubmitWSCreation()
-                  localPageDispatch({ type: 'closeModal' })
-                }}
-                className="flex h-[40px] w-[415px] flex-row items-center justify-center rounded-md bg-[#208D8E] gap-[10px]"
+                disabled={disablity}
+                onClick={onSubmitWSCreation}
+                className="flex h-[40px] w-[415px] flex-row items-center justify-center gap-[10px] rounded-md bg-[#208D8E]"
               >
                 <p className="font-yekan h-[20px] w-[117px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
                   ساختن ورک‌اسپیس
@@ -139,7 +142,7 @@ const Step3: FunctionComponent<Step3Props> = ({ form, onSubmitWSCreation }) => {
             </div>
           </div>
         </div>
-      </div>{' '}
+      </div>
     </>
   )
 }

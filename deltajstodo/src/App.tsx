@@ -296,7 +296,7 @@ function App(): JSX.Element {
             <Route path="/admin" element={<Admin />} />
             <Route path="/" element={<Login />} />
             <Route path="api/auth/register" element={<Register />} />
-
+            <Route path="/e" element={<EmptyArea />} />
             <Route
               path="api/auth/forgetPassword"
               element={<ForgetPassword />}

@@ -5,14 +5,14 @@ import '../../dist/output.css'
 import ShareButton from '../Buttons/ShareButton'
 import TaskMoreOption from './TaskMoreOption'
 import { localPageDispatchContext } from '../../pages/MainLayout'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function TaskMore({
   workspaceID,
   projectID
 }: {
-  workspaceID: string
-  projectID: string
+  workspaceID: number
+  projectID: number
 }): JSX.Element {
   const dispatch: any = useContext(UserDispatchContext)
   const localPageDispatch: any = useContext(localPageDispatchContext)

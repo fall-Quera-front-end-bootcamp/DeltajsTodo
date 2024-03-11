@@ -19,17 +19,11 @@ import ShareIconSvg from '../components/Icons/ShareIconSvg'
 import TodoListIconSvg from '../components/Icons/TodoListIconSvg'
 import ColumnArtboardIconSvg from '../components/Icons/ColumnArtboardIconSvg'
 import CalendarIconSvg from '../components/Icons/CalendarIconSvg'
-import SearchIconSvg from '../components/Icons/SearchIconSvg'
-import FilterSettingIconSvg from '../components/Icons/FilterIconSvg'
 
-import Button from '../components/Buttons/Button'
-
-import AddSecondaryIconSvg from '../components/Icons/AddSecondaryIconSvg'
-import { Workspace as W, Project as P } from '../utilities/models'
-import { UserContext } from '../contexts/UserProvider'
 import ColumnView from '../components/BoardViews/ColumnView/ColumnView'
 import RowView from '../components/BoardViews/RowView/RowView'
 import CalenderView from '../components/BoardViews/CalenderView/CalenderView'
+import { useGetProjectQuery } from '../features/auth/authApiSlice'
 interface BoardProps {}
 enum Views {
   column = 643,
@@ -40,7 +34,7 @@ const Board: FunctionComponent<BoardProps> = () => {
   // const { projectID } = useParams()
 
   const {
-    state: { workspaceItemID, project }
+    state: { workspaceItemID, projectID }
   } = useLocation()
   // const user = useContext(UserContext)
   // const [currentWorkspace, setW] = useState(W | undefined)
@@ -58,7 +52,16 @@ const Board: FunctionComponent<BoardProps> = () => {
     //console.log(e?.target?.ariaLabel)
     setViw(() => Views[e?.target?.ariaLabel as keyof typeof Views])
   }
+  ////////////////////////////////////////////////////////////////////
+  const {
+    data: project,
+    isLoading,
+    isError,
+    isSuccess,
+    error
+  } = useGetProjectQuery({ workspace_id: workspaceItemID, id: projectID })
 
+  /////////////////////////////////////////////////////////////////////
   return (
     <>
       <div className="relative ">
@@ -78,7 +81,7 @@ const Board: FunctionComponent<BoardProps> = () => {
               <div className="flex h-[32px] w-[511px] flex-row-reverse gap-4">
                 <div className=" flex h-[32px] w-[77px] flex-row justify-between  ">
                   <p className="font-yekan w-[77px] text-right text-[20px] font-extrabold leading-[32px] text-[#1E1E1E] ">
-                    {project.title}
+                    {project.name}
                   </p>
                 </div>
                 <div className=" h-[22px] border-[1px] border-[#999999] self-center"></div>
@@ -181,21 +184,6 @@ const Board: FunctionComponent<BoardProps> = () => {
           {view === Views.row && <RowView project={project} />}
           {view === Views.calender && <CalenderView />}
 
-          {/* <div
-                className={`w-[118px] h-[40px] flex flex-row ${view === Views.calender ? 'invisible' : ''}`}
-              >
-                <Button>
-                  <p
-                    className="w-[67px] h-[20px]
-                     text-right text-[14px] 
-                      leading-[19.73px] 
-                      font-medium text-[#1E1E1E] "
-                  >
-                    تسک جدید
-                  </p>
-                  <AddSecondaryIconSvg />
-                </Button>
-              </div> */}
           {/**--------------------------------------- */}
         </div>
       </div>

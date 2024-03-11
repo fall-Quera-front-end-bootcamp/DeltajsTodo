@@ -8,8 +8,8 @@ interface TaskMoreOptionProps {
   color: string
   text: string
   type: string
-  workspaceID: string
-  projectID: string
+  workspaceID: number
+  projectID: number
   onClickHandler?: () => any
 }
 

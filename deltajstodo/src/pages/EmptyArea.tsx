@@ -1,23 +1,15 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useRef, type FunctionComponent } from 'react'
-import ButtonColorIconSvg from '../components/Icons/ButtonColorIconSvg'
-import Step2 from '../components/Modals/NewWorkspace/Step2'
-import NewWorkspace from '../components/Modals/NewWorkspace/NewWorkspace'
-import Row from '../components/BoardViews/RowView/Row'
-import CalenderView from '../components/BoardViews/CalenderView/CalenderView'
-import RowView from '../components/BoardViews/RowView/RowView'
-import NewColumn from '../components/BoardViews/ColumnView/NewColumn'
-import LargTaskCard from '../components/TaskAndCheckBox/LargTaskCard'
-
+import { type FunctionComponent } from 'react'
+import Response from '../components/Modals/ResponseModales/Response'
 interface EmptyAreaProps {}
 
 const EmptyArea: FunctionComponent<EmptyAreaProps> = () => {
-  const inputRef: any = useRef()
   // useEffect(() => {
   //   console.log(inputRef?.current?.checked)
   // }, [inputRef?.current?.checked])
@@ -27,8 +19,7 @@ const EmptyArea: FunctionComponent<EmptyAreaProps> = () => {
 
   return (
     <>
-      <NewColumn />
-      <LargTaskCard />
+      <Response responsetype="success" message="woooooooow" />
     </>
     //  <>
     // //   <div className="flex flex-col gap-6">
