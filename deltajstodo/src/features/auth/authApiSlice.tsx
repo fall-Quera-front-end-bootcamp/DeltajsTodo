@@ -229,5 +229,9 @@ export const {
   /////////////////////////////////////
   useGetProjectsQuery,
   useCreateProjectMutation,
-  useGetProjectQuery
+  useGetProjectQuery,
+  useUpdataProjectMutation,
+  useDeleteProjectMutation,
+  ///////////////////////////////////
+  useGetBoardsQuery
 } = authApiSlice

@@ -1,6 +1,7 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type FunctionComponent } from 'react'
+import { useEffect, type FunctionComponent } from 'react'
 import NewColumn from './NewColumn'
 import {
   type Project,
@@ -9,20 +10,42 @@ import {
 } from '../../../utilities/models'
 
 import Column from './Column'
-import LargTaskCard from '../../TaskAndCheckBox/LargTaskCard'
+
+import { useGetBoardsQuery } from '../../../features/auth/authApiSlice'
+import { IDS } from '../../../pages/MainLayout'
+import { useAtom } from 'jotai'
 
 interface ColumnViewProps {
-  project: Project
+  project?: Project
 }
 
-const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
+const ColumnView: FunctionComponent<ColumnViewProps> = () => {
+  const [ids, setids] = useAtom(IDS)
+
+  useEffect(() => {
+    console.log(ids)
+  }, [])
+  ///////////////////////////// API FOR BOADR ////////////////////////////////
+  const {
+    data: boards,
+    isLoading,
+    isError,
+    isSuccess,
+    error
+  } = useGetBoardsQuery({
+    workspace_id: ids.workspaceID,
+    project_id: ids.projectID
+  })
+
+  ///////////////////////////////////////////////////////////////////////////////////
+
   return (
     <>
       <div className="absolute right-0 top-[220px] overflow-y-hidden  ">
-        {project.boards.length > 0 ? (
+        {boards?.length > 0 ? (
           <>
             <div className="flex flex-row-reverse gap-[16px]">
-              {project.boards.map((b: B) => {
+              {boards.map((b: B) => {
                 return (
                   <div key={b.id}>
                     <Column board={b} />

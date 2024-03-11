@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable tailwindcss/classnames-order */
@@ -7,7 +9,8 @@ import { useContext, type FunctionComponent, useRef, useState } from 'react'
 import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
 import { localPageDispatchContext } from '../../../pages/MainLayout'
-import { UserDispatchContext } from '../../../contexts/UserProvider'
+import { useUpdataProjectMutation } from '../../../features/auth/authApiSlice'
+import Message from '../../Message/Message'
 interface ChangeProjectTitleProps {
   WID: number | null
   PID: number | null
@@ -17,14 +20,38 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
   WID,
   PID
 }) => {
-  const stepDispatch: any = useContext(localPageDispatchContext)
   const inputRef: any = useRef()
-  const userDispatch: any = useContext(UserDispatchContext)
-
+  const localPageDispatch: any = useContext(localPageDispatchContext)
   const [inputValue, setInputValue] = useState('')
   const onChangeHandler = (e: any): void => {
     setInputValue((p) => e?.target?.value)
   }
+
+  const [updataProject, { isLoading }] = useUpdataProjectMutation()
+
+  ////////////////////// api ////////////////////////////////
+  const onSubmitHandler = async (): Promise<void> => {
+    if (inputValue !== '') {
+      try {
+        const userData = await updataProject({
+          workspace_id: WID,
+          id: PID,
+          name: inputValue
+        }).unwrap()
+
+        // console.log(userData)
+
+        localPageDispatch({ type: 'closeModal' })
+      } catch (err: any) {
+        //console.log(err)
+        localPageDispatch({
+          type: 'openResponseModal',
+          responseData: { type: 'fail', message: err?.error ?? '' }
+        })
+      }
+    }
+  }
+  ///////////////////////////////////////////////////////////
 
   return (
     <>
@@ -53,7 +80,9 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
                flex flex-row justify-between "
             >
               <div>
-                <button onClick={() => stepDispatch({ type: 'closeModal' })}>
+                <button
+                  onClick={() => localPageDispatch({ type: 'closeModal' })}
+                >
                   <Close />
                 </button>
               </div>
@@ -109,17 +138,8 @@ rounded-md border-[1px] border-[#AAAAAA]
               h-[40px] w-[415px] rounded-md   flex gap-[10px] "
           >
             <button
-              onClick={() => {
-                if (inputValue !== '') {
-                  userDispatch({
-                    type: 'changeProjectTitle',
-                    WID,
-                    PID,
-                    new_title: inputValue
-                  })
-                }
-                stepDispatch({ type: 'closeModal' })
-              }}
+              disabled={isLoading}
+              onClick={onSubmitHandler}
               className="bg-[#208D8E] h-[40px] w-[415px] rounded-md flex flex-row items-center justify-center"
             >
               <p className="font-yekan w-[30px] h-[20px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">

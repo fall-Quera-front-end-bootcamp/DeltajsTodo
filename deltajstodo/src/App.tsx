@@ -27,263 +27,263 @@ import Admin from './pages/Admin'
 import RequireAuth from './features/auth/RequireAuth'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
-  // // const User = useRef<User>({
-  // //   id: 1,
-  // //   gmailAccount: 'abc@gmail.com',
-  // //   coverImg: './asset/123.png',
-  // //   profile: {
-  // //     userInformatin: {
-  // //       name: 'نیلوفر',
-  // //       fmailyName: 'موجودی',
-  // //       phoneNumber: '098765432',
-  // //       profileImg: './'
-  // //     },
-  // //     accountInformatin: {
-  // //       gmailAccount: 'abc@gmail.com',
+  const User = useRef<User>({
+    id: 1,
+    gmailAccount: 'abc@gmail.com',
+    coverImg: './asset/123.png',
+    profile: {
+      userInformatin: {
+        name: 'نیلوفر',
+        fmailyName: 'موجودی',
+        phoneNumber: '098765432',
+        profileImg: './'
+      },
+      accountInformatin: {
+        gmailAccount: 'abc@gmail.com',
 
-  // //       userName: 'NM',
-  // //       passWord: '12345678'
-  // //     },
-  // //     setting: {
-  // //       mainTheme: 'light',
-  // //       colortheme: 'green'
-  // //     }
-  // //   },
-  // //   workspaces: [
-  // //     {
-  // //       id: '1',
-  // //       title: 'درس مدیریت پروژه',
-  // //       color: '#BE4BDB',
-  // //       status: Permission.manager,
-  // //       projects: [
-  // //         {
-  // //           id: '11',
-  // //           title: 'پروژه اول',
-  // //           status: Permission.manager,
-  // //           boards: [
-  // //             {
-  // //               id: '1111',
-  // //               title: 'pending',
-  // //               color: '#F92E8F',
-  // //               tasks: [
-  // //                 {
-  // //                   id: '111',
-  // //                   title: 'این یک تیتر برای این تسک است.',
-  // //                   projectTitle: 'پروژه اول',
-  // //                   status: Permission.manager,
-  // //                   archived: false,
-  // //                   sendforPeople: [
-  // //                     { gmailAccount: '', coverImg: '' },
-  // //                     { gmailAccount: '', coverImg: '' }
-  // //                   ],
-  // //                   describtion: '',
-  // //                   attachFiles: [''],
-  // //                   coverImg: '',
-  // //                   tags: [
-  // //                     { title: 'درس', color: 'blue' },
-  // //                     { title: 'پروژه', color: 'pink' }
-  // //                   ],
-  // //                   timeLine: {
-  // //                     start: new Date(2001),
-  // //                     deadLine: new Date(2000)
-  // //                   },
-  // //                   priority: Priorities.high
-  // //                 },
-  // //                 {
-  // //                   id: '112',
-  // //                   title: 'این یک تیتر برای این تسک است.',
-  // //                   projectTitle: 'پروژه اول',
-  // //                   status: Permission.manager,
-  // //                   archived: false,
-  // //                   sendforPeople: [{ gmailAccount: '', coverImg: '' }],
-  // //                   describtion: '',
-  // //                   attachFiles: [''],
-  // //                   coverImg: '',
-  // //                   tags: [
-  // //                     { title: 'درس', color: 'blue' },
-  // //                     { title: 'پروژه', color: 'pink' }
-  // //                   ],
-  // //                   timeLine: {
-  // //                     start: new Date(2001),
-  // //                     deadLine: new Date(2000)
-  // //                   },
-  // //                   priority: Priorities.asa
-  // //                 },
-  // //                 {
-  // //                   id: '113',
-  // //                   title: 'این یک تیتر برای این تسک است.',
-  // //                   projectTitle: 'پروژه اول',
-  // //                   status: Permission.manager,
-  // //                   archived: false,
-  // //                   sendforPeople: [
-  // //                     { gmailAccount: '', coverImg: '' },
-  // //                     { gmailAccount: '', coverImg: '' }
-  // //                   ],
-  // //                   describtion: '',
-  // //                   attachFiles: [''],
-  // //                   coverImg: '',
-  // //                   tags: [
-  // //                     { title: 'درس', color: 'blue' },
-  // //                     { title: 'پروژه', color: 'pink' }
-  // //                   ],
-  // //                   timeLine: {
-  // //                     start: new Date(2001),
-  // //                     deadLine: new Date(2000)
-  // //                   },
-  // //                   priority: Priorities.high
-  // //                 },
-  // //                 {
-  // //                   id: '114',
-  // //                   title: 'این یک تیتر برای این تسک است.',
-  // //                   projectTitle: 'پروژه اول',
-  // //                   status: Permission.manager,
-  // //                   archived: false,
-  // //                   sendforPeople: [
-  // //                     { gmailAccount: '', coverImg: '' },
-  // //                     { gmailAccount: '', coverImg: '' }
-  // //                   ],
-  // //                   describtion: '',
-  // //                   attachFiles: [''],
-  // //                   coverImg: '',
-  // //                   tags: [
-  // //                     { title: 'درس', color: 'blue' },
-  // //                     { title: 'پروژه', color: 'pink' }
-  // //                   ],
-  // //                   timeLine: {
-  // //                     start: new Date(2001),
-  // //                     deadLine: new Date(2000)
-  // //                   },
-  // //                   priority: Priorities.high
-  // //                 }
-  // //               ]
-  // //             },
-  // //             {
-  // //               id: '1112',
-  // //               title: 'TO Do',
-  // //               color: '#FD7E14',
-  // //               tasks: [
-  // //                 {
-  // //                   id: '113',
-  // //                   title: 'این یک تیتر برای این تسک است.',
-  // //                   projectTitle: 'پروژه اول',
-  // //                   status: Permission.manager,
-  // //                   archived: false,
-  // //                   sendforPeople: [{ gmailAccount: '', coverImg: '' }],
-  // //                   describtion: '',
-  // //                   attachFiles: [''],
-  // //                   coverImg: '',
-  // //                   tags: [
-  // //                     { title: 'درس', color: 'blue' },
-  // //                     { title: 'پروژه', color: 'pink' }
-  // //                   ],
-  // //                   timeLine: {
-  // //                     start: new Date(2000),
-  // //                     deadLine: new Date(1999)
-  // //                   },
-  // //                   priority: Priorities.asa
-  // //                 }
-  // //               ]
-  // //             },
-  // //             {
-  // //               id: '1113',
-  // //               title: 'In Progress',
-  // //               color: '#FAB005',
-  // //               tasks: []
-  // //             }
-  // //           ]
-  // //         },
-  // //         {
-  // //           id: '12',
-  // //           title: 'پروژه دوم',
-  // //           status: Permission.manager,
-  // //           boards: [
-  // //             {
-  // //               id: '1124',
-  // //               title: '',
-  // //               color: '',
-  // //               tasks: []
-  // //             }
-  // //           ]
-  // //         }
-  // //       ]
-  // //     },
-  // //     {
-  // //       id: '2',
-  // //       title: 'درس کامپایلر',
-  // //       color: '#FA5252',
-  // //       status: Permission.manager,
-  // //       projects: [
-  // //         {
-  // //           id: '21',
-  // //           title: '  پروژه اول',
-  // //           status: Permission.manager,
-  // //           boards: [
-  // //             {
-  // //               id: '1121',
-  // //               title: '',
-  // //               color: '',
-  // //               tasks: []
-  // //             }
-  // //           ]
-  // //         },
-  // //         {
-  // //           id: '22',
-  // //           title: 'پروژه دوم',
-  // //           status: Permission.manager,
-  // //           boards: [
-  // //             {
-  // //               id: '1122',
-  // //               title: '',
-  // //               color: '',
-  // //               tasks: []
-  // //             }
-  // //           ]
-  // //         }
-  // //       ]
-  // //     },
-  // //     {
-  // //       id: '3',
-  // //       title: 'کارهای شخصی',
-  // //       color: '#FAB005',
-  // //       status: Permission.manager,
-  // //       projects: [
-  // //         {
-  // //           id: '31',
-  // //           title: 'پروژه اول',
-  // //           status: Permission.manager,
-  // //           boards: [
-  // //             {
-  // //               id: '1131',
-  // //               title: '',
-  // //               color: '',
-  // //               tasks: []
-  // //             }
-  // //           ]
-  // //         },
-  // //         {
-  // //           id: '32',
-  // //           title: 'پروژه دوم',
-  // //           status: Permission.manager,
-  // //           boards: [
-  // //             {
-  // //               id: '1132',
-  // //               title: '',
-  // //               color: '',
-  // //               tasks: []
-  // //             }
-  // //           ]
-  // //         }
-  // //       ]
-  // //     },
-  // //     {
-  // //       id: '4',
-  // //       title: 'درس طراحی الگوریتم',
-  // //       color: '#228BE6',
-  // //       status: Permission.manager,
-  // //       projects: []
-  // //     }
-  // //   ]
-  //  })
+        userName: 'NM',
+        passWord: '12345678'
+      },
+      setting: {
+        mainTheme: 'light',
+        colortheme: 'green'
+      }
+    },
+    workspaces: [
+      {
+        id: '1',
+        title: 'درس مدیریت پروژه',
+        color: '#BE4BDB',
+        status: Permission.manager,
+        projects: [
+          {
+            id: '11',
+            title: 'پروژه اول',
+            status: Permission.manager,
+            boards: [
+              {
+                id: '1111',
+                title: 'pending',
+                color: '#F92E8F',
+                tasks: [
+                  {
+                    id: '111',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  },
+                  {
+                    id: '112',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.asa
+                  },
+                  {
+                    id: '113',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  },
+                  {
+                    id: '114',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [
+                      { gmailAccount: '', coverImg: '' },
+                      { gmailAccount: '', coverImg: '' }
+                    ],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2001),
+                      deadLine: new Date(2000)
+                    },
+                    priority: Priorities.high
+                  }
+                ]
+              },
+              {
+                id: '1112',
+                title: 'TO Do',
+                color: '#FD7E14',
+                tasks: [
+                  {
+                    id: '113',
+                    title: 'این یک تیتر برای این تسک است.',
+                    projectTitle: 'پروژه اول',
+                    status: Permission.manager,
+                    archived: false,
+                    sendforPeople: [{ gmailAccount: '', coverImg: '' }],
+                    describtion: '',
+                    attachFiles: [''],
+                    coverImg: '',
+                    tags: [
+                      { title: 'درس', color: 'blue' },
+                      { title: 'پروژه', color: 'pink' }
+                    ],
+                    timeLine: {
+                      start: new Date(2000),
+                      deadLine: new Date(1999)
+                    },
+                    priority: Priorities.asa
+                  }
+                ]
+              },
+              {
+                id: '1113',
+                title: 'In Progress',
+                color: '#FAB005',
+                tasks: []
+              }
+            ]
+          },
+          {
+            id: '12',
+            title: 'پروژه دوم',
+            status: Permission.manager,
+            boards: [
+              {
+                id: '1124',
+                title: '',
+                color: '',
+                tasks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: '2',
+        title: 'درس کامپایلر',
+        color: '#FA5252',
+        status: Permission.manager,
+        projects: [
+          {
+            id: '21',
+            title: '  پروژه اول',
+            status: Permission.manager,
+            boards: [
+              {
+                id: '1121',
+                title: '',
+                color: '',
+                tasks: []
+              }
+            ]
+          },
+          {
+            id: '22',
+            title: 'پروژه دوم',
+            status: Permission.manager,
+            boards: [
+              {
+                id: '1122',
+                title: '',
+                color: '',
+                tasks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: '3',
+        title: 'کارهای شخصی',
+        color: '#FAB005',
+        status: Permission.manager,
+        projects: [
+          {
+            id: '31',
+            title: 'پروژه اول',
+            status: Permission.manager,
+            boards: [
+              {
+                id: '1131',
+                title: '',
+                color: '',
+                tasks: []
+              }
+            ]
+          },
+          {
+            id: '32',
+            title: 'پروژه دوم',
+            status: Permission.manager,
+            boards: [
+              {
+                id: '1132',
+                title: '',
+                color: '',
+                tasks: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: '4',
+        title: 'درس طراحی الگوریتم',
+        color: '#228BE6',
+        status: Permission.manager,
+        projects: []
+      }
+    ]
+  })
   const initialvalue = User.current
   const [user, dispatch] = useReducer(UserReducer, initialvalue)
 

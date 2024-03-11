@@ -20,6 +20,7 @@ import ChangeProjectTitle from '../components/Modals/NewProject/ChangeProjectTit
 import DeleteWorkspace from '../components/Modals/NewWorkspace/DeleteWorkspace'
 import Response from '../components/Modals/ResponseModales/Response'
 import { store } from '../app/store'
+import { atom } from 'jotai'
 interface MainLayoutProps {}
 
 interface MainLayoutContext {
@@ -30,6 +31,7 @@ interface MainLayoutContext {
 }
 
 let WIDForNewProject: null | string = null
+export const IDS = atom({ workspaceID: 0, projectID: 0 })
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   const [localPage, dispatch] = useReducer(StepReducer, {
     value: 0,

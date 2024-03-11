@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-extra-boolean-cast */
 /* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable spaced-comment */
@@ -50,7 +51,7 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
               }
             }}
             to={`/workspace/${project.id}`}
-            state={{ workspaceItemID, projectID }}
+            state={{ workspaceItemID, projectItemID: projectID }}
           >
             <div className="group justify-between flex w-[246px] cursor-pointer space-x-2 hover:bg-[#E9F9FF]">
               <div className="invisible w-[20px] group-hover:visible group-hover:bg-[#E9F9FF]">
