@@ -14,7 +14,6 @@ import SidebarPrimary from '../components/SideBars/SidebarPrimary'
 import { Outlet } from 'react-router-dom'
 import NewProject from '../components/Modals/NewProject/NewProject'
 import NewWorkspace from '../components/Modals/NewWorkspace/NewWorkspace'
-
 import ChangeWorkspaceTitle from '../components/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../components/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../components/Modals/NewProject/ChangeProjectTitle'
