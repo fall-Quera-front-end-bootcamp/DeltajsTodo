@@ -12,11 +12,11 @@ import ChangeWorkspaceTitle from '../../components/Common/Modals/NewWorkspace/Ch
 import ChangeWorkspaceColor from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../../components/Common/Modals/NewProject/ChangeProjectTitle'
 import { localPageContext } from '../../contexts/LocalPageContextProvider'
-import { UserContext } from '../../contexts/UserProvider'
-import ProjectItemWorkspace from '../../components/WorkspaceComponents/ProjectItemWorkspace'
-import BuildProjectItemWorkspaceButton from '../../components/WorkspaceComponents/BuildProjectItemWorkspaceButton'
+import { atom } from 'jotai'
 
 interface MainLayoutProps {}
+
+export const IDS = atom({ workspaceID: 0, projectID: 0 })
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   const { value, WorkspaceID, projectID } = useContext(localPageContext)

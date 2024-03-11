@@ -1,14 +1,21 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent } from 'react'
-import { type Project } from '../../../../../utilities/models'
+import { useState, type FunctionComponent, useEffect } from 'react'
+import {
+  type Board,
+  type Task,
+  type Project
+} from '../../../../../utilities/models'
 import TaskCard from '../../Task/TaskCard/TaskCard'
 import Column from './ColumnComponents/Column'
 import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
 import NewColumn from './ColumnComponents/NewColumn'
 import NewTask from '../../Task/NewTask/NewTask'
+import { useAtom } from 'jotai'
+import { useGetBoardsQuery } from '../../../../../features/auth/authApiSlice'
+import { IDS } from '../../../../../pages/MainPages/MainLayout'
 
 interface ColumnViewProps {
-  project: Project
+  project?: Project
 }
 
 const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
@@ -17,17 +24,38 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
     setShowNewTask((p) => !p)
   }
 
+  const [ids, setids] = useAtom(IDS)
+
+  useEffect(() => {
+    console.log(ids)
+  }, [])
+  // Api for Board =========
+  const {
+    data: boards,
+    isLoading,
+    isError,
+    isSuccess,
+    error
+  } = useGetBoardsQuery({
+    workspace_id: ids.workspaceID,
+    project_id: ids.projectID
+  })
+
+  // ==================================
+
   return (
     <div dir="rtl" className={`flex flex-row gap-4 ${showNewTask ? '' : ''}`}>
-      {project.boards.length === 0 ? (
+      {boards?.length === 0
+        ? (
         <></>
-      ) : (
-        project.boards.map((board) => {
-          return (
+          )
+        : (
+            boards?.map((board: Board) => {
+              return (
             <Column handleNewTask={handleNewTask} key={board.id} board={board}>
               <>
                 <div className="flex flex-col gap-3">
-                  {board.tasks.map((task) => {
+                  {board.tasks.map((task: Task) => {
                     return (
                       <div key={task.id} className="">
                         <TaskCard task={task} />
@@ -43,9 +71,9 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
                 />
               </>
             </Column>
-          )
-        })
-      )}
+              )
+            })
+          )}
       <NewColumn />
       <BuildTaskButtonPrimary
         className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"

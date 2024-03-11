@@ -12,11 +12,11 @@ import DateRangePicker from '../../Calendar/DateRangePicker'
 import LinkCopyIconSvg from '../../../../Common/Icons/LinkCopyIconSvg'
 import { UserContext } from '../../../../../contexts/UserProvider'
 import NewTaskDropDownMenu from './NewTaskDropDownMenu'
-import { Project } from '../../../../../utilities/models'
+import { type Project } from '../../../../../utilities/models'
 
 interface NewTaskProps {
   handle: () => void
-  project: Project
+  project: Project | undefined
 }
 
 const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {

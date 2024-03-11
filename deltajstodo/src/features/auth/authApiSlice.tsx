@@ -43,7 +43,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     updataWorkspace: builder.mutation({
       query: (data) => ({
-        url: `/workspaces/${data.id}/`,
+        url: `workspaces/${data.id}/`,
         method: 'PATCH',
         body: { ...data }
       }),
@@ -99,7 +99,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     getProjects: builder.query({
       query: (data) => ({
-        url: `/workspaces/${data.workspace_id}/projects`,
+        url: `/workspaces/${data.workspace_id}/projects/`,
         method: 'GET'
         // body: { ...data }
       }),
@@ -107,7 +107,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     createProject: builder.mutation({
       query: (data) => ({
-        url: ` /workspaces/${data.workspace_id}/projects/`,
+        url: `/workspaces/${data.workspace_id}/projects/`,
         method: 'POST',
         body: { ...data }
       }),
@@ -123,7 +123,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     updataProject: builder.mutation({
       query: (data) => ({
-        url: ` /workspaces/${data.workspace_id}/projects/${data.id}/`,
+        url: `/workspaces/${data.workspace_id}/projects/${data.id}/`,
         method: 'PATCH',
         body: { ...data }
       }),
@@ -225,5 +225,13 @@ export const {
   useGetWorkspacesQuery,
   useCreateWorkspaceMutation,
   useUpdataWorkspaceMutation,
-  useDeleteWorkspaceMutation
+  useDeleteWorkspaceMutation,
+  /////////////////////////////////////
+  useGetProjectsQuery,
+  useCreateProjectMutation,
+  useGetProjectQuery,
+  useUpdataProjectMutation,
+  useDeleteProjectMutation,
+  ///////////////////////////////////
+  useGetBoardsQuery
 } = authApiSlice

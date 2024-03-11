@@ -61,7 +61,7 @@ interface Comment {
 }
 export interface Task {
   readonly id: string
-  title: string
+  name: string
   projectTitle: string
   status: Permission.manager
   archived: false
@@ -77,14 +77,14 @@ export interface Task {
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
 export interface Board {
   readonly id: string
-  title: string
+  name: string
   color: string
   tasks: Task[]
 }
 
 export interface Project {
   readonly id: string
-  title: string
+  name: string
   status: Permission.manager
   sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
   boards: Board[]
@@ -103,7 +103,7 @@ export enum Permission {
  */
 export interface Workspace {
   readonly id: string
-  title: string
+  name: string
   color: string
   link?: string
   status: Permission.manager
