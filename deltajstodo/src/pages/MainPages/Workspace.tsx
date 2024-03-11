@@ -9,27 +9,38 @@ import ChangeWorkspaceColor from '../../components/Common/Modals/NewWorkspace/Ch
 import ChangeProjectTitle from '../../components/Common/Modals/NewProject/ChangeProjectTitle'
 import ProjectItemWorkspace from '../../components/MainPage/WorkspaceComponents/ProjectItemWorkspace'
 import BuildProjectItemWorkspaceButton from '../../components/MainPage/WorkspaceComponents/BuildProjectItemWorkspaceButton'
+import { useGetWorkspacesQuery } from '../../features/auth/authApiSlice'
+import { Workspace } from '../../utilities/models'
 interface WorkspaceProps {}
 
 const Workspace: FunctionComponent<WorkspaceProps> = () => {
   const user = useContext(UserContext)
   const { value, WorkspaceID, projectID } = useContext(localPageContext)
+  const {
+    data: workspaces,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetWorkspacesQuery(null)
+
   return (
     <div className="flex h-screen w-full flex-col gap-8 overflow-auto pr-20 pt-20">
-      {user?.workspaces?.length === 0
+      {workspaces?.length === 0
         ? (
         <div className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2">
           <NewWorkspace />
         </div>
           )
         : (
-            user?.workspaces?.map((w) => {
+            workspaces?.map((w: Workspace) => {
               return (
             <>
               <div key={w?.id} className="flex flex-col items-end gap-8">
-                <h3 className="text-boldxl">{w.title}</h3>
-                <div className="flex flex-row-reverse gap-8">
-                  {w?.projects?.length !== undefined && w?.projects?.length > 0
+                <h3 className="text-boldxl">{w.name}</h3>
+                <div className="flex flex-row-reverse gap-8 dark:bg-gray-dark">
+                  {w?.projects?.length !== undefined &&
+                  w?.projects?.length > 0
                     ? (
                         w?.projects?.map((p) => {
                           return (
@@ -37,7 +48,7 @@ const Workspace: FunctionComponent<WorkspaceProps> = () => {
                           workspaceItemColor={w?.color}
                           project={p}
                           projectID={p?.id}
-                          projectTitle={p?.title}
+                          projectTitle={p?.name}
                           workspaceID={w?.id}
                           key={p.id}
                         />
