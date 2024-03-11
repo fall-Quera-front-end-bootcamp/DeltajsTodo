@@ -23,11 +23,12 @@ import { UserContext, UserDispatchContext } from './contexts/UserProvider'
 import Admin from './pages/Admin'
 import RequireAuth from './features/auth/RequireAuth'
 import AllContext from './contexts/AllContext'
+import EmptyArea from './pages/EmptyArea'
 import Workspace from './pages/MainPages/Workspace'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
-    id: 1,
+    id: '1',
     gmailAccount: 'abc@gmail.com',
     coverImg: './asset/123.png',
     profile: {
@@ -296,7 +297,7 @@ function App(): JSX.Element {
               <Route path="/admin" element={<Admin />} />
               <Route path="/" element={<Login />} />
               <Route path="api/auth/register" element={<Register />} />
-
+              <Route path="/e" element={<EmptyArea />} />
               <Route
                 path="api/auth/forgetPassword"
                 element={<ForgetPassword />}

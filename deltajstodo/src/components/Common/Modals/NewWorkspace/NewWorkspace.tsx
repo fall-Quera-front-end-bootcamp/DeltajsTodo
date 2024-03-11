@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable spaced-comment */
@@ -9,7 +11,6 @@ import {
   useReducer,
   createContext,
   useState,
-  useEffect,
   useContext
 } from 'react'
 
@@ -17,12 +18,10 @@ import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 import { Permission, type Workspace } from '../../../../utilities/models'
-import {
-  UserContext,
-  UserDispatchContext
-} from '../../../../contexts/UserProvider'
 import { useNavigate } from 'react-router-dom'
-
+import { useCreateWorkspaceMutation } from '../../../../features/auth/authApiSlice'
+import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+////////////////////// 🟨Local Context🟥 //////////////////////////
 export const CreationWorkspaceStepContext = createContext<number | null>(null)
 export const CreationWorkspaceStepDispatchContext = createContext<unknown>(null)
 function CreationWorkspaceStepReducer(step: number, action: any): number {
@@ -46,39 +45,46 @@ function CreationWorkspaceStepReducer(step: number, action: any): number {
     }
   }
 }
-// eslint-disable-next-line @typescript-eslint/ban-types
+////////////////////// 🟨🟥 //////////////////////////
 
 interface NewWorkspaceProps {}
 
 const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   const [creationStep, dispatch] = useReducer(CreationWorkspaceStepReducer, 1)
   const [form, setForm] = useState<Workspace>({
-    id: '',
+    id: -1,
     title: '',
     color: '#7D828C',
     status: Permission.manager,
     projects: []
   })
-  const user = useContext(UserContext)
-  const userDispatch: any = useContext(UserDispatchContext)
+  const navigate = useNavigate()
+  const localPageDispatch: any = useContext(localPageDispatchContext)
+  const [createWorkspace, { isLoading }] = useCreateWorkspaceMutation()
 
   const onchangeHandler = (e: any): void => {
     setForm((prev) => {
       return { ...prev, [e.target.name]: e.target.value }
     })
   }
-  const navigate = useNavigate()
-  const onSubmitWSCreation = (): void => {
-    userDispatch({
-      type: 'AddWorkspace',
-      new_workspace: {
-        id: ((user?.workspaces?.length ?? 0) + 1).toString(),
-        title: form.title,
-        color: form.color,
-        status: Permission.manager,
-        projects: []
-      }
-    })
+
+  const onSubmitWSCreation = async (): Promise<void> => {
+    console.log(form)
+
+    try {
+      const newWS = await createWorkspace({
+        name: form?.title,
+        color: form?.color
+      }).unwrap()
+      console.log(newWS)
+      localPageDispatch({ type: 'closeModal' })
+    } catch (err: any) {
+      localPageDispatch({
+        type: 'openResponseModal',
+        responseData: { type: 'fail', message: err?.error ?? '' }
+      })
+    }
+
     navigate('/workspace')
   }
   return (
@@ -87,7 +93,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px] "
+            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px]"
           >
             {creationStep === 1 && (
               <Step1 value={form.title} onchangeHandler={onchangeHandler} />
@@ -96,7 +102,11 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
               <Step2 value={form.color} onChangeHandler={onchangeHandler} />
             )}
             {creationStep === 3 && (
-              <Step3 form={form} onSubmitWSCreation={onSubmitWSCreation} />
+              <Step3
+                form={form}
+                onSubmitWSCreation={onSubmitWSCreation}
+                disablity={isLoading}
+              />
             )}
             {/**⚫⚫⚪ */}
             <div

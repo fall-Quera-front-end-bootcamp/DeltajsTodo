@@ -11,8 +11,8 @@ function TaskMore({
   workspaceID,
   projectID
 }: {
-  workspaceID: string
-  projectID: string
+  workspaceID: number
+  projectID: number
 }): JSX.Element {
   const dispatch: any = useContext(UserDispatchContext)
   const localPageDispatch: any = useContext(localPageDispatchContext)

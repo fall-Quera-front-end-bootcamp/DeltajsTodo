@@ -60,8 +60,8 @@ interface Comment {
   commentDescription: string
 }
 export interface Task {
-  readonly id: string
-  title: string
+  readonly id: nubmer
+  name: string
   projectTitle: string
   status: Permission.manager
   archived: false
@@ -76,15 +76,15 @@ export interface Task {
 }
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
 export interface Board {
-  readonly id: string
-  title: string
+  readonly id: number
+  name: string
   color: string
   tasks: Task[]
 }
 
 export interface Project {
-  readonly id: string
-  title: string
+  readonly id: number
+  name: string
   status: Permission.manager
   sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
   boards: Board[]
@@ -102,8 +102,8 @@ export enum Permission {
  * * Every time should created from contex api or localstorage
  */
 export interface Workspace {
-  readonly id: string
-  title: string
+  readonly id: number
+  name: string
   color: string
   link?: string
   status: Permission.manager

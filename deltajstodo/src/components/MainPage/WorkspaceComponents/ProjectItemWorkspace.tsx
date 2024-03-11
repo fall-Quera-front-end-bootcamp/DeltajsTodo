@@ -4,11 +4,11 @@ import { hexColors } from '../../../constants'
 import getKeyByValue from '../../../utilities/getKeyByValue'
 
 interface ProjectItemWorkspaceProps {
-  projectID: number
+  projectID: string
   project: Project
   workspaceItemColor: string
   projectTitle: string
-  workspaceID: number
+  workspaceID: string
 }
 
 const ProjectItemWorkspace = ({
@@ -26,7 +26,7 @@ const ProjectItemWorkspace = ({
       state={{ workspaceID, project }}
       className={`h-20 w-[200px] rounded-2xl ${bgColor} flex items-center justify-center`}
     >
-      <h3 className="text-boldm text-white">{projectTitle}</h3>
+      <h3 className="text-boldm text-white dark:bg-gray-primary">{projectTitle}</h3>
     </NavLink>
   )
 }
