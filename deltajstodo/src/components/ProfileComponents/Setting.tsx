@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, useEffect, useRef } from 'react'
-import ButtonColorIconSvg from '../Icons/ButtonColorIconSvg'
-import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import { motion } from 'framer-motion'
+
 import {
   useGetSettingsQuery,
   useSetSettingsMutation
 } from '../../features/users/usersInteractionApiSlice'
+
+import ButtonColorIconSvg from '../Icons/ButtonColorIconSvg'
+import ThemeToggle from '../ThemeToggle/ThemeToggle'
 import Loading from '../Loading/Loading'
 
 interface SettingProps {
@@ -16,13 +18,11 @@ interface SettingProps {
 const Setting = ({ messageFunction }: SettingProps) => {
   const getSettings = useGetSettingsQuery(1)
   const [setSettings] = useSetSettingsMutation()
-  console.log(getSettings.data)
 
   const [isLoading, setIsLoading] = useState(true)
   const [isSending, setIsSending] = useState(false)
 
   const [chosedColor, setChosedColor] = useState('#208D8E')
-  const [darkTheme, setDarkTheme] = useState(false)
 
   const colorsPalet = useRef<any>([
     '#FD7E14',
@@ -42,10 +42,6 @@ const Setting = ({ messageFunction }: SettingProps) => {
 
   const changeThemeHandler = (e: any) => {
     setChosedColor(e.target.value)
-  }
-
-  const DarkModeTheme = () => {
-    setDarkTheme((prev) => !prev)
   }
 
   useEffect(() => {
@@ -114,7 +110,7 @@ const Setting = ({ messageFunction }: SettingProps) => {
           </div>
         </div>
 
-        <ThemeToggle DarkModeTheme={DarkModeTheme} />
+        <ThemeToggle />
 
         <button
           className="flex justify-center w-[354px] rounded-md mt-[40px] py-[8px] px-[12px] bg-brand-primary text-white font-extrabold text-[14px] leading-[19.73px]"

@@ -1,24 +1,25 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useEffect, useState } from 'react'
-import Input from '../Input/Input'
 import { FormProvider, useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
+
+import axios from 'axios'
+
+import { store } from '../../app/store'
 import {
   useGetUserQuery,
   useUpdateInfoMutation
 } from '../../features/users/usersInteractionApiSlice'
+
 import Loading from '../Loading/Loading'
-import { useAtom } from 'jotai'
-import { userId } from '../../App'
-import { store } from '../../app/store'
+import Input from '../Input/Input'
 
 interface ProfileInfoProps {
   messageFunction: Function
 }
 
 const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
-  const [id, setId] = useAtom(userId)
-  console.log(id)
+  const id = store.getState().auth.user?.user_id
 
   const getUser = useGetUserQuery(id)
   const [UpdateInfo] = useUpdateInfoMutation()
@@ -27,6 +28,24 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isSending, setIsSending] = useState(false)
   const [userData, setUserData] = useState(['', '', ''])
+
+  const [profileImageURL, setProfileImageURL] = useState('')
+  const [profileImageFile, setProfileImageFile] = useState<File | null>(null)
+
+  const uploadImage = (e: any) => {
+    const imageFile = e.target.files[0]
+    setProfileImageFile(imageFile)
+
+    const imageurl = URL.createObjectURL(imageFile)
+    setProfileImageURL(imageurl)
+  }
+
+  const clearImage = (e: any) => (e.target.value = '')
+
+  const deleteProfileImage = () => {
+    setProfileImageURL('')
+    setProfileImageFile(null)
+  }
 
   const profileNameProps = {
     name: 'profile_name',
@@ -70,43 +89,72 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
     value: `${userData[2]}`
   }
 
-  // const user = store.getState().auth.user
-
   useEffect(() => {
     if (getUser.status === 'fulfilled') {
       setUserData([
         getUser.data.first_name,
         getUser.data.last_name,
         getUser.data.phone_number || ''
-        // store.getState().auth.user.first_name,
-        // store.getState().auth.user.last_name,
-        // store.getState().auth.user.phone_number
       ])
+      setProfileImageURL(getUser.data.thumbnail)
       setIsLoading(false)
     }
-    console.log(getUser.status)
   }, [getUser])
 
   const onSubmit = methods.handleSubmit((data) => {
     setIsSending(true)
+
+    if (profileImageFile) {
+      const updateData = new FormData()
+      updateData.append('thumbnail', profileImageFile, profileImageFile.name)
+      handleImageSubmit(updateData)
+    } else {
+      const updateData = {
+        thumbnail: null
+      }
+      handleInfoSubmit(updateData)
+    }
+
     const updateData = {
       first_name: data.profile_name,
       last_name: data.profile_last_name,
       phone_number: data.profile_phone
     }
-    handleSubmit(updateData)
+    handleInfoSubmit(updateData)
   })
 
-  const handleSubmit = async (data: {
-    first_name: string
-    last_name: string
-    phone_number: string
+  const handleImageSubmit = async (data: FormData): Promise<void> => {
+    const accessToken = store.getState().auth.user?.access
+    const url = `http://185.8.174.74:8000/accounts/${id}/`
+
+    await axios
+      .patch(url, data, {
+        headers: {
+          'content-type': 'multipart/form-data',
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+      .then(() => {
+        messageFunction('عکس پروفایل تغییر کرد', 'success')
+      })
+      .catch(() =>
+        messageFunction('مشکلی در تغییر عکس پروفایل پیش آمده', 'fail')
+      )
+
+    setIsSending(false)
+  }
+
+  const handleInfoSubmit = async (data: {
+    first_name?: string
+    last_name?: string
+    phone_number?: string
+    thumbnail?: null
   }): Promise<void> => {
     try {
       await UpdateInfo({ data, id }).unwrap()
-      messageFunction('تغییرات با موفقیت اعمال شد', 'success')
+      messageFunction('اطلاعات با موفقیت تغییر کرد', 'success')
     } catch (err: any) {
-      messageFunction('تغییرات موفقیت آمیز نبود', 'fail')
+      messageFunction('مشکلی در تغییر اطلاعات به وجود آمده', 'fail')
       methods.reset
     }
     setIsSending(false)
@@ -133,16 +181,49 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
         className="flex flex-col gap-8"
       >
         <div className="flex items-center gap-4">
-          <div className="bg-[#FFF3BF] px-[22.86px] pt-[25.71px] pb-[20px] rounded-[285.71px]">
-            <span className="font-medium text-[34.29px] leading-[48.31px] text-[#FAB005]">
-              NM
-            </span>
+          <div className="w-[100.71px] h-[93.71px] rounded-[285.71px] overflow-hidden">
+            {profileImageURL ? (
+              <img
+                src={profileImageURL}
+                alt=""
+                className="w-[100%] h-[100%] object-cover"
+              />
+            ) : (
+              <span className="w-[100%] h-[100%] bg-[#FFF3BF] pt-2 flex justify-center items-center font-medium text-[34.29px] leading-[48.31px] text-[#FAB005]">
+                NM
+              </span>
+            )}
           </div>
 
-          <div className="flex flex-col items-center gap-4">
-            <button className="p-[10px] rounded-lg border border-[#208D8E] font-medium text-[20px] leading-[28.18px] text-[#208D8E]">
-              ویرایش تصویر پروفایل
-            </button>
+          <div className="flex flex-col justify-center h-[93.71px] gap-3">
+            {profileImageURL ? (
+              <span
+                className="text-[15px] text-red-primary cursor-pointer"
+                onClick={deleteProfileImage}
+              >
+                حذف تصویر پروفایل
+              </span>
+            ) : (
+              <></>
+            )}
+
+            <label
+              htmlFor="image_input"
+              className="relative cursor-pointer py-[10px]"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                id="image_input"
+                hidden
+                onChange={uploadImage}
+                onClick={clearImage}
+              />
+              <span className="p-[10px] rounded-lg border border-[#208D8E] font-medium text-[20px] leading-[28.18px] text-[#208D8E]">
+                ویرایش تصویر پروفایل
+              </span>
+            </label>
+
             <span className="font-normal text-[12px] leading-[16.91px]">
               این تصویر برای عموم قابل نمایش است.
             </span>

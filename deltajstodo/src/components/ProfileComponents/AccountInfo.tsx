@@ -1,23 +1,24 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import Input from '../Input/Input'
+import { motion } from 'framer-motion'
+
+import { store } from '../../app/store'
 import {
   useGetUserQuery,
   useUpdateInfoMutation,
   useUpdatePassMutation
 } from '../../features/users/usersInteractionApiSlice'
-import { useEffect, useState } from 'react'
+
 import Loading from '../Loading/Loading'
-import { useAtom } from 'jotai'
-import { userId } from '../../App'
+import Input from '../Input/Input'
 
 interface AccountInfoProps {
   messageFunction: Function
 }
 
 const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
-  const [id, setId] = useAtom(userId)
+  const id = store.getState().auth.user?.user_id
 
   const getUser = useGetUserQuery(id)
   const [UpdateInfo] = useUpdateInfoMutation()
@@ -27,7 +28,6 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isSending, setIsSending] = useState(false)
   const [userData, setUserData] = useState(['', ''])
-  const [passReqired, setPassReqired] = useState(false)
 
   const accountEmailProps = {
     name: 'account_email',
@@ -61,7 +61,7 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
     name: 'account_current_pass',
     validation: {
       required: {
-        value: passReqired,
+        value: false,
         message: 'لطفا رمز عبور خود را وارد کنید'
       }
     },
@@ -75,7 +75,7 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
     name: 'account_new_pass',
     validation: {
       required: {
-        value: passReqired,
+        value: false,
         message: 'لطفا رمز عبور خود را وارد کنید'
       }
     },
@@ -88,7 +88,7 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
     name: 'account_repeated_new_pass',
     validation: {
       required: {
-        value: passReqired,
+        value: false,
         message: 'لطفا رمز عبور خود را وارد کنید'
       }
     },
@@ -106,45 +106,31 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
 
   const onSubmit = methods.handleSubmit((data) => {
     if (
-      data.account_current_pass ||
-      data.account_new_pass ||
-      data.account_repeated_new_pass
+      !data.account_current_pass &&
+      !data.account_new_pass &&
+      !data.account_repeated_new_pass
     ) {
-      console.log(1)
-      setPassReqired(true)
-    }
-    if (
-      data.account_current_pass &&
-      data.account_new_pass &&
-      data.account_repeated_new_pass
-    ) {
-      console.log(2)
       setIsSending(true)
-      console.log(data)
+
       const updateInfo = {
         email: data.account_email,
         username: data.account_user_name
       }
       handleInfoChange(updateInfo)
-
+    } else if (
+      data.account_current_pass &&
+      data.account_new_pass &&
+      data.account_repeated_new_pass
+    ) {
+      setIsSending(true)
       const updatePass = {
         old_password: data.account_current_pass,
         new_password: data.account_new_pass,
         new_password1: data.account_repeated_new_pass
       }
       handlePassChange(updatePass)
-    } else if (
-      !data.account_current_pass &&
-      !data.account_new_pass &&
-      !data.account_repeated_new_pass
-    ) {
-      setIsSending(true)
-      console.log(data)
-      const updateInfo = {
-        email: data.account_email,
-        username: data.account_user_name
-      }
-      handleInfoChange(updateInfo)
+    } else {
+      messageFunction('فیلد‌های رمز عبور خالی است', 'fail')
     }
   })
 
@@ -154,9 +140,9 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
   }): Promise<void> => {
     try {
       await UpdateInfo({ data, id }).unwrap()
-      messageFunction('تغییرات با موفقیت اعمال شد', 'success')
+      messageFunction('اطلاعات با موفقیت تغییر کرد', 'success')
     } catch (err: any) {
-      messageFunction('تغییرات موفقیت آمیز نبود', 'fail')
+      messageFunction('مشکلی در تغییر اطلاعات به وجود آمده', 'fail')
       methods.reset
     }
     setIsSending(false)
@@ -171,7 +157,7 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
       await UpdatePass(data).unwrap()
       messageFunction('رمز با موفقیت تغییر کرد', 'success')
     } catch (err: any) {
-      messageFunction('تغییرات موفقیت آمیز نبود', 'fail')
+      messageFunction('تغییر رمز عبور موفقیت آمیز نبود', 'fail')
       methods.reset
     }
     setIsSending(false)

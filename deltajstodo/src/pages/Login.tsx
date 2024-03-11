@@ -23,14 +23,11 @@ import axios from 'axios'
 import { useGetUsersQuery } from '../features/users/usersInteractionApiSlice'
 import { setUsers } from '../features/users/usersInteractionSlice'
 import { store } from '../app/store'
-import { userId } from '../App'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
 
 const Login: FunctionComponent<LoginProps> = () => {
-  const [id, setId] = useAtom(userId)
-
   const methods = useForm()
   const navigate = useNavigate()
 
@@ -74,8 +71,6 @@ const Login: FunctionComponent<LoginProps> = () => {
         password: data.password
       }).unwrap()
       console.log(userData)
-
-      setId(userData.user_id)
 
       dispatch(
         setCredentials({ accessToken: userData.access, user: { ...userData } })

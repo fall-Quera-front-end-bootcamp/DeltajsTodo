@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './dist/output.css'
 import { Route, Routes } from 'react-router-dom'
-import { atom } from 'jotai'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import ForgetPassword from './pages/ForgetPassword'
@@ -26,8 +25,7 @@ import NewProject from './components/Modals/NewProject/NewProject'
 import Admin from './pages/Admin'
 import RequireAuth from './features/auth/RequireAuth'
 import Profile from './pages/Profile'
-
-export const userId = atom(0)
+import TaskInformationPage from './pages/taskInformationPage'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
@@ -312,6 +310,10 @@ function App(): JSX.Element {
                 <Route path=":projectID" element={<Board />} />
               </Route>
               <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/taskinformation"
+                element={<TaskInformationPage />}
+              />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

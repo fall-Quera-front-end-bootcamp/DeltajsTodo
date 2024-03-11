@@ -1,8 +1,27 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { createSlice } from '@reduxjs/toolkit'
+
+type SliceState = {
+  user: null | {
+    access: string
+    email: string
+    first_name: string
+    last_name: string
+    phone_number: string
+    refresh: string
+    thumbnail: string
+    user_id: number
+    username: string
+  }
+  token: null | string
+  resetURL: null | string
+}
+
+const initialState: SliceState = { user: null, token: null, resetURL: null }
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { user: null, token: null, resetURL: null },
+  initialState: initialState,
   reducers: {
     setCredentials: (state, action) => {
       const { user, accessToken } = action.payload

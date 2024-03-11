@@ -1,26 +1,27 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, type FunctionComponent } from 'react'
+
 import ProfileSideBar from '../components/ProfileComponents/ProfileSideBar'
 import ProfileInfo from '../components/ProfileComponents/ProfileInfo'
 import AccountInfo from '../components/ProfileComponents/AccountInfo'
 import Setting from '../components/ProfileComponents/Setting'
-import { Theme } from './MainLayout'
-import { useAtom } from 'jotai'
-import { string } from 'prop-types'
 import Message from '../components/Message/Message'
+
 interface ProfileProps {}
 
 const Profile: FunctionComponent<ProfileProps> = () => {
-  const [theme, setTheme] = useAtom(Theme)
-
   const [section, setSection] = useState('info')
   const [title, setTitle] = useState('اطلاعات فردی')
-  const [messages, setMessages] = useState<string[][]>([])
+  const [messages, setMessages] = useState<
+    Array<{ text: string; type: string }>
+  >([])
 
   const setMessage = (text: string, type: string) => {
-    const newValue = [...messages, [text, type]]
-    setMessages(newValue)
-    setTimeout(() => {}, 5000)
+    setMessages((prev) => [...prev, { text: text, type: type }])
+    const remove = setTimeout(() => {
+      setMessages([])
+    }, 5000)
+    return () => clearTimeout(remove)
   }
 
   const changeSection = (e: any) => {
@@ -49,13 +50,12 @@ const Profile: FunctionComponent<ProfileProps> = () => {
   }
 
   return (
-    <div
-      dir="rtl"
-      className={`flex w-[100%] h-[100vh] ${theme.bgColor} ${theme.textColor}`}
-    >
-      <div className="fixed top-3 left-[50%] translate-x-[-50%]">
-        {messages.map((item) => {
-          return <Message text={item[0]} type={item[1]} />
+    <div dir="rtl" className={`flex w-[100%] h-[100vh]`}>
+      <div className="fixed top-3 left-[50%] translate-x-[-50%] z-10">
+        {messages.map((item, index) => {
+          if (index < messages.length / 2) {
+            return <Message key={index} text={item.text} type={item.type} />
+          }
         })}
       </div>
       {/* sidebar */}

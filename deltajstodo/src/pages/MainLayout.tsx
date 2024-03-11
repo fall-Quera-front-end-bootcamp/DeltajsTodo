@@ -17,7 +17,6 @@ import Step1 from '../components/Modals/NewWorkspace/Step1'
 import ChangeWorkspaceTitle from '../components/Modals/NewWorkspace/ChangeWorkspaceTitle'
 import ChangeWorkspaceColor from '../components/Modals/NewWorkspace/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../components/Modals/NewProject/ChangeProjectTitle'
-import { atom, useAtom } from 'jotai'
 
 interface MainLayoutProps {}
 
@@ -29,30 +28,7 @@ interface MainLayoutContext {
 
 let WIDForNewProject: null | string = null
 
-export const Theme = atom({
-  bgColor: 'bg-white',
-  textColor: 'text-black'
-})
-
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
-  const [theme, setTheme] = useAtom(Theme)
-
-  useEffect(() => {
-    console.log('initial')
-    const DarkTheme = localStorage.getItem('Darktheme')
-    console.log({ DarkTheme: DarkTheme })
-    if (DarkTheme && DarkTheme === 'true') {
-      console.log('theme is exist')
-      setTheme({
-        bgColor: 'bg-[#202124]',
-        textColor: 'text-[#f1f1f1]'
-      })
-    } else if (!DarkTheme) {
-      console.log('theme does not exist')
-      localStorage.setItem('DarkTheme', 'false')
-    }
-  }, [])
-
   const [localPage, dispatch] = useReducer(StepReducer, {
     value: 0,
     WorkspaceID: '',

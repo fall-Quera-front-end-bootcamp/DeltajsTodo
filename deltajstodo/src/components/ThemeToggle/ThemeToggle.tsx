@@ -2,16 +2,9 @@
 import { useState } from 'react'
 import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import LightModeSwitchIconSvg from '../Icons/LightModeSwitchIconSvg'
-import { useAtom } from 'jotai'
-import { Theme } from '../../pages/MainLayout'
 
-interface ThemeToggleProps {
-  DarkModeTheme: Function
-}
-
-const ThemeToggle = ({ DarkModeTheme }: ThemeToggleProps) => {
+const ThemeToggle = () => {
   const [darkTheme, setDarkTheme] = useState(false)
-  const [theme, setTheme] = useAtom(Theme)
 
   const [insideDivPosition, setInsideDivPosition] = useState('left-[31px]')
   const [insideDivBg, setInsideDivBg] = useState('bg-[#FFFFFF]')
@@ -21,30 +14,12 @@ const ThemeToggle = ({ DarkModeTheme }: ThemeToggleProps) => {
 
   const themeChanger = () => {
     if (darkTheme) {
-      DarkModeTheme(true)
-
-      setTheme({
-        bgColor: 'bg-white',
-        textColor: 'text-black'
-      })
-
-      localStorage.setItem('DarkTheme', 'false')
-
       setInsideDivPosition('left-[31px]')
       setInsideDivBg('bg-[#FFFFFF]')
       setContainerDivBg('bg-[#F1F3F5]')
       setLightSvgColor('#262626')
       setDarkSvgColor('#F1F3F5')
     } else {
-      DarkModeTheme(false)
-
-      setTheme({
-        bgColor: 'bg-[#202124]',
-        textColor: 'text-[#f1f1f1]'
-      })
-
-      localStorage.setItem('DarkTheme', 'true')
-
       setInsideDivPosition('left-[3px]')
       setInsideDivBg('bg-[#868E96]')
       setContainerDivBg('bg-[#343A40]')
