@@ -1,11 +1,13 @@
 const DisabledIconSvg = ({
   size = '32',
   color = '#BDBDBD',
-  className
+  className,
+  onClick
 }: {
   size?: string
   color?: string
   className?: string
+  onClick?: () => void
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes

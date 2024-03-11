@@ -1,10 +1,10 @@
-import '../../../../dist/output.css'
-import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
-import ProfileAddUserIconSvg from '../../../../Common/Icons/ProfileAddUserIconSvg'
-import ShareIconSvg from '../../../../Common/Icons/ShareIconSvg'
-import profile from '../../../Common/Imgs/taskInformationprofile.jpg'
+import { type Task } from '../../../../../../../utilities/models'
+import PriorityFlag from '../../../../../../Common/Icons/PriorityFlag'
+import ProfileAddUserIconSvg from '../../../../../../Common/Icons/ProfileAddUserIconSvg'
+import ShareIconSvg from '../../../../../../Common/Icons/ShareIconSvg'
+import profile from '../../../../../../Common/Imgs/taskInformationprofile.jpg'
 
-function TopRightSide(): JSX.Element {
+function TopRightSide ({ task }: { task: Task }): JSX.Element {
   return (
     <div className="flex h-[57px] w-[100%] items-center justify-between px-[16px]">
       <div className="flex items-center gap-[5px]">

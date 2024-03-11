@@ -12,14 +12,15 @@ import DateRangePicker from '../../Calendar/DateRangePicker'
 import LinkCopyIconSvg from '../../../../Common/Icons/LinkCopyIconSvg'
 import { UserContext } from '../../../../../contexts/UserProvider'
 import NewTaskDropDownMenu from './NewTaskDropDownMenu'
-import { Project } from '../../../../../utilities/models'
+import { type Project } from '../../../../../utilities/models'
 
 interface NewTaskProps {
   handle: () => void
   project: Project
+  boardId?: string
 }
 
-const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
+const NewTask = ({ handle, project, boardId }: NewTaskProps): JSX.Element => {
   // Context
   const user = useContext(UserContext)
   // UseState hook
@@ -36,6 +37,9 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
   const inputRefSecond = useRef<HTMLInputElement | null>(null)
   const inputRefFirstUpload = useRef<HTMLInputElement | null>(null)
   const inputRefSecondUpload = useRef<HTMLInputElement | null>(null)
+
+  console.log(selectedAttachmentFile)
+  console.log(selectedCoverFile)
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault()
@@ -95,13 +99,13 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
         {/* Top New Task  */}
         <div className="flex w-full justify-between">
           {/* Task Title Handle */}
-          <div className="relative flex flex-row items-center justify-center gap-[13px]">
-            <span className="inline-block size-4 bg-[#D9D9D9]"></span>
+          <div className="relative flex w-full flex-row items-center justify-start gap-[13px]">
             <form onSubmit={handleSubmit}>
+              <span className="inline-block size-4 bg-[#D9D9D9]"></span>
               <input
                 ref={inputRefFirst}
                 type="text"
-                className="absolute right-5 top-0 px-5 text-bodyxl placeholder:text-black"
+                className="px-5 text-bodyxl placeholder:text-black"
                 placeholder="عنوان تسک"
                 value={inputValue}
                 onChange={(e) => {

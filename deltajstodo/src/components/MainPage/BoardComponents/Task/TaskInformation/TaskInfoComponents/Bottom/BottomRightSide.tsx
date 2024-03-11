@@ -1,7 +1,7 @@
-import '../../../../dist/output.css'
-import AddSecondaryIconSvg from '../../../../Common/Icons/AddSecondaryIconSvg'
-import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
-function BottomRightSide(): JSX.Element {
+import { type Task } from '../../../../../../../utilities/models'
+import AddSecondaryIconSvg from '../../../../../../Common/Icons/AddSecondaryIconSvg'
+import BookmarkTagIconSvg from '../../../../../../Common/Icons/BookmarkTagIconSvg'
+function BottomRightSide({ task }: { task: Task }): JSX.Element {
   return (
     <div dir="rtl" className="flex flex-col gap-6 px-[20px]">
       <div className="flex items-center gap-4">
@@ -14,7 +14,7 @@ function BottomRightSide(): JSX.Element {
 
       <div className="flex flex-col gap-2">
         <span className="text-[24px] font-extrabold leading-[32px]">
-          عنوان تسک
+          {task.title}
         </span>
 
         <div className="rounded-xl border-[1px] border-[#C1C1C1] p-[12px]">

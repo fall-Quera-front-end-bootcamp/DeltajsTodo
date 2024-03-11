@@ -44,7 +44,7 @@ const CalendarCell = ({
       <div
         className={`absolute bottom-[10px] right-[10px] flex size-[24px] items-center justify-center rounded-[3px] bg-brand-primary ${addIconOpacity} transition-all duration-300`}
       >
-        <AddSecondaryIconSvg />
+        <AddSecondaryIconSvg color="#ffffff" />
       </div>
 
       <div className={`absolute left-0 top-0 ${newTaskView}`}>

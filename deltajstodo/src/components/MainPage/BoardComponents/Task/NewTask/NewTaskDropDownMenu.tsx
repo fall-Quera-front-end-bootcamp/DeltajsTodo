@@ -15,7 +15,7 @@ const NewTaskDropDownMenu = ({
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="absolute right-[350px] top-0 rounded-2xl font-medium">
+    <div className=" rounded-2xl font-medium">
       <div
         onClick={() => {
           setOpen(!open)

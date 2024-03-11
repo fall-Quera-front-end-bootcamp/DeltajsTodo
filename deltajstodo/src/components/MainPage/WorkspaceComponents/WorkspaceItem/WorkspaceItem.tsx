@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom'
 import ProjectMore from '../../MainPage/BoardComponents/Column-more/ProjectMore'
 
 import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
-import ItemColor from '../../Common/Icons/ItemColor'
+import ItemColor from '../../../Common/Icons/ItemColor'
 
 interface WorkspaceItemProps {
   workspaceItemID: string

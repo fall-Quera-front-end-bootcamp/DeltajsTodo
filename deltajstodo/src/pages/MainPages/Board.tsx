@@ -10,7 +10,7 @@ import { useState, type FunctionComponent } from 'react'
 import { useLocation } from 'react-router-dom'
 import ColumnView from '../../components/MainPage/BoardComponents/BoardViews/ColumnView/ColumnView'
 import RowView from '../../components/MainPage/BoardComponents/BoardViews/RowView/RowView'
-import CalenderView from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalenderView'
+import CalenderView from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalendarView'
 import TopBar from '../../components/MainPage/BoardComponents/TopBar/TopBar'
 interface BoardProps {}
 export enum Views {

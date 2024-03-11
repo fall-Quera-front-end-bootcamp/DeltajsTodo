@@ -1,7 +1,6 @@
-import '../../../../dist/output.css'
-function TopLeftSide (): JSX.Element {
+function TopLeftSide(): JSX.Element {
   return (
-    <div dir="rtl" className="flex gap-6 pl-[36px] pr-[20px]">
+    <div dir="rtl" className="flex ">
       <div className="flex flex-col gap-2">
         <span className="text-[12px] font-normal leading-[16.91px] text-[#BBBBBB]">
           ساخته شده در
