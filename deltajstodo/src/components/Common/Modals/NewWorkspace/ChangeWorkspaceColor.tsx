@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable tailwindcss/enforces-shorthand */
@@ -5,40 +7,22 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent, useRef, useState } from 'react'
 import LeftArrow from '../../Icons/LeftArrow'
-import Close from '../../Icons/Close' 
+import Close from '../../Icons/Close'
 
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider' 
-import ButtonColorIconSvg from '../../Icons/ButtonColorIconSvg' 
-import { UserDispatchContext } from '../../../../contexts/UserProvider' 
+import ButtonColorIconSvg from '../../Icons/ButtonColorIconSvg'
+import { useUpdataWorkspaceMutation } from '../../../../features/auth/authApiSlice' 
 
 interface ChangeWorkspaceColorProps {
-  WID: string
+  WID: number
 }
 
 const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
   WID
 }) => {
-  const localPageDispatch: any = useContext(localPageDispatchContext)
-  const userDispatch: any = useContext(UserDispatchContext)
-
   const [WScolor, setWSColor] = useState<string>('#7D828C')
-
-  const onChangeHandler = (e: any): void => {
-    setWSColor((p) => e?.target?.value)
-  }
-  const onSubmitHandler = (): void => {
-    if (WScolor !== '') {
-      userDispatch({
-        type: 'changeWorkspaceColor',
-        id: WID,
-        new_color: WScolor
-      })
-    }
-    localPageDispatch({ type: 'closeModal' })
-  }
   const colorsPalet = useRef<any>([
     '#FD7E14',
     '#FAB005',
@@ -54,6 +38,36 @@ const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
     '#E64980',
     '#FA5252'
   ])
+  const [updataWorkspace, { isLoading }] = useUpdataWorkspaceMutation()
+  const localPageDispatch: any = useContext(localPageDispatchContext)
+
+  const onSubmitHandler = async (): Promise<void> => {
+    if (WScolor !== '') {
+      try {
+        const userData = await updataWorkspace({
+          id: WID,
+          color: WScolor
+        }).unwrap()
+        //console.log(userData)
+
+        localPageDispatch({ type: 'closeModal' })
+      } catch (err: any) {
+        //console.log(err)
+        localPageDispatch({
+          type: 'openResponseModal',
+          responseData: { type: 'fail', message: err?.error ?? '' }
+        })
+      }
+    }
+  }
+  ///////////////////////////////////////////////////
+
+  const onChangeHandler = (e: any): void => {
+    setWSColor((p) => e?.target?.value)
+  }
+
+  //////////////////////////////////////////
+
   return (
     <>
       <div
@@ -201,7 +215,8 @@ leading-[19.73px]  text-[#1E1E1E] "
             h-[40px] w-[415px] rounded-md    flex gap-[10px] "
         >
           <button
-            onClick={() => onSubmitHandler()}
+            disabled={isLoading}
+            onClick={onSubmitHandler}
             className="bg-[#208D8E] h-[40px] w-[415px] rounded-md flex flex-row items-center justify-center"
           >
             <p className="font-yekan w-[30px] h-[20px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
