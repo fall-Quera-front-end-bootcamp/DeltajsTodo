@@ -29,7 +29,20 @@ function BoradMore({
         }}
       />
 
-      <BordMoreOption color="text-[black]" text="افزودن تسک" type="add" />
+      <BordMoreOption
+        color="text-[black]"
+        text="افزودن تسک"
+        type="add"
+        onClickFunc={() => {
+          localPageDispatch({
+            type: 'openNewTask',
+            WID,
+            PID,
+            BID
+          })
+        }}
+      />
+
       <BordMoreOption
         color="text-[black]"
         text="آرشیو تمام تسک‌ها"

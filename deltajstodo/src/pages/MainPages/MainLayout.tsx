@@ -20,6 +20,7 @@ import { localPageContext } from '../../contexts/LocalPageContextProvider'
 import Message from '../../components/Common/Message/Message'
 import NewBoard from '../../components/Common/Modals/Board/NewBoard/NewBoard'
 import ChangeBoardTitle from '../../components/Common/Modals/Board/ChangeBoardTitle.tsx/ChangeBoardTitle'
+import NewTask from '../../components/MainPage/BoardComponents/Task/NewTask/NewTask'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
@@ -64,7 +65,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                 BID={boardID}
               />
             )}
-
+            {value === 12 && (
+              <NewTask WID={workspaceID} PID={projectID} BID={boardID} />
+            )}
             {value === -1 && (
               <>
                 <Message

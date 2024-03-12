@@ -18,7 +18,7 @@ import { type Project } from '../../../../../utilities/models'
 interface NewTaskProps {
   WID: number //this is workspace id you need
   PID: number //this is project id you
-
+  BID: number
   handle?: () => void
   project?: Project | undefined
 }

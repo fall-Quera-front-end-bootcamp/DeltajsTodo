@@ -6,7 +6,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent } from 'react'
+import { useState, type FunctionComponent, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import ShareIconSvg from '../../components/Common/Icons/ShareIconSvg'
 import TodoListIconSvg from '../../components/Common/Icons/TodoListIconSvg'
@@ -18,6 +18,7 @@ import CalenderView from '../../components/MainPage/BoardComponents/BoardViews/C
 import { useGetProjectQuery } from '../../features/auth/authApiSlice'
 
 import BuildTaskButtonPrimary from '../../components/MainPage/BoardComponents/Task/BuildTaskButtons/BuildTaskButtonPrimary'
+import { localPageDispatchContext } from '../../contexts/LocalPageContextProvider'
 interface BoardProps {}
 enum Views {
   column = 643,
@@ -33,6 +34,7 @@ const Board: FunctionComponent<BoardProps> = () => {
   } = useLocation()
 
   const [view, setViw] = useState<Views>(Views.column)
+  const localPageDispatch: any = useContext(localPageDispatchContext)
 
   const handleView = (e: any): void => {
     //console.log(e?.target?.ariaLabel)
