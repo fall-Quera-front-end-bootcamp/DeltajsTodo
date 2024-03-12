@@ -71,7 +71,6 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                   text={responseData?.message ?? 'SomeThing went wrong ...'}
                   type={responseData?.type ?? 'fail'}
                 />
-                <Response responsetype={'fail'} message={''} />
               </>
             )}
           </div>
