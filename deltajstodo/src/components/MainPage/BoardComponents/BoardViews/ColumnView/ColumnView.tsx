@@ -66,7 +66,7 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
   } else if (!!isSuccess) {
     return (
       <>
-        <div className="relative ml-4 flex flex-row overflow-auto scrollbar-thin scrollbar-webkit">
+        <div className="relative ml-4 flex w-full flex-row-reverse overflow-auto scrollbar-thin scrollbar-webkit">
           {boards?.length > 0 ? (
             <div className="flex w-full flex-row-reverse gap-[16px] overflow-x-scroll">
               {boards.map((b: B) => {
@@ -81,17 +81,17 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
           ) : (
             <NewColumn onClickFunc={handleNewColumn} />
           )}
-          <BuildTaskButtonPrimary
-            className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
-            IconColor="#ffffff"
-            title="تسک جدید"
-            onClick={handleNewTask}
-          />
-          <NewTask
-            className={showNewTaskBoard ? '' : 'hidden'}
-            handle={handleNewTask}
-          />
-        </div>
+        </div>{' '}
+        <BuildTaskButtonPrimary
+          className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
+          IconColor="#ffffff"
+          title="تسک جدید"
+          onClick={handleNewTask}
+        />
+        <NewTask
+          className={showNewTaskBoard ? '' : 'hidden'}
+          handle={handleNewTask}
+        />
       </>
     )
   } else if (!!isError) {

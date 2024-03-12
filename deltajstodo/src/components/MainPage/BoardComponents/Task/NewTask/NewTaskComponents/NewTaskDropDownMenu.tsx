@@ -1,7 +1,7 @@
+/* eslint-disable multiline-ternary */
 import { useState } from 'react'
 import { BiChevronDown } from 'react-icons/bi'
 import { type Project } from '../../../../../../utilities/models'
-import { useGetProjectsQuery } from '../../../../../../features/auth/authApiSlice'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 const NewTaskDropDownMenu = ({
@@ -14,6 +14,8 @@ const NewTaskDropDownMenu = ({
   const [inputValue, setInputValue] = useState('')
   const [selected, setSelected] = useState('')
   const [open, setOpen] = useState(false)
+
+  console.log(selected)
 
   return (
     <div className="absolute right-[350px] top-0 rounded-2xl font-medium">

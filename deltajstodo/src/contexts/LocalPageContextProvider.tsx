@@ -112,6 +112,15 @@ function StepReducer(
         boardID: action?.BID
       }
     }
+    case 'openDeleteBoard': {
+      return {
+        ...localPage,
+        value: 11,
+        workspaceID: action?.WID,
+        projectID: action?.PID,
+        boardID: action?.BID
+      }
+    }
     case 'openNewTask': {
       return {
         ...localPage,

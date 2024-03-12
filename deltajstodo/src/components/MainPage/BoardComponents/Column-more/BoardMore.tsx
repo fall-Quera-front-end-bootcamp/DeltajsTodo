@@ -48,7 +48,14 @@ function BoradMore({
         text="آرشیو تمام تسک‌ها"
         type="archive"
       />
-      <BordMoreOption color="text-[#FA5252]" text="حذف ستون" type="remove" />
+      <BordMoreOption
+        color="text-[#FA5252]"
+        text="حذف ستون"
+        type="remove"
+        onClickFunc={() => {
+          localPageDispatch({ type: 'openDeleteBoard', WID, PID, BID })
+        }}
+      />
     </div>
   )
 }

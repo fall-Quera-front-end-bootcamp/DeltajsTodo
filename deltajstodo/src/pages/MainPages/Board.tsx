@@ -76,7 +76,7 @@ const Board: FunctionComponent<BoardProps> = () => {
               WID={workspaceItemID}
             />
           )}
-          {view === Views.row && <RowView project={project} />}
+          {view === Views.row && <RowView WID={workspaceItemID} project={project} />}
           {view === Views.calender && <CalenderView project={project} />}
         </div>
       </>

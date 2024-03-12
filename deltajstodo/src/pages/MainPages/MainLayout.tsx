@@ -21,11 +21,13 @@ import Message from '../../components/Common/Message/Message'
 import NewBoard from '../../components/Common/Modals/Board/NewBoard/NewBoard'
 import ChangeBoardTitle from '../../components/Common/Modals/Board/ChangeBoardTitle.tsx/ChangeBoardTitle'
 import NewTask from '../../components/MainPage/BoardComponents/Task/NewTask/NewTask'
+import DeleteBoard from '../../components/Common/Modals/Board/DeleteBoard/DeleteBoard'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   const { value, workspaceID, projectID, boardID, taskID, responseData } =
     useContext(localPageContext)
+  console.log(boardID, projectID, workspaceID)
 
   // const WIDForNewProject = useRef(null)
 
@@ -64,6 +66,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                 PID={projectID}
                 BID={boardID}
               />
+            )}
+            {value === 11 && (
+              <DeleteBoard WID={workspaceID} PID={projectID} BID={boardID} />
             )}
             {value === 12 && (
               <NewTask WID={workspaceID} PID={projectID} BID={boardID} />

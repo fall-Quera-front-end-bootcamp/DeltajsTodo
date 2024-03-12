@@ -25,7 +25,8 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
 }) => {
   const [columnMore, setColumnMore] = useState(false)
   const [ishover, setHover] = useState(false)
-  const [borderColor, setBorderColor] = useState(`border-[${board.color}]`)
+
+  console.log(board?.color)
 
   return (
     <button className="group">
@@ -36,7 +37,8 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
       </div>
       <div
         className={` relative flex h-[40px] w-[250px] flex-row items-center justify-between
-              rounded-[16px] border-t-[2px]  px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] ${borderColor}`}
+              rounded-[16px] border-t-[2px]  px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] `}
+        style={{ borderColor: board?.color }}
       >
         <div className="invisible  flex h-[24px] w-[48px] flex-row gap-[4px] group-hover:visible ">
           <button
