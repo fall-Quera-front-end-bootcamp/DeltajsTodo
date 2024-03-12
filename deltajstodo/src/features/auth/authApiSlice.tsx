@@ -239,5 +239,6 @@ export const {
   useGetBoardsQuery,
   useCreateBoardMutation,
   useGetBoardQuery,
-  useUpdataBoardMutation
+  useUpdataBoardMutation,
+  useCreateTaskMutation
 } = authApiSlice

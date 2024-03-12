@@ -13,13 +13,7 @@ interface CalenderViewProps {
 const CalenderView: FunctionComponent<CalenderViewProps> = ({ project }) => {
   const { days } = useContext(DatepickerContext)
 
-  const Days = [...days.previous, ...days.current, ...days.next]
-
-  const keys: number[] = []
-  for (let i = 1; i <= Days.length; i++) {
-    keys.push(i)
-  }
-  console.log(keys)
+  console.log(days)
 
   return (
     <div className="relative flex flex-col transition-all duration-500 min-[1024px]:w-[800px] xl:w-[1033px]">

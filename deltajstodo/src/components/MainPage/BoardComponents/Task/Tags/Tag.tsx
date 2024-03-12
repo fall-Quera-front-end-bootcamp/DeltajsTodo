@@ -1,3 +1,5 @@
+import { type Tag as TagType } from '../../../../../utilities/models'
+
 interface TagProps {
   taskTags: []
 }
@@ -5,8 +7,12 @@ interface TagProps {
 const Tag = ({ taskTags }: TagProps): JSX.Element => {
   return (
     <div className="">
-      {taskTags.map((t) => {
-        return <div key={} className=""></div>
+      {taskTags.map((t: TagType) => {
+        return (
+          <div key={t.id} className="">
+            {t.name}
+          </div>
+        )
       })}
     </div>
   )

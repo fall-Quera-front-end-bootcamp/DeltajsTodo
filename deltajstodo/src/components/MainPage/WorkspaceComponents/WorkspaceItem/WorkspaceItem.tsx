@@ -15,6 +15,7 @@ import ProjectMore from '../../BoardComponents/Column-more/ProjectMore'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
 import ItemColor from '../../../Common/Icons/ItemColor'
 import { useGetProjectsQuery } from '../../../../features/auth/authApiSlice'
+import LoadingComponent from '../../../Common/LoadingComponent/LoadingComponent'
 
 interface WorkspaceItemProps {
   workspace: Workspace
@@ -39,12 +40,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
 
   ///////////////////////////////////////////////////////////
   if (!!isLoading) {
-    return (
-      <>
-        <p>loading...</p>
-        <div className="animate-spin"></div>
-      </>
-    )
+    return <LoadingComponent />
   } else if (!!isSuccess) {
     return (
       <>

@@ -16,8 +16,8 @@ const NewColumn: FunctionComponent<NewColumnProps> = ({ onClickFunc }) => {
     <div className="flex flex-col justify-start">
       <button onClick={onClickFunc}>
         <div
-          className="relative flex h-[40px] w-[250px] flex-row-reverse items-center justify-between
-          rounded-[16px] border-t-[2px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] mt-4"
+          className="relative mt-4 flex h-[40px] w-[250px] flex-row-reverse items-center
+          justify-between rounded-[16px] border-t-[2px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]"
         >
           <p className="text-right font-yekan text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
             ساختن برد جدید

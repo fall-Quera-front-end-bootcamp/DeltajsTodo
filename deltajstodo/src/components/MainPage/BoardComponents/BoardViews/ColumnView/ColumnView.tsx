@@ -4,7 +4,7 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useEffect, type FunctionComponent, useContext } from 'react'
+import { useEffect, type FunctionComponent, useContext, useState } from 'react'
 import NewColumn from './ColumnComponents/NewColumn'
 import {
   type Project,
@@ -16,6 +16,8 @@ import { useGetBoardsQuery } from '../../../../../features/auth/authApiSlice'
 
 import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
+import NewTask from '../../Task/NewTask/NewTask'
 
 interface ColumnViewProps {
   WID: number
@@ -25,12 +27,25 @@ interface ColumnViewProps {
 }
 
 const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
+  const [showNewTask, setShowNewTask] = useState(false)
+  const [showNewTaskBoard, setShowNewTaskBoard] = useState(false)
   ///////////////////////////// API FOR BOADRs ////////////////////////////////
   const localPageDispatch: any = useContext(localPageDispatchContext)
+
+  const handleNewTask = (): void => {
+    setShowNewTask((p) => !p)
+    setShowNewTaskBoard((p) => !p)
+  }
+
+  const handleNewTaskBoard = (): void => {
+    setShowNewTaskBoard((p) => !p)
+    setShowNewTask((p) => !p)
+  }
 
   const handleNewColumn = (): void => {
     localPageDispatch({ type: 'openNewBoard', WID, PID })
   }
+
   const handleChangeColumn = (): void => {
     localPageDispatch({ type: 'openNewBoardTitle', WID, PID })
   }
@@ -47,25 +62,35 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
 
   ///////////////////////////////////////////////////////////////////////////////////
   if (!!isLoading) {
-    return (
-      <>
-        <p>loading...</p>
-      </>
-    )
+    return <LoadingComponent />
   } else if (!!isSuccess) {
     return (
       <>
-        <div className="ml-4 flex flex-row overflow-auto scrollbar-thin scrollbar-webkit">
+        <div className="relative ml-4 flex flex-row overflow-auto scrollbar-thin scrollbar-webkit">
           {boards?.length > 0 ? (
             <div className="flex w-full flex-row-reverse gap-[16px] overflow-x-scroll">
               {boards.map((b: B) => {
-                return <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
+                return (
+                  <>
+                    <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
+                  </>
+                )
               })}
               <NewColumn onClickFunc={handleNewColumn} />
             </div>
           ) : (
             <NewColumn onClickFunc={handleNewColumn} />
           )}
+          <BuildTaskButtonPrimary
+            className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
+            IconColor="#ffffff"
+            title="تسک جدید"
+            onClick={handleNewTask}
+          />
+          <NewTask
+            className={showNewTaskBoard ? '' : 'hidden'}
+            handle={handleNewTask}
+          />
         </div>
       </>
     )

@@ -9,7 +9,7 @@ const BuildTaskButtonPrimary = ({
   className: string
   IconColor: string
   title: string
-  onClick: (boardID: number) => void
+  onClick: () => void
 }): JSX.Element => {
   return (
     <button className={className} onClick={onClick}>

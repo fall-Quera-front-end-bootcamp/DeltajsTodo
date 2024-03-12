@@ -4,28 +4,37 @@ import DropdownMenu from '../../DropDownMenu/DropdownMenu'
 import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
 import { AnimatePresence, motion } from 'framer-motion'
 import ProfileAddUserIconSvg from '../../../../Common/Icons/ProfileAddUserIconSvg'
-import { useContext, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import Button from '../../../../Common/Buttons/Button'
 import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
 import CalelndarEndIconSvg from '../../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
 import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
 import DateRangePicker from '../../Calendar/DateRangePicker'
 import LinkCopyIconSvg from '../../../../Common/Icons/LinkCopyIconSvg'
-import { UserContext } from '../../../../../contexts/UserProvider'
-import NewTaskDropDownMenu from './NewTaskDropDownMenu'
+import NewTaskDropDownMenu from './NewTaskComponents/NewTaskDropDownMenu'
 import { type Project } from '../../../../../utilities/models'
+import {
+  useCreateTaskMutation,
+  useGetProjectsQuery
+} from '../../../../../features/auth/authApiSlice'
 
 interface NewTaskProps {
-  WID: number //this is workspace id you need
-  PID: number //this is project id you
-  BID: number
+  WID?: number //this is workspace id you need
+  PID?: number //this is project id you
+  BID?: number
   handle?: () => void
   project?: Project | undefined
+  className?: string
 }
 
-const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
-  // Context
-  const user = useContext(UserContext)
+const NewTask = ({
+  handle,
+  project,
+  WID,
+  BID,
+  PID,
+  className
+}: NewTaskProps): JSX.Element => {
   // UseState hook
   const [showCalendar, setShowCalendar] = useState(false)
   const [showInputValue, setShowInputValue] = useState(false)
@@ -84,16 +93,30 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
   const removeFileSecond = (): void => {
     setSelectedCoverFile(null)
   }
+  const onSubmit = (): void => {
+    setSelectedCoverFile(null)
+  }
+
+  const [Task, { isLoading, isError }] = useCreateTaskMutation()
+
+  const { data: projects } = useGetProjectsQuery({
+    workspace_id: WID
+  })
 
   return (
     <AnimatePresence>
-      <motion.div
+      <motion.form
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.1 }}
+        autoComplete="off"
+        noValidate
+        onSubmit={(e) => {
+          e.preventDefault()
+        }}
         dir="rtl"
-        className="absolute left-1/2 top-1/2 flex w-[1153px] -translate-x-1/2 -translate-y-1/2 flex-col gap-xl rounded-[20px] bg-white p-l shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]"
+        className={`absolute left-1/2 top-1/2 z-50 flex w-[1153px] -translate-x-1/2 -translate-y-1/2 flex-col gap-xl rounded-[20px] bg-white p-l shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
       >
         {/* Box 1 */}
         {/* Top New Task  */}
@@ -101,19 +124,18 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
           {/* Task Title Handle */}
           <div className="relative flex flex-row items-center justify-center gap-[13px]">
             <span className="inline-block size-4 bg-[#D9D9D9]"></span>
-            <form onSubmit={handleSubmit}>
-              <input
-                ref={inputRefFirst}
-                type="text"
-                className="absolute right-5 top-0 px-5 text-bodyxl placeholder:text-black"
-                placeholder="عنوان تسک"
-                value={inputValue}
-                onChange={(e) => {
-                  setInputValue(e.target.value)
-                }}
-              />
-            </form>
-            <NewTaskDropDownMenu placeHolderText="پروژه" project={project} />
+            <input
+              ref={inputRefFirst}
+              type="text"
+              className="text-bodyxl placeholder:text-black"
+              placeholder="عنوان تسک"
+              value={inputValue}
+              onChange={(e) => {
+                setInputValue(e.target.value)
+              }}
+            />
+            <div className="">{BID}</div>
+            <NewTaskDropDownMenu placeHolderText="پروژه" projects={projects} />
           </div>
           {/* Leave New Task Box */}
           <button onClick={handle}>
@@ -123,22 +145,23 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
         {/* Box 2 */}
         <div className="flex flex-row items-center gap-xs text-[16px] font-[500]">
           <p className="inline-block">در </p>
-          <DropdownMenu buttonClassName="mr-[10px] inline-block w-[158px] rounded-md border border-[#E9EBF0] px-2 pb-[4px] pt-[5px] text-right">
+          <DropdownMenu buttonClassName="mr-[10px] inline-block w-[188px] rounded-md border border-[#E9EBF0] px-2 pb-[4px] pt-[5px] text-right">
             <motion.ul
               initial={{ opacity: 0, translate: 0 }}
               animate={{ opacity: 1, translateY: '5px' }}
               exit={{ opacity: 0, translateY: '-5px' }}
               className="absolute left-[-5px] top-[35px] flex w-full flex-col gap-2 rounded-md bg-gray-secondary"
             >
-              <li className="cursor-pointer p-1 hover:bg-gray-primary">
-                پروژه اول
-              </li>
-              <li className="cursor-pointer p-1 hover:bg-gray-primary">
-                پروژه دوم
-              </li>
-              <li className="cursor-pointer p-1 hover:bg-gray-primary">
-                پروژه سوم
-              </li>
+              {projects?.map((project: Project) => {
+                return (
+                  <li
+                    key={project?.id}
+                    className="cursor-pointer p-1 hover:bg-gray-primary"
+                  >
+                    {project?.name}
+                  </li>
+                )
+              })}
             </motion.ul>
           </DropdownMenu>{' '}
           <p className="inline-block">برای</p>
@@ -230,14 +253,16 @@ const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {
               <BookmarkTagIconSvg className="size-[30px]" />
             </div>
           </div>
-          <Button newTask>ساختن تسک</Button>
+          <Button onClickFunction={onSubmit} newTask>
+            ساختن تسک
+          </Button>
         </div>
         <div
           className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${showCalendar ? '' : 'hidden'}`}
         >
           <DateRangePicker setShowCalendar={setShowCalendar} />
         </div>
-      </motion.div>
+      </motion.form>
     </AnimatePresence>
   )
 }

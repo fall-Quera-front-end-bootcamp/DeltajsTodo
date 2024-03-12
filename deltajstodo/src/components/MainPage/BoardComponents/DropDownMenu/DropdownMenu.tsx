@@ -11,13 +11,13 @@ const DropdownMenu = ({
   children
 }: DropProps): JSX.Element => {
   const [open, setOpen] = useState(false)
-  function openHandle (): void {
+  function openHandle(): void {
     setOpen(!open)
   }
   return (
     <div className="relative">
       <button onClick={openHandle} className={buttonClassName}>
-        پروژه اول
+        بک پروژه انتخاب بکنید...
       </button>
       <AnimatePresence>{open && <> {children}</>}</AnimatePresence>
     </div>

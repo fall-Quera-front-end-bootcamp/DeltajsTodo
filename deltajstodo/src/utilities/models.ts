@@ -38,8 +38,9 @@ interface Profile {
 }
 /*---------------------      Task    ----------------------------------------- */
 
-interface Tag {
-  title: string
+export interface Tag {
+  id: number
+  name: string
   color: string
 }
 interface TimeLine {

@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom'
 import { useGetProjectQuery } from '../../../../../features/auth/authApiSlice'
 import TaskMore from '../../../BoardComponents/Column-more/TaskMore'
 import DotsMenuIconSvg from '../../../../Common/Icons/DotsMenuIconSvg'
+import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 
 interface ProjectItemProps {
   workspaceItemID: number
@@ -34,11 +35,7 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
   /////////////////////////////////////////////////////////////////////
 
   if (!!isLoading) {
-    return (
-      <>
-        <p>loading...</p>
-      </>
-    )
+    return <LoadingComponent />
   } else if (!!isSuccess) {
     return (
       <>

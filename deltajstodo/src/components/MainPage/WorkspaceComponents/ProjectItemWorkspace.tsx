@@ -3,45 +3,39 @@ import { hexColors } from '../../../constants'
 import getKeyByValue from '../../../utilities/getKeyByValue'
 import { useGetProjectQuery } from '../../../features/auth/authApiSlice'
 import { type FunctionComponent } from 'react'
+import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 
 interface ProjectItemWorkspaceProps {
   projectID: number
   workspaceItemColor: string
-  workspaceID: number
+  workspaceItemID: number
 }
 
 const ProjectItemWorkspace: FunctionComponent<ProjectItemWorkspaceProps> = ({
   projectID,
   workspaceItemColor,
-  workspaceID
+  workspaceItemID
 }) => {
   const bgColor = 'bg-' + getKeyByValue(hexColors, workspaceItemColor)
   const {
     data: project,
     isLoading,
     isError,
-    isSuccess,
-    error
-  } = useGetProjectQuery({ workspace_id: workspaceID, id: projectID })
+    isSuccess
+  } = useGetProjectQuery({ workspace_id: workspaceItemID, id: projectID })
   if (isLoading) {
-    return (
-      <>
-        <p>loading...</p>
-      </>
-    )
+    return <LoadingComponent />
   } else if (isSuccess) {
     return (
       <NavLink
         key={projectID}
         to={`/workspace/${project?.id}`}
-        state={{ workspaceID, projectItemID: projectID }}
+        state={{ workspaceItemID, projectItemID: projectID }}
       >
         <div
           className={`h-20 w-52 rounded-2xl ${bgColor} flex items-center justify-center`}
         >
-          <h3 className="text-boldm text-white">
-            {project?.name}
-          </h3>
+          <h3 className="text-boldm text-white">{project?.name}</h3>
         </div>
       </NavLink>
     )

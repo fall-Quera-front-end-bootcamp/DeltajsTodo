@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { BiChevronDown } from 'react-icons/bi'
+import { type Project } from '../../../../../../utilities/models'
+import { useGetProjectsQuery } from '../../../../../../features/auth/authApiSlice'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { type Project } from '../../../../../utilities/models'
 
 const NewTaskDropDownMenu = ({
-  project,
+  projects,
   placeHolderText
 }: {
-  project: Project
+  projects: []
   placeHolderText: string
 }): JSX.Element => {
   const [inputValue, setInputValue] = useState('')
@@ -24,49 +25,53 @@ const NewTaskDropDownMenu = ({
           !(selected !== '') && 'text-gray-primary'
         }`}
       >
-        {selected !== ''
-          ? selected?.length > 25
-            ? selected?.substring(0, 25) + '...'
-            : selected
-          : placeHolderText}
+        {selected !== '' ? (
+          selected?.length > 25 ? (
+            selected?.substring(0, 25) + '...'
+          ) : (
+            selected
+          )
+        ) : (
+          <div className=" flex items-center px-2">
+            <AiOutlineSearch size={18} className="text-gray-primary" />
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => {
+                setInputValue(e.target.value.toLowerCase())
+              }}
+              placeholder={`${placeHolderText} را وارد کنید`}
+              className="p-2 outline-none placeholder:text-gray-primary"
+            />
+          </div>
+        )}
         <BiChevronDown size={20} className={`${open && 'rotate-180'}`} />
       </div>
+
       <ul className={`mt-2 overflow-y-auto ${open ? 'max-h-60' : 'max-h-0'} `}>
-        <div className="sticky top-0 flex items-center px-2">
-          <AiOutlineSearch size={18} className="text-gray-primary" />
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => {
-              setInputValue(e.target.value.toLowerCase())
-            }}
-            placeholder={`${placeHolderText} را وارد کنید`}
-            className="p-2 outline-none placeholder:text-gray-primary"
-          />
-        </div>
-        {project?.boards?.map((country) => (
+        {projects?.map((project: Project) => (
           <li
             dir="ltr"
-            key={country?.id}
+            key={project?.id}
             className={`p-2 text-bodys hover:bg-blue-secondary hover:text-white
             ${
-              country?.title?.toLowerCase() === selected?.toLowerCase() &&
+              project?.name?.toLowerCase() === selected?.toLowerCase() &&
               'bg-blue-secondary text-white'
             }
             ${
-              country?.title?.toLowerCase().startsWith(inputValue)
+              project?.name?.toLowerCase().startsWith(inputValue)
                 ? 'block'
                 : 'hidden'
             }`}
             onClick={() => {
-              if (country?.title?.toLowerCase() !== selected.toLowerCase()) {
-                setSelected(country?.title)
+              if (project?.name?.toLowerCase() !== selected.toLowerCase()) {
+                setSelected(project?.name)
                 setOpen(false)
                 setInputValue('')
               }
             }}
           >
-            {country?.title}
+            {project?.name}
           </li>
         ))}
       </ul>
