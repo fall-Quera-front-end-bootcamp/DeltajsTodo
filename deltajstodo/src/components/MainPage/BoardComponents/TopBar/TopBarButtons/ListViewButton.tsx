@@ -1,4 +1,4 @@
-import { Views } from '../../../../../pages/MainPages/Board'
+import { Views } from '../../../../../utilities/models'
 import TodoListIconSvg from '../../../../Common/Icons/TodoListIconSvg'
 
 const ListViewButton = ({

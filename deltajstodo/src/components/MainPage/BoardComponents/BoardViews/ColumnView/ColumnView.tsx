@@ -55,26 +55,14 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
   } else if (!!isSuccess) {
     return (
       <>
-        <div className="absolute right-0 top-[220px] overflow-y-hidden  ">
+        <div className="ml-4 flex flex-row overflow-auto scrollbar-thin scrollbar-webkit">
           {boards?.length > 0 ? (
-            <>
-              <div className="flex flex-row-reverse gap-[16px]">
-                {boards.map((b: B) => {
-                  return (
-                    <div key={b.id}>
-                      <Column WID={WID} PID={PID} BID={b.id} />
-                      <BuildTaskButtonPrimary
-                        className="border-brand-primary text-brand-primary hidden w-full flex-row-reverse items-center justify-center gap-1 rounded-lg border-2 px-3 py-2 group-hover:flex"
-                        IconColor="#208D8E"
-                        title="ساختن تسک جدید"
-                        onClick={() => {}}
-                      />
-                    </div>
-                  )
-                })}
-                <NewColumn onClickFunc={handleNewColumn} />
-              </div>
-            </>
+            <div className="flex w-full flex-row-reverse gap-[16px] overflow-x-scroll">
+              {boards.map((b: B) => {
+                return <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
+              })}
+              <NewColumn onClickFunc={handleNewColumn} />
+            </div>
           ) : (
             <NewColumn onClickFunc={handleNewColumn} />
           )}

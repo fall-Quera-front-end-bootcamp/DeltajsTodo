@@ -1,34 +1,57 @@
 import { NavLink } from 'react-router-dom'
-import { type Project } from '../../../utilities/models'
 import { hexColors } from '../../../constants'
 import getKeyByValue from '../../../utilities/getKeyByValue'
+import { useGetProjectQuery } from '../../../features/auth/authApiSlice'
+import { type FunctionComponent } from 'react'
 
 interface ProjectItemWorkspaceProps {
-  projectID: string
-  project: Project
+  projectID: number
   workspaceItemColor: string
-  projectTitle: string
-  workspaceID: string
+  workspaceID: number
 }
 
-const ProjectItemWorkspace = ({
+const ProjectItemWorkspace: FunctionComponent<ProjectItemWorkspaceProps> = ({
   projectID,
-  project,
   workspaceItemColor,
-  projectTitle,
   workspaceID
-}: ProjectItemWorkspaceProps): JSX.Element => {
+}) => {
   const bgColor = 'bg-' + getKeyByValue(hexColors, workspaceItemColor)
-  return (
-    <NavLink
-      key={projectID}
-      to={`/workspace/${projectID}`}
-      state={{ workspaceID, project }}
-      className={`h-20 w-[200px] rounded-2xl ${bgColor} flex items-center justify-center`}
-    >
-      <h3 className="text-boldm text-white dark:bg-gray-primary">{projectTitle}</h3>
-    </NavLink>
-  )
+  const {
+    data: project,
+    isLoading,
+    isError,
+    isSuccess,
+    error
+  } = useGetProjectQuery({ workspace_id: workspaceID, id: projectID })
+  if (isLoading) {
+    return (
+      <>
+        <p>loading...</p>
+      </>
+    )
+  } else if (isSuccess) {
+    return (
+      <NavLink
+        key={projectID}
+        to={`/workspace/${project?.id}`}
+        state={{ workspaceID, projectItemID: projectID }}
+      >
+        <div
+          className={`h-20 w-52 rounded-2xl ${bgColor} flex items-center justify-center`}
+        >
+          <h3 className="text-boldm text-white">
+            {project?.name}
+          </h3>
+        </div>
+      </NavLink>
+    )
+  } else if (isError) {
+    return (
+      <>
+        <p>error</p>
+      </>
+    )
+  }
 }
 
 export default ProjectItemWorkspace

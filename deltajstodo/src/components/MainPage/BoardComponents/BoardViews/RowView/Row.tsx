@@ -43,7 +43,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                 </svg>
 
                 <p className="h-[32px] absolute top-0 z-10 px-[12px] py-[10px] text-center text-[16px] font-extrabold leading-[22.55px] text-[#FFDEEB] ">
-                  {board.title}
+                  {board?.name}
                 </p>
               </div>
             </div>
@@ -55,7 +55,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                  leading-[16.91px]
                   text-[#1E1E1E]"
               >
-                {board.tasks.length} تسک
+                {board?.tasks?.length} تسک
               </p>
             </div>
           </div>
@@ -127,7 +127,7 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
               text-right text-[12px] 
               font-normal leading-[16.91px] text-[#1E1E1E]"
                     >
-                      {t.title}
+                      {t?.name}
                     </p>
                   </div>
                   <div className="h-[33x] w-[490px] flex flex-row gap-[70px] items-center">

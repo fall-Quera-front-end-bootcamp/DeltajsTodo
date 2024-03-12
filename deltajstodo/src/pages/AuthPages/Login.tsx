@@ -20,7 +20,7 @@ const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
 
   // ---------------
-  const [login, { isLoading }] = useLoginMutation()
+  const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
   const dispatch = useDispatch()
   const [err, setErr] = useState()
   const handleSubmit = async (
@@ -47,10 +47,7 @@ const Login: FunctionComponent<LoginProps> = () => {
     }
   }
   const onSubmit = methods.handleSubmit((data) => {
-    console.log(data)
-    //  fetch(data)
     handleSubmit(data)
-    // handleUsers()
   })
 
   const [formVisible, setFormVisible] = useState(true)

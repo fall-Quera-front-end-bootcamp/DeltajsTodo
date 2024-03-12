@@ -42,6 +42,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
     return (
       <>
         <p>loading...</p>
+        <div className="animate-spin"></div>
       </>
     )
   } else if (!!isSuccess) {

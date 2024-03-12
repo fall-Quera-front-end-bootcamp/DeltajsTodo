@@ -34,18 +34,18 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   }, [])
   return (
     <>
-      <div className="flex flex-row-reverse gap-4">
-        <div className="fixed max-h-[100vh] overflow-hidden">
+      <div className="flex flex-row-reverse gap-4 overflow-hidden">
+        <div className="relative max-h-[100vh]">
           <SidebarPrimary />
         </div>
 
-        <div className={'absolute right-[356px] max-w-[1100px] '}>
+        <div className={'relative h-screen w-full overflow-auto'}>
           <div
-            className={`${value !== 0 && ' hidden  bg-gray-primary blur-md'}`}
+            className={`${value !== 0 ? 'hidden  bg-gray-primary blur-md' : ''}`}
           >
             <Outlet />
           </div>
-          <div className="absolute right-[390px] top-[200px] z-100 border-black">
+          <div className="z-100 absolute right-[390px] top-[200px] border-black">
             {value === 1 && <NewWorkspace />}
             {value === 2 && <NewProject WID={workspaceID} />}
             {/* {step === 3 && <NewTask />}??? */}

@@ -15,7 +15,7 @@ const RowView: FunctionComponent<RowViewProps> = ({ project }) => {
       </p>
 
       <div className="flex flex-col gap-10">
-        {project.boards.map((board: Board) => {
+        {project.boards?.map((board: Board) => {
           return (
             <div key={board.id}>
               <Row board={board} />

@@ -136,9 +136,26 @@ export default {
         '.no-scrollbar': {
           '-ms-overflow-style': 'none',
           'scrollbar-width': 'none'
+        },
+        '.scrollbar-thin': {
+          scrollbarWidth: 'thin',
+          scrollbarColor: 'rgb(31 29 29) white'
+        },
+        '.scrollbar-webkit': {
+          '&::-webkit-scrollbar': {
+            width: '8px'
+          },
+          '&::-webkit-scrollbar-track': {
+            background: 'white'
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgb(31 41 55)',
+            borderRadius: '1000px',
+            border: '10px solid black'
+          }
         }
       }
-      addUtilities(newUtilities)
+      addUtilities(newUtilities, ['responsive', 'hover'])
     }
   ]
 }
