@@ -1,19 +1,22 @@
-import '../../dist/output.css'
-import AddIconSvg from '../Icons/AddIconSvg'
-import ArchiveIconSvg from '../Icons/ArchiveIconSvg'
-import EditIconSvg from '../Icons/EditIconSvg'
-import RemoveIconSvg from '../Icons/RemoveIconSvg'
+/* eslint-disable @typescript-eslint/space-before-function-paren */
+import '../../../../dist/output.css'
+import AddIconSvg from '../../../Common/Icons/AddIconSvg'
+import ArchiveIconSvg from '../../../Common/Icons/ArchiveIconSvg'
+import EditIconSvg from '../../../Common/Icons/EditIconSvg'
+import RemoveIconSvg from '../../../Common/Icons/RemoveIconSvg'
 
 interface BordMoreOptionProps {
   color: string
   text: string
   type: string
+  onClickFunc?: () => void
 }
 
 function BordMoreOption({
   color,
   text,
-  type
+  type,
+  onClickFunc
 }: BordMoreOptionProps): JSX.Element {
   function iconChoose(): JSX.Element | undefined {
     switch (type) {
@@ -31,7 +34,7 @@ function BordMoreOption({
     <div className="flex w-[142px] items-center gap-2">
       {iconChoose()}
       <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
-        {text}
+        <button onClick={onClickFunc}> {text}</button>
       </span>
     </div>
   )

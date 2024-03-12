@@ -97,13 +97,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['workspaces']
     }),
+    /////////////////////////////////////////////////////////
     getProjects: builder.query({
       query: (data) => ({
         url: `/workspaces/${data.workspace_id}/projects/`,
         method: 'GET'
         // body: { ...data }
       }),
-      providesTags: ['workspaces']
+      providesTags: ['project', 'board', 'task']
     }),
     createProject: builder.mutation({
       query: (data) => ({
@@ -111,7 +112,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['project', 'board', 'task']
     }),
     getProject: builder.query({
       query: (data) => ({
@@ -119,7 +120,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'GET'
         // body: { ...data }
       }),
-      providesTags: ['workspaces']
+      providesTags: ['project', 'board', 'task']
     }),
     updataProject: builder.mutation({
       query: (data) => ({
@@ -127,7 +128,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['project', 'board', 'task']
     }),
     deleteProject: builder.mutation({
       query: (data) => ({
@@ -135,15 +136,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'Delete'
         //body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['board', 'task']
     }),
+    //////////////////////////////////////////////////////////////
     getBoards: builder.query({
       query: (data) => ({
         url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/`,
         method: 'GET'
         // body: { ...data }
       }),
-      providesTags: ['workspaces']
+      providesTags: ['board', 'task']
     }),
     createBoard: builder.mutation({
       query: (data) => ({
@@ -151,39 +153,40 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['board', 'task']
     }),
     getBoard: builder.query({
       query: (data) => ({
-        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.id}`,
+        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.id}/`,
         method: 'GET'
         // body: { ...data }
       }),
-      providesTags: ['workspaces']
+      providesTags: ['board', 'task']
     }),
     updataBoard: builder.mutation({
       query: (data) => ({
-        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.id}`,
+        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.id}/`,
         method: 'PATCH',
         body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['board', 'task']
     }),
     deleteBoard: builder.mutation({
       query: (data) => ({
-        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.id}`,
+        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.id}/`,
         method: 'Delete'
         //body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['board', 'task']
     }),
+    /////////////////////////////////////////////////////
     getTasks: builder.query({
       query: (data) => ({
         url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.board_id}/tasks`,
         method: 'GET'
         // body: { ...data }
       }),
-      providesTags: ['workspaces']
+      providesTags: ['task']
     }),
     createTask: builder.mutation({
       query: (data) => ({
@@ -191,7 +194,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['task']
     }),
     getTask: builder.query({
       query: (data) => ({
@@ -199,7 +202,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'GET'
         // body: { ...data }
       }),
-      providesTags: ['workspaces']
+      providesTags: ['task']
     }),
     updataTask: builder.mutation({
       query: (data) => ({
@@ -207,7 +210,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['task']
     }),
     deleteTask: builder.mutation({
       query: (data) => ({
@@ -215,7 +218,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'Delete'
         //body: { ...data }
       }),
-      invalidatesTags: ['workspaces']
+      invalidatesTags: ['task']
     })
   })
 })
@@ -233,5 +236,8 @@ export const {
   useUpdataProjectMutation,
   useDeleteProjectMutation,
   ///////////////////////////////////
-  useGetBoardsQuery
+  useGetBoardsQuery,
+  useCreateBoardMutation,
+  useGetBoardQuery,
+  useUpdataBoardMutation
 } = authApiSlice

@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom'
 
 import { useGetProjectQuery } from '../../../../../features/auth/authApiSlice'
 import TaskMore from '../../../BoardComponents/Column-more/TaskMore'
+import DotsMenuIconSvg from '../../../../Common/Icons/DotsMenuIconSvg'
 
 interface ProjectItemProps {
   workspaceItemID: number
@@ -59,7 +60,7 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
                   className="w-[30px]"
                   onClick={() => setColumnMoreSelect((prev) => !prev)}
                 >
-                  ...
+                  <DotsMenuIconSvg />
                 </button>
               </div>
               <div className="relative">

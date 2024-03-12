@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-
 import '../../../../dist/output.css'
+
 import AddIconSvg from '../../../Common/Icons/AddIconSvg'
 import ColorPaletteIconSvg from '../../../Common/Icons/ColorPaletteIconSvg'
 import EditIconSvg from '../../../Common/Icons/EditIconSvg'

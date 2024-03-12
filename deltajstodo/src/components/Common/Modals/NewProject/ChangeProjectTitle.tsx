@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable tailwindcss/classnames-order */
@@ -7,22 +9,20 @@ import { useContext, type FunctionComponent, useRef, useState } from 'react'
 import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-import { UserDispatchContext } from '../../../../contexts/UserProvider'
+
+import Message from '../../Message/Message'
 import { useUpdataProjectMutation } from '../../../../features/auth/authApiSlice'
 interface ChangeProjectTitleProps {
-  WID: string | null
-  PID: string | null
+  WID: number
+  PID: number
 }
 
 const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
   WID,
   PID
 }) => {
-  const stepDispatch: any = useContext(localPageDispatchContext)
   const inputRef: any = useRef()
-  const userDispatch: any = useContext(UserDispatchContext)
   const localPageDispatch: any = useContext(localPageDispatchContext)
-
   const [inputValue, setInputValue] = useState('')
   const onChangeHandler = (e: any): void => {
     setInputValue((p) => e?.target?.value)
@@ -109,7 +109,7 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
             >
               <p
                 className="font-yekan w-[51px]
-               h-[20px] text-right text-[14px]
+               h-[20px] text-right text-[14px] font-[400px] 
               leading-[19.73px]  text-[#1E1E1E] "
               >
                 نام پروژه

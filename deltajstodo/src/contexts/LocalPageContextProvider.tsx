@@ -1,21 +1,23 @@
+/* eslint-disable @typescript-eslint/space-before-function-paren */
+/* eslint-disable @typescript-eslint/member-delimiter-style */
 import { createContext, useReducer } from 'react'
 
 interface MainLayoutContext {
   value: number
-  WorkspaceID: string
-  projectID: string
+  workspaceID: number
+  projectID: number
+  boardID: number
+  taskID?: number
+  responseData?: { type: 'success' | 'fail'; message: string } | undefined
 }
 
-let WIDForNewProject: null | string = null
-
-export const localPageContext = createContext<{
-  value: number
-  WorkspaceID: string
-  projectID: string
-}>({
+export const localPageContext = createContext<MainLayoutContext>({
   value: 0,
-  WorkspaceID: '',
-  projectID: ''
+  workspaceID: -1,
+  projectID: -1,
+  boardID: -1,
+  taskID: -1,
+  responseData: { type: 'success', message: '' }
 })
 export const localPageDispatchContext = createContext<unknown>(null)
 
@@ -26,15 +28,21 @@ const LocalPageContextProvider = ({
 }): JSX.Element => {
   const [localPage, dispatch] = useReducer(StepReducer, {
     value: 0,
-    WorkspaceID: '',
-    projectID: ''
+    workspaceID: -1,
+    projectID: -1,
+    boardID: -1,
+    taskID: -1,
+    responseData: { type: 'success', message: '' }
   })
   return (
     <localPageContext.Provider
       value={{
         value: localPage.value,
-        WorkspaceID: localPage.WorkspaceID,
-        projectID: localPage.projectID
+        workspaceID: localPage.workspaceID,
+        projectID: localPage.projectID,
+        boardID: localPage.boardID,
+        taskID: localPage.taskID,
+        responseData: localPage.responseData
       }}
     >
       <localPageDispatchContext.Provider value={dispatch}>
@@ -46,16 +54,13 @@ const LocalPageContextProvider = ({
 
 export default LocalPageContextProvider
 
-function StepReducer (
+function StepReducer(
   localPage: MainLayoutContext,
   action: any
 ): MainLayoutContext {
   switch (action?.type) {
     case 'openNewProject': {
-      WIDForNewProject = action?.WID
-      console.log(WIDForNewProject)
-
-      return { ...localPage, value: 2, WorkspaceID: action?.WID }
+      return { ...localPage, value: 2, workspaceID: action?.WID }
     }
 
     case 'closeModal': {
@@ -65,13 +70,50 @@ function StepReducer (
       return { ...localPage, value: 1 }
     }
     case 'openNewWorkspaceTitle': {
-      return { ...localPage, value: 4, WorkspaceID: action?.WID }
+      return { ...localPage, value: 4, workspaceID: action?.WID }
     }
     case 'openNewWorkspaceColor': {
-      return { ...localPage, value: 5, WorkspaceID: action?.WID }
+      return { ...localPage, value: 5, workspaceID: action?.WID }
     }
+    case 'openDeleteWorkspace': {
+      return { ...localPage, value: 6, workspaceID: action?.WID }
+    }
+
     case 'openNewProjectTitle': {
-      return { value: 6, WorkspaceID: action?.WID, projectID: action?.PID }
+      return {
+        ...localPage,
+        value: 7,
+        workspaceID: action?.WID,
+        projectID: action?.PID
+      }
+    }
+    case 'openDeleteProject': {
+      return {
+        ...localPage,
+        value: 8,
+        workspaceID: action?.WID,
+        projectID: action?.PID
+      }
+    }
+    case 'openNewBoard': {
+      return {
+        ...localPage,
+        value: 9,
+        workspaceID: action?.WID,
+        projectID: action?.PID
+      }
+    }
+    case 'openNewBoardTitle': {
+      return {
+        ...localPage,
+        value: 10,
+        workspaceID: action?.WID,
+        projectID: action?.PID,
+        boardID: action?.BID
+      }
+    }
+    case 'openResponseModal': {
+      return { ...localPage, value: -1, responseData: action?.responseData }
     }
     default: {
       throw Error('Unknown action: ' + action.type)

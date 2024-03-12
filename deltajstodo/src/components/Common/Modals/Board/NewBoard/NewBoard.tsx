@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
@@ -17,10 +18,14 @@ import {
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
-import { Permission, type Workspace } from '../../../../utilities/models'
+import { Permission, type Workspace } from '../../../../../utilities/models'
 import { useNavigate } from 'react-router-dom'
-import { useCreateWorkspaceMutation } from '../../../../features/auth/authApiSlice'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import {
+  useCreateBoardMutation,
+  useCreateWorkspaceMutation,
+  useGetBoardsQuery
+} from '../../../../../features/auth/authApiSlice'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 ////////////////////// 🟨Local Context🟥 //////////////////////////
 export const CreationWorkspaceStepContext = createContext<number | null>(null)
 export const CreationWorkspaceStepDispatchContext = createContext<unknown>(null)
@@ -47,9 +52,12 @@ function CreationWorkspaceStepReducer(step: number, action: any): number {
 }
 ////////////////////// 🟨🟥 //////////////////////////
 
-interface NewWorkspaceProps {}
+interface NewBoardProps {
+  WID: number
+  PID: number
+}
 
-const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
+const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
   const [creationStep, dispatch] = useReducer(CreationWorkspaceStepReducer, 1)
   const [form, setForm] = useState<Workspace>({
     id: -1,
@@ -60,7 +68,17 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   })
   const navigate = useNavigate()
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const [createWorkspace, { isLoading }] = useCreateWorkspaceMutation()
+  const [createBoard, { isLoading }] = useCreateBoardMutation()
+  const {
+    data: boards,
+
+    isSuccess,
+    isError,
+    error
+  } = useGetBoardsQuery({
+    workspace_id: WID,
+    project_id: PID
+  })
 
   const onchangeHandler = (e: any): void => {
     setForm((prev) => {
@@ -72,11 +90,17 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
     console.log(form)
 
     try {
-      const newWS = await createWorkspace({
+      const newB = await createBoard({
+        workspace_id: WID,
+        project_id: PID,
         name: form?.name,
-        color: form?.color
+        order: boards.length + 1,
+        color: form?.color,
+        is_archive: false,
+        tasks: [],
+        tasks_count: 0
       }).unwrap()
-      console.log(newWS)
+      console.log(newB)
       localPageDispatch({ type: 'closeModal' })
     } catch (err: any) {
       localPageDispatch({
@@ -111,7 +135,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
             {/**⚫⚫⚪ */}
             <div
               className="
-         flex h-[8px] w-[40px] flex-row-reverse gap-[8px]"
+           flex h-[8px] w-[40px] flex-row-reverse gap-[8px]"
             >
               <div>
                 <svg
@@ -170,4 +194,4 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   )
 }
 
-export default NewWorkspace
+export default NewBoard

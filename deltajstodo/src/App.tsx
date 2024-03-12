@@ -25,6 +25,7 @@ import RequireAuth from './features/auth/RequireAuth'
 import AllContext from './contexts/AllContext'
 import EmptyArea from './pages/EmptyArea'
 import Workspace from './pages/MainPages/Workspace'
+import LocalPageContextProvider from './contexts/LocalPageContextProvider'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   const User = useRef<User>({
@@ -308,8 +309,14 @@ function App(): JSX.Element {
               />
 
               <Route element={<RequireAuth />}>
-                <Route path="/workspace" element={<MainLayout />}>
-                  <Route path="" element={<Workspace />} />
+                <Route
+                  path="/workspace"
+                  element={
+                    <LocalPageContextProvider>
+                      <MainLayout />
+                    </LocalPageContextProvider>
+                  }
+                >
                   <Route path=":projectID" element={<Board />} />
                 </Route>
               </Route>

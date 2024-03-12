@@ -2,10 +2,10 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent, useRef } from 'react'
-import LeftArrow from '../../Icons/LeftArrow'
-import Close from '../../Icons/Close'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-import { CreationWorkspaceStepDispatchContext } from './NewWorkspace'
+import LeftArrow from '../../../Icons/LeftArrow'
+import Close from '../../../Icons/Close'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { CreationWorkspaceStepDispatchContext } from './NewBoard'
 
 interface Step1Props {
   value: string
@@ -23,7 +23,7 @@ const Step1: FunctionComponent<Step1Props> = ({ value, onchangeHandler }) => {
       <div
         className="flex 
         h-[268px] w-[500px]
-        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0_3px_4px_0] shadow-[#00000033]
+        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px]
         "
       >
         <div
@@ -40,10 +40,10 @@ const Step1: FunctionComponent<Step1Props> = ({ value, onchangeHandler }) => {
               </button>
             </div>
             <div>
-              <p className="h-[32px] w-[261px] text-center font-yekan text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
-                ساختن ورک‌اسپیس جدید‌
+              <p className="font-yekan h-[32px] w-[261px] text-center text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
+                ساختن برد جدید‌
               </p>
-            </div>{' '}
+            </div>
             <div className="invisible">
               <button>
                 <LeftArrow />
@@ -57,11 +57,11 @@ const Step1: FunctionComponent<Step1Props> = ({ value, onchangeHandler }) => {
             "
           >
             <p
-              className="h-[20px] w-[92px]
-               text-right font-yekan text-[14px] 
+              className="font-yekan h-[20px]
+               w-[92px] text-right text-[14px] font-[400px] 
               leading-[19.73px]  text-[#1E1E1E] "
             >
-              نام ورک‌اسپیس
+              نام برد
             </p>
 
             <div
@@ -95,7 +95,7 @@ rounded-md border-[1px] border-[#AAAAAA]
             }}
             className="flex h-[40px] w-[415px] flex-row items-center justify-center rounded-md bg-[#208D8E]"
           >
-            <p className="h-[20px] w-[30px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
+            <p className="font-yekan h-[20px] w-[30px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
               ادامه
             </p>
           </button>

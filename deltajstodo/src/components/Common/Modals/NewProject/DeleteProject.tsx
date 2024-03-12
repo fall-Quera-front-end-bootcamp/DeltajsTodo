@@ -8,33 +8,29 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useContext, type FunctionComponent, useRef, useState } from 'react'
+import { useContext, type FunctionComponent } from 'react'
 import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
 
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-import ButtonColorIconSvg from '../../Icons/ButtonColorIconSvg'
-import {
-  useDeleteWorkspaceMutation,
-  useUpdataWorkspaceMutation
-} from '../../../../features/auth/authApiSlice'
-import { set } from 'react-hook-form'
+import { useDeleteProjectMutation } from '../../../../features/auth/authApiSlice'
 import { useNavigate } from 'react-router-dom'
 
-interface DeleteWorkspaceProps {
+interface DeleteProjectProps {
   WID: number
+  PID: number
 }
 
-const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
+const DeleteProject: FunctionComponent<DeleteProjectProps> = ({ WID, PID }) => {
   ////////////////////////////////////////////////////////////////
-  const [deleteWorkspace, { isLoading }] = useDeleteWorkspaceMutation()
+  const [deleteProject, { isLoading }] = useDeleteProjectMutation()
   const navigate = useNavigate()
   ///////////////////////////////////////////////////
   const localPageDispatch: any = useContext(localPageDispatchContext)
 
   const onSubmitHandler = async (): Promise<void> => {
     try {
-      const res = await deleteWorkspace({ id: WID }).unwrap()
+      const res = await deleteProject({ workspace_id: WID, id: PID }).unwrap()
       //console.log(res)
       navigate('/workspace')
       localPageDispatch({
@@ -42,7 +38,7 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
         responseData: { type: 'success', message: res?.message ?? '' }
       })
     } catch (error: any) {
-      // console.log(error)
+      console.log('hi i am that erroe ', error)
       localPageDispatch({
         type: 'openResponseModal',
         responseData: { type: 'fail', message: error?.error ?? '' }
@@ -102,7 +98,7 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
                  text-center text-[24px] font-extrabold 
                  leading-[32px]  text-[#1E1E1E]"
             >
-              آیا از حذف ورک اسپیس اطمینان داری ؟
+              آیا از حذف پروژه اطمینان داری ؟
             </p>
             {/*--------------------------------------------------------------- */}
           </div>
@@ -137,4 +133,4 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
     </>
   )
 }
-export default DeleteWorkspace
+export default DeleteProject

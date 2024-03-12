@@ -6,7 +6,8 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { type FunctionComponent } from 'react'
-import Response from '../components/Common/Modals/ResponseModals/Response' 
+import Response from '../components/Common/Modals/ResponseModals/Response'
+import NewTask from '../components/MainPage/BoardComponents/Task/NewTask/NewTask'
 interface EmptyAreaProps {}
 
 const EmptyArea: FunctionComponent<EmptyAreaProps> = () => {
@@ -19,7 +20,7 @@ const EmptyArea: FunctionComponent<EmptyAreaProps> = () => {
 
   return (
     <>
-      <Response responsetype="success" message="woooooooow" />
+      <NewTask />
     </>
     //  <>
     // //   <div className="flex flex-col gap-6">

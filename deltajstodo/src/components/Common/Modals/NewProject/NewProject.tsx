@@ -14,7 +14,7 @@ import { localPageDispatchContext } from '../../../../contexts/LocalPageContextP
 import { useCreateProjectMutation } from '../../../../features/auth/authApiSlice'
 
 interface NewProjectProps {
-  WID: number | null
+  WID: number
 }
 
 const NewProject: FunctionComponent<NewProjectProps> = ({ WID }) => {

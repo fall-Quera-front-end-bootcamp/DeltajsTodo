@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 import { useContext } from 'react'
-import { UserDispatchContext } from '../../../../contexts/UserProvider'
 import '../../../../dist/output.css'
 import ShareButton from '../../../Common/Buttons/ShareButton'
 import TaskMoreOption from './TaskMoreOption'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-import { useNavigate } from 'react-router-dom'
 
 function TaskMore({
   workspaceID,
@@ -14,9 +12,7 @@ function TaskMore({
   workspaceID: number
   projectID: number
 }): JSX.Element {
-  const dispatch: any = useContext(UserDispatchContext)
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const navigate = useNavigate()
   return (
     <div
       dir="rtl"
@@ -56,15 +52,13 @@ function TaskMore({
         type="remove"
         workspaceID={workspaceID}
         projectID={projectID}
-        onClickHandler={() => {
-          navigate('/workspac')
-
-          dispatch({
-            type: 'DeleteProject',
+        onClickHandler={() =>
+          localPageDispatch({
+            type: 'openDeleteProject',
             WID: workspaceID,
             PID: projectID
           })
-        }}
+        }
       />
       <ShareButton />
     </div>

@@ -36,6 +36,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
     isSuccess,
     error
   } = useGetProjectsQuery({ workspace_id: workspace.id })
+
   ///////////////////////////////////////////////////////////
   if (!!isLoading) {
     return (

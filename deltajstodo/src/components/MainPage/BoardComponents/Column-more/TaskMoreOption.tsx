@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/space-before-function-paren */
 import '../../../../dist/output.css'
 import AddIconSvg from '../../../Common/Icons/AddIconSvg'
 import EditIconSvg from '../../../Common/Icons/EditIconSvg'
@@ -17,8 +18,7 @@ function TaskMoreOption({
   color,
   text,
   type,
-  workspaceID,
-  projectID,
+
   onClickHandler = () => {}
 }: TaskMoreOptionProps): JSX.Element {
   function iconChoose(): JSX.Element {

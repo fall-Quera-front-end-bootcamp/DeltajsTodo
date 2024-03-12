@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
 import DropdownMenu from '../../DropDownMenu/DropdownMenu'
 import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
@@ -15,8 +16,11 @@ import NewTaskDropDownMenu from './NewTaskDropDownMenu'
 import { type Project } from '../../../../../utilities/models'
 
 interface NewTaskProps {
-  handle: () => void
-  project: Project | undefined
+  WID: number //this is workspace id you need
+  PID: number //this is project id you
+
+  handle?: () => void
+  project?: Project | undefined
 }
 
 const NewTask = ({ handle, project }: NewTaskProps): JSX.Element => {

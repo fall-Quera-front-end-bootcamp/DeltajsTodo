@@ -1,35 +1,39 @@
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable tailwindcss/no-custom-classname */
+/* eslint-disable spaced-comment */
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent, useEffect } from 'react'
-import {
-  type Board,
-  type Task,
-  type Project
-} from '../../../../../utilities/models'
-import TaskCard from '../../Task/TaskCard/TaskCard'
-import Column from './ColumnComponents/Column'
-import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
+import { useEffect, type FunctionComponent, useContext } from 'react'
 import NewColumn from './ColumnComponents/NewColumn'
-import NewTask from '../../Task/NewTask/NewTask'
-import { useAtom } from 'jotai'
+import {
+  type Project,
+  type Board as B,
+  type Task as T
+} from '../../../../../utilities/models'
+import Column from './ColumnComponents/Column'
 import { useGetBoardsQuery } from '../../../../../features/auth/authApiSlice'
-import { IDS } from '../../../../../pages/MainPages/MainLayout'
+
+import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 
 interface ColumnViewProps {
+  WID: number
+  PID: number
+
   project?: Project
 }
 
-const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
-  const [showNewTask, setShowNewTask] = useState(false)
-  const handleNewTask = (): void => {
-    setShowNewTask((p) => !p)
+const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
+  ///////////////////////////// API FOR BOADRs ////////////////////////////////
+  const localPageDispatch: any = useContext(localPageDispatchContext)
+
+  const handleNewColumn = (): void => {
+    localPageDispatch({ type: 'openNewBoard', WID, PID })
   }
-
-  const [ids, setids] = useAtom(IDS)
-
-  useEffect(() => {
-    console.log(ids)
-  }, [])
-  // Api for Board =========
+  const handleChangeColumn = (): void => {
+    localPageDispatch({ type: 'openNewBoardTitle', WID, PID })
+  }
   const {
     data: boards,
     isLoading,
@@ -37,55 +41,53 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ project }) => {
     isSuccess,
     error
   } = useGetBoardsQuery({
-    workspace_id: ids.workspaceID,
-    project_id: ids.projectID
+    workspace_id: WID,
+    project_id: PID
   })
 
-  // ==================================
-
-  return (
-    <div dir="rtl" className={`flex flex-row gap-4 ${showNewTask ? '' : ''}`}>
-      {boards?.length === 0
-        ? (
-        <></>
-          )
-        : (
-            boards?.map((board: Board) => {
-              return (
-            <Column handleNewTask={handleNewTask} key={board.id} board={board}>
-              <>
-                <div className="flex flex-col gap-3">
-                  {board.tasks.map((task: Task) => {
-                    return (
-                      <div key={task.id} className="">
-                        <TaskCard task={task} />
-                      </div>
-                    )
-                  })}
-                </div>
-                <BuildTaskButtonPrimary
-                  className="hidden w-full flex-row-reverse items-center justify-center gap-1 rounded-lg border-2 border-brand-primary px-3 py-2 text-brand-primary group-hover:flex"
-                  IconColor="#208D8E"
-                  title="ساختن تسک جدید"
-                  onClick={handleNewTask}
-                />
-              </>
-            </Column>
-              )
-            })
+  ///////////////////////////////////////////////////////////////////////////////////
+  if (!!isLoading) {
+    return (
+      <>
+        <p>loading...</p>
+      </>
+    )
+  } else if (!!isSuccess) {
+    return (
+      <>
+        <div className="absolute right-0 top-[220px] overflow-y-hidden  ">
+          {boards?.length > 0 ? (
+            <>
+              <div className="flex flex-row-reverse gap-[16px]">
+                {boards.map((b: B) => {
+                  return (
+                    <div key={b.id}>
+                      <Column WID={WID} PID={PID} BID={b.id} />
+                      <BuildTaskButtonPrimary
+                        className="border-brand-primary text-brand-primary hidden w-full flex-row-reverse items-center justify-center gap-1 rounded-lg border-2 px-3 py-2 group-hover:flex"
+                        IconColor="#208D8E"
+                        title="ساختن تسک جدید"
+                        onClick={() => {}}
+                      />
+                    </div>
+                  )
+                })}
+                <NewColumn onClickFunc={handleNewColumn} />
+              </div>
+            </>
+          ) : (
+            <NewColumn onClickFunc={handleNewColumn} />
           )}
-      <NewColumn />
-      <BuildTaskButtonPrimary
-        className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
-        IconColor="#ffffff"
-        title="تسک جدید"
-        onClick={handleNewTask}
-      />
-      <div className={showNewTask ? '' : 'hidden'}>
-        <NewTask project={project} handle={handleNewTask} />
-      </div>
-    </div>
-  )
+        </div>
+      </>
+    )
+  } else if (!!isError) {
+    return (
+      <>
+        <p>error</p>
+      </>
+    )
+  }
 }
 
 export default ColumnView

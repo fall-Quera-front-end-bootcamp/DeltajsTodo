@@ -1,61 +1,38 @@
-import { useState, type FunctionComponent } from 'react'
-import AddIconSvg from '../../../../../Common/Icons/AddIconSvg'
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable tailwindcss/no-custom-classname */
+
+import { type FunctionComponent } from 'react'
+import { localPageDispatchContext } from '../../../../../../contexts/LocalPageContextProvider'
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
-interface NewColumnProps {}
+interface NewColumnProps {
+  onClickFunc: () => void
+}
 
-const NewColumn: FunctionComponent<NewColumnProps> = () => {
-  const [newBoard, setNewBoard] = useState(true)
-
-  // const [login, { isLoading }] = useLoginMutation()
-  // const dispatch = useDispatch()
-  // const [err, setErr] = useState()
-  // const handleSubmit = async (
-  //   data = {
-  //     username: 'any',
-  //     password: 'any'
-  //   }
-  // ): Promise<void> => {
-  //   try {
-  //     const userData = await login({
-  //       username: data.username,
-  //       password: data.password
-  //     }).unwrap()
-  //     console.log(userData)
-
-  //     dispatch(
-  //       setCredentials({ accessToken: userData.access, user: { ...userData } })
-  //     )
-
-  //     methods.reset()
-  //     navigate('/workspace')
-  //   } catch (err: any) {
-  //     setErr(err)
-  //   }
-  // }
-  // const onSubmit = methods.handleSubmit((data) => {
-  //   console.log(data)
-  //   //  fetch(data)
-  //   handleSubmit(data)
-  //   // handleUsers()
-  // })
-
-  const handleNewBoard = (): void => {
-    setNewBoard((p) => !p)
-  }
+const NewColumn: FunctionComponent<NewColumnProps> = ({ onClickFunc }) => {
   return (
     <>
-      <button
-        onClick={handleNewBoard}
-        className="relative flex h-[40px] w-[250px] flex-row items-center justify-between rounded-[16px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]"
-      >
-        <p className="w-full text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
-          ساختن برد چدید
-        </p>
-        <AddIconSvg />
-      </button>
+      <div className="relative">
+        <button
+          onClick={onClickFunc}
+          className="group hover:bg-black hover:shadow-2xl"
+        >
+          <div className=" relative flex h-[40px] w-[250px] flex-row-reverse items-center justify-start rounded-[16px] border-t-[2px] px-[12px]  py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] ">
+            <div className="flex h-[23px] w-[125px] flex-row gap-[4px]">
+              <p className="font-yekan h-[23px] w-[125px] text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+                ساختن برد جدید +
+              </p>
+            </div>
+          </div>
+        </button>
+      </div>
     </>
   )
 }
 
 export default NewColumn
+function useContext(localPageDispatchContext: Context<unknown>): any {
+  throw new Error('Function not implemented.')
+}
