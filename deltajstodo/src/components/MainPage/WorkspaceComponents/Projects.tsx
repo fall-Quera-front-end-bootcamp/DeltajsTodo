@@ -1,11 +1,13 @@
 /* eslint-disable multiline-ternary */
-import { useContext, type FunctionComponent } from 'react'
+import { useContext, type FunctionComponent, useRef } from 'react'
 import { useGetProjectsQuery } from '../../../features/auth/authApiSlice'
 import { type Project, type Workspace } from '../../../utilities/models'
 import BuildProjectItemWorkspaceButton from './BuildProjectItemWorkspaceButton'
 import ProjectItemWorkspace from './ProjectItemWorkspace'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
+import ClickDargToScroll from '../../../utilities/ClickDargToScroll'
+import Slider from '../Slider/Slider'
 
 interface ProjectsInterface {
   w: Workspace
@@ -19,7 +21,6 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
     isSuccess
   } = useGetProjectsQuery({ workspace_id: w.id })
 
-  const localPageDispatch: any = useContext(localPageDispatchContext)
   const stepDispatch: any = useContext(localPageDispatchContext)
 
   const handleNewProject = (): void => {
@@ -30,7 +31,7 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
     return <LoadingComponent />
   } else if (isSuccess) {
     return (
-      <div className="flex h-28 w-full flex-row-reverse gap-8 overflow-auto scrollbar scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-dark">
+      <Slider className="flex h-28 w-full flex-row-reverse gap-8 overflow-x-scroll scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-dark">
         {projects?.length !== undefined && projects?.length > 0 ? (
           <>
             {projects?.map((p: Project) => {
@@ -56,7 +57,7 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
             workspace={w}
           />
         )}
-      </div>
+      </Slider>
     )
   } else if (isError) {
     return (

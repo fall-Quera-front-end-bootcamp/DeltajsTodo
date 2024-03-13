@@ -43,7 +43,7 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
         <div className="group mt-4 flex h-[70vh] flex-col gap-4">
           <ColumnHeader board={board} WID={WID} PID={PID} BID={BID} />
 
-          <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1  scrollbar scrollbar-thin scrollbar-thumb-gray-dark">
+          <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1">
             {board.tasks.map((t: T) => {
               return <TaskCard task={t} key={t?.id} />
             })}

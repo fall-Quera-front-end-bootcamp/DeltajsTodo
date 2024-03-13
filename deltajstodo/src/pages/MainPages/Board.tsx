@@ -6,7 +6,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent, useContext } from 'react'
+import { useState, type FunctionComponent, useContext, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import ColumnView from '../../components/MainPage/BoardComponents/BoardViews/ColumnView/ColumnView'
 import RowView from '../../components/MainPage/BoardComponents/BoardViews/RowView/RowView'
@@ -15,6 +15,7 @@ import { useGetProjectQuery } from '../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../contexts/LocalPageContextProvider'
 import TopBar from '../../components/MainPage/BoardComponents/TopBar/TopBar'
 import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
+import ClickDargToScroll from '../../utilities/ClickDargToScroll'
 
 interface BoardProps {}
 enum Views {
@@ -50,7 +51,7 @@ const Board: FunctionComponent<BoardProps> = () => {
 
   if (!!isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex h-screen w-full flex-col items-center justify-center">
         <LoadingComponent />
       </div>
     )
@@ -64,7 +65,7 @@ const Board: FunctionComponent<BoardProps> = () => {
           view={view}
         />
 
-        <div className="flex items-center justify-end overflow-hidden  scrollbar scrollbar-thumb-gray-dark">
+        <>
           {view === Views.column && (
             <ColumnView
               project={project}
@@ -73,7 +74,9 @@ const Board: FunctionComponent<BoardProps> = () => {
             />
           )}
           {view === Views.row && (
-            <RowView WID={workspaceItemID} project={project} />
+            <div className="flex flex-row items-start justify-end">
+              <RowView WID={workspaceItemID} project={project} />
+            </div>
           )}
           {view === Views.calender && (
             <CalenderView
@@ -82,7 +85,7 @@ const Board: FunctionComponent<BoardProps> = () => {
               project={project}
             />
           )}
-        </div>
+        </>
       </>
     )
   } else if (!!isError) {

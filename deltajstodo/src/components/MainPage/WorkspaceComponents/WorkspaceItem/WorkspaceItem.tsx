@@ -40,7 +40,11 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
 
   ///////////////////////////////////////////////////////////
   if (!!isLoading) {
-    return <LoadingComponent />
+    return (
+      <div className="h-[31px] w-full bg-gray-secondary">
+        <LoadingComponent />
+      </div>
+    )
   } else if (!!isSuccess) {
     return (
       <>
@@ -92,18 +96,38 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
         {isSelected ? (
           projects.length > 0 ? (
             projects?.map((project: P) => {
-              return (
-                <>
-                  <div key={project.id}>
-                    <li>
-                      <ProjectItem
-                        workspaceItemID={workspace.id}
-                        projectID={project.id}
-                      />
-                    </li>
+              if (isLoading) {
+                return (
+                  <div key={project?.id} className="w-[246px] bg-gray-primary">
+                    <LoadingComponent />
                   </div>
-                </>
-              )
+                )
+              } else if (isSuccess) {
+                return (
+                  <>
+                    <div key={project.id}>
+                      <li>
+                        <ProjectItem
+                          workspaceItemID={workspace.id}
+                          projectID={project.id}
+                        />
+                      </li>
+                    </div>
+                  </>
+                )
+              } else if (isError) {
+                return (
+                  <div key={project?.id} className="">
+                    Error
+                  </div>
+                )
+              } else {
+                return (
+                  <div key={project?.id} className="">
+                    Error
+                  </div>
+                )
+              }
             })
           ) : (
             <>
@@ -114,7 +138,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
                   stepDispatch({ type: 'openNewProject', WID: workspace.id })
                 }
               >
-                ساختن پروژه جدید
+                {isLoading ? <LoadingComponent /> : 'ساختن پروژه جدید'}
               </button>
             </>
           )

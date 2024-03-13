@@ -46,7 +46,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
   ])
   return (
     <>
-      <div className="bg-white h-[286px] w-[501px] rounded-lg p-[24px] flex flex-col items-center gap-[40px]">
+      <div className="bg-white h-[286px] w-[501px] rounded-lg p-[24px] flex flex-col items-center gap-[40px] shadow-[0_3px_4px_0] shadow-[#00000033]">
         <div className="bg-white h-[158px] w-[453px] flex flex-col items-center gap-[40px]">
           {/* header */}
           <div className="bg-white h-[32px] w-[453px] flex flex-row justify-between ">

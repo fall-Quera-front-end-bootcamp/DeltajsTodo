@@ -28,7 +28,7 @@ const Step3: FunctionComponent<Step3Props> = ({
   return (
     <>
       <div className="h-[365px] w-[501px]">
-        <div className="flex  h-[365px] w-[501px] flex-col items-center gap-[40px] rounded-lg bg-white p-[24px]">
+        <div className="flex  h-[365px] w-[501px] flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0_3px_4px_0] shadow-[#00000033]">
           <div className="flex h-[237px] w-[453px] flex-col items-center gap-[40px] bg-white">
             <div className="flex h-[32px] w-[453px] flex-row justify-between bg-white ">
               <div>
@@ -39,7 +39,7 @@ const Step3: FunctionComponent<Step3Props> = ({
                 </button>
               </div>
               <div>
-                <p className="font-yekan h-[32px] w-[129px] text-center text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
+                <p className="h-[32px] w-[129px] text-center font-yekan text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
                   مرور اطلاعات‌
                 </p>
               </div>
@@ -61,12 +61,12 @@ const Step3: FunctionComponent<Step3Props> = ({
               {/*title */}
               <div className="flex h-[34px] w-[429px] flex-row items-center justify-between">
                 <div className="h-[20px] w-[93px]">
-                  <p className="font-yekan h-[20px] w-[93px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] w-[93px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     نام برد
                   </p>
                 </div>
                 <div className="h-[20px] min-w-[64px]">
-                  <p className="font-yekan h-[20px] max-w-[164px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] max-w-[164px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     {form.name}‌
                   </p>
                 </div>
@@ -75,7 +75,7 @@ const Step3: FunctionComponent<Step3Props> = ({
               {/*color */}
               <div className="flex h-[34px] w-[429px] flex-row items-center justify-between">
                 <div className="h-[20px] w-[98px]">
-                  <p className="font-yekan h-[20px] w-[98px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] w-[98px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     رنگ برد‌
                   </p>
                 </div>
@@ -101,7 +101,7 @@ const Step3: FunctionComponent<Step3Props> = ({
               {/*teamworkers */}
               <div className="flex h-[33px] w-[429px] flex-row items-center justify-between">
                 <div className="h-[20px] w-[27px]">
-                  <p className="font-yekan h-[20px] w-[27px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
+                  <p className="h-[20px] w-[27px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#1E1E1E] ">
                     اعضا‌
                   </p>
                 </div>
@@ -124,7 +124,7 @@ const Step3: FunctionComponent<Step3Props> = ({
                 onClick={onSubmitWSCreation}
                 className="flex h-[40px] w-[415px] flex-row items-center justify-center gap-[10px] rounded-md bg-[#208D8E]"
               >
-                <p className="font-yekan h-[20px] w-[117px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
+                <p className="h-[20px] w-[117px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
                   ساختن برد
                 </p>
               </button>

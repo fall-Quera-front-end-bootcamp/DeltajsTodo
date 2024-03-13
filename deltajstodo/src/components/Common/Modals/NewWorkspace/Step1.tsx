@@ -17,23 +17,12 @@ const Step1: FunctionComponent<Step1Props> = ({ value, onchangeHandler }) => {
   const creationWorkspaceDispatch: any = useContext(
     CreationWorkspaceStepDispatchContext
   )
-  const inputRef: any = useRef()
+  const inputRef = useRef<HTMLInputElement | null>(null)
   return (
     <>
-      <div
-        className="flex 
-        h-[268px] w-[500px]
-        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0_3px_4px_0] shadow-[#00000033]
-        "
-      >
-        <div
-          className="flex 
-        h-[140px] w-[452px] flex-col items-center gap-[40px] bg-white"
-        >
-          <div
-            className="flex 
-        h-[32px] w-[452px] flex-row justify-between bg-white "
-          >
+      <div className="flex h-[268px] w-[500px] flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0_3px_4px_0] shadow-[#00000033]">
+        <div className="flex h-[140px] w-[452px] flex-col items-center gap-[40px] bg-white">
+          <div className="flex h-[32px] w-[452px] flex-row justify-between bg-white ">
             <div>
               <button onClick={() => localPageDispatch({ type: 'closeModal' })}>
                 <Close />
@@ -51,27 +40,17 @@ const Step1: FunctionComponent<Step1Props> = ({ value, onchangeHandler }) => {
             </div>
           </div>
 
-          <div
-            className="flex h-[68px]
-            w-[415px] flex-col gap-[8px]
-            "
-          >
-            <p
-              className="h-[20px] w-[92px]
-               text-right font-yekan text-[14px] 
-              leading-[19.73px]  text-[#1E1E1E] "
-            >
+          <div className="flex h-[68px] w-[415px] flex-col gap-[8px]">
+            <p className="h-[20px] w-[92px] text-right font-yekan text-[14px] leading-[19.73px]  text-[#1E1E1E] ">
               نام ورک‌اسپیس
             </p>
 
             <div
-              className="h-[40px] w-[415px]
-rounded-md border-[1px] border-[#AAAAAA]
+              className="h-[40px] w-[415px] rounded-md border-[1px] border-[#AAAAAA]
 "
             >
               <input
-                className="h-[40px] w-[415px]
-              rounded-md border-[1px] border-[#AAAAAA]"
+                className="h-[40px] w-[415px] rounded-md border-[1px] border-[#AAAAAA] p-4"
                 type="text"
                 name="name"
                 value={value}
@@ -82,13 +61,10 @@ rounded-md border-[1px] border-[#AAAAAA]
           </div>
         </div>
 
-        <div
-          className="flex 
-        h-[40px] w-[415px] gap-[10px]    rounded-md bg-white "
-        >
+        <div className="flex h-[40px] w-[415px] gap-[10px] rounded-md bg-white ">
           <button
             onClick={() => {
-              if (inputRef.current.value === '') {
+              if (inputRef.current?.value === '') {
                 return
               }
               return creationWorkspaceDispatch({ type: 'next' })

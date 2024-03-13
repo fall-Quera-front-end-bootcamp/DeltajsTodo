@@ -60,7 +60,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   })
   const navigate = useNavigate()
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const [createWorkspace, { isLoading }] = useCreateWorkspaceMutation()
+  const [createWorkspace, { isLoading, isSuccess, isError }] = useCreateWorkspaceMutation()
 
   const onchangeHandler = (e: any): void => {
     setForm((prev) => {
@@ -93,7 +93,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="fixed left-1/2 top-1/2 flex h-[316px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] "
+            className="fixed left-1/2 top-1/2 flex h-[316px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px]"
           >
             {creationStep === 1 && (
               <Step1 value={form.name} onchangeHandler={onchangeHandler} />
@@ -106,13 +106,11 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
                 form={form}
                 onSubmitWSCreation={onSubmitWSCreation}
                 disablity={isLoading}
+                isLoading={isLoading}
               />
             )}
             {/**⚫⚫⚪ */}
-            <div
-              className="
-         flex h-[8px] w-[40px] flex-row-reverse gap-[8px]"
-            >
+            <div className="flex h-[8px] w-[40px] flex-row-reverse gap-[8px]">
               <div>
                 <svg
                   width="8"

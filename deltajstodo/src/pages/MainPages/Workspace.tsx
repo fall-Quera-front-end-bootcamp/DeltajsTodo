@@ -1,12 +1,7 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useContext, type FunctionComponent } from 'react'
-import { localPageContext } from '../../contexts/LocalPageContextProvider'
+import { type FunctionComponent } from 'react'
 import NewWorkspace from '../../components/Common/Modals/NewWorkspace/NewWorkspace'
-import NewProject from '../../components/Common/Modals/NewProject/NewProject'
-import ChangeWorkspaceTitle from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceTitle'
-import ChangeWorkspaceColor from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
-import ChangeProjectTitle from '../../components/Common/Modals/NewProject/ChangeProjectTitle'
 import { useGetWorkspacesQuery } from '../../features/auth/authApiSlice'
 import { type Workspace } from '../../utilities/models'
 import Projects from '../../components/MainPage/WorkspaceComponents/Projects'
@@ -14,13 +9,11 @@ import LoadingComponent from '../../components/Common/LoadingComponent/LoadingCo
 interface WorkspaceProps {}
 
 const WorkspacePage: FunctionComponent<WorkspaceProps> = () => {
-  const { value, workspaceID, projectID } = useContext(localPageContext)
   const {
     data: workspaces,
     isLoading,
     isSuccess,
-    isError,
-    error
+    isError
   } = useGetWorkspacesQuery(null)
 
   // console.log(projects)

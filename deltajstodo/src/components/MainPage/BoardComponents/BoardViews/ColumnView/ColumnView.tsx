@@ -4,7 +4,13 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useEffect, type FunctionComponent, useContext, useState } from 'react'
+import {
+  useEffect,
+  type FunctionComponent,
+  useContext,
+  useState,
+  useRef
+} from 'react'
 import NewColumn from './ColumnComponents/NewColumn'
 import {
   type Project,
@@ -18,6 +24,8 @@ import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonP
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 import NewTask from '../../Task/NewTask/NewTask'
+import ClickDargToScroll from '../../../../../utilities/ClickDargToScroll'
+import Slider from '../../../Slider/Slider'
 
 interface ColumnViewProps {
   WID: number
@@ -51,29 +59,30 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
     workspace_id: WID,
     project_id: PID
   })
-
   ///////////////////////////////////////////////////////////////////////////////////
   if (!!isLoading) {
     return (
-      <div className="flex h-[60vh] w-full flex-col items-center justify-center scrollbar scrollbar-thumb-gray-dark">
+      <div className="flex h-[60vh] w-full flex-col items-center justify-center">
         <LoadingComponent />
       </div>
     )
   } else if (!!isSuccess) {
     return (
       <>
-        <div className="relative ml-4 flex w-full flex-row-reverse scrollbar scrollbar-thumb-gray-dark">
+        <div className="relative ml-4 flex w-full flex-row-reverse">
           {boards?.length > 0 ? (
-            <div className="flex w-full flex-row-reverse gap-[16px] overflow-x-auto">
-              {boards.map((b: B) => {
-                return (
-                  <>
-                    <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
-                  </>
-                )
-              })}
-              <NewColumn onClickFunc={handleNewColumn} />
-            </div>
+            <Slider className="flex w-full scale-100 flex-row-reverse gap-[16px] overflow-x-auto overflow-y-hidden transition-all duration-200 will-change-transform">
+              <>
+                {boards.map((b: B) => {
+                  return (
+                    <>
+                      <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
+                    </>
+                  )
+                })}
+                <NewColumn onClickFunc={handleNewColumn} />
+              </>
+            </Slider>
           ) : (
             <NewColumn onClickFunc={handleNewColumn} />
           )}

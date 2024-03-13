@@ -23,7 +23,7 @@ const Step1: FunctionComponent<Step1Props> = ({ value, onchangeHandler }) => {
       <div
         className="flex 
         h-[268px] w-[500px]
-        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px]
+        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0_3px_4px_0] shadow-[#00000033]
         "
       >
         <div
