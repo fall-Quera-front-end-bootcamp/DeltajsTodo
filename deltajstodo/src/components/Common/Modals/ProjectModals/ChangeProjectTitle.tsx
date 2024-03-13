@@ -122,8 +122,7 @@ rounded-md border-[1px] border-[#AAAAAA]
               >
                 {/* <Input {...newProject} /> */}
                 <input
-                  className="h-[40px] w-[415px]
-                            rounded-md border-[1px] border-[#AAAAAA]"
+                  className="h-[40px] w-[415px] rounded-md border-[1px] border-[#AAAAAA]"
                   type="text"
                   name="title"
                   value={inputValue}

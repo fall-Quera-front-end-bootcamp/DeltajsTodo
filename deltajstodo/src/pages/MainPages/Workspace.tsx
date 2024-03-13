@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { type FunctionComponent } from 'react'
-import NewWorkspace from '../../components/Common/Modals/NewWorkspace/NewWorkspace'
+import NewWorkspace from '../../components/Common/Modals/WorkspaceModals/NewWorkspace'
 import { useGetWorkspacesQuery } from '../../features/auth/authApiSlice'
 import { type Workspace } from '../../utilities/models'
 import Projects from '../../components/MainPage/WorkspaceComponents/Projects'

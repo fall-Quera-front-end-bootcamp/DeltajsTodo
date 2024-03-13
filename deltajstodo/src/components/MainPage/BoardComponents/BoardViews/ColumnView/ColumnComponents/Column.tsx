@@ -21,7 +21,6 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
 
   const handleNewTaskBoard = (): void => {
     setShowNewTaskBoard((p) => !p)
-    console.log('hello mobin')
   }
 
   const {
@@ -33,7 +32,7 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
 
   if (!!isLoading) {
     return (
-      <div className="mt-4 flex w-[270px] flex-col items-center justify-start rounded-lg bg-gray-secondary">
+      <div className="mt-14 flex h-10 w-[270px] flex-col items-center justify-start gap-4 rounded-3xl bg-gray-secondary">
         <LoadingComponent />
       </div>
     )
@@ -41,7 +40,7 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
     return (
       <>
         <div className="group mt-4 flex h-[70vh] flex-col gap-4">
-          <ColumnHeader board={board} WID={WID} PID={PID} BID={BID} />
+          <ColumnHeader handleNewTaskBoard={handleNewTaskBoard} board={board} WID={WID} PID={PID} BID={BID} />
 
           <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1 scrollbar-thin">
             {board.tasks.map((t: T) => {

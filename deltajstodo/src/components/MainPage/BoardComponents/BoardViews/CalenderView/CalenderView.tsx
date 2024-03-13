@@ -20,47 +20,49 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({
   const { days } = useContext(DatepickerContext)
 
   return (
-    <div className="relative flex flex-col transition-all duration-500 min-[1024px]:w-[800px] xl:w-[1033px]">
-      <div
-        dir="rtl"
-        className="absolute right-[10px] z-50 grid w-full  grid-cols-7"
-      >
-        <Week className="text-black" />
-      </div>
-      <div
-        dir="rtl"
-        className="grid h-[870px] w-full grid-cols-7 grid-rows-7 overflow-auto"
-      >
-        {days.previous.map((day) => {
-          return (
-            <CalendarCell
-              PID={PID}
-              WID={WID}
-              key={days.previous.indexOf(day)}
-              day={toFarsiNumber(String(day))}
-            />
-          )
-        })}
-        {days.current.map((day) => {
-          return (
-            <CalendarCell
-              PID={PID}
-              WID={WID}
-              key={days.current.indexOf(day)}
-              day={toFarsiNumber(String(day))}
-            />
-          )
-        })}
-        {days.next.map((day) => {
-          return (
-            <CalendarCell
-              PID={PID}
-              WID={WID}
-              key={days.next.indexOf(day)}
-              day={toFarsiNumber(String(day))}
-            />
-          )
-        })}
+    <div className=" mt-5 flex w-full flex-col items-end justify-start overflow-hidden">
+      <div className="relative flex flex-col transition-all duration-500 min-[1024px]:w-[800px] xl:w-[1033px]">
+        <div
+          dir="rtl"
+          className="absolute right-[10px] z-50 grid w-full  grid-cols-7"
+        >
+          <Week className="text-black" />
+        </div>
+        <div
+          dir="rtl"
+          className="grid h-[770px] w-full grid-cols-7 grid-rows-6 overflow-auto"
+        >
+          {days.previous.map((day) => {
+            return (
+              <CalendarCell
+                PID={PID}
+                WID={WID}
+                key={days.previous.indexOf(day)}
+                day={toFarsiNumber(String(day))}
+              />
+            )
+          })}
+          {days.current.map((day) => {
+            return (
+              <CalendarCell
+                PID={PID}
+                WID={WID}
+                key={days.current.indexOf(day)}
+                day={toFarsiNumber(String(day))}
+              />
+            )
+          })}
+          {days.next.map((day) => {
+            return (
+              <CalendarCell
+                PID={PID}
+                WID={WID}
+                key={days.next.indexOf(day)}
+                day={toFarsiNumber(String(day))}
+              />
+            )
+          })}
+        </div>
       </div>
     </div>
   )

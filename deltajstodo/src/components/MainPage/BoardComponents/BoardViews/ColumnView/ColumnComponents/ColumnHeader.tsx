@@ -15,13 +15,15 @@ interface ColumnHeaderProps {
   PID: number
   BID: number
   board: Board
+  handleNewTaskBoard: () => void
 }
 
 const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
   WID,
   PID,
   BID,
-  board
+  board,
+  handleNewTaskBoard
 }) => {
   const [columnMore, setColumnMore] = useState(false)
   const [ishover, setHover] = useState(false)
@@ -34,14 +36,14 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
         <AddTaskLableSvg />
       </div>
       <div
-        className={` relative flex h-[40px] w-[270px] flex-row items-center justify-between
-              rounded-[16px] border-t-[2px]  px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] `}
+        className="relative flex h-[40px] w-[270px] flex-row items-center justify-between rounded-[16px] border-t-[2px]  px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]"
         style={{ borderColor: board?.color }}
       >
         <div className="invisible  flex h-[24px] w-[48px] flex-row gap-[4px] group-hover:visible ">
           <button
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
+            onClick={handleNewTaskBoard}
           >
             <AddIconSvg />
           </button>

@@ -25,7 +25,7 @@ const ProjectItemWorkspace: FunctionComponent<ProjectItemWorkspaceProps> = ({
   } = useGetProjectQuery({ workspace_id: workspaceItemID, id: projectID })
   if (isLoading) {
     return (
-      <div className="flex h-20 w-52 items-center justify-center rounded-2xl bg-gray-secondary">
+      <div className="flex h-20 w-[208px] items-center justify-center rounded-2xl bg-gray-secondary">
         <LoadingComponent />
       </div>
     )

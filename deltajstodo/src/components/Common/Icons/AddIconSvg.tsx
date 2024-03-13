@@ -1,16 +1,19 @@
 const AddIconSvg = ({
   size = '20',
   color = '#323232',
-  className
+  className,
+  onClick
 }: {
   size?: string
   color?: string
   className?: string
+  onClick?: () => void
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes
   return (
     <svg
+      onClick={onClick}
       className={className}
       width={size}
       height={size}

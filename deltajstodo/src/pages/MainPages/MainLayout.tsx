@@ -7,21 +7,22 @@
 import { type FunctionComponent, useEffect, useContext } from 'react'
 import SidebarPrimary from '../../components/MainPage/SideBarPrimary/SidebarPrimary'
 import { Outlet } from 'react-router-dom'
-import NewProject from '../../components/Common/Modals/NewProject/NewProject'
-import NewWorkspace from '../../components/Common/Modals/NewWorkspace/NewWorkspace'
-import ChangeWorkspaceTitle from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceTitle'
-import ChangeWorkspaceColor from '../../components/Common/Modals/NewWorkspace/ChangeWorkspaceColor'
-import ChangeProjectTitle from '../../components/Common/Modals/NewProject/ChangeProjectTitle'
-import DeleteWorkspace from '../../components/Common/Modals/NewWorkspace/DeleteWorkspace'
+import NewProject from '../../components/Common/Modals/ProjectModals/NewProject'
+import NewWorkspace from '../../components/Common/Modals/WorkspaceModals/NewWorkspace'
+import ChangeWorkspaceTitle from '../../components/Common/Modals/WorkspaceModals/ChangeWorkspaceTitle'
+import ChangeWorkspaceColor from '../../components/Common/Modals/WorkspaceModals/ChangeWorkspaceColor'
+import ChangeProjectTitle from '../../components/Common/Modals/ProjectModals/ChangeProjectTitle'
+import DeleteWorkspace from '../../components/Common/Modals/WorkspaceModals/DeleteWorkspace'
 import Response from '../../components/Common/Modals/ResponseModals/Response'
 import { store } from '../../app/store'
-import DeleteProject from '../../components/Common/Modals/NewProject/DeleteProject'
+import DeleteProject from '../../components/Common/Modals/ProjectModals/DeleteProject'
 import { localPageContext } from '../../contexts/LocalPageContextProvider'
 import Message from '../../components/Common/Message/Message'
-import NewBoard from '../../components/Common/Modals/Board/NewBoard/NewBoard'
-import ChangeBoardTitle from '../../components/Common/Modals/Board/ChangeBoardTitle.tsx/ChangeBoardTitle'
+import NewBoard from '../../components/Common/Modals/BoardModals/NewBoard/NewBoard'
+import ChangeBoardTitle from '../../components/Common/Modals/BoardModals/ChangeBoardTitle.tsx/ChangeBoardTitle'
 import NewTask from '../../components/MainPage/BoardComponents/Task/NewTask/NewTask'
-import DeleteBoard from '../../components/Common/Modals/Board/DeleteBoard/DeleteBoard'
+import DeleteBoard from '../../components/Common/Modals/BoardModals/Delete‌Board/DeleteBoard'
+import { AnimatePresence } from 'framer-motion'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
@@ -34,13 +35,12 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
         <div className="relative max-h-[100vh]">
           <SidebarPrimary />
         </div>
-
         <div
           className={
-            'relative h-screen w-full overflow-auto scrollbar scrollbar-thin scrollbar-thumb-gray-dark'
+            'relative h-screen w-full overflow-auto scrollbar-thin scrollbar-thumb-gray-dark'
           }
         >
-          <div className={`overflow-hidden ${value !== 0 ? 'blur-3xl' : ''}`}>
+          <div className={`overflow-hidden ${value > 0 ? 'blur-3xl' : ''}`}>
             <Outlet />
           </div>
           <div className="">
@@ -69,16 +69,16 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
             {value === 12 && (
               <NewTask WID={workspaceID} PID={projectID} BID={boardID} />
             )}
-            {value === -1 && (
-              <>
-                <Message
-                  text={responseData?.message ?? 'SomeThing went wrong ...'}
-                  type={responseData?.type ?? 'fail'}
-                />
-              </>
-            )}
           </div>
-        </div>
+        </div>{' '}
+        {value === -1 && (
+          <AnimatePresence>
+            <Message
+              text={responseData?.message ?? 'SomeThing went wrong ...'}
+              type={responseData?.type ?? 'fail'}
+            />
+          </AnimatePresence>
+        )}
       </div>
     </>
   )

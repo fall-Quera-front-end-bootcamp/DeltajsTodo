@@ -108,8 +108,6 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
         responseData: { type: 'fail', message: err?.error ?? '' }
       })
     }
-
-    navigate('/workspace')
   }
   return (
     <>
@@ -117,7 +115,7 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="fixed left-1/2 top-1/2 flex w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px]"
           >
             {creationStep === 1 && (
               <Step1 value={form.name} onchangeHandler={onchangeHandler} />
@@ -133,59 +131,51 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
               />
             )}
             {/**⚫⚫⚪ */}
-            <div
-              className="
-           flex h-[8px] w-[40px] flex-row-reverse gap-[8px]"
-            >
-              <div>
-                <svg
-                  width="8"
-                  height="8"
-                  viewBox="0 8 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill={creationStep === 1 ? '#ffffff' : '#8A8989'}
-                  />
-                </svg>
-              </div>
-              <div>
-                <svg
-                  width="8"
-                  height="8"
-                  viewBox="0 0 8 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill={creationStep === 2 ? '#ffffff' : '#8A8989'}
-                  />
-                </svg>
-              </div>
+            <div className="flex flex-row-reverse items-center justify-between gap-[8px] rounded-3xl bg-gray-secondary px-4 py-2">
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 8 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="4"
+                  cy="4"
+                  r="4"
+                  fill={creationStep === 1 ? '#ffffff' : '#8A8989'}
+                />
+              </svg>
 
-              <div>
-                <svg
-                  width="8"
-                  height="8"
-                  viewBox="0 0 8 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill={creationStep === 3 ? '#ffffff' : '#8A8989'}
-                  />
-                </svg>
-              </div>
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 0 8 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="4"
+                  cy="4"
+                  r="4"
+                  fill={creationStep === 2 ? '#ffffff' : '#8A8989'}
+                />
+              </svg>
+
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 0 8 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="4"
+                  cy="4"
+                  r="4"
+                  fill={creationStep === 3 ? '#ffffff' : '#8A8989'}
+                />
+              </svg>
             </div>
           </div>
         </CreationWorkspaceStepDispatchContext.Provider>

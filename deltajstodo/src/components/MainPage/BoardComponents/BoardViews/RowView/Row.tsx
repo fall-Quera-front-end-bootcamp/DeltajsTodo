@@ -55,9 +55,9 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
               <ArrowButton columnMore={columnMore} />
               <div
                 style={{ backgroundColor: `${board?.color}` }}
-                className="relative h-[31px] w-[96px] rounded-[8px] flex flex-row gap-[10px] items-center justify-center"
+                className="relative rounded-[8px] flex flex-row gap-[10px] items-center justify-center"
               >
-                <p className="text-center text-boldm text-[#FFDEEB] ">
+                <p className="text-center text-boldm text-white px-4">
                   {board?.name}
                 </p>
               </div>

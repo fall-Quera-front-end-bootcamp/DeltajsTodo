@@ -2,7 +2,7 @@ import { type FunctionComponent } from 'react'
 
 const LoadingComponent: FunctionComponent = () => {
   return (
-    <div className="flex flex-row items-center justify-center" role="status">
+    <div className="flex size-full flex-row items-center justify-center" role="status">
       <svg
         aria-hidden="true"
         className="size-8 animate-spin fill-blue-primary text-gray-secondary dark:text-gray-primary"

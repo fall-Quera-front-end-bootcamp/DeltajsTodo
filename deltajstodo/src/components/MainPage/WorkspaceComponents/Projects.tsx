@@ -7,7 +7,7 @@ import ProjectItemWorkspace from './ProjectItemWorkspace'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
 import ClickDargToScroll from '../../../utilities/ClickDargToScroll'
-import Slider from '../Slider/Slider'
+import Slider from '../SliderHorizontal/SliderHorizontal'
 
 interface ProjectsInterface {
   w: Workspace
@@ -28,7 +28,11 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
   }
 
   if (isLoading) {
-    return <LoadingComponent />
+    return (
+      <div className="h-full w-full flex flex-col items-center justify-center">
+        <LoadingComponent />
+      </div>
+    )
   } else if (isSuccess) {
     return (
       <Slider className="flex h-28 w-full flex-row-reverse gap-8 overflow-x-scroll scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-dark">

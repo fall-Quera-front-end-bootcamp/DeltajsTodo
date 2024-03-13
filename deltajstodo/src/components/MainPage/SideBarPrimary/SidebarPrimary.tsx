@@ -30,7 +30,6 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
       isSuccess,
       error
     } = useGetWorkspacesQuery(null)
-    const [err, setErr] = useState()
 
     const filterWorkspacesHandler = (e: any): void => {
       e?.target?.value !== ''
@@ -93,7 +92,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
                 </button>
 
                 {/* list workspace */}
-                <ul className="flex h-[45vh] max-h-96 flex-col gap-[8px] overflow-y-scroll">
+                <ul className="flex h-[45vh] max-h-96 flex-col gap-[8px] overflow-y-scroll scrollbar-thin">
                   {/* ***********!!!  Need typescript to display remove and add list !!!******************************************** */}
 
                   {filterValue === ''

@@ -1,7 +1,7 @@
 import type React from 'react'
 import { useState } from 'react'
 
-const Slider = ({
+const SliderHorizontal = ({
   children,
   className
 }: {
@@ -14,26 +14,26 @@ const Slider = ({
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>): void => {
     setIsDown(true)
-    e.currentTarget.classList.add('active')
+    e.currentTarget.classList.add('activeSlider')
     setStartX(e.pageX - e.currentTarget.offsetLeft)
     setScrollLeft(e.currentTarget.scrollLeft)
   }
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>): void => {
     setIsDown(false)
-    e.currentTarget.classList.remove('active')
+    e.currentTarget.classList.remove('activeSlider')
   }
 
   const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>): void => {
     setIsDown(false)
-    e.currentTarget.classList.remove('active')
+    e.currentTarget.classList.remove('activeSlider')
   }
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>): void => {
     if (!isDown) return
     e.preventDefault()
     const x = e.pageX - e.currentTarget.offsetLeft
-    const walk = (x - startX) * 3
+    const walk = (x - startX) * 2
     e.currentTarget.scrollLeft = scrollLeft - walk
   }
 
@@ -50,4 +50,4 @@ const Slider = ({
   )
 }
 
-export default Slider
+export default SliderHorizontal

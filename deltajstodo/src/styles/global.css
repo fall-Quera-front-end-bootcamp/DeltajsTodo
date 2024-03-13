@@ -6,7 +6,7 @@ body {
   font-family: Yekan, sans-serif;
 }
 
-.active {
+.activeSlider {
   background: rgba(255, 255, 255, 0.3);
   cursor: grabbing;
   cursor: -webkit-grabbing;

@@ -1,9 +1,7 @@
 import { type Task } from '../../../../../utilities/models'
 import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
-import Tag from '../Tags/Tag'
 import moment from 'jalali-moment'
-import fa from 'moment/src/locale/fa'
 
 function TaskCard({ task }: { task: Task }): JSX.Element {
   moment.locale('fa', { useGregorianParser: true })

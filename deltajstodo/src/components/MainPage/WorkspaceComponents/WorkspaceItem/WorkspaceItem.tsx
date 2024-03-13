@@ -47,7 +47,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
     )
   } else if (!!isSuccess) {
     return (
-      <>
+      <div className="relative">
         <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
           <div className="invisible w-[20px] group-hover:visible ">
             <button
@@ -56,14 +56,6 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
             >
               ...
             </button>
-          </div>
-          <div className="relative">
-            <div
-              className="absolute top-[20px] right-[-100px]"
-              onMouseLeave={() => setColumnMoreSelect(false)}
-            >
-              {isColumnMoreSelected && <ProjectMore id={workspace.id} />}
-            </div>
           </div>
           <div className="flex flex-row items-center justify-between gap-2">
             <div>
@@ -86,12 +78,18 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
             </div>
 
             <div>
-              <div className={'size-[20px] rounded-[4px]  '}>
+              <div className={'size-[20px] rounded-[4px]'}>
                 <ItemColor color={workspace.color} />
               </div>
             </div>
           </div>
         </button>
+        <div
+          className="absolute top-[20px] left-[10px] z-50"
+          onMouseLeave={() => setColumnMoreSelect(false)}
+        >
+          {isColumnMoreSelected && <ProjectMore id={workspace.id} />}
+        </div>
 
         {isSelected ? (
           projects.length > 0 ? (
@@ -145,7 +143,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
         ) : (
           <></>
         )}
-      </>
+      </div>
     )
   } else if (!!isError) {
     return (

@@ -25,7 +25,7 @@ import { localPageDispatchContext } from '../../../../../contexts/LocalPageConte
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 import NewTask from '../../Task/NewTask/NewTask'
 import ClickDargToScroll from '../../../../../utilities/ClickDargToScroll'
-import Slider from '../../../Slider/Slider'
+import Slider from '../../../SliderHorizontal/SliderHorizontal'
 
 interface ColumnViewProps {
   WID: number
