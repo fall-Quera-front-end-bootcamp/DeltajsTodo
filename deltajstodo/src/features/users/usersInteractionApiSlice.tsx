@@ -10,6 +10,13 @@ export const usersInteractionApiSlice = apiSlice.injectEndpoints({
         //body: { ...users }
       })
     }),
+    getUser: builder.query({
+      query: (id) => ({
+        url: `/accounts/${id}`,
+        method: 'Get'
+      }),
+      providesTags: ['profile']
+    }),
     register: builder.mutation({
       query: (data) => ({
         url: '/accounts/',
@@ -39,5 +46,6 @@ export const {
   useGetUsersQuery,
   useRegisterMutation,
   useForgetMutation,
-  useResetMutation
+  useResetMutation,
+  useGetUserQuery
 } = usersInteractionApiSlice

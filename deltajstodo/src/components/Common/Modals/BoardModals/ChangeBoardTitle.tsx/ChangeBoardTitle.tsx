@@ -57,6 +57,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
           tasks_count: board?.tasks_count,
           color: board?.color
         }).unwrap()
+        
         toast.success('عنوان ستون با موفقیت تغییر کرد', {
           duration: 4000,
           style: {
@@ -116,9 +117,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
             "
           >
             <p
-              className="h-[20px] w-[92px]
-               text-right font-yekan text-[14px] font-[400px] 
-              leading-[19.73px]  text-[#1E1E1E] "
+              className="h-[20px] w-[92px] text-right font-yekan text-[14px] leading-[19.73px]  text-[#1E1E1E]"
             >
               نام برد
             </p>

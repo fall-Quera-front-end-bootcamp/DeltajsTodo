@@ -80,7 +80,7 @@ const NewTask = ({
     const formData = new FormData()
     const selectedFile = event.target.files?.[0]
     if (selectedFile !== null && selectedFile !== undefined) {
-      formData.append('file', selectedFile)
+      formData.append('attachment', selectedFile, selectedFile.name)
       setSelectedAttachmentFile(formData)
     }
   }
@@ -90,7 +90,7 @@ const NewTask = ({
     const formData = new FormData()
     const selectedFile = event.target.files?.[0]
     if (selectedFile !== null && selectedFile !== undefined) {
-      formData.append('file', selectedFile)
+      formData.append('thumbnail', selectedFile, selectedFile.name)
       setSelectedCoverFile(formData)
       console.log(selectedAttachmentFile)
     }
