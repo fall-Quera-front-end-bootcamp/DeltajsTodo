@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 import { useState, type FunctionComponent } from 'react'
 import ColumnHeader from './ColumnHeader'
-import { type Board, type Task as T } from '../../../../../../utilities/models'
+import { type Task as T } from '../../../../../../utilities/models'
 import { useGetBoardQuery } from '../../../../../../features/auth/authApiSlice'
 import TaskCard from '../../../Task/TaskCard/TaskCard'
 import BuildTaskButtonPrimary from '../../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
@@ -43,7 +43,7 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
         <div className="group mt-4 flex h-[70vh] flex-col gap-4">
           <ColumnHeader board={board} WID={WID} PID={PID} BID={BID} />
 
-          <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1">
+          <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1 scrollbar-thin">
             {board.tasks.map((t: T) => {
               return <TaskCard task={t} key={t?.id} />
             })}

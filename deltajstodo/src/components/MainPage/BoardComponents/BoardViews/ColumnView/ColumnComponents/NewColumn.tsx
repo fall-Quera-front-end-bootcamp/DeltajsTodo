@@ -13,7 +13,7 @@ interface NewColumnProps {
 
 const NewColumn: FunctionComponent<NewColumnProps> = ({ onClickFunc }) => {
   return (
-    <div className="flex flex-col justify-start">
+    <div className="flex flex-col justify-start pt-10">
       <button onClick={onClickFunc}>
         <div
           className="relative mt-4 flex h-[40px] w-[250px] flex-row-reverse items-center

@@ -27,9 +27,9 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
   const [ishover, setHover] = useState(false)
 
   return (
-    <button className="group">
+    <button className="group relative pt-10">
       <div
-        className={`absolute left-[-22px] top-[-20px] ${ishover ? 'opacity-1' : 'opacity-0'}`}
+        className={`absolute bottom-[40px] left-[-23px] ${ishover ? 'opacity-1' : 'opacity-0'}`}
       >
         <AddTaskLableSvg />
       </div>
