@@ -10,6 +10,7 @@ import LeftArrow from '../../../Icons/LeftArrow'
 import Close from '../../../Icons/Close'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import {
+  useGetBoardQuery,
   useUpdataBoardMutation,
   useUpdataWorkspaceMutation
 } from '../../../../../features/auth/authApiSlice'
@@ -34,6 +35,12 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
   }
   ////////////////////////////////////////////////////////////////
 
+  const { data: board } = useGetBoardQuery({
+    workspace_id: WID,
+    project_id: PID,
+    id: BID
+  })
+
   const onSubmitHandler = async (): Promise<void> => {
     if (inputValue !== '') {
       try {
@@ -42,12 +49,11 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
           project_id: PID,
           id: BID,
           name: inputValue,
-          order: 2,
-          tasks: [],
-          tasks_count: 0,
-          color: '#f7f7f7f'
+          order: board?.order,
+          tasks: board?.tasks,
+          tasks_count: board?.tasks_count,
+          color: board?.color
         }).unwrap()
-        // console.log(userData)
 
         localPageDispatch({ type: 'closeModal' })
       } catch (err: any) {

@@ -8,18 +8,13 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, type FunctionComponent, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-import ShareIconSvg from '../../components/Common/Icons/ShareIconSvg'
-import TodoListIconSvg from '../../components/Common/Icons/TodoListIconSvg'
-import ColumnArtboardIconSvg from '../../components/Common/Icons/ColumnArtboardIconSvg'
-import CalendarIconSvg from '../../components/Common/Icons/CalendarIcons/CalendarIconSvg'
 import ColumnView from '../../components/MainPage/BoardComponents/BoardViews/ColumnView/ColumnView'
 import RowView from '../../components/MainPage/BoardComponents/BoardViews/RowView/RowView'
 import CalenderView from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalenderView'
 import { useGetProjectQuery } from '../../features/auth/authApiSlice'
-
-import BuildTaskButtonPrimary from '../../components/MainPage/BoardComponents/Task/BuildTaskButtons/BuildTaskButtonPrimary'
 import { localPageDispatchContext } from '../../contexts/LocalPageContextProvider'
 import TopBar from '../../components/MainPage/BoardComponents/TopBar/TopBar'
+
 interface BoardProps {}
 enum Views {
   column = 643,
@@ -68,7 +63,7 @@ const Board: FunctionComponent<BoardProps> = () => {
           view={view}
         />
 
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end overflow-hidden">
           {view === Views.column && (
             <ColumnView
               project={project}
@@ -76,7 +71,9 @@ const Board: FunctionComponent<BoardProps> = () => {
               WID={workspaceItemID}
             />
           )}
-          {view === Views.row && <RowView WID={workspaceItemID} project={project} />}
+          {view === Views.row && (
+            <RowView WID={workspaceItemID} project={project} />
+          )}
           {view === Views.calender && <CalenderView project={project} />}
         </div>
       </>

@@ -182,7 +182,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     /////////////////////////////////////////////////////
     getTasks: builder.query({
       query: (data) => ({
-        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.board_id}/tasks`,
+        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.board_id}/tasks/`,
         method: 'GET'
         // body: { ...data }
       }),
@@ -190,7 +190,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     createTask: builder.mutation({
       query: (data) => ({
-        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.board_id}/tasks`,
+        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.board_id}/tasks/`,
         method: 'POST',
         body: { ...data }
       }),

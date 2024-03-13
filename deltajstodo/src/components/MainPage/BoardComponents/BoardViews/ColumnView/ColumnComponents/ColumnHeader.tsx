@@ -36,7 +36,7 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
         <AddTaskLableSvg />
       </div>
       <div
-        className={` relative flex h-[40px] w-[250px] flex-row items-center justify-between
+        className={` relative flex h-[40px] w-[270px] flex-row items-center justify-between
               rounded-[16px] border-t-[2px]  px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] `}
         style={{ borderColor: board?.color }}
       >

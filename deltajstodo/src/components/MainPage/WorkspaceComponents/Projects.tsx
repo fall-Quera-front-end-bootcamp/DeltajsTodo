@@ -22,18 +22,21 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
     return <LoadingComponent />
   } else if (isSuccess) {
     return (
-      <div className="flex w-full flex-row-reverse gap-8 overflow-auto">
+      <div className="flex h-28 w-full flex-row-reverse gap-8 overflow-auto">
         {projects?.length !== undefined && projects?.length > 0 ? (
-          projects?.map((p: Project) => {
-            return (
-              <ProjectItemWorkspace
-                workspaceItemColor={w?.color}
-                projectID={p?.id}
-                workspaceItemID={w?.id}
-                key={p.id}
-              />
-            )
-          })
+          <>
+            {projects?.map((p: Project) => {
+              return (
+                <ProjectItemWorkspace
+                  workspaceItemColor={w?.color}
+                  projectID={p?.id}
+                  workspaceItemID={w?.id}
+                  key={p.id}
+                />
+              )
+            })}
+            <BuildProjectItemWorkspaceButton key={w?.id} workspace={w} />
+          </>
         ) : (
           <BuildProjectItemWorkspaceButton key={w?.id} workspace={w} />
         )}

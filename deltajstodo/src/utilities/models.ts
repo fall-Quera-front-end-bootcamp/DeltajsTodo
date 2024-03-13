@@ -14,9 +14,9 @@ export interface sidebarItem {
   children: projectItem[]
 }
 export enum Views {
-  column = 0,
-  row = 0,
-  calender = 0
+  column = 643,
+  row = 802,
+  calender = 541
 }
 interface Profile {
   userInformatin: {
@@ -59,21 +59,29 @@ interface Comment {
   profileImg: string
   gmailAccount?: string
   commentDescription: string
+
+  id: 0
+  name: 'string'
+  description: 'string'
+  deadline: '2024-03-12'
+  priority: 9223372036854776000
+  attachment: 'string'
+  thumbnail: 'string'
+  order: 9223372036854776000
+  members: 'string'
+  created_at: '2024-03-12T21:09:37.396Z'
 }
 export interface Task {
-  readonly id: nubmer
+  readonly id: number
   name: string
-  projectTitle: string
-  status: Permission.manager
-  archived: false
-  sendforPeople?: Array<Pick<User, 'gmailAccount' | 'coverImg'>>
-  describtion?: string
-  attachFiles?: string[]
-  coverImg?: string
-  tags: Tag[]
-  timeLine: TimeLine
-  priority: Priorities
-  comments?: Comment[]
+  description?: string
+  deadline?: string
+  priority?: number
+  attachment?: FormData
+  thumbnail?: FormData
+  order?: number
+  members?: []
+  created_at?: string
 }
 /*-----------------Board -> Project -> Workspace  ------------------------------------*/
 export interface Board {

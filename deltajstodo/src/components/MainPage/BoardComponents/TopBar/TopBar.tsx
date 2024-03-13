@@ -40,31 +40,6 @@ const TopBar: FunctionComponent<TopBarProps> = ({
         </div>
         <div className="w-full border-b-[0.5px] border-[#AAAAAA] pt-4"></div>
       </div>
-      {/* <div className="flex flex-row-reverse gap-[40px]">
-        <div className=" flex h-[24px] w-[200px] flex-row justify-items-start gap-[4px]">
-          <input
-            className=" w-[172px]"
-            type="text"
-            placeholder="جستجو بین تسک‌ها"
-          />
-          <SearchIconSvg />
-        </div>
-        <div className=" h-[22px] self-center border-[1px] border-[#999999]"></div>
-
-        <div className="flex h-[28px] w-[754px] flex-row justify-between">
-          <div className="flex h-[25px] w-[238px] flex-row gap-4">
-            <div className="flex h-[24px] w-[67px] flex-row gap-[6px]">
-              <p className=" h-[17px] w-[37px] text-right text-[12px]   font-normal leading-[16.91px] text-[#1E1E1E]">
-                فیلترها
-              </p>
-              <FilterSettingIconSvg />
-            </div>
-            <div className="h-[25px] w-[155px] border-[4px]"></div>
-          </div>
-
-          <div></div>
-        </div>
-      </div> */}
     </>
   )
 }

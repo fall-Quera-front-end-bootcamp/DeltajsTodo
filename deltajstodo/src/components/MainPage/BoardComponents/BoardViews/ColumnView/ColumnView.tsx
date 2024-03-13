@@ -37,18 +37,10 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
     setShowNewTaskBoard((p) => !p)
   }
 
-  const handleNewTaskBoard = (): void => {
-    setShowNewTaskBoard((p) => !p)
-    setShowNewTask((p) => !p)
-  }
-
   const handleNewColumn = (): void => {
     localPageDispatch({ type: 'openNewBoard', WID, PID })
   }
 
-  const handleChangeColumn = (): void => {
-    localPageDispatch({ type: 'openNewBoardTitle', WID, PID })
-  }
   const {
     data: boards,
     isLoading,
@@ -66,9 +58,9 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
   } else if (!!isSuccess) {
     return (
       <>
-        <div className="relative ml-4 flex w-full flex-row-reverse overflow-auto scrollbar-thin scrollbar-webkit">
+        <div className="relative ml-4 flex w-full flex-row-reverse scrollbar-thin scrollbar-webkit">
           {boards?.length > 0 ? (
-            <div className="flex w-full flex-row-reverse gap-[16px] overflow-x-scroll">
+            <div className="flex w-full flex-row-reverse gap-[16px] overflow-x-auto">
               {boards.map((b: B) => {
                 return (
                   <>

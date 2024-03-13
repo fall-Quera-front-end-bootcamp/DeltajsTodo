@@ -8,6 +8,8 @@ const ListViewButton = ({
   handleView: (e: any) => void
   view: Views
 }): JSX.Element => {
+  console.log(view)
+
   return (
     <button
       onClick={handleView}

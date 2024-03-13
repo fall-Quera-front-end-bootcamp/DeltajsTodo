@@ -1,6 +1,3 @@
-import { hexColors } from '../../../constants'
-import { useCreateWorkspaceMutation } from '../../../features/auth/authApiSlice'
-import getKeyByValue from '../../../utilities/getKeyByValue'
 import { type Workspace } from '../../../utilities/models'
 import AddSecondaryIconSvg from '../../Common/Icons/AddSecondaryIconSvg'
 
@@ -11,13 +8,21 @@ interface BuildProjectItemWorkspaceButtonProps {
 const BuildProjectItemWorkspaceButton = ({
   workspace
 }: BuildProjectItemWorkspaceButtonProps): JSX.Element => {
-  const bgColor = 'bg-' + getKeyByValue(hexColors, workspace?.color)
   return (
     <button
-      className={`h-20 w-[200px] ${bgColor} flex flex-row items-center justify-center rounded-2xl border-4`}
+      className="flex flex-col items-center justify-center"
+      style={{
+        borderRadius: '16px',
+        border: `4px solid ${workspace?.color}`,
+        boxShadow: '0px 3px 4px 0px #00000033',
+        height: '80px',
+        width: '200px'
+      }}
     >
-      <h3 className="text-boldm">ساختن پروژه جدید</h3>
-      <AddSecondaryIconSvg />
+      <div className="flex h-20 w-[200px] flex-row items-center justify-center">
+        <h3 className="text-boldm">ساختن پروژه جدید</h3>
+        <AddSecondaryIconSvg />
+      </div>
     </button>
   )
 }

@@ -16,7 +16,7 @@ const ProjectItemWorkspace: FunctionComponent<ProjectItemWorkspaceProps> = ({
   workspaceItemColor,
   workspaceItemID
 }) => {
-  const bgColor = 'bg-' + getKeyByValue(hexColors, workspaceItemColor)
+  // const bgColor = 'bg-' + getKeyByValue(hexColors, workspaceItemColor)
   const {
     data: project,
     isLoading,
@@ -33,7 +33,11 @@ const ProjectItemWorkspace: FunctionComponent<ProjectItemWorkspaceProps> = ({
         state={{ workspaceItemID, projectItemID: projectID }}
       >
         <div
-          className={`h-20 w-52 rounded-2xl ${bgColor} flex items-center justify-center`}
+          className="flex h-20 w-52 items-center justify-center rounded-2xl shadow-[0px_3px_4px_0px_#00000033]
+          "
+          style={{
+            background: `linear-gradient(249.83deg, ${workspaceItemColor} 0%, ${workspaceItemColor + '95'} 100%)`
+          }}
         >
           <h3 className="text-boldm text-white">{project?.name}</h3>
         </div>

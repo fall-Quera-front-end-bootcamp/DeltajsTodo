@@ -17,6 +17,8 @@ import {
   useCreateTaskMutation,
   useGetProjectsQuery
 } from '../../../../../features/auth/authApiSlice'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 
 interface NewTaskProps {
   WID?: number //this is workspace id you need
@@ -42,8 +44,10 @@ const NewTask = ({
   const [inputValueSecond, setInputValueSecond] = useState('')
   const [textAreaValue, setTextAreaValue] = useState('')
   const [selectedAttachmentFile, setSelectedAttachmentFile] =
-    useState<File | null>(null)
-  const [selectedCoverFile, setSelectedCoverFile] = useState<File | null>(null)
+    useState<FormData | null>(null)
+  const [selectedCoverFile, setSelectedCoverFile] = useState<FormData | null>(
+    null
+  )
   // Ref hook
   const inputRefFirst = useRef<HTMLInputElement | null>(null)
   const inputRefSecond = useRef<HTMLInputElement | null>(null)
@@ -73,35 +77,82 @@ const NewTask = ({
   const handleOnChangeFirst = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
+    const formData = new FormData()
     const selectedFile = event.target.files?.[0]
     if (selectedFile !== null && selectedFile !== undefined) {
-      setSelectedAttachmentFile(selectedFile)
+      formData.append('file', selectedFile)
+      setSelectedAttachmentFile(formData)
     }
   }
   const handleOnChangeSecond = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
+    const formData = new FormData()
     const selectedFile = event.target.files?.[0]
     if (selectedFile !== null && selectedFile !== undefined) {
-      setSelectedCoverFile(selectedFile)
+      formData.append('file', selectedFile)
+      setSelectedCoverFile(formData)
+      console.log(selectedAttachmentFile)
     }
   }
 
   const removeFileFirst = (): void => {
+    console.log(selectedAttachmentFile)
     setSelectedAttachmentFile(null)
   }
   const removeFileSecond = (): void => {
     setSelectedCoverFile(null)
   }
-  const onSubmit = (): void => {
-    setSelectedCoverFile(null)
-  }
 
-  const [Task, { isLoading, isError }] = useCreateTaskMutation()
+  const [Task, { isLoading, isError, isSuccess, error }] =
+    useCreateTaskMutation()
 
   const { data: projects } = useGetProjectsQuery({
-    workspace_id: WID
+    workspace_id: WID,
+    project_id: PID,
+    id: BID
   })
+
+  const navigate = useNavigate()
+  const notify = () =>
+    toast.error('🦄 Wow so easy!', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light'
+    })
+
+  const onSubmit = async (): Promise<void> => {
+    try {
+      await Task({
+        workspace_id: WID,
+        project_id: PID,
+        board_id: BID,
+        name: inputValue,
+        description: textAreaValue,
+        priority: 1,
+        // attachment: selectedAttachmentFile,
+        // thumbnail: selectedCoverFile,
+        order: 12,
+        tags: [
+          {
+            name: 'Tag1',
+            color: '#ffffff'
+          },
+          {
+            name: 'Tag2',
+            color: '#000000'
+          }
+        ]
+      }).unwrap()
+    } catch (err: any) {
+      console.log(err)
+    }
+  }
 
   return (
     <AnimatePresence>

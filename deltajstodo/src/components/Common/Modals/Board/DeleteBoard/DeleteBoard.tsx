@@ -41,7 +41,7 @@ const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
         id: BID
       }).unwrap()
       //console.log(res)
-    //   navigate('/workspace')
+      //   navigate('/workspace')
       localPageDispatch({
         type: 'openResponseModal',
         responseData: { type: 'success', message: res?.message ?? '' }

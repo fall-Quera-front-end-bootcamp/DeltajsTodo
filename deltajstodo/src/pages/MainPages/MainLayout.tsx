@@ -43,7 +43,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
 
         <div className={'relative h-screen w-full overflow-auto'}>
           <div
-            className={`${value !== 0 ? 'hidden  bg-gray-primary blur-md' : ''}`}
+            className={`overflow-hidden ${value !== 0 ? 'hidden  bg-gray-primary blur-md' : ''}`}
           >
             <Outlet />
           </div>
