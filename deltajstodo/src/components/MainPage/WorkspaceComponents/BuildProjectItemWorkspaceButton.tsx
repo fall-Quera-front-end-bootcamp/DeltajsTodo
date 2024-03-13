@@ -3,10 +3,12 @@ import AddSecondaryIconSvg from '../../Common/Icons/AddSecondaryIconSvg'
 
 interface BuildProjectItemWorkspaceButtonProps {
   workspace: Workspace
+  onClick: () => void
 }
 
 const BuildProjectItemWorkspaceButton = ({
-  workspace
+  workspace,
+  onClick
 }: BuildProjectItemWorkspaceButtonProps): JSX.Element => {
   return (
     <button
@@ -18,6 +20,7 @@ const BuildProjectItemWorkspaceButton = ({
         height: '80px',
         width: '200px'
       }}
+      onClick={onClick}
     >
       <div className="flex h-20 w-[200px] flex-row items-center justify-center">
         <h3 className="text-boldm">ساختن پروژه جدید</h3>

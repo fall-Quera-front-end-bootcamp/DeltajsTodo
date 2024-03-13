@@ -58,7 +58,7 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
     <>
       <div
         dir="rtl"
-        className="flex h-[268px] w-[500px] flex-col items-center gap-[40px]"
+        className="flex h-[268px] w-[500px] flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         <div
           className="bg-white 

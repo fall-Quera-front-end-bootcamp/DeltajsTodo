@@ -117,7 +117,7 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px]"
+            className="flex h-[316px] w-[500px] flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           >
             {creationStep === 1 && (
               <Step1 value={form.name} onchangeHandler={onchangeHandler} />

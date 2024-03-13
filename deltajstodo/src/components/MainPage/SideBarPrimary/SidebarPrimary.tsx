@@ -15,6 +15,7 @@ import UserButton from './UserButton/UserButton'
 import HeadingTextLogoLink from '../../Common/HeadingMainText/HeadingTextLogoLink'
 import { type Workspace as W } from '../../../utilities/models'
 import { useGetWorkspacesQuery } from '../../../features/auth/authApiSlice'
+import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 
 interface SidebarPrimaryProps {}
 
@@ -38,7 +39,11 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
     }
 
     if (isLoading) {
-      return <p>loading..</p>
+      return (
+        <div className="flex flex-col items-center justify-center">
+          <LoadingComponent />
+        </div>
+      )
     } else if (isSuccess) {
       return (
         <section className="relative flex h-screen w-[340px] flex-col justify-between border-l-[1px] border-[#AAAAAA] bg-[#ffff]">

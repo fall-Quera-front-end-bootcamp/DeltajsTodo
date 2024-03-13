@@ -43,17 +43,6 @@ const WorkspacePage: FunctionComponent<WorkspaceProps> = () => {
           )
         })
       )}
-
-      <div className="absolute right-[390px] top-[200px] z-50 border-black">
-        {value === 1 && <NewWorkspace />}
-        {value === 2 && <NewProject WID={workspaceID} />}
-        {/* {step === 3 && <NewTask />}??? */}
-        {value === 4 && <ChangeWorkspaceTitle WID={workspaceID} />}
-        {value === 5 && <ChangeWorkspaceColor WID={workspaceID} />}
-        {value === 6 && (
-          <ChangeProjectTitle WID={workspaceID} PID={projectID} />
-        )}
-      </div>
     </div>
   )
 }

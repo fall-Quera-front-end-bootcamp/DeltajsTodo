@@ -1,10 +1,11 @@
 /* eslint-disable multiline-ternary */
-import { type FunctionComponent } from 'react'
+import { useContext, type FunctionComponent } from 'react'
 import { useGetProjectsQuery } from '../../../features/auth/authApiSlice'
 import { type Project, type Workspace } from '../../../utilities/models'
 import BuildProjectItemWorkspaceButton from './BuildProjectItemWorkspaceButton'
 import ProjectItemWorkspace from './ProjectItemWorkspace'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
+import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
 
 interface ProjectsInterface {
   w: Workspace
@@ -17,6 +18,13 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
     isError,
     isSuccess
   } = useGetProjectsQuery({ workspace_id: w.id })
+
+  const localPageDispatch: any = useContext(localPageDispatchContext)
+  const stepDispatch: any = useContext(localPageDispatchContext)
+
+  const handleNewProject = (): void => {
+    stepDispatch({ type: 'openNewProject', WID: w.id })
+  }
 
   if (isLoading) {
     return <LoadingComponent />
@@ -35,10 +43,14 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
                 />
               )
             })}
-            <BuildProjectItemWorkspaceButton key={w?.id} workspace={w} />
+            <BuildProjectItemWorkspaceButton
+              onClick={handleNewProject}
+              key={w?.id}
+              workspace={w}
+            />
           </>
         ) : (
-          <BuildProjectItemWorkspaceButton key={w?.id} workspace={w} />
+          <BuildProjectItemWorkspaceButton onClick={handleNewProject} key={w?.id} workspace={w} />
         )}
       </div>
     )

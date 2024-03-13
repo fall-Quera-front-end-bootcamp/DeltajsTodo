@@ -15,8 +15,6 @@ const NewTaskDropDownMenu = ({
   const [selected, setSelected] = useState('')
   const [open, setOpen] = useState(false)
 
-  console.log(selected)
-
   return (
     <div className="absolute right-[350px] top-0 rounded-2xl font-medium">
       <div

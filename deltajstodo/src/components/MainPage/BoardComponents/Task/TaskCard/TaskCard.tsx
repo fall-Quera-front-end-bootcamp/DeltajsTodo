@@ -8,7 +8,6 @@ import fa from 'moment/src/locale/fa'
 function TaskCard({ task }: { task: Task }): JSX.Element {
   moment.locale('fa', { useGregorianParser: true })
   const deadline = moment(task?.deadline).format('DD / MM')
-  console.log(task)
 
   return (
     <section

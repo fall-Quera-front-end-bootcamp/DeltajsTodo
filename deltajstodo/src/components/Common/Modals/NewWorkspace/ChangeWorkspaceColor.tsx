@@ -75,7 +75,7 @@ const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
         className=" bg-white h-[286px] w-[501px]
             rounded-lg p-[24px]
              flex flex-col items-center
-              gap-[40px]
+              gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
             "
       >
         <div

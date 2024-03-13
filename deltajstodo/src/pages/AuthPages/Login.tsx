@@ -12,6 +12,7 @@ import { motion } from 'framer-motion'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/auth/authSlice'
+import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
@@ -144,7 +145,15 @@ const Login: FunctionComponent<LoginProps> = () => {
                   textWhite
                   onClickFunction={onSubmit}
                 >
-                  ورود
+                  {isLoading
+                    ? (
+                    <div className="flex h-[20px] w-full flex-row items-center justify-center">
+                      <LoadingComponent />
+                    </div>
+                      )
+                    : (
+                        'ورود'
+                      )}
                 </Button>
                 <div className="flex flex-row items-center justify-center text-[19px]">
                   <button

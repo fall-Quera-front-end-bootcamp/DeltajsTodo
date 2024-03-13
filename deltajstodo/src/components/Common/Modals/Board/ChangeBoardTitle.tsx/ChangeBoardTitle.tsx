@@ -73,7 +73,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
         dir="rtl"
         className="flex 
         h-[268px] w-[500px]
-        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px]
+        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
         "
       >
         <div

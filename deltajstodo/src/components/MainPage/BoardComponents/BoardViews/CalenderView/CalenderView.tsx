@@ -8,12 +8,16 @@ import Week from '../../Calendar/Week'
 
 interface CalenderViewProps {
   project: Project
+  PID: number
+  WID: number
 }
 
-const CalenderView: FunctionComponent<CalenderViewProps> = ({ project }) => {
+const CalenderView: FunctionComponent<CalenderViewProps> = ({
+  project,
+  PID,
+  WID
+}) => {
   const { days } = useContext(DatepickerContext)
-
-  console.log(days)
 
   return (
     <div className="relative flex flex-col transition-all duration-500 min-[1024px]:w-[800px] xl:w-[1033px]">
@@ -25,11 +29,13 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({ project }) => {
       </div>
       <div
         dir="rtl"
-        className="relative grid h-[870px] w-full grid-cols-7 grid-rows-7 overflow-auto"
+        className="grid h-[870px] w-full grid-cols-7 grid-rows-7 overflow-auto"
       >
         {days.previous.map((day) => {
           return (
             <CalendarCell
+              PID={PID}
+              WID={WID}
               key={days.previous.indexOf(day)}
               day={toFarsiNumber(String(day))}
             />
@@ -38,6 +44,8 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({ project }) => {
         {days.current.map((day) => {
           return (
             <CalendarCell
+              PID={PID}
+              WID={WID}
               key={days.current.indexOf(day)}
               day={toFarsiNumber(String(day))}
             />
@@ -46,6 +54,8 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({ project }) => {
         {days.next.map((day) => {
           return (
             <CalendarCell
+              PID={PID}
+              WID={WID}
               key={days.next.indexOf(day)}
               day={toFarsiNumber(String(day))}
             />

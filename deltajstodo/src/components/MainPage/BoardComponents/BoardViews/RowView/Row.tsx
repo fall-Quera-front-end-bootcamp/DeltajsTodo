@@ -11,38 +11,53 @@ import { type Task, type Board } from '../../../../../utilities/models'
 import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
 import ArrowButton from './RowComponents/ArrowButton'
+import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
+import moment from 'jalali-moment'
+import { useGetTasksQuery } from '../../../../../features/auth/authApiSlice'
+import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 
 interface RowProps {
   board: Board
+  BID: number
+  WID: number
 }
 
-const Row: FunctionComponent<RowProps> = ({ board }) => {
+const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
   const [columnMore, setColumnMore] = useState(false)
+
+  const handleSetColumnMore = (): void => {
+    setColumnMore((p) => !p)
+  }
+
+  const {
+    data: tasks,
+    isLoading,
+    isError,
+    isSuccess
+  } = useGetTasksQuery({
+    workspace_id: WID,
+    board_id: board.id,
+    project_id: BID
+  })
+
+  moment.locale('fa', { useGregorianParser: true })
 
   return (
     <>
-      <div dir="rtl" className="flex flex-col gap-[19px]">
+      <div dir="rtl" className="flex w-full flex-col gap-[19px]">
         {/**header */}
-        <div className="flex flex-row justify-between">
+        <button
+          onClick={handleSetColumnMore}
+          className="flex flex-row justify-between"
+        >
           <div className="flex flex-row gap-[8px] items-center">
             <div className="flex flex-row gap-[5px] items-center">
-              <ArrowButton
-                columnMore={columnMore}
-                setColumnMore={setColumnMore}
-              />
-              <div className="relative rounded-[8px] flex flex-row gap-[10px] items-center justify-center">
-                <svg
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 84 32"
-                  preserveAspectRatio="none"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect width="100%" height="100%" rx="4" fill={board.color} />
-                </svg>
-
-                <p className="h-[32px] absolute top-0 z-10 px-[12px] py-[10px] text-center text-[16px] font-extrabold leading-[22.55px] text-[#FFDEEB] ">
+              <ArrowButton columnMore={columnMore} />
+              <div
+                style={{ backgroundColor: `${board?.color}` }}
+                className="relative h-[31px] w-[96px] rounded-[8px] flex flex-row gap-[10px] items-center justify-center"
+              >
+                <p className="text-center text-boldm text-[#FFDEEB] ">
                   {board?.name}
                 </p>
               </div>
@@ -55,118 +70,77 @@ const Row: FunctionComponent<RowProps> = ({ board }) => {
                  leading-[16.91px]
                   text-[#1E1E1E]"
               >
-                {board?.tasks?.length} تسک
+                {toFarsiNumber(`${board?.tasks?.length}`)} تسک
               </p>
             </div>
           </div>
-
-          <div className="h-[23px] w-[473px] flex flex-row gap-[70px]">
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
-              <p
-                className="font-yekan h-[23px] w-[32px] 
-              text-right text-[16px]
-               font-medium leading-[22.55px]
-                text-[#1E1E1E]"
-              >
-                اعضا
-              </p>
-            </div>
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
-              <p
-                className="font-yekan 
-                h-[23px] w-[45px] 
-              text-right text-[16px]
-               font-medium leading-[22.55px]
-                text-[#1E1E1E]"
-              >
-                ددلاین
-              </p>
-            </div>
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
-              <p
-                className="font-yekan 
-              h-[23px] w-[48px] 
-              text-right text-[16px]
-               font-medium leading-[22.55px]
-                text-[#1E1E1E]"
-              >
-                اولویت
-              </p>
-            </div>
-            <div className="w-[70px] h-[23px] flex flex-row gap-[10px] px-[10px]">
-              <p
-                className="font-yekan 
-              h-[23px] w-[66px] 
-              text-right text-[16px]
-               font-medium leading-[22.55px]
-                text-[#1E1E1E]"
-              >
-                توضیحات
-              </p>
-            </div>
+          <div className="flex flex-row gap-[70px]">
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+              اعضا
+            </p>
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+              ددلاین
+            </p>
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+              اولویت
+            </p>
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+              توضیحات
+            </p>
           </div>
-        </div>
+        </button>
 
         <div className="pr-[25px]">
           <div className={columnMore ? 'block' : 'hidden'}>
-            {board.tasks.map((t: Task) => {
-              return (
-                <div
-                  key={t.id}
-                  className="w-[986px] h-[47px] rounded-[4px] flex flex-row justify-between py-[7px] bg-white items-center"
-                >
+            {tasks?.map((task: Task) => {
+              if (isLoading) {
+                return <LoadingComponent key={task?.id} />
+              } else if (isSuccess) {
+                return (
                   <div
-                    className="w-[193px] h-[17px] 
-            flex flex-row gap-[7px] 
-            items-center"
+                    key={task.id}
+                    className="rounded-[4px] flex flex-row justify-between py-[7px] bg-white items-center"
                   >
-                    <ItemColor color={board.color} size="16" />
-                    <p
-                      className="font-yekan 
-              h-[17px] w-[170px] 
-              text-right text-[12px] 
-              font-normal leading-[16.91px] text-[#1E1E1E]"
-                    >
-                      {t?.name}
-                    </p>
-                  </div>
-                  <div className="h-[33x] w-[490px] flex flex-row gap-[70px] items-center">
-                    <div className="w-[70px] h-[33px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
-                      {t.sendforPeople?.map((s, i) => {
-                        return (
-                          <div
-                            key={i}
-                            className="h-[33px] w-[32px] rounded-[100px] pt-[9px] px-[8px] pb-[7px]"
-                          >
-                            <img
-                              width={'32px'}
-                              height={'33px'}
-                              src={s.coverImg}
-                              alt=""
-                            />
-                          </div>
-                        )
-                      })}
-                    </div>
-
-                    <div className="w-[70px] h-[17px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
-                      <p className="font-yekan h-[17px] w-[31px] text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
-                        ۶ آبان
+                    <div className="flex flex-row gap-[7px] items-center">
+                      <ItemColor color={board.color} size="16" />
+                      <p className="font-yekan text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
+                        {task?.name}
                       </p>
                     </div>
-                    <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
-                      <PriorityFlag size="16" color={t.priority} />
-                    </div>
-                    <div className="w-[70px] h-[16px] px-[10px] flex flex-row gap-[10px] justify-center items-center">
+                    <div className="ml-4 flex flex-row gap-[70px] justify-between">
+                      <div className="flex flex-row justify-center items-center">
+                        {task?.members?.map((memeber, i) => {
+                          return (
+                            <div key={i} className="">
+                              <img src={memeber.coverImg} alt="" />
+                            </div>
+                          )
+                        })}
+                        Img
+                      </div>
+
+                      <p className="text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
+                        {toFarsiNumber(moment(task?.deadline).format('DD MMM'))}
+                      </p>
+
+                      <div className="">Priority</div>
+
                       <ParagraphsIconSvg />
                     </div>
                   </div>
-                </div>
-              )
+                )
+              } else if (isError) {
+                return (
+                  <div key={task?.id} className="">
+                    <div className="">Error</div>
+                  </div>
+                )
+              }
             })}
           </div>
         </div>
       </div>
+      <div className="w-full border-[0.5px] border-gray-secondary h-[0.5px]"></div>
     </>
   )
 }

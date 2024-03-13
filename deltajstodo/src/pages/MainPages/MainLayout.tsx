@@ -42,12 +42,10 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
         </div>
 
         <div className={'relative h-screen w-full overflow-auto'}>
-          <div
-            className={`overflow-hidden ${value !== 0 ? 'hidden  bg-gray-primary blur-md' : ''}`}
-          >
+          <div className={`overflow-hidden ${value !== 0 ? 'blur-3xl' : ''}`}>
             <Outlet />
           </div>
-          <div className="z-100 absolute right-[390px] top-[200px] border-black">
+          <div className="">
             {value === 1 && <NewWorkspace />}
             {value === 2 && <NewProject WID={workspaceID} />}
             {/* {step === 3 && <NewTask />}??? */}

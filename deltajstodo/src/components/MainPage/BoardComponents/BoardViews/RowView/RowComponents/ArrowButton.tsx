@@ -4,13 +4,13 @@ const ArrowButton = ({
   columnMore,
   setColumnMore
 }: {
-  columnMore: boolean
-  setColumnMore: Dispatch<SetStateAction<boolean>>
+  columnMore?: boolean
+  setColumnMore?: () => void
 }): JSX.Element => {
   return (
     <svg
       className={`size-5 cursor-pointer ${columnMore ? 'rotate-[180deg]' : 'rotate-[0deg]'}`}
-      onClick={() => { setColumnMore((p) => !p) }}
+      onClick={setColumnMore}
       width="20"
       height="20"
       viewBox="0 0 20 20"

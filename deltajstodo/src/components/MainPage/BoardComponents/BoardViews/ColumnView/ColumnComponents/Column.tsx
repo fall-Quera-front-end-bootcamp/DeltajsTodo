@@ -21,7 +21,7 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
 
   const handleNewTaskBoard = (): void => {
     setShowNewTaskBoard((p) => !p)
-    // setShowNewTask((p) => !p)
+    console.log('hello mobin')
   }
 
   const {

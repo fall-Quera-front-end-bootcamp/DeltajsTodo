@@ -13,7 +13,7 @@ const Message = ({ text, type }: MessageProps): JSX.Element => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   return (
     <div
-      className={`mb-[10px] text-[20px] ${bg} animate-fadein rounded-full px-4 py-3 font-medium`}
+      className={`mb-[10px] text-[20px] ${bg} animate-fadein rounded-full px-4 py-3 font-medium fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
     >
       <button onClick={() => localPageDispatch({ type: 'closeModal' })}>
         <Close />

@@ -26,8 +26,6 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
   const [columnMore, setColumnMore] = useState(false)
   const [ishover, setHover] = useState(false)
 
-  console.log(board?.color)
-
   return (
     <button className="group">
       <div
