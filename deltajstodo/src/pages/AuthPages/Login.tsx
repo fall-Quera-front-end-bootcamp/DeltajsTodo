@@ -13,6 +13,7 @@ import { useLoginMutation } from '../../features/auth/authApiSlice'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/auth/authSlice'
 import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
+import toast from 'react-hot-toast'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
@@ -40,6 +41,8 @@ const Login: FunctionComponent<LoginProps> = () => {
       dispatch(
         setCredentials({ accessToken: userData.access, user: { ...userData } })
       )
+
+      toast.success(`شما وارد شدید ${data.username}`)
 
       methods.reset()
       navigate('/workspace')
@@ -145,15 +148,13 @@ const Login: FunctionComponent<LoginProps> = () => {
                   textWhite
                   onClickFunction={onSubmit}
                 >
-                  {isLoading
-                    ? (
+                  {isLoading ? (
                     <div className="flex h-[20px] w-full flex-row items-center justify-center">
                       <LoadingComponent />
                     </div>
-                      )
-                    : (
-                        'ورود'
-                      )}
+                  ) : (
+                    'ورود'
+                  )}
                 </Button>
                 <div className="flex flex-row items-center justify-center text-[19px]">
                   <button

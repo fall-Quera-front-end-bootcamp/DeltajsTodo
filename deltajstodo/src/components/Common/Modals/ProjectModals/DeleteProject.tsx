@@ -15,6 +15,7 @@ import Close from '../../Icons/Close'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
 import { useDeleteProjectMutation } from '../../../../features/auth/authApiSlice'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 interface DeleteProjectProps {
   WID: number
@@ -22,27 +23,18 @@ interface DeleteProjectProps {
 }
 
 const DeleteProject: FunctionComponent<DeleteProjectProps> = ({ WID, PID }) => {
-  ////////////////////////////////////////////////////////////////
   const [deleteProject, { isLoading }] = useDeleteProjectMutation()
   const navigate = useNavigate()
-  ///////////////////////////////////////////////////
   const localPageDispatch: any = useContext(localPageDispatchContext)
 
   const onSubmitHandler = async (): Promise<void> => {
     try {
       const res = await deleteProject({ workspace_id: WID, id: PID }).unwrap()
-      //console.log(res)
+      toast.success(res?.message)
       navigate('/workspace')
-      localPageDispatch({
-        type: 'openResponseModal',
-        responseData: { type: 'success', message: res?.message ?? '' }
-      })
     } catch (error: any) {
       console.log('hi i am that erroe ', error)
-      localPageDispatch({
-        type: 'openResponseModal',
-        responseData: { type: 'fail', message: error?.error ?? '' }
-      })
+      toast.error(error?.message)
     }
   }
 

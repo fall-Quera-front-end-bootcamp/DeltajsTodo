@@ -60,7 +60,8 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   })
   const navigate = useNavigate()
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const [createWorkspace, { isLoading, isSuccess, isError }] = useCreateWorkspaceMutation()
+  const [createWorkspace, { isLoading, isSuccess, isError }] =
+    useCreateWorkspaceMutation()
 
   const onchangeHandler = (e: any): void => {
     setForm((prev) => {
@@ -105,7 +106,6 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
               <Step3
                 form={form}
                 onSubmitWSCreation={onSubmitWSCreation}
-                disablity={isLoading}
                 isLoading={isLoading}
               />
             )}

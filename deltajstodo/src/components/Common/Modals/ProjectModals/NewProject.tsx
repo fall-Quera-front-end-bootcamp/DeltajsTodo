@@ -35,7 +35,6 @@ const NewProject: FunctionComponent<NewProjectProps> = ({ WID }) => {
           workspace_id: WID,
           name: inputValue
         }).unwrap()
-        // console.log(userData)
 
         localPageDispatch({ type: 'closeModal' })
       } catch (err: any) {

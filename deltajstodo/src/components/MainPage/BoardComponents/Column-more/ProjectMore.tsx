@@ -16,7 +16,7 @@ function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
   return (
     <div
       dir="rtl"
-      className="flex w-[193px] flex-col gap-4 rounded-lg bg-[white] p-3 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] z-50"
+      className="z-50 flex w-[193px] flex-col gap-4 rounded-lg bg-[white] p-3 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]"
     >
       <ProjectMoreOption
         workspaceID={id}
@@ -32,13 +32,8 @@ function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
         color="text-[black]"
         text="ویرایش نام ورک‌اسپیس"
         type="editWordkSpace"
-        onClickHandler={
-          () => localPageDispatch({ type: 'openNewWorkspaceTitle', WID: id })
-          // dispatch({
-          //   type: 'changeWorkspaceTitle',
-          //   id: id,
-          //   new_title: 'updated'
-          // })
+        onClickHandler={() =>
+          localPageDispatch({ type: 'openNewWorkspaceTitle', WID: id })
         }
       />
       <ProjectMoreOption
@@ -46,13 +41,8 @@ function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
         color="text-[black]"
         text="ویرایش رنگ"
         type="editColor"
-        onClickHandler={
-          (id) => localPageDispatch({ type: 'openNewWorkspaceColor', WID: id })
-          // dispatch({
-          //   type: 'changeColorWorkspace',
-          //   id: id,
-          //   new_color: '#40C057'
-          // })
+        onClickHandler={(id) =>
+          localPageDispatch({ type: 'openNewWorkspaceColor', WID: id })
         }
       />
       <ProjectMoreOption

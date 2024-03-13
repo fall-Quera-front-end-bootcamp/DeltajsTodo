@@ -62,7 +62,7 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
               </div>
               <div className="relative">
                 <div
-                  className="absolute top-[20px] right-[-100px]"
+                  className="absolute top-[20px] right-[-100px] z-50"
                   onMouseLeave={() => setColumnMoreSelect(false)}
                 >
                   {isColumnMoreSelected && (

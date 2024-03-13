@@ -26,6 +26,7 @@ import {
   useGetBoardsQuery
 } from '../../../../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import toast from 'react-hot-toast'
 ////////////////////// 🟨Local Context🟥 //////////////////////////
 export const CreationWorkspaceStepContext = createContext<number | null>(null)
 export const CreationWorkspaceStepDispatchContext = createContext<unknown>(null)
@@ -90,7 +91,7 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
     console.log(form)
 
     try {
-      const newB = await createBoard({
+      const res = await createBoard({
         workspace_id: WID,
         project_id: PID,
         name: form?.name,
@@ -100,7 +101,7 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
         tasks: [],
         tasks_count: 0
       }).unwrap()
-      console.log(newB)
+      toast.success(res?.message)
       localPageDispatch({ type: 'closeModal' })
     } catch (err: any) {
       localPageDispatch({

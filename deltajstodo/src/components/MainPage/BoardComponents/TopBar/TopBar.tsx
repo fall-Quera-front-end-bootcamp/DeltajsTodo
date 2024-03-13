@@ -8,7 +8,7 @@ import ColumnViewButton from './TopBarButtons/ColumnViewButton'
 import CalendarViewButton from './TopBarButtons/CalendarViewButton'
 import VerticalLine from './LineComponents/VerticalLine'
 import TopBarTitle from './TopBarTitle/TopBarTitle'
-import { type Views } from '../../../../pages/MainPages/Board'
+import { type Views } from '../../../../utilities/models'
 
 interface TopBarProps {
   projectInfoTitle: string
@@ -23,7 +23,7 @@ const TopBar: FunctionComponent<TopBarProps> = ({
 }) => {
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-between pt-10 pl-4">
+      <div className="flex w-full flex-col items-center justify-between pl-4 pt-10">
         <div className="flex w-full flex-row justify-between ">
           <ShareTaskButton ShareTaskClass="absolute left-0 top-0 z-50" />
 

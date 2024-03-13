@@ -20,6 +20,7 @@ import {
 } from '../../../../../features/auth/authApiSlice'
 import LoadingComponent from '../../../LoadingComponent/LoadingComponent'
 import DeleteModalParent from '../../DeleteModalParentComponent/DeleteModalParent'
+import toast from 'react-hot-toast'
 
 interface DeleteBoardProps {
   WID: number
@@ -32,7 +33,7 @@ const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
   BID,
   PID
 }) => {
-  const [deleteBoard, { isLoading }] = useDeleteBoardMutation()
+  const [deleteBoard, { isLoading, isSuccess }] = useDeleteBoardMutation()
 
   const localPageDispatch: any = useContext(localPageDispatchContext)
 
@@ -44,16 +45,12 @@ const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
         id: BID
       }).unwrap()
 
-      localPageDispatch({
-        type: 'openResponseModal',
-        responseData: { type: 'success', message: res?.message ?? '' }
-      })
+      toast.success(res?.message)
+
+      localPageDispatch({ type: 'closeModal' })
     } catch (error: any) {
-      console.log('hi i am that erroe ', error)
-      localPageDispatch({
-        type: 'openResponseModal',
-        responseData: { type: 'fail', message: error?.error ?? '' }
-      })
+      toast.error(error?.message)
+      console.log('Hi i am that error: ', error)
     }
   }
 

@@ -48,7 +48,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
   } else if (!!isSuccess) {
     return (
       <div className="relative">
-        <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF]">
+        <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF] -z-10">
           <div className="invisible w-[20px] group-hover:visible ">
             <button
               className="w-[30px]"

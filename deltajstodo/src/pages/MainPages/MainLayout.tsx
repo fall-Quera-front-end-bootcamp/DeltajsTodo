@@ -23,6 +23,7 @@ import ChangeBoardTitle from '../../components/Common/Modals/BoardModals/ChangeB
 import NewTask from '../../components/MainPage/BoardComponents/Task/NewTask/NewTask'
 import DeleteBoard from '../../components/Common/Modals/BoardModals/Delete‌Board/DeleteBoard'
 import { AnimatePresence } from 'framer-motion'
+import { Toaster } from 'react-hot-toast'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
@@ -70,15 +71,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
               <NewTask WID={workspaceID} PID={projectID} BID={boardID} />
             )}
           </div>
-        </div>{' '}
-        {value === -1 && (
-          <AnimatePresence>
-            <Message
-              text={responseData?.message ?? 'SomeThing went wrong ...'}
-              type={responseData?.type ?? 'fail'}
-            />
-          </AnimatePresence>
-        )}
+        </div>
       </div>
     </>
   )
