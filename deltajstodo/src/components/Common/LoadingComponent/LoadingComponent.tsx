@@ -2,7 +2,7 @@ import { type FunctionComponent } from 'react'
 
 const LoadingComponent: FunctionComponent = () => {
   return (
-    <div role="status">
+    <div className="flex flex-row items-center justify-center" role="status">
       <svg
         aria-hidden="true"
         className="size-8 animate-spin fill-blue-primary text-gray-secondary dark:text-gray-primary"
@@ -19,7 +19,6 @@ const LoadingComponent: FunctionComponent = () => {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
     </div>
   )
 }

@@ -32,14 +32,18 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
   } = useGetBoardQuery({ workspace_id: WID, project_id: PID, id: BID })
 
   if (!!isLoading) {
-    return <LoadingComponent />
+    return (
+      <div className="mt-4 flex w-[270px] flex-col items-center justify-start rounded-lg bg-gray-secondary">
+        <LoadingComponent />
+      </div>
+    )
   } else if (!!isSuccess) {
     return (
       <>
         <div className="group mt-4 flex h-[70vh] flex-col gap-4">
           <ColumnHeader board={board} WID={WID} PID={PID} BID={BID} />
 
-          <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1">
+          <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1  scrollbar scrollbar-thin scrollbar-thumb-gray-dark">
             {board.tasks.map((t: T) => {
               return <TaskCard task={t} key={t?.id} />
             })}

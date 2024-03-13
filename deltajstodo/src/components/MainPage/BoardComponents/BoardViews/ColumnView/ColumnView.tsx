@@ -54,11 +54,15 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
 
   ///////////////////////////////////////////////////////////////////////////////////
   if (!!isLoading) {
-    return <LoadingComponent />
+    return (
+      <div className="flex h-[60vh] w-full flex-col items-center justify-center scrollbar scrollbar-thumb-gray-dark">
+        <LoadingComponent />
+      </div>
+    )
   } else if (!!isSuccess) {
     return (
       <>
-        <div className="relative ml-4 flex w-full flex-row-reverse scrollbar-thin scrollbar-webkit">
+        <div className="relative ml-4 flex w-full flex-row-reverse scrollbar scrollbar-thumb-gray-dark">
           {boards?.length > 0 ? (
             <div className="flex w-full flex-row-reverse gap-[16px] overflow-x-auto">
               {boards.map((b: B) => {

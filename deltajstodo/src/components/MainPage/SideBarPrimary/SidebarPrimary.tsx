@@ -40,7 +40,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
 
     if (isLoading) {
       return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex h-screen w-[340px] flex-col items-center justify-center border-l-[1px] border-[#AAAAAA]">
           <LoadingComponent />
         </div>
       )

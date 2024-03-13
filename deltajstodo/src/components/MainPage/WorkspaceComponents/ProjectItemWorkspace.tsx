@@ -24,7 +24,11 @@ const ProjectItemWorkspace: FunctionComponent<ProjectItemWorkspaceProps> = ({
     isSuccess
   } = useGetProjectQuery({ workspace_id: workspaceItemID, id: projectID })
   if (isLoading) {
-    return <LoadingComponent />
+    return (
+      <div className="flex h-20 w-52 items-center justify-center rounded-2xl bg-gray-secondary">
+        <LoadingComponent />
+      </div>
+    )
   } else if (isSuccess) {
     return (
       <NavLink

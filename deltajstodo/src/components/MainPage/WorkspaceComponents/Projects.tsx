@@ -30,7 +30,7 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
     return <LoadingComponent />
   } else if (isSuccess) {
     return (
-      <div className="flex h-28 w-full flex-row-reverse gap-8 overflow-auto">
+      <div className="flex h-28 w-full flex-row-reverse gap-8 overflow-auto scrollbar scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-dark">
         {projects?.length !== undefined && projects?.length > 0 ? (
           <>
             {projects?.map((p: Project) => {
@@ -50,7 +50,11 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
             />
           </>
         ) : (
-          <BuildProjectItemWorkspaceButton onClick={handleNewProject} key={w?.id} workspace={w} />
+          <BuildProjectItemWorkspaceButton
+            onClick={handleNewProject}
+            key={w?.id}
+            workspace={w}
+          />
         )}
       </div>
     )

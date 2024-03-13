@@ -14,6 +14,7 @@ import CalenderView from '../../components/MainPage/BoardComponents/BoardViews/C
 import { useGetProjectQuery } from '../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../contexts/LocalPageContextProvider'
 import TopBar from '../../components/MainPage/BoardComponents/TopBar/TopBar'
+import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
 
 interface BoardProps {}
 enum Views {
@@ -49,9 +50,9 @@ const Board: FunctionComponent<BoardProps> = () => {
 
   if (!!isLoading) {
     return (
-      <>
-        <p>loading...</p>
-      </>
+      <div className="flex flex-col items-center justify-center">
+        <LoadingComponent />
+      </div>
     )
   } else if (!!isSuccess) {
     return (
@@ -63,7 +64,7 @@ const Board: FunctionComponent<BoardProps> = () => {
           view={view}
         />
 
-        <div className="flex items-center justify-end overflow-hidden">
+        <div className="flex items-center justify-end overflow-hidden  scrollbar scrollbar-thumb-gray-dark">
           {view === Views.column && (
             <ColumnView
               project={project}

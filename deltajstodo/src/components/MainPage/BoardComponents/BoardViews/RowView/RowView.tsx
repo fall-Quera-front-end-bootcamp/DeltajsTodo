@@ -3,6 +3,7 @@ import { type FunctionComponent } from 'react'
 import Row from './Row'
 import { type Board, type Project } from '../../../../../utilities/models'
 import { useGetBoardsQuery } from '../../../../../features/auth/authApiSlice'
+import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 
 interface RowViewProps {
   WID: number
@@ -10,27 +11,42 @@ interface RowViewProps {
 }
 
 const RowView: FunctionComponent<RowViewProps> = ({ project, WID }) => {
-  const { data: boards } = useGetBoardsQuery({
+  const {
+    data: boards,
+    isLoading,
+    isSuccess,
+    isError
+  } = useGetBoardsQuery({
     workspace_id: WID,
     project_id: project?.id
   })
-  return (
-    <div className="flex w-full max-w-[1400px] flex-col items-end justify-center overflow-hidden pl-8">
-      <p className="mb-[31px] text-right text-[20px] font-extrabold leading-[32px] text-[#1E1E1E]">
-        {project?.name}
-      </p>
-
-      <div className="flex w-full flex-col gap-10 overflow-x-auto">
-        {boards?.map((board: Board) => {
-          return (
-            <div key={board.id}>
-              <Row board={board} BID={project?.id} WID={WID} />
-            </div>
-          )
-        })}
+  if (isLoading) {
+    return (
+      <div className="">
+        <LoadingComponent />
       </div>
-    </div>
-  )
+    )
+  } else if (isSuccess) {
+    return (
+      <div className="flex w-full max-w-[1400px] flex-col items-end justify-center overflow-hidden pl-8">
+        <p className="mb-[31px] text-right text-[20px] font-extrabold leading-[32px] text-[#1E1E1E]">
+          {project?.name}
+        </p>
+
+        <div className="flex w-full flex-col gap-10 overflow-x-auto">
+          {boards?.map((board: Board) => {
+            return (
+              <div key={board.id}>
+                <Row board={board} BID={project?.id} WID={WID} />
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  } else if (isError) {
+    return <div className="">Error</div>
+  }
 }
 
 export default RowView

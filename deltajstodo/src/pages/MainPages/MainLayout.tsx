@@ -27,13 +27,7 @@ interface MainLayoutProps {}
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
   const { value, workspaceID, projectID, boardID, taskID, responseData } =
     useContext(localPageContext)
-  console.log(boardID, projectID, workspaceID)
 
-  // const WIDForNewProject = useRef(null)
-
-  useEffect(() => {
-    confirm(`Welcom ${store.getState().auth.user?.username ?? 'you'}`)
-  }, [])
   return (
     <>
       <div className="flex flex-row-reverse gap-4 overflow-hidden">
@@ -41,7 +35,11 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
           <SidebarPrimary />
         </div>
 
-        <div className={'relative h-screen w-full overflow-auto'}>
+        <div
+          className={
+            'relative h-screen w-full overflow-auto scrollbar scrollbar-thin scrollbar-thumb-gray-dark'
+          }
+        >
           <div className={`overflow-hidden ${value !== 0 ? 'blur-3xl' : ''}`}>
             <Outlet />
           </div>
