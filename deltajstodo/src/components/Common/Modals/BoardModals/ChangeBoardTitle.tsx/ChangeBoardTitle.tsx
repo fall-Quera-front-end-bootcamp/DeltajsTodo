@@ -14,17 +14,20 @@ import {
   useUpdataBoardMutation,
   useUpdataWorkspaceMutation
 } from '../../../../../features/auth/authApiSlice'
+import { toast } from 'react-hot-toast'
 
 interface ChangeBoardTitleProps {
   WID: number
   PID: number
   BID: number
+  className?: string
 }
 
 const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
   WID,
   PID,
-  BID
+  BID,
+  className
 }) => {
   const [inputValue, setInputVlue] = useState('')
   const localPageDispatch: any = useContext(localPageDispatchContext)
@@ -54,7 +57,14 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
           tasks_count: board?.tasks_count,
           color: board?.color
         }).unwrap()
-
+        toast.success('عنوان ستون با موفقیت تغییر کرد', {
+          duration: 4000,
+          style: {
+            border: '2px',
+            borderStyle: 'solid',
+            borderColor: 'rgb(130, 201, 30)'
+          }
+        })
         localPageDispatch({ type: 'closeModal' })
       } catch (err: any) {
         //console.log(err)
@@ -71,10 +81,9 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
     <>
       <div
         dir="rtl"
-        className="flex 
-        h-[268px] w-[500px]
-        flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]
-        "
+        className={`fixed 
+        left-1/2 top-1/2
+        flex h-[268px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
       >
         <div
           className="flex 
@@ -90,7 +99,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
               </button>
             </div>
             <div>
-              <p className="font-yekan h-[32px] w-[261px] text-center text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
+              <p className="h-[32px] w-[261px] text-center font-yekan text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
                 ویرایش نام برد
               </p>
             </div>{' '}
@@ -107,8 +116,8 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
             "
           >
             <p
-              className="font-yekan h-[20px]
-               w-[92px] text-right text-[14px] font-[400px] 
+              className="h-[20px] w-[92px]
+               text-right font-yekan text-[14px] font-[400px] 
               leading-[19.73px]  text-[#1E1E1E] "
             >
               نام برد
@@ -140,7 +149,7 @@ rounded-md border-[1px] border-[#AAAAAA]
             onClick={onSubmitHandler}
             className="flex h-[40px] w-[415px] flex-row items-center justify-center rounded-md bg-[#208D8E]"
           >
-            <p className="font-yekan h-[20px] w-[30px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
+            <p className="h-[20px] w-[30px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
               تایید
             </p>
           </button>

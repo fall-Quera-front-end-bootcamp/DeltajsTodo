@@ -26,12 +26,14 @@ interface DeleteBoardProps {
   WID: number
   BID: number
   PID: number
+  className?: string
 }
 
 const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
   WID,
   BID,
-  PID
+  PID,
+  className
 }) => {
   const [deleteBoard, { isLoading, isSuccess }] = useDeleteBoardMutation()
 
@@ -44,9 +46,14 @@ const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
         project_id: PID,
         id: BID
       }).unwrap()
-
-      toast.success(res?.message)
-
+      toast.success(res?.message, {
+        duration: 4000,
+        style: {
+          border: '2px',
+          borderStyle: 'solid',
+          borderColor: 'rgb(130, 201, 30)'
+        }
+      })
       localPageDispatch({ type: 'closeModal' })
     } catch (error: any) {
       toast.error(error?.message)
@@ -59,25 +66,13 @@ const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
   }
 
   return (
-    <DeleteModalParent DeleteItem="برد">
-      <>
-        <div className="rounded-md flex gap-[15px] ">
-          <button
-            disabled={isLoading}
-            onClick={onSubmitHandler}
-            className="bg-red-primary h-[40px] w-[200px] rounded-md flex flex-row items-center justify-center text-white"
-          >
-            {isLoading ? <LoadingComponent /> : 'بله'}
-          </button>
-          <button
-            onClick={CloseModalHandler}
-            className="bg-brand-primary h-[40px] w-[200px] rounded-md flex flex-row items-center justify-center text-white"
-          >
-            خیر
-          </button>
-        </div>
-      </>
-    </DeleteModalParent>
+    <DeleteModalParent
+      className={className}
+      CloseModalHandler={CloseModalHandler}
+      isLoading={isLoading}
+      onSubmitHandler={onSubmitHandler}
+      DeleteItem="برد"
+    />
   )
 }
 export default DeleteBoard

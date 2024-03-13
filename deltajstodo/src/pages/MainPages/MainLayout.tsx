@@ -45,7 +45,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
             <Outlet />
           </div>
           <div className="">
-            {value === 1 && <NewWorkspace />}
+            {value === 1 && (
+              <NewWorkspace className={value === 1 ? '' : 'hidden'} />
+            )}
             {value === 2 && <NewProject WID={workspaceID} />}
             {/* {step === 3 && <NewTask />}??? */}
             {value === 4 && <ChangeWorkspaceTitle WID={workspaceID} />}

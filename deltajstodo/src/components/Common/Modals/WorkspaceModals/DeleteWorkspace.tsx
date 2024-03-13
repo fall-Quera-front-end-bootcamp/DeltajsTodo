@@ -20,12 +20,18 @@ import {
 } from '../../../../features/auth/authApiSlice'
 import { set } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+import DeleteModalParent from '../DeleteModalParentComponent/DeleteModalParent'
 
 interface DeleteWorkspaceProps {
   WID: number
+  className?: string
 }
 
-const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
+const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({
+  WID,
+  className
+}) => {
   ////////////////////////////////////////////////////////////////
   const [deleteWorkspace, { isLoading }] = useDeleteWorkspaceMutation()
   const navigate = useNavigate()
@@ -35,106 +41,26 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({ WID }) => {
   const onSubmitHandler = async (): Promise<void> => {
     try {
       const res = await deleteWorkspace({ id: WID }).unwrap()
-      //console.log(res)
+      toast.success(res?.message)
+      localPageDispatch({ type: 'closeModal' })
       navigate('/workspace')
-      localPageDispatch({
-        type: 'openResponseModal',
-        responseData: { type: 'success', message: res?.message ?? '' }
-      })
     } catch (error: any) {
-      // console.log(error)
-      localPageDispatch({
-        type: 'openResponseModal',
-        responseData: { type: 'fail', message: error?.error ?? '' }
-      })
+      toast.error(error?.message)
     }
   }
 
-  return (
-    <>
-      <div
-        dir="rtl"
-        className=" bg-white h-[286px] w-[501px]
-            rounded-lg p-[24px]
-             flex flex-col items-center
-              gap-[40px] border-[1px] border-l-gray-dark fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]"
-      >
-        <div
-          className="bg-white 
-            h-[158px] w-[453px]
-             flex flex-col items-center
-              gap-[40px]"
-        >
-          {/* header */}
-          <div
-            className="bg-white 
-            h-[32px] w-[453px]
-             flex flex-row justify-between "
-          >
-            <div>
-              <button onClick={() => localPageDispatch({ type: 'closeModal' })}>
-                <Close />
-              </button>
-            </div>
-            <div>
-              <p
-                className="font-yekan w-[245px] h-[32px]
-                 text-center text-[24px] font-extrabold 
-                 leading-[32px]  text-[#1E1E1E] "
-              >
-                حذف ‌
-              </p>
-            </div>
-            <div className="invisible">
-              <button onClick={() => {}}>
-                <LeftArrow />
-              </button>
-            </div>
-          </div>
-          {/* colerPalet */}
-          <div
-            className="w-[453px] h-[86px]
-                flex flex-row gap-[16px]
-                "
-          >
-            <p
-              className="font-yekan w-[245px] h-[32px]
-                 text-center text-[24px] font-extrabold 
-                 leading-[32px]  text-[#1E1E1E]"
-            >
-              آیا از حذف ورک اسپیس اطمینان داری ؟
-            </p>
-            {/*--------------------------------------------------------------- */}
-          </div>
-        </div>
+  const CloseModalHandler = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
 
-        {/* ادامه*/}
-        <div
-          className="bg-white 
-            h-[40px] w-[415px] rounded-md    flex gap-[15px] "
-        >
-          <button
-            disabled={isLoading}
-            onClick={onSubmitHandler}
-            className="bg-[#208D8E] h-[40px] w-[200px] rounded-md flex flex-row items-center justify-center"
-          >
-            <p className="font-yekan w-[30px] h-[20px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
-              بله
-            </p>
-          </button>
-          <button
-            onClick={() => {
-              localPageDispatch({ type: 'closeModal' })
-            }}
-            className="bg-[#8ac1c2] h-[40px] w-[200px] rounded-md flex flex-row items-center justify-center"
-          >
-            <p className="font-yekan w-[30px] h-[20px] text-right text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
-              خیر
-            </p>
-          </button>
-        </div>
-      </div>
-    </>
+  return (
+    <DeleteModalParent
+      className={className}
+      CloseModalHandler={CloseModalHandler}
+      onSubmitHandler={onSubmitHandler}
+      isLoading={isLoading}
+      DeleteItem="ورک اسپیس"
+    />
   )
 }
 export default DeleteWorkspace

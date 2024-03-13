@@ -17,10 +17,12 @@ import { useUpdataWorkspaceMutation } from '../../../../features/auth/authApiSli
 
 interface ChangeWorkspaceColorProps {
   WID: number
+  className?: string
 }
 
 const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
-  WID
+  WID,
+  className
 }) => {
   const [WScolor, setWSColor] = useState<string>('#7D828C')
   const colorsPalet = useRef<any>([
@@ -72,7 +74,7 @@ const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
     <>
       <div
         dir="rtl"
-        className=" bg-white h-[286px] w-[501px] rounded-lg p-[24px] flex flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]"
+        className={`bg-white h-[286px] w-[501px] rounded-lg p-[24px] flex flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
       >
         <div
           className="bg-white 

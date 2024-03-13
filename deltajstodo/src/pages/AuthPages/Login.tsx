@@ -42,7 +42,14 @@ const Login: FunctionComponent<LoginProps> = () => {
         setCredentials({ accessToken: userData.access, user: { ...userData } })
       )
 
-      toast.success(`شما وارد شدید ${data.username}`)
+      toast.success(`خوش اومدی ${data.username}`, {
+        duration: 4000,
+        style: {
+          border: '2px',
+          borderStyle: 'solid',
+          borderColor: 'rgb(130, 201, 30)'
+        }
+      })
 
       methods.reset()
       navigate('/workspace')

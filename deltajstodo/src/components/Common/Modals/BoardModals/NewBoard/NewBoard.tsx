@@ -56,9 +56,14 @@ function CreationWorkspaceStepReducer(step: number, action: any): number {
 interface NewBoardProps {
   WID: number
   PID: number
+  className?: string
 }
 
-const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
+const NewBoard: FunctionComponent<NewBoardProps> = ({
+  WID,
+  PID,
+  className
+}) => {
   const [creationStep, dispatch] = useReducer(CreationWorkspaceStepReducer, 1)
   const [form, setForm] = useState<Workspace>({
     id: -1,
@@ -72,7 +77,6 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
   const [createBoard, { isLoading }] = useCreateBoardMutation()
   const {
     data: boards,
-
     isSuccess,
     isError,
     error
@@ -101,7 +105,14 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
         tasks: [],
         tasks_count: 0
       }).unwrap()
-      toast.success(res?.message)
+      toast.success('ستون با موفقیت ساخته شد', {
+        duration: 4000,
+        style: {
+          border: '2px',
+          borderStyle: 'solid',
+          borderColor: 'rgb(130, 201, 30)'
+        }
+      })
       localPageDispatch({ type: 'closeModal' })
     } catch (err: any) {
       localPageDispatch({
@@ -116,7 +127,7 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({ WID, PID }) => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="fixed left-1/2 top-1/2 flex w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px]"
+            className={`fixed left-1/2 top-1/2 flex w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] ${className}`}
           >
             {creationStep === 1 && (
               <Step1 value={form.name} onchangeHandler={onchangeHandler} />

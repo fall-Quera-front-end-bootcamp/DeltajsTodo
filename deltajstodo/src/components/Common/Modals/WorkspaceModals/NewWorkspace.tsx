@@ -21,6 +21,7 @@ import { Permission, type Workspace } from '../../../../utilities/models'
 import { useNavigate } from 'react-router-dom'
 import { useCreateWorkspaceMutation } from '../../../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { toast } from 'react-hot-toast'
 ////////////////////// 🟨Local Context🟥 //////////////////////////
 export const CreationWorkspaceStepContext = createContext<number | null>(null)
 export const CreationWorkspaceStepDispatchContext = createContext<unknown>(null)
@@ -47,9 +48,11 @@ function CreationWorkspaceStepReducer(step: number, action: any): number {
 }
 ////////////////////// 🟨🟥 //////////////////////////
 
-interface NewWorkspaceProps {}
+interface NewWorkspaceProps {
+  className: string
+}
 
-const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
+const NewWorkspace: FunctionComponent<NewWorkspaceProps> = ({ className }) => {
   const [creationStep, dispatch] = useReducer(CreationWorkspaceStepReducer, 1)
   const [form, setForm] = useState<Workspace>({
     id: -1,
@@ -70,14 +73,14 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
   }
 
   const onSubmitWSCreation = async (): Promise<void> => {
-    console.log(form)
-
     try {
       const newWS = await createWorkspace({
         name: form?.name,
         color: form?.color
       }).unwrap()
-      console.log(newWS)
+
+      toast.success(`با موفقیت ساخته شد${form?.name}`)
+
       localPageDispatch({ type: 'closeModal' })
     } catch (err: any) {
       localPageDispatch({
@@ -94,7 +97,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = () => {
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
             dir="rtl"
-            className="fixed left-1/2 top-1/2 flex h-[316px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px]"
+            className={`fixed left-1/2 top-1/2 flex h-[316px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] ${className}`}
           >
             {creationStep === 1 && (
               <Step1 value={form.name} onchangeHandler={onchangeHandler} />
