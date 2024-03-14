@@ -34,7 +34,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
   const [profileImageURL, setProfileImageURL] = useState('')
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null)
 
-  const uploadImage = (e: any) => {
+  const uploadImage = (e: any): void => {
     const imageFile = e.target.files[0]
     setProfileImageFile(imageFile)
 
@@ -42,9 +42,9 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
     setProfileImageURL(imageurl)
   }
 
-  const clearImage = (e: any) => (e.target.value = '')
+  const clearImage = (e: any): string => (e.target.value = '')
 
-  const deleteProfileImage = () => {
+  const deleteProfileImage = (): void => {
     setProfileImageURL('')
     setProfileImageFile(null)
   }
