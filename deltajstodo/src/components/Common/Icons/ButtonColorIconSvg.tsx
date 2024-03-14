@@ -11,6 +11,7 @@ interface ButtonColorIconSvgProps {
   name?: string
   color?: string
   value?: string
+  checked?: boolean
   onChangeHandler?: (e: any) => void
 }
 
@@ -19,6 +20,7 @@ const ButtonColorIconSvg: FunctionComponent<ButtonColorIconSvgProps> = ({
   name,
   color,
   value,
+  checked,
   onChangeHandler
 }) => {
   const inputRef: any = useRef()
@@ -34,6 +36,7 @@ const ButtonColorIconSvg: FunctionComponent<ButtonColorIconSvgProps> = ({
           type="radio"
           id={id}
           name={name}
+          checked={checked}
           value={value}
           onChange={(e) => onChangeHandler(e)}
           className="peer  z-10 size-full cursor-pointer opacity-0"

@@ -18,6 +18,7 @@ import EmptyArea from './pages/EmptyArea'
 import LocalPageContextProvider from './contexts/LocalPageContextProvider'
 import WorkspacePage from './pages/MainPages/Workspace'
 import { Toaster } from 'react-hot-toast'
+import Profile from './pages/MainPages/Profile'
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function App(): JSX.Element {
   return (
@@ -33,6 +34,8 @@ function App(): JSX.Element {
           <Route path="api/auth/resetPassword" element={<ResetPassword />} />
 
           <Route element={<RequireAuth />}>
+            <Route path="/profile" element={<Profile />} />
+
             <Route
               path="/workspace"
               element={

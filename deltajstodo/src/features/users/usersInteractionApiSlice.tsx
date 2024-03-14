@@ -5,9 +5,8 @@ export const usersInteractionApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => ({
-        url: '/accounts/',
+        url: '/accounts',
         method: 'Get'
-        //body: { ...users }
       })
     }),
     getUser: builder.query({
@@ -16,6 +15,34 @@ export const usersInteractionApiSlice = apiSlice.injectEndpoints({
         method: 'Get'
       }),
       providesTags: ['profile']
+    }),
+    updateInfo: builder.mutation({
+      query: (data) => ({
+        url: `/accounts/${data.id}/`,
+        method: 'PATCH',
+        body: { ...data }
+      }),
+      invalidatesTags: ['profile']
+    }),
+    getSettings: builder.query({
+      query: () => ({
+        url: '/settings/',
+        method: 'Get'
+      })
+    }),
+    setSettings: builder.mutation({
+      query: (data) => ({
+        url: '/settings/',
+        method: 'POST',
+        body: { ...data }
+      })
+    }),
+    updatePass: builder.mutation({
+      query: (data) => ({
+        url: '/accounts/change-password/',
+        method: 'PUT',
+        body: { ...data }
+      })
     }),
     register: builder.mutation({
       query: (data) => ({
@@ -43,9 +70,13 @@ export const usersInteractionApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
+  useUpdatePassMutation,
+  useUpdateInfoMutation,
+  useGetSettingsQuery,
+  useSetSettingsMutation,
   useGetUsersQuery,
+  useGetUserQuery,
   useRegisterMutation,
   useForgetMutation,
-  useResetMutation,
-  useGetUserQuery
+  useResetMutation
 } = usersInteractionApiSlice

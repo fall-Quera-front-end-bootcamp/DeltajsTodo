@@ -14,6 +14,8 @@ interface InputProps {
   className?: string
   dir?: string
   inputDir?: string
+  initialValue?: string
+  autocomplete?: string
 }
 
 const Input = ({
@@ -25,7 +27,9 @@ const Input = ({
   validation,
   className,
   dir = 'rtl',
-  inputDir = 'ltr'
+  inputDir = 'ltr',
+  initialValue = '',
+  autocomplete
 }: InputProps): JSX.Element => {
   const {
     register,
@@ -56,7 +60,9 @@ const Input = ({
         type={type}
         placeholder={placeholder}
         dir={inputDir}
+        defaultValue={initialValue}
         className={`w-[100%] rounded-[6px] border-[1px] border-solid border-gray-primary bg-[white] p-2  ${className}`}
+        autoComplete={autocomplete}
         required
         {...register(name, validation)}
       />
