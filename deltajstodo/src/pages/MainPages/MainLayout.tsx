@@ -24,6 +24,7 @@ import NewTask from '../../components/MainPage/BoardComponents/Task/NewTask/NewT
 import DeleteBoard from '../../components/Common/Modals/BoardModals/Delete‌Board/DeleteBoard'
 import { AnimatePresence } from 'framer-motion'
 import { Toaster } from 'react-hot-toast'
+import NewTaskContextProvider from '../../contexts/NewTaskContextProvider'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
@@ -70,7 +71,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
               <DeleteBoard WID={workspaceID} PID={projectID} BID={boardID} />
             )}
             {value === 12 && (
-              <NewTask WID={workspaceID} PID={projectID} BID={boardID} />
+              <NewTaskContextProvider>
+                <NewTask WID={workspaceID} PID={projectID} BID={boardID} />
+              </NewTaskContextProvider>
             )}
           </div>
         </div>

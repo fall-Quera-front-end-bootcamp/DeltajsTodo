@@ -50,12 +50,12 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
       <div className="relative">
         <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF] -z-10">
           <div className="invisible w-[20px] group-hover:visible ">
-            <button
+            <div
               className="w-[30px]"
               onClick={() => setColumnMoreSelect((prev) => !prev)}
             >
               ...
-            </button>
+            </div>
           </div>
           <div className="flex flex-row items-center justify-between gap-2">
             <div>
@@ -128,17 +128,15 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
               }
             })
           ) : (
-            <>
-              <button
-                disabled={isLoading}
-                className=" text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] "
-                onClick={() =>
-                  stepDispatch({ type: 'openNewProject', WID: workspace.id })
-                }
-              >
-                {isLoading ? <LoadingComponent /> : 'ساختن پروژه جدید'}
-              </button>
-            </>
+            <button
+              disabled={isLoading}
+              className=" text-bodys w-[274px] gap-[8px] rounded-[8px] border-[2px] border-[#208D8E] p-[4px] text-center font-normal text-[#208D8E] "
+              onClick={() =>
+                stepDispatch({ type: 'openNewProject', WID: workspace.id })
+              }
+            >
+              {isLoading ? <LoadingComponent /> : 'ساختن پروژه جدید'}
+            </button>
           )
         ) : (
           <></>

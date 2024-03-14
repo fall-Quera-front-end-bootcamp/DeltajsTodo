@@ -6,12 +6,12 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent, useRef, useState } from 'react'
-import LeftArrow from '../../Icons/LeftArrow'
-import Close from '../../Icons/Close'
+import LeftArrow from '../../../Icons/LeftArrow'
+import Close from '../../../Icons/Close'
 
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-import { CreationWorkspaceStepDispatchContext } from './NewWorkspace'
-import ButtonColorIconSvg from '../../Icons/ButtonColorIconSvg'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { CreationWorkspaceStepDispatchContext } from '../NewWorkspace'
+import ButtonColorIconSvg from '../../../Icons/ButtonColorIconSvg'
 
 interface Step2Props {
   value: string

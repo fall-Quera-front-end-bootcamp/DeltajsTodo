@@ -18,13 +18,14 @@ const BuildProjectItemWorkspaceButton = ({
         border: `4px solid ${workspace?.color}`,
         boxShadow: '0px 3px 4px 0px #00000033',
         height: '80px',
-        width: '200px'
+        width: '200px',
+        color: `${workspace?.color}`
       }}
       onClick={onClick}
     >
-      <div className="flex h-20 w-[200px] flex-row items-center justify-center">
+      <div className="flex h-20 w-[200px] flex-row items-center justify-center gap-2">
         <h3 className="text-boldm">ساختن پروژه جدید</h3>
-        <AddSecondaryIconSvg />
+        <AddSecondaryIconSvg color={workspace?.color} />
       </div>
     </button>
   )

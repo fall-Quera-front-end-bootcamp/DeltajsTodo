@@ -118,7 +118,7 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
         email: string
         username: string
       } = {
-        id: id,
+        id,
         email: data.account_email,
         username: data.account_user_name
       }
@@ -200,10 +200,10 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
                 opacity: 1,
                 transition: { duration: 1 }
               }}
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={(e) => { e.preventDefault() }}
               className="flex flex-col gap-10"
             >
-              <div className="w-[354px] flex flex-col gap-4">
+              <div className="flex w-[354px] flex-col gap-4">
                 <Input {...accountEmailProps} />
                 <Input {...accountUserNameProps} />
                 <Input {...accountCurrentPasswordProps} />
@@ -211,7 +211,7 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
                 <Input {...accountRepeatedNewPasswordProps} />
               </div>
 
-              <button className="flex justify-center w-[354px] rounded-md py-[8px] px-[12px] bg-brand-primary text-white font-extrabold text-[14px] leading-[19.73px]">
+              <button className="flex w-[354px] justify-center rounded-md bg-brand-primary px-[12px] py-[8px] text-[14px] font-extrabold leading-[19.73px] text-white">
                 {isSending ? <Loading /> : <span>ثبت تغییرات</span>}
               </button>
             </motion.form>

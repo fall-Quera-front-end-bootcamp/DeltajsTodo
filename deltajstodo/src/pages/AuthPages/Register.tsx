@@ -10,6 +10,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import TermsConditions from '../../components/Common/Modals/TermsConditions'
 import Button from '../../components/Common/Buttons/Button'
 import { AnimatePresence, motion } from 'framer-motion'
+import toast from 'react-hot-toast'
+import { useRegisterMutation } from '../../features/users/usersInteractionApiSlice'
+import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface RegisterProps {}
@@ -17,14 +20,48 @@ interface RegisterProps {}
 const Register: FunctionComponent<RegisterProps> = () => {
   const navigate: NavigateFunction = useNavigate()
   const methods = useForm()
-  // const [success, setSuccess] = useState(false)
 
   const [showBox, setShowBox] = useState(false)
 
+  const [register, { isLoading }] = useRegisterMutation()
+
+  const validateEmail = (): boolean => {
+    if (methods.watch('email')?.includes('@') === true) return true
+    else return false
+  }
+
+  const handleSubmit = async (
+    data = {
+      username: 'any',
+      email: 'any',
+      password: 'any'
+    }
+  ): Promise<void> => {
+    if (validateEmail()) {
+      try {
+        await register({
+          username: data.username,
+          email: data.email,
+          password: data.password
+        }).unwrap()
+
+        isLoading
+          ? toast.loading('در حال بررسی...')
+          : toast.success('ثبت‌نام با موفقیت انجام شد')
+
+        methods.reset()
+        navigate('/api/auth/login')
+      } catch (err: unknown) {
+        if (err?.data?.username !== undefined) toast.error(err.data.username)
+        if (err?.data?.email !== undefined) toast.error(err.data.email)
+        console.log(err)
+      }
+    } else {
+      toast.error('لطفا ایمیل معتبر وارد بکنید')
+    }
+  }
   const onSubmit = methods.handleSubmit((data) => {
-    console.log(data)
-    methods.reset()
-    // setSuccess(true)
+    handleSubmit(data)
   })
 
   function showBoxFunction(): void {
@@ -33,20 +70,20 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
   // userName input Props
   const userNameProps = {
-    name: 'نام کاربری',
+    name: 'username',
     validation: {
       required: {
         value: true,
         message: 'لطفا نام کاربری خود را وارد کنید'
       }
     },
-    id: 'text',
+    id: 'username',
     label: 'نام کاربری',
     type: 'text'
   }
   // userPassword input Props
   const userPasswordProps = {
-    name: 'رمز عبور',
+    name: 'password',
     validation: {
       required: {
         value: true,
@@ -63,7 +100,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
   }
   // userEmail input Props
   const userEmailProps = {
-    name: 'ایمیل',
+    name: 'email',
     validation: {
       required: {
         value: true,
@@ -126,7 +163,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                   textWhite
                   onClickFunction={onSubmit}
                 >
-                  ثبت‌نام
+                  {isLoading ? <LoadingComponent /> : 'ثبت‌نام'}
                 </Button>
               </div>
             </motion.form>

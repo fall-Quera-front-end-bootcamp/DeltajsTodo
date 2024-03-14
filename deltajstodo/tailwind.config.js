@@ -125,7 +125,8 @@ export default {
         card: '0px 70px 100px -20px #32325D40, 0px 50px 60px -30px #0000004D',
         comment: '0px -7px 18px -10px #00000040'
       }
-    }
+    },
+    namedGroups: ['foo']
   },
   plugins: [
     function ({ addUtilities }) {
@@ -140,6 +141,8 @@ export default {
       }
       addUtilities(newUtilities, ['responsive', 'hover'])
     },
-    require('tailwind-scrollbar')
+
+    require('tailwind-scrollbar'),
+    require('tailwindcss-labeled-groups')(['custom', '1'])
   ]
 }

@@ -1,47 +1,50 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
-import DropdownMenu from '../../DropDownMenu/DropdownMenu'
-import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
 import { AnimatePresence, motion } from 'framer-motion'
-import ProfileAddUserIconSvg from '../../../../Common/Icons/ProfileAddUserIconSvg'
-import { useRef, useState } from 'react'
-import Button from '../../../../Common/Buttons/Button'
-import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
-import CalelndarEndIconSvg from '../../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
-import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
+import type React from 'react'
+import { useContext, useRef, useState } from 'react'
 import DateRangePicker from '../../Calendar/DateRangePicker'
-import LinkCopyIconSvg from '../../../../Common/Icons/LinkCopyIconSvg'
-import NewTaskDropDownMenu from './NewTaskComponents/NewTaskDropDownMenu'
-import { type Project } from '../../../../../utilities/models'
 import {
   useCreateTaskMutation,
   useGetProjectsQuery
 } from '../../../../../features/auth/authApiSlice'
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { FieldError, FormProvider, useForm } from 'react-hook-form'
+import NewTaskBoxTwo from './NewTaskComponents/Boxs/Box2/NewTaskBoxTwo'
+import NewTaskDescription from './NewTaskComponents/Boxs/Box3/NewTaskDescription'
+import BoxOne from './NewTaskComponents/Boxs/Box1/BoxOne'
+import BoxFourUpload from './NewTaskComponents/Boxs/Box4/BoxFourUpload'
+import BoxFive from './NewTaskComponents/Boxs/Box5/BoxFive'
+import NewTaskContextProvider, {
+  NewTaskContext
+} from '../../../../../contexts/NewTaskContextProvider'
+import { store } from '../../../../../app/store'
+import axios from 'axios'
 
 interface NewTaskProps {
   WID?: number //this is workspace id you need
   PID?: number //this is project id you
   BID?: number
-  handle?: () => void
-  project?: Project | undefined
   className?: string
 }
 
-const NewTask = ({
-  handle,
-  project,
-  WID,
-  BID,
-  PID,
-  className
-}: NewTaskProps): JSX.Element => {
+interface FormDataProps {
+  BID?: number
+  name: string
+  description?: string
+  deadline?: string
+  priority?: number
+  attachment?: File | null | undefined
+  thumbnail?: File | null
+}
+
+const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
+  const methods = useForm()
+  const localPageDispatch: any = useContext(localPageDispatchContext)
+  const { selected, setSelected } = useContext(NewTaskContext)
   // UseState hook
   const [showCalendar, setShowCalendar] = useState(false)
-  const [showInputValue, setShowInputValue] = useState(false)
-  const [inputValue, setInputValue] = useState('')
-  const [inputValueSecond, setInputValueSecond] = useState('')
   const [textAreaValue, setTextAreaValue] = useState('')
   const [selectedAttachmentFile, setSelectedAttachmentFile] =
     useState<FormData | null>(null)
@@ -49,23 +52,8 @@ const NewTask = ({
     null
   )
   // Ref hook
-  const inputRefFirst = useRef<HTMLInputElement | null>(null)
-  const inputRefSecond = useRef<HTMLInputElement | null>(null)
   const inputRefFirstUpload = useRef<HTMLInputElement | null>(null)
   const inputRefSecondUpload = useRef<HTMLInputElement | null>(null)
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault()
-
-    const inputValue = inputRefFirst.current?.value
-
-    if (inputValue !== undefined && inputValue.replaceAll(' ', '') !== '') {
-      setShowInputValue(false)
-      setInputValue(inputValue)
-    } else {
-      setShowInputValue(true)
-    }
-  }
 
   const onChooseFileFirst = (): void => {
     inputRefFirstUpload.current?.click()
@@ -79,8 +67,9 @@ const NewTask = ({
   ): void => {
     const formData = new FormData()
     const selectedFile = event.target.files?.[0]
+    console.log(selectedFile)
     if (selectedFile !== null && selectedFile !== undefined) {
-      formData.append('attachment', selectedFile, selectedFile.name)
+      formData.append('thumbnail', selectedFile, selectedFile.name)
       setSelectedAttachmentFile(formData)
     }
   }
@@ -89,218 +78,161 @@ const NewTask = ({
   ): void => {
     const formData = new FormData()
     const selectedFile = event.target.files?.[0]
+    console.log(selectedFile)
     if (selectedFile !== null && selectedFile !== undefined) {
-      formData.append('thumbnail', selectedFile, selectedFile.name)
+      formData.append('attachment', selectedFile, selectedFile.name)
       setSelectedCoverFile(formData)
-      console.log(selectedAttachmentFile)
     }
   }
+  console.log(selectedAttachmentFile)
+  console.log(selectedCoverFile)
 
   const removeFileFirst = (): void => {
-    console.log(selectedAttachmentFile)
     setSelectedAttachmentFile(null)
   }
   const removeFileSecond = (): void => {
     setSelectedCoverFile(null)
   }
 
+  const handleShowCalendar = (): void => {
+    setShowCalendar(true)
+  }
+
+  const handleSetDesc = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setTextAreaValue(e.target.value)
+  }
+
   const [Task, { isLoading, isError, isSuccess, error }] =
     useCreateTaskMutation()
 
   const { data: projects } = useGetProjectsQuery({
-    workspace_id: WID,
-    project_id: PID,
-    id: BID
+    workspace_id: WID
   })
 
-  const onSubmit = async (): Promise<void> => {
-    try {
-      await Task({
-        workspace_id: WID,
-        project_id: PID,
-        board_id: BID,
-        name: inputValue,
-        description: textAreaValue,
-        priority: 1,
-        // attachment: selectedAttachmentFile,
-        // thumbnail: selectedCoverFile,
-        order: 12,
-        tags: [
-          {
-            name: 'Tag1',
-            color: '#ffffff'
-          },
-          {
-            name: 'Tag2',
-            color: '#000000'
+  const handleSubmit = async (data: FormDataProps): Promise<void> => {
+    const accessToken = store.getState().auth.user?.access
+    const url = `http://185.8.174.74:8000/accounts/${id}/workspaces/${WID}/projects/${PID}/boards/${BID ?? selected}/tasks/`
+
+    await axios
+      .patch(
+        url,
+        {
+          name: data.name,
+          description: data.description,
+          priority: 1,
+          attachment: selectedAttachmentFile,
+          thumbnail: selectedCoverFile,
+          order: 1
+        },
+        {
+          headers: {
+            'content-type': 'multipart/form-data',
+            Authorization: `Bearer ${accessToken}`
           }
-        ]
-      }).unwrap()
-    } catch (err: any) {
-      console.log(err)
-    }
+        }
+      )
+      .then(() => {
+        methods.reset()
+        localPageDispatch({ type: 'closeModal' })
+      })
+      .catch((err) => {
+        toast.error(err?.data?.attachment)
+      })
   }
+
+  const onSubmit = methods.handleSubmit((data) => {
+    if (selected === 0) {
+      toast.error('لطفا یکی از ستون‌ها رو انتخاب بکن')
+    } else {
+      void toast.promise(
+        handleSubmit(data),
+        {
+          loading: '... در حال بررسی',
+          success: 'تسک شما ساخته شد',
+          error: data?.error
+        },
+        {
+          style: {
+            minWidth: '250px'
+          },
+          loading: {
+            style: { backgroundColor: '#ffffff80' }
+          },
+          success: {
+            duration: 3000,
+            style: {
+              border: '2px',
+              borderStyle: 'solid',
+              borderColor: 'rgb(130, 201, 30)'
+            }
+          },
+          error: {
+            style: {
+              border: '2px',
+              borderStyle: 'solid',
+              borderColor: 'red'
+            }
+          }
+        }
+      )
+    }
+  })
 
   return (
     <AnimatePresence>
-      <motion.form
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.1 }}
-        autoComplete="off"
-        noValidate
-        onSubmit={(e) => {
-          e.preventDefault()
-        }}
-        dir="rtl"
-        className={`absolute left-1/2 top-1/2 z-50 flex w-[1153px] -translate-x-1/2 -translate-y-1/2 flex-col gap-xl rounded-[20px] bg-white p-l shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
-      >
-        {/* Box 1 */}
-        {/* Top New Task  */}
-        <div className="flex w-full justify-between">
-          {/* Task Title Handle */}
-          <div className="relative flex flex-row items-center justify-center gap-[13px]">
-            <span className="inline-block size-4 bg-[#D9D9D9]"></span>
-            <input
-              ref={inputRefFirst}
-              type="text"
-              className="text-bodyxl placeholder:text-black"
-              placeholder="عنوان تسک"
-              value={inputValue}
-              onChange={(e) => {
-                setInputValue(e.target.value)
-              }}
-            />
-            <div className="">{BID}</div>
-            <NewTaskDropDownMenu placeHolderText="پروژه" projects={projects} />
-          </div>
-          {/* Leave New Task Box */}
-          <button onClick={handle}>
-            <DisabledIconSvg />
-          </button>
-        </div>
-        {/* Box 2 */}
-        <div className="flex flex-row items-center gap-xs text-[16px] font-[500]">
-          <p className="inline-block">در </p>
-          <DropdownMenu buttonClassName="mr-[10px] inline-block w-[188px] rounded-md border border-[#E9EBF0] px-2 pb-[4px] pt-[5px] text-right">
-            <motion.ul
-              initial={{ opacity: 0, translate: 0 }}
-              animate={{ opacity: 1, translateY: '5px' }}
-              exit={{ opacity: 0, translateY: '-5px' }}
-              className="absolute left-[-5px] top-[35px] flex w-full flex-col gap-2 rounded-md bg-gray-secondary"
-            >
-              {projects?.map((project: Project) => {
-                return (
-                  <li
-                    key={project?.id}
-                    className="cursor-pointer p-1 hover:bg-gray-primary"
-                  >
-                    {project?.name}
-                  </li>
-                )
-              })}
-            </motion.ul>
-          </DropdownMenu>{' '}
-          <p className="inline-block">برای</p>
-          <div className="flex size-[34px] items-center justify-center rounded-full border border-dashed border-[#C1C1C1]">
-            <ProfileAddUserIconSvg />
-          </div>
-        </div>
-        {/* Box 3 : Description */}
-        <div className="">
-          <textarea
-            onChange={(e) => {
-              setTextAreaValue(e.target.value)
-            }}
-            name=""
-            id=""
-            placeholder="توضیحاتی برای این تسک بنویسید"
-            className="h-[191px] max-h-[191px] min-h-[191px] w-full rounded-xl border border-[#E2E2E2] p-6 text-[16px]"
-          ></textarea>
-        </div>
-        {/* Box 4 */}
-        <div className="flex flex-row items-center gap-5">
-          <div className="">افزودن پیوست</div>
-          <Button onClickFunction={onChooseFileFirst} UploadButton>
-            <LinkCopyIconSvg color="#208D8E" />
-            آپلود فایل
-            <input
-              type="file"
-              ref={inputRefFirstUpload}
-              onChange={handleOnChangeFirst}
-              style={{ display: 'none' }}
-            />
-          </Button>
-          {selectedAttachmentFile !== null && (
-            <>
-              <div className="">
-                <p>{selectedAttachmentFile.name}</p>
-              </div>
-              <button
-                onClick={removeFileFirst}
-                className="rounded-[4px] border border-red-primary px-4"
-              >
-                حذف کردن فایل آپلود شده
-              </button>
-            </>
-          )}
-        </div>
-        {/* Box 5 */}
-        <div className="flex flex-row items-center gap-5">
-          <div className="">افزودن کاور</div>
-          <Button onClickFunction={onChooseFileSecond} UploadButton>
-            <LinkCopyIconSvg color="#208D8E" />
-            آپلود فایل
-            <input
-              type="file"
-              ref={inputRefSecondUpload}
-              onChange={handleOnChangeSecond}
-              style={{ display: 'none' }}
-            />
-          </Button>
-          {selectedCoverFile !== null && (
-            <>
-              <div className="">
-                <p>{selectedCoverFile.name}</p>
-              </div>
-              <button
-                onClick={removeFileSecond}
-                className="rounded-[4px] border border-red-primary px-4"
-              >
-                حذف کردن فایل آپلود شده
-              </button>
-            </>
-          )}
-        </div>
-        {/* Bottom Box 6 */}
-        <div className="flex items-center justify-between">
-          <div className="relative flex flex-row items-center justify-between gap-6">
-            <div className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]">
-              <PriorityFlag className="size-[30px]" color="#C1C1C1" />
-            </div>
-            <div
-              onClick={() => {
-                setShowCalendar(true)
-              }}
-              className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]"
-            >
-              <CalelndarEndIconSvg className="size-[30px]" color="#C1C1C1" />
-            </div>
-            <div className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]">
-              <BookmarkTagIconSvg className="size-[30px]" />
-            </div>
-          </div>
-          <Button onClickFunction={onSubmit} newTask>
-            ساختن تسک
-          </Button>
-        </div>
-        <div
-          className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${showCalendar ? '' : 'hidden'}`}
+      <FormProvider {...methods}>
+        <motion.form
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.1 }}
+          autoComplete="off"
+          noValidate
+          onSubmit={(e) => {
+            e.preventDefault()
+          }}
+          dir="rtl"
+          className={`absolute left-1/2 top-1/2 z-50 flex w-[1153px] -translate-x-1/2 -translate-y-1/2 flex-col gap-xl rounded-[20px] bg-white p-l shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
         >
-          <DateRangePicker setShowCalendar={setShowCalendar} />
-        </div>
-      </motion.form>
+          {/* Box 1 */}
+          {/* Top New Task  */}
+          <BoxOne
+            selected={selected}
+            setSelected={setSelected}
+            WID={WID}
+            PID={PID}
+            BID={BID}
+          />
+          {/* Box 2 */}
+          <NewTaskBoxTwo projects={projects} />
+          {/* Box 3 : Description */}
+          <NewTaskDescription handleSetDesc={handleSetDesc} />
+          {/* Box 4  */}
+          <BoxFourUpload
+            handleOnChangeFirst={handleOnChangeFirst}
+            removeFileFirst={removeFileFirst}
+            inputRefFirstUpload={inputRefFirstUpload}
+            onChooseFileFirst={onChooseFileFirst}
+            selectedAttachmentFile={selectedAttachmentFile}
+            handleOnChangeSecond={handleOnChangeSecond}
+            removeFileSecond={removeFileSecond}
+            inputRefSecondUpload={inputRefSecondUpload}
+            onChooseFileSecond={onChooseFileSecond}
+            selectedCoverFile={selectedCoverFile}
+          />
+          {/* Bottom Box 5 */}
+          <BoxFive
+            handleShowCalendar={handleShowCalendar}
+            isLoading={isLoading}
+            onSubmit={onSubmit}
+          />
+          <div
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${showCalendar ? '' : 'hidden'}`}
+          >
+            <DateRangePicker setShowCalendar={setShowCalendar} />
+          </div>
+        </motion.form>
+      </FormProvider>
     </AnimatePresence>
   )
 }

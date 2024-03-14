@@ -35,7 +35,7 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
     )
   } else if (isSuccess) {
     return (
-      <Slider className="flex h-28 w-full flex-row-reverse gap-8 overflow-x-scroll scrollbar-thin scrollbar-track-white scrollbar-thumb-gray-dark">
+      <Slider className="flex h-28 w-full flex-row-reverse gap-8 overflow-x-scroll scrollbar-thin scrollbar-track-gray-secondary scrollbar-thumb-gray-dark">
         {projects?.length !== undefined && projects?.length > 0 ? (
           <>
             {projects?.map((p: Project) => {

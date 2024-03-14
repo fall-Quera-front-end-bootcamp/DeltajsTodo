@@ -5,11 +5,13 @@ import { type FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { selectCurrentToken } from './authSlice'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 interface RequireAuthProps {}
 
 const RequireAuth: FunctionComponent<RequireAuthProps> = () => {
-  const token = useSelector(selectCurrentToken)
+  const cookies = new Cookies()
+  const token = cookies.get('accessToken')
   const location = useLocation()
 
   return token ? (

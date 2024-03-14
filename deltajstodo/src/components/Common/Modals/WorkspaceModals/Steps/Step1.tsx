@@ -2,10 +2,10 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent, useRef } from 'react'
-import LeftArrow from '../../Icons/LeftArrow'
-import Close from '../../Icons/Close'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-import { CreationWorkspaceStepDispatchContext } from './NewWorkspace'
+import LeftArrow from '../../../Icons/LeftArrow'
+import Close from '../../../Icons/Close'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { CreationWorkspaceStepDispatchContext } from '../NewWorkspace'
 
 interface Step1Props {
   value: string

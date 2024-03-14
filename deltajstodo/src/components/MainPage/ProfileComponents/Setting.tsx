@@ -88,16 +88,17 @@ const Setting = ({ messageFunction }: SettingProps) => {
         }}
         className="flex flex-col gap-6"
       >
-        <div className="flex flex-col gap-2 w-[354px]">
-          <span className="font-normal text-[14px] leading-[19.73px]">
+        <div className="flex w-[354px] flex-col gap-2">
+          <span className="text-[14px] font-normal leading-[19.73px]">
             انتخاب تم
           </span>
 
           <div className="flex gap-[20.36px]">
-            {colorsPalet.current.map((color: string) => {
+            {colorsPalet.current.map((color: string, x) => {
               const checked = color === chosedColor
               return (
                 <ButtonColorIconSvg
+                  key={x}
                   id={color}
                   name={'color'}
                   color={color}
@@ -113,7 +114,7 @@ const Setting = ({ messageFunction }: SettingProps) => {
         <ThemeToggle />
 
         <button
-          className="flex justify-center w-[354px] rounded-md mt-[40px] py-[8px] px-[12px] bg-brand-primary text-white font-extrabold text-[14px] leading-[19.73px]"
+          className="mt-[40px] flex w-[354px] justify-center rounded-md bg-brand-primary px-[12px] py-[8px] text-[14px] font-extrabold leading-[19.73px] text-white"
           onClick={onSubmit}
         >
           {isSending ? <Loading /> : <span>ثبت تغییرات</span>}

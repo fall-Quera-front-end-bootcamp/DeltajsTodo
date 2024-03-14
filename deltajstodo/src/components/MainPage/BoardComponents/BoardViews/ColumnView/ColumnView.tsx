@@ -26,6 +26,7 @@ import LoadingComponent from '../../../../Common/LoadingComponent/LoadingCompone
 import NewTask from '../../Task/NewTask/NewTask'
 import ClickDargToScroll from '../../../../../utilities/ClickDargToScroll'
 import Slider from '../../../SliderHorizontal/SliderHorizontal'
+import NewTaskContextProvider from '../../../../../contexts/NewTaskContextProvider'
 
 interface ColumnViewProps {
   WID: number
@@ -74,11 +75,7 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
             <Slider className="flex w-full scale-100 flex-row-reverse gap-[16px] overflow-x-auto overflow-y-hidden transition-all duration-200 will-change-transform scrollbar-thin">
               <>
                 {boards.map((b: B) => {
-                  return (
-                    <>
-                      <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
-                    </>
-                  )
+                  return <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
                 })}
                 <NewColumn onClickFunc={handleNewColumn} />
               </>
@@ -91,11 +88,9 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
           className="absolute bottom-[30px] left-[50px] flex flex-row-reverse gap-1 rounded-md bg-brand-primary p-2 text-white"
           IconColor="#ffffff"
           title="تسک جدید"
-          onClick={handleNewTask}
-        />
-        <NewTask
-          className={showNewTaskBoard ? '' : 'hidden'}
-          handle={handleNewTask}
+          onClick={() => {
+            localPageDispatch({ type: 'openNewTask', WID, PID })
+          }}
         />
       </>
     )

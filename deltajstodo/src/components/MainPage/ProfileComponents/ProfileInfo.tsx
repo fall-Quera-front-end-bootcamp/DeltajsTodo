@@ -112,7 +112,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
     }
 
     const updateData = {
-      id: id,
+      id,
       first_name: data.profile_name,
       last_name: data.profile_last_name,
       phone_number: data.profile_phone
@@ -122,7 +122,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
 
   const handleImageSubmit = async (data: FormData): Promise<void> => {
     const accessToken = store.getState().auth.user?.access
-    const url = `http://185.8.174.74:8000/accounts/86/`
+    const url = 'http://185.8.174.74:8000/accounts/86/'
 
     await axios
       .patch(url, data, {
@@ -179,31 +179,35 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
         className="flex flex-col gap-8"
       >
         <div className="flex items-center gap-4">
-          <div className="w-[100.71px] h-[93.71px] rounded-[285.71px] overflow-hidden">
-            {profileImageURL ? (
+          <div className="h-[93.71px] w-[100.71px] overflow-hidden rounded-[285.71px]">
+            {profileImageURL
+              ? (
               <img
                 src={profileImageURL}
                 alt=""
-                className="w-[100%] h-[100%] object-cover"
+                className="size-[100%] object-cover"
               />
-            ) : (
-              <span className="w-[100%] h-[100%] bg-[#FFF3BF] pt-2 flex justify-center items-center font-medium text-[34.29px] leading-[48.31px] text-[#FAB005]">
+                )
+              : (
+              <span className="flex size-[100%] items-center justify-center bg-[#FFF3BF] pt-2 text-[34.29px] font-medium leading-[48.31px] text-[#FAB005]">
                 NM
               </span>
-            )}
+                )}
           </div>
 
-          <div className="flex flex-col justify-center h-[93.71px] gap-3">
-            {profileImageURL ? (
+          <div className="flex h-[93.71px] flex-col justify-center gap-3">
+            {profileImageURL
+              ? (
               <span
-                className="text-[15px] text-red-primary cursor-pointer"
+                className="cursor-pointer text-[15px] text-red-primary"
                 onClick={deleteProfileImage}
               >
                 حذف تصویر پروفایل
               </span>
-            ) : (
+                )
+              : (
               <></>
-            )}
+                )}
 
             <label
               htmlFor="image_input"
@@ -217,12 +221,12 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
                 onChange={uploadImage}
                 onClick={clearImage}
               />
-              <span className="p-[10px] rounded-lg border border-[#208D8E] font-medium text-[20px] leading-[28.18px] text-[#208D8E]">
+              <span className="rounded-lg border border-[#208D8E] p-[10px] text-[20px] font-medium leading-[28.18px] text-[#208D8E]">
                 ویرایش تصویر پروفایل
               </span>
             </label>
 
-            <span className="font-normal text-[12px] leading-[16.91px]">
+            <span className="text-[12px] font-normal leading-[16.91px]">
               این تصویر برای عموم قابل نمایش است.
             </span>
           </div>
@@ -242,7 +246,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
               className="flex flex-col gap-10"
             >
               <div
-                className="w-[354px] flex flex-col gap-4"
+                className="flex w-[354px] flex-col gap-4"
                 key={`${isLoading}`}
               >
                 <Input {...profileNameProps} />
@@ -250,7 +254,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
                 <Input {...profilePhoneProps} />
               </div>
 
-              <button className="flex justify-center w-[354px] rounded-md py-[8px] px-[12px] bg-brand-primary text-white font-extrabold text-[14px] leading-[19.73px]">
+              <button className="flex w-[354px] justify-center rounded-md bg-brand-primary px-[12px] py-[8px] text-[14px] font-extrabold leading-[19.73px] text-white">
                 {isSending ? <Loading /> : <span>ثبت تغییرات</span>}
               </button>
             </motion.form>

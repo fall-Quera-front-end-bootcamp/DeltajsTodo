@@ -12,15 +12,15 @@ const Profile: FunctionComponent<ProfileProps> = () => {
   const [section, setSection] = useState('info')
   const [title, setTitle] = useState('اطلاعات فردی')
   const [messages, setMessages] = useState<
-    Array<{ text: string; type: string }>
+  Array<{ text: string, type: string }>
   >([])
 
   const setMessage = (text: string, type: string) => {
-    setMessages((prev) => [...prev, { text: text, type: type }])
+    setMessages((prev) => [...prev, { text, type }])
     const remove = setTimeout(() => {
       setMessages([])
     }, 5000)
-    return () => clearTimeout(remove)
+    return () => { clearTimeout(remove) }
   }
 
   const changeSection = (e: any) => {
@@ -49,8 +49,8 @@ const Profile: FunctionComponent<ProfileProps> = () => {
   }
 
   return (
-    <div dir="rtl" className={`flex w-[100%] h-[100vh]`}>
-      <div className="fixed top-3 left-[50%] translate-x-[-50%] z-10">
+    <div dir="rtl" className={'flex h-[100vh] w-[100%]'}>
+      <div className="fixed left-[50%] top-3 z-10 translate-x-[-50%]">
         {messages.map((item, index) => {
           if (index < messages.length / 2) {
             return <Message key={index} text={item.text} type={item.type} />
@@ -58,14 +58,14 @@ const Profile: FunctionComponent<ProfileProps> = () => {
         })}
       </div>
       {/* sidebar */}
-      <div className="w-[340px] h-[100%]">
+      <div className="h-[100%] w-[340px]">
         <ProfileSideBar onClickFunction={changeSection} selected={section} />
       </div>
 
       {/* main content */}
-      <div className="relative flex-grow-[2] py-[170px] px-[58px] overflow-y-scroll no-scrollbar">
-        <div className={`flex flex-col gap-8 transition-[height] duration-700`}>
-          <span className="font-bold text-[31px] leading-[43.68px] animate-fadein">
+      <div className="relative grow-[2] overflow-y-scroll px-[58px] py-[170px] no-scrollbar">
+        <div className={'flex flex-col gap-8 transition-[height] duration-700'}>
+          <span className="animate-fadein text-[31px] font-bold leading-[43.68px]">
             {title}
           </span>
 

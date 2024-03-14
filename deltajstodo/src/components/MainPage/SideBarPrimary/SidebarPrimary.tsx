@@ -16,12 +16,24 @@ import HeadingTextLogoLink from '../../Common/HeadingMainText/HeadingTextLogoLin
 import { type Workspace as W } from '../../../utilities/models'
 import { useGetWorkspacesQuery } from '../../../features/auth/authApiSlice'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
+import Cookies from 'universal-cookie'
+import { useNavigate } from 'react-router-dom'
 
 interface SidebarPrimaryProps {}
 
 const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
+  const cookies = new Cookies()
   const [filterValue, setFilterValue] = useState('')
   const stepDispatch: any = useContext(localPageDispatchContext)
+  const navigate = useNavigate()
+
+  const handleLogout = (): void => {
+    cookies.remove('accessToken')
+    cookies.remove('id')
+    localStorage.removeItem('refreshToken')
+    navigate('/api/auth/login')
+  }
+
   try {
     const {
       data: workspaces,
@@ -126,7 +138,10 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
             {/* Exit and toggle dark Light tame */}
             <div className="flex justify-between space-x-2 p-[16px]">
               <ThemeToggle />
-              <div className="flex items-center justify-center space-x-2">
+              <div
+                onClick={handleLogout}
+                className="flex items-center justify-center space-x-2"
+              >
                 <LogoutIconSvg />
                 <p className="text-right text-[16px] font-medium text-[#818181]">
                   خروج

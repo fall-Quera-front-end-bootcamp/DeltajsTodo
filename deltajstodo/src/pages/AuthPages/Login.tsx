@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
@@ -6,7 +7,7 @@ import Layout from '../../components/AuthPage/AuthComponents/layout/Layout'
 import AuthCard from '../../components/AuthPage/AuthComponents/Card/AuthCard'
 import Input from '../../components/Common/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FieldValue, FormProvider, useForm } from 'react-hook-form'
 import Button from '../../components/Common/Buttons/Button'
 import { motion } from 'framer-motion'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
@@ -14,6 +15,8 @@ import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/auth/authSlice'
 import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
 import toast from 'react-hot-toast'
+import { AxiosError } from 'axios'
+import Cookies from 'universal-cookie'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
@@ -21,10 +24,11 @@ interface LoginProps {}
 const Login: FunctionComponent<LoginProps> = () => {
   const methods = useForm()
 
+  const cookies = new Cookies()
+
   // ---------------
   const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
   const dispatch = useDispatch()
-  const [err, setErr] = useState()
   const handleSubmit = async (
     data = {
       username: 'any',
@@ -36,29 +40,63 @@ const Login: FunctionComponent<LoginProps> = () => {
         username: data.username,
         password: data.password
       }).unwrap()
+
       console.log(userData)
 
       dispatch(
         setCredentials({ accessToken: userData.access, user: { ...userData } })
       )
 
-      toast.success(`خوش اومدی ${data.username}`, {
+      cookies.set('accessToken', userData?.access)
+      cookies.set('id', userData?.user_id)
+      localStorage.setItem('refreshToken', String(userData?.refresh))
+      methods.reset()
+      navigate('/workspace')
+    } catch (err: any) {
+      console.log(err)
+
+      toast.error(err?.data?.detail, {
         duration: 4000,
         style: {
           border: '2px',
           borderStyle: 'solid',
-          borderColor: 'rgb(130, 201, 30)'
+          borderColor: '#9f0000'
         }
       })
-
-      methods.reset()
-      navigate('/workspace')
-    } catch (err: any) {
-      setErr(err)
     }
   }
   const onSubmit = methods.handleSubmit((data) => {
-    handleSubmit(data)
+    void toast.promise(
+      handleSubmit(data),
+      {
+        loading: '... در حال بررسی',
+        success: `خوش اومدی ${data.username}`,
+        error: 'نام‌کاربری یا رمزعبور اشتباه است'
+      },
+      {
+        style: {
+          minWidth: '250px'
+        },
+        loading: {
+          style: { backgroundColor: '#ffffff80' }
+        },
+        success: {
+          duration: 3000,
+          style: {
+            border: '2px',
+            borderStyle: 'solid',
+            borderColor: 'rgb(130, 201, 30)'
+          }
+        },
+        error: {
+          style: {
+            border: '2px',
+            borderStyle: 'solid',
+            borderColor: 'red'
+          }
+        }
+      }
+    )
   })
 
   const [formVisible, setFormVisible] = useState(true)

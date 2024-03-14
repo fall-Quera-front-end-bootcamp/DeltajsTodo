@@ -10,7 +10,7 @@
 
 import { type FieldErrors, type FieldValues } from 'react-hook-form'
 
-export function findInputError(
+export function findInputError (
   errors: FieldErrors<FieldValues>,
   name: string
 ): object {

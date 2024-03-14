@@ -14,30 +14,30 @@ const ProfileSideBar: FunctionComponent<ProfileSideBarProps> = ({
   selected
 }) => {
   return (
-    <div className="w-[100%] h-[100%] border-l-[0.5px] border-l-[#AAAAAA] pt-[40px] pr-[50px]">
-      <p className="text-headingl leading-[45.09px] font-extrabold text-cyan-primary text-right">
+    <div className="size-[100%] border-l-[0.5px] border-l-[#AAAAAA] pr-[50px] pt-[40px]">
+      <p className="text-right text-headingl font-extrabold leading-[45.09px] text-cyan-primary">
         کوئرا تسک منیجر
       </p>
 
-      <button className="flex items-center gap-2 mt-[85px] rounded-lg py-[4px] px-[8px] text-white bg-brand-primary">
-        <ArrowIconSvg className="w-[24px] h-[24px]" />
-        <span className="font-medium text-[20px] leading-[28.18px]">
+      <button className="mt-[85px] flex items-center gap-2 rounded-lg bg-brand-primary px-[8px] py-[4px] text-white">
+        <ArrowIconSvg className="size-[24px]" />
+        <span className="text-[20px] font-medium leading-[28.18px]">
           بازگشت
         </span>
       </button>
 
-      <div className="flex flex-col gap-8 w-[266px] mt-[43px]">
+      <div className="mt-[43px] flex w-[266px] flex-col gap-8">
         <button
           name="info"
-          className={`relative flex gap-[11px] rounded-[4px] py-[4px] px-[8px] ${selected === 'info' ? 'bg-[#C2F7FA]' : 'bg-white'} cursor-pointer transition-all duration-700`}
+          className={`relative flex gap-[11px] rounded-[4px] px-[8px] py-[4px] ${selected === 'info' ? 'bg-[#C2F7FA]' : 'bg-white'} cursor-pointer transition-all duration-700`}
           onClick={(e) => onClickFunction(e)}
         >
           <div
-            className="absolute inset-0 w-[100%] h-[100%]"
+            className="absolute inset-0 size-[100%]"
             aria-label="info"
           ></div>
 
-          <ProfileEditUserIconSvg className="w-[24px] h-[24px]" />
+          <ProfileEditUserIconSvg className="size-[24px]" />
 
           <span
             className={`${selected === 'info' ? 'font-[800]' : 'font-[500]'} text-[20px] leading-[28.18px] text-[#1E1E1E] transition-all duration-700`}
@@ -47,15 +47,15 @@ const ProfileSideBar: FunctionComponent<ProfileSideBarProps> = ({
         </button>
 
         <button
-          className={`relative flex gap-[11px] rounded-[4px] py-[4px] px-[8px] ${selected === 'account' ? 'bg-[#C2F7FA]' : 'bg-white'} cursor-pointer transition-all duration-700`}
+          className={`relative flex gap-[11px] rounded-[4px] px-[8px] py-[4px] ${selected === 'account' ? 'bg-[#C2F7FA]' : 'bg-white'} cursor-pointer transition-all duration-700`}
           onClick={(e) => onClickFunction(e)}
         >
           <div
-            className="absolute inset-0 w-[100%] h-[100%]"
+            className="absolute inset-0 size-[100%]"
             aria-label="account"
           ></div>
 
-          <ProfileCheckmarkUserIconSvg className="w-[24px] h-[24px]" />
+          <ProfileCheckmarkUserIconSvg className="size-[24px]" />
 
           <span
             className={`${selected === 'account' ? 'font-[800]' : 'font-[500]'} text-[20px] leading-[28.18px] text-[#1E1E1E] transition-all duration-700`}
@@ -65,15 +65,15 @@ const ProfileSideBar: FunctionComponent<ProfileSideBarProps> = ({
         </button>
 
         <button
-          className={`relative flex gap-[11px] rounded-[4px] py-[4px] px-[8px] ${selected === 'setting' ? 'bg-[#C2F7FA]' : 'bg-white'} cursor-pointer transition-all duration-700`}
+          className={`relative flex gap-[11px] rounded-[4px] px-[8px] py-[4px] ${selected === 'setting' ? 'bg-[#C2F7FA]' : 'bg-white'} cursor-pointer transition-all duration-700`}
           onClick={(e) => onClickFunction(e)}
         >
           <div
-            className="absolute inset-0 w-[100%] h-[100%]"
+            className="absolute inset-0 size-[100%]"
             aria-label="setting"
           ></div>
 
-          <SettingIconSvg className="w-[24px] h-[24px]" />
+          <SettingIconSvg className="size-[24px]" />
 
           <span
             className={`${selected === 'setting' ? 'font-[800]' : 'font-[500]'} text-[20px] leading-[28.18px] text-[#1E1E1E] transition-all duration-700`}

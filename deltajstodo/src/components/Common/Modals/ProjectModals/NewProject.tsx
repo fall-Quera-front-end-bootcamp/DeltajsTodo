@@ -13,6 +13,7 @@ import { localPageDispatchContext } from '../../../../contexts/LocalPageContextP
 
 import { useCreateProjectMutation } from '../../../../features/auth/authApiSlice'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
+import toast from 'react-hot-toast'
 
 interface NewProjectProps {
   WID: number
@@ -37,6 +38,7 @@ const NewProject: FunctionComponent<NewProjectProps> = ({ WID, className }) => {
           name: inputValue
         }).unwrap()
 
+        toast.success(`${inputValue} با موفقیت ساخته شد`)
         localPageDispatch({ type: 'closeModal' })
       } catch (err: any) {
         //console.log(err)

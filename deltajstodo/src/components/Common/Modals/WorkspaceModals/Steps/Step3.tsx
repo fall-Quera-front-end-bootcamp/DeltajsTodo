@@ -4,12 +4,12 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent } from 'react'
-import LeftArrow from '../../Icons/LeftArrow'
-import Close from '../../Icons/Close'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-import { CreationWorkspaceStepDispatchContext } from './NewWorkspace'
-import { type Workspace } from '../../../../utilities/models'
-import LoadingComponent from '../../LoadingComponent/LoadingComponent'
+import LeftArrow from '../../../Icons/LeftArrow'
+import Close from '../../../Icons/Close'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { CreationWorkspaceStepDispatchContext } from '../NewWorkspace'
+import { type Workspace } from '../../../../../utilities/models'
+import LoadingComponent from '../../../LoadingComponent/LoadingComponent'
 
 interface Step3Props {
   form: Workspace
@@ -115,15 +115,13 @@ const Step3: FunctionComponent<Step3Props> = ({
           onClick={onSubmitWSCreation}
           className="flex h-[40px] w-[415px] flex-row items-center justify-center gap-[10px] rounded-md bg-[#208D8E]"
         >
-          {isLoading
-            ? (
+          {isLoading ? (
             <LoadingComponent />
-              )
-            : (
+          ) : (
             <p className="h-[20px] w-[117px] text-right font-yekan text-[14px] font-extrabold leading-[19.73px]  text-[#FFFFFF] ">
               ساختن ورک‌اسپیس
             </p>
-              )}
+          )}
         </button>
       </div>
     </div>

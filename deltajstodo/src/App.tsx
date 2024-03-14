@@ -27,7 +27,6 @@ function App(): JSX.Element {
         <Routes>
           <Route path="api/auth/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/" element={<Login />} />
           <Route path="api/auth/register" element={<Register />} />
           <Route path="/e" element={<EmptyArea />} />
           <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />

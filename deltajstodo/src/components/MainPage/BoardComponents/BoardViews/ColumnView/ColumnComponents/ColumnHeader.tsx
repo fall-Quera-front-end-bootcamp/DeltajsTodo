@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-import { useState, type FunctionComponent } from 'react'
+import { useState, type FunctionComponent, useContext } from 'react'
 import AddIconSvg from '../../../../../Common/Icons/AddIconSvg'
 import DotsMenuIconSvg from '../../../../../Common/Icons/DotsMenuIconSvg'
 import { type Board } from '../../../../../../utilities/models'
 import { toFarsiNumber } from '../../../../../../utilities/toFarsiNumber'
 import BoradMore from '../../../Column-more/BoardMore'
 import AddTaskLableSvg from '../../../../../Common/Icons/AddTaskLableSvg'
+import {
+  localPageContext,
+  localPageDispatchContext
+} from '../../../../../../contexts/LocalPageContextProvider'
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface ColumnHeaderProps {
@@ -25,6 +29,7 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
   board,
   handleNewTaskBoard
 }) => {
+  const localPageDispatch: any = useContext(localPageDispatchContext)
   const [columnMore, setColumnMore] = useState(false)
   const [ishover, setHover] = useState(false)
 
@@ -40,16 +45,18 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
         style={{ borderColor: board?.color }}
       >
         <div className="invisible  flex h-[24px] w-[48px] flex-row gap-[4px] group-hover:visible ">
-          <button
+          <div
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            onClick={handleNewTaskBoard}
+            onClick={() => {
+              localPageDispatch({ type: 'openNewTask', WID, PID, BID })
+            }}
           >
             <AddIconSvg />
-          </button>
-          <button onClick={() => setColumnMore(true)}>
+          </div>
+          <div onClick={() => setColumnMore(true)}>
             <DotsMenuIconSvg />
-          </button>
+          </div>
           <div className="relative">
             <div
               className="absolute right-[-100px] top-[20px]"

@@ -1,14 +1,14 @@
 /* eslint-disable multiline-ternary */
 import { useState } from 'react'
 import { BiChevronDown } from 'react-icons/bi'
-import { type Project } from '../../../../../../utilities/models'
+import { type Project } from '../../../../../../../utilities/models'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 const NewTaskDropDownMenu = ({
   projects,
   placeHolderText
 }: {
-  projects: []
+  projects?: [] | undefined
   placeHolderText: string
 }): JSX.Element => {
   const [inputValue, setInputValue] = useState('')
