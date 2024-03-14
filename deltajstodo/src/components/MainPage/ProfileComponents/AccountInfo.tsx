@@ -2,23 +2,22 @@
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
-
-import { store } from '../../../app/store'
 import {
   useGetUserQuery,
   useUpdateInfoMutation,
   useUpdatePassMutation
 } from '../../../features/users/usersInteractionApiSlice'
-
 import Loading from '../../Common/Loading/Loading'
 import Input from '../../Common/Input/Input'
+import Cookies from 'universal-cookie'
 
 interface AccountInfoProps {
   messageFunction: Function
 }
 
-const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
-  const id = store.getState().auth.user?.user_id
+const AccountInfo = ({ messageFunction }: AccountInfoProps): JSX.Element => {
+  const cookies = new Cookies()
+  const id = cookies.get('id')
 
   const getUser = useGetUserQuery(id)
   const [UpdateInfo] = useUpdateInfoMutation()
@@ -200,7 +199,9 @@ const AccountInfo = ({ messageFunction }: AccountInfoProps) => {
                 opacity: 1,
                 transition: { duration: 1 }
               }}
-              onSubmit={(e) => { e.preventDefault() }}
+              onSubmit={(e) => {
+                e.preventDefault()
+              }}
               className="flex flex-col gap-10"
             >
               <div className="flex w-[354px] flex-col gap-4">

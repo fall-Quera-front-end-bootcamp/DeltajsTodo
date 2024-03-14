@@ -20,7 +20,9 @@ const Profile: FunctionComponent<ProfileProps> = () => {
     const remove = setTimeout(() => {
       setMessages([])
     }, 5000)
-    return () => { clearTimeout(remove) }
+    return () => {
+      clearTimeout(remove)
+    }
   }
 
   const changeSection = (e: any) => {
@@ -51,11 +53,15 @@ const Profile: FunctionComponent<ProfileProps> = () => {
   return (
     <div dir="rtl" className={'flex h-[100vh] w-[100%]'}>
       <div className="fixed left-[50%] top-3 z-10 translate-x-[-50%]">
-        {messages.map((item, index) => {
-          if (index < messages.length / 2) {
-            return <Message key={index} text={item.text} type={item.type} />
-          }
-        })}
+        {messages.map((item, index) =>
+          index < messages.length / 2
+            ? (
+            <Message key={index} text={item.text} type={item.type} />
+              )
+            : (
+            <></>
+              )
+        )}
       </div>
       {/* sidebar */}
       <div className="h-[100%] w-[340px]">

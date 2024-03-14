@@ -4,6 +4,7 @@ import ArrowIconSvg from '../../Common/Icons/ArrowIconSvg'
 import ProfileEditUserIconSvg from '../../Common/Icons/ProfileEditUserIconSvg'
 import ProfileCheckmarkUserIconSvg from '../../Common/Icons/ProfileCheckmarkUserIconSvg'
 import SettingIconSvg from '../../Common/Icons/SettingIconSvg'
+import { useNavigate } from 'react-router-dom'
 interface ProfileSideBarProps {
   onClickFunction: any
   selected: string
@@ -13,13 +14,16 @@ const ProfileSideBar: FunctionComponent<ProfileSideBarProps> = ({
   onClickFunction,
   selected
 }) => {
+  const navigate = useNavigate()
   return (
     <div className="size-[100%] border-l-[0.5px] border-l-[#AAAAAA] pr-[50px] pt-[40px]">
       <p className="text-right text-headingl font-extrabold leading-[45.09px] text-cyan-primary">
         کوئرا تسک منیجر
       </p>
 
-      <button className="mt-[85px] flex items-center gap-2 rounded-lg bg-brand-primary px-[8px] py-[4px] text-white">
+      <button onClick={() => {
+        navigate('/workspace')
+      }} className="mt-[85px] flex items-center gap-2 rounded-lg bg-brand-primary px-[8px] py-[4px] text-white">
         <ArrowIconSvg className="size-[24px]" />
         <span className="text-[20px] font-medium leading-[28.18px]">
           بازگشت

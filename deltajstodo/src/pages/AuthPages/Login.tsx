@@ -49,6 +49,7 @@ const Login: FunctionComponent<LoginProps> = () => {
 
       cookies.set('accessToken', userData?.access)
       cookies.set('id', userData?.user_id)
+
       localStorage.setItem('refreshToken', String(userData?.refresh))
       methods.reset()
       navigate('/workspace')

@@ -13,13 +13,15 @@ import {
 
 import Loading from '../../Common/Loading/Loading'
 import Input from '../../Common/Input/Input'
+import Cookies from 'universal-cookie'
 
 interface ProfileInfoProps {
   messageFunction: Function
 }
 
 const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
-  const id = store.getState().auth.user?.user_id
+  const cookies = new Cookies()
+  const id = cookies.get('id')
 
   const getUser = useGetUserQuery(id)
   const [UpdateInfo] = useUpdateInfoMutation()
@@ -94,7 +96,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
       setUserData([
         getUser.data.first_name,
         getUser.data.last_name,
-        getUser.data.phone_number || ''
+        getUser.data.phone_number
       ])
       console.log(getUser.data.thumbnail)
       setProfileImageURL(getUser.data.thumbnail)
@@ -180,7 +182,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
       >
         <div className="flex items-center gap-4">
           <div className="h-[93.71px] w-[100.71px] overflow-hidden rounded-[285.71px]">
-            {profileImageURL
+            {profileImageURL !== null
               ? (
               <img
                 src={profileImageURL}
@@ -196,7 +198,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
           </div>
 
           <div className="flex h-[93.71px] flex-col justify-center gap-3">
-            {profileImageURL
+            {profileImageURL !== null
               ? (
               <span
                 className="cursor-pointer text-[15px] text-red-primary"

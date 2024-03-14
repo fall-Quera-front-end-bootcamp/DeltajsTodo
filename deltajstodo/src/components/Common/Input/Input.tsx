@@ -16,6 +16,7 @@ interface InputProps {
   inputDir?: string
   initialValue?: string
   autocomplete?: string
+  labelClassName?: string
 }
 
 const Input = ({
@@ -29,7 +30,8 @@ const Input = ({
   dir = 'rtl',
   inputDir = 'ltr',
   initialValue = '',
-  autocomplete
+  autocomplete,
+  labelClassName
 }: InputProps): JSX.Element => {
   const {
     register,

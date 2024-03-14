@@ -8,6 +8,7 @@ const UserButton = (): JSX.Element => {
   // const id = store.getState().auth.user?.user_id
   const cookies = new Cookies()
   const id = cookies.get('id')
+
   const { data: userData, isLoading } = useGetUserQuery(id)
 
   const firstName: string = userData?.first_name
