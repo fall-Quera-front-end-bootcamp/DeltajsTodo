@@ -57,7 +57,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
             </div>
             <div>
               <p className="font-yekan w-[245px] h-[32px] text-center text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
-                انتخاب رنگ ورک‌اسپیس‌
+                انتخاب رنگ برد
               </p>
             </div>
             <div>

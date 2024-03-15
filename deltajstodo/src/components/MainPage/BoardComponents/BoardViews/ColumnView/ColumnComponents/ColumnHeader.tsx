@@ -19,15 +19,13 @@ interface ColumnHeaderProps {
   PID: number
   BID: number
   board: Board
-  handleNewTaskBoard: () => void
 }
 
 const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
   WID,
   PID,
   BID,
-  board,
-  handleNewTaskBoard
+  board
 }) => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [columnMore, setColumnMore] = useState(false)
@@ -54,7 +52,7 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
           >
             <AddIconSvg />
           </div>
-          <div onClick={() => setColumnMore(true)}>
+          <div onClick={() => setColumnMore((p) => !p)}>
             <DotsMenuIconSvg />
           </div>
           <div className="relative">
@@ -68,7 +66,7 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
         </div>
         <div className="flex w-full flex-row items-center justify-end gap-[4px]">
           <div className="rounded-lg bg-gray-secondary px-1">
-            {toFarsiNumber(String(board?.tasks.length))}
+            {toFarsiNumber(String(board?.tasks_count))}
           </div>
 
           <p className="text-right text-boldm leading-[22.55px] text-[#1E1E1E]">

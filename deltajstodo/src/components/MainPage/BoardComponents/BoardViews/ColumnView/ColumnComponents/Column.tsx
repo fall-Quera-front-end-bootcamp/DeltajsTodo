@@ -10,6 +10,7 @@ import BuildTaskButtonPrimary from '../../../Task/BuildTaskButtons/BuildTaskButt
 import LoadingComponent from '../../../../../Common/LoadingComponent/LoadingComponent'
 import NewTask from '../../../Task/NewTask/NewTask'
 import { localPageDispatchContext } from '../../../../../../contexts/LocalPageContextProvider'
+import ColumnTask from './ColumnTask'
 
 interface ColumnProps {
   WID: number
@@ -19,11 +20,6 @@ interface ColumnProps {
 
 const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const [showNewTaskBoard, setShowNewTaskBoard] = useState(false)
-
-  const handleNewTaskBoard = (): void => {
-    setShowNewTaskBoard((p) => !p)
-  }
 
   const {
     data: board,
@@ -42,19 +38,8 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
     return (
       <>
         <div className="group mt-4 flex h-[70vh] flex-col gap-4">
-          <ColumnHeader
-            handleNewTaskBoard={handleNewTaskBoard}
-            board={board}
-            WID={WID}
-            PID={PID}
-            BID={BID}
-          />
-
-          <div className="flex flex-col items-center gap-[16px] overflow-x-auto p-1 scrollbar-thin">
-            {board.tasks.map((t: T) => {
-              return <TaskCard task={t} key={t?.id} />
-            })}
-          </div>
+          <ColumnHeader board={board} WID={WID} PID={PID} BID={BID} />
+          <ColumnTask WID={WID} PID={PID} BID={BID} />
           <BuildTaskButtonPrimary
             className="hidden w-full flex-row-reverse items-center justify-center gap-1 rounded-lg border-2 border-brand-primary px-3 py-2 text-brand-primary group-hover:flex"
             IconColor="#208D8E"

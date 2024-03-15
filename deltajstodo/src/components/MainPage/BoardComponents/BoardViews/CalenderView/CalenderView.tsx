@@ -1,10 +1,26 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useContext, type FunctionComponent } from 'react'
+import {
+  useContext,
+  type FunctionComponent,
+  useCallback,
+  useMemo,
+  useEffect
+} from 'react'
 import { type Project } from '../../../../../utilities/models'
 import { DatepickerContext } from '../../../../../contexts/DateContextProvider'
 import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import CalendarCell from './CalendarViewComponents/CalendarCell/CalendarCell'
 import Week from '../../Calendar/Week'
+import {
+  getDaysInMonth,
+  getFirstDayInMonth,
+  getFirstDaysInMonth,
+  getLastDaysInMonth,
+  getNumberOfDay,
+  nextMonth,
+  previousMonth
+} from '../../../../../helpers'
+import moment from 'jalali-moment'
 
 interface CalenderViewProps {
   project: Project
@@ -17,7 +33,43 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({
   PID,
   WID
 }) => {
-  const { days } = useContext(DatepickerContext)
+  moment.locale('fa')
+  const date = moment().format()
+  const { days, daysChangeF } = useContext(DatepickerContext)
+
+  const previous = useCallback(() => {
+    return getLastDaysInMonth(
+      previousMonth(date),
+      getNumberOfDay(getFirstDayInMonth(date).ddd, 'شنبه')
+    )
+  }, [date])
+
+  const current = useCallback(() => {
+    return getDaysInMonth(date)
+  }, [date])
+
+  const next = useCallback(() => {
+    return getFirstDaysInMonth(
+      nextMonth(date),
+      42 - (previous().length + current().length)
+    )
+  }, [current, date, previous])
+
+  // Update the calendarData state whenever the dependencies change
+  const calendarData = useMemo(() => {
+    return {
+      date,
+      days: {
+        previous: previous(),
+        current: current(),
+        next: next()
+      }
+    }
+  }, [current, date, previous])
+
+  useEffect(() => {
+    daysChangeF(calendarData.days)
+  }, [calendarData.days])
 
   return (
     <div className=" mt-5 flex w-full flex-col items-end justify-start overflow-hidden">

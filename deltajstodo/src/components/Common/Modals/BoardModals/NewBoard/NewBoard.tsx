@@ -92,10 +92,8 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({
   }
 
   const onSubmitWSCreation = async (): Promise<void> => {
-    console.log(form)
-
     try {
-      const res = await createBoard({
+      await createBoard({
         workspace_id: WID,
         project_id: PID,
         name: form?.name,

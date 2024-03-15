@@ -12,11 +12,11 @@ interface DatepickerStore {
   dayHover?: string | null
   changeDayHover?: (day: string | null) => void
   changeDatepickerValue?: (value: { startDate: null; endDate: null }) => void
-  daysChangeF?: (days: {
+  daysChangeF?: ((days: {
     previous: number[]
     current: number[]
     next: number[]
-  }) => void
+  }) => void) | undefined
 }
 
 export const DatepickerContext = createContext<DatepickerStore>({

@@ -1,4 +1,4 @@
-import { Views } from '../../../../../utilities/models' 
+import { Views } from '../../../../../utilities/models'
 import ColumnArtboardIconSvg from '../../../../Common/Icons/ColumnArtboardIconSvg'
 
 const ColumnViewButton = ({
@@ -13,6 +13,7 @@ const ColumnViewButton = ({
       <button
         onClick={handleView}
         name="column"
+        aria-label="column"
         className="relative my-[5px] flex flex-row justify-between gap-[5px]"
       >
         <p
@@ -23,6 +24,7 @@ const ColumnViewButton = ({
           نمایش ستونی
         </p>
         <ColumnArtboardIconSvg
+          arialabel="column"
           color={view === Views.column ? '#208D8E' : '#323232'}
         />
         <div

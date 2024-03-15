@@ -1,11 +1,13 @@
 const TodoListIconSvg = ({
   size = '24',
   color = '#323232',
-  className
+  className,
+  arialabel
 }: {
   size?: string
   color?: string
   className?: string
+  arialabel?: string
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes
@@ -13,6 +15,7 @@ const TodoListIconSvg = ({
   return (
     <>
       <svg
+        aria-label={arialabel}
         className={className}
         width={size}
         height={size}

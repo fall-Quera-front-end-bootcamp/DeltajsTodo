@@ -10,7 +10,7 @@ import {
 } from '../../../../../features/auth/authApiSlice'
 import { toast } from 'react-hot-toast'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
-import { FieldError, FormProvider, useForm } from 'react-hook-form'
+import { FieldError, FieldValues, FormProvider, useForm } from 'react-hook-form'
 import NewTaskBoxTwo from './NewTaskComponents/Boxs/Box2/NewTaskBoxTwo'
 import NewTaskDescription from './NewTaskComponents/Boxs/Box3/NewTaskDescription'
 import BoxOne from './NewTaskComponents/Boxs/Box1/BoxOne'
@@ -84,8 +84,6 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
       setSelectedCoverFile(formData)
     }
   }
-  console.log(selectedAttachmentFile)
-  console.log(selectedCoverFile)
 
   const removeFileFirst = (): void => {
     setSelectedAttachmentFile(null)
@@ -109,35 +107,25 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
     workspace_id: WID
   })
 
-  const handleSubmit = async (data: FormDataProps): Promise<void> => {
-    const accessToken = store.getState().auth.user?.access
-    const url = `http://185.8.174.74:8000/accounts/${id}/workspaces/${WID}/projects/${PID}/boards/${BID ?? selected}/tasks/`
-
-    await axios
-      .patch(
-        url,
-        {
-          name: data.name,
-          description: data.description,
-          priority: 1,
-          attachment: selectedAttachmentFile,
-          thumbnail: selectedCoverFile,
-          order: 1
-        },
-        {
-          headers: {
-            'content-type': 'multipart/form-data',
-            Authorization: `Bearer ${accessToken}`
-          }
-        }
-      )
-      .then(() => {
-        methods.reset()
-        localPageDispatch({ type: 'closeModal' })
-      })
-      .catch((err) => {
-        toast.error(err?.data?.attachment)
-      })
+  const handleSubmit = async (
+    data: FieldValues | FormDataProps
+  ): Promise<void> => {
+    try {
+      await Task({
+        workspace_id: WID,
+        project_id: PID,
+        board_id: BID,
+        name: data.name,
+        description: data.description,
+        priority: 1,
+        attachment: data.attachment,
+        thumbnail: selectedCoverFile,
+        order: 12
+      }).unwrap()
+      localPageDispatch({ type: 'closeModal' })
+    } catch (err: any) {
+      console.log(err)
+    }
   }
 
   const onSubmit = methods.handleSubmit((data) => {

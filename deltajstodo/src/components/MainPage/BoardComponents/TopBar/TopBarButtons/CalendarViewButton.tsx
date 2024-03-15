@@ -12,6 +12,7 @@ const CalendarViewButton = ({
     <button
       onClick={handleView}
       name="calender"
+      aria-label="calender"
       className="relative my-[5px] flex flex-row justify-between gap-[5px]"
     >
       <p
@@ -22,6 +23,7 @@ const CalendarViewButton = ({
         تقویم
       </p>
       <CalendarIconSvg
+        arialabel="calender"
         className="size-6"
         color={view === Views.calender ? '#208D8E' : '#323232'}
       />

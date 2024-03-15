@@ -32,30 +32,25 @@ const Board: FunctionComponent<BoardProps> = () => {
   } = useLocation()
 
   const [view, setViw] = useState<Views>(Views.column)
-  const localPageDispatch: any = useContext(localPageDispatchContext)
 
   const handleView = (e: any): void => {
-    //console.log(e?.target?.ariaLabel)
     setViw(() => Views[e?.target?.ariaLabel as keyof typeof Views])
   }
-  ////////////////////////////////////////////////////////////////////
+
   const {
     data: project,
     isLoading,
     isError,
-    isSuccess,
-    error
+    isSuccess
   } = useGetProjectQuery({ workspace_id: workspaceItemID, id: projectItemID })
 
-  /////////////////////////////////////////////////////////////////////
-
-  if (!!isLoading) {
+  if (isLoading) {
     return (
       <div className="flex h-screen w-full flex-col items-center justify-center">
         <LoadingComponent />
       </div>
     )
-  } else if (!!isSuccess) {
+  } else if (isSuccess) {
     return (
       <>
         {/*Header */}

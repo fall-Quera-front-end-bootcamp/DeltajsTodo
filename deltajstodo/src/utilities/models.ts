@@ -89,6 +89,7 @@ export interface Board {
   name: string
   color: string
   tasks: Task[]
+  tasks_count: number
 }
 
 export interface Project {

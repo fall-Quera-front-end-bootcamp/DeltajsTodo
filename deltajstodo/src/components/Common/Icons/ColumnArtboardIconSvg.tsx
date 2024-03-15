@@ -2,18 +2,21 @@ const ColumnArtboardIconSvg = ({
   size = '24',
   color = '#208D8E',
   className,
-  onClick
+  onClick,
+  arialabel
 }: {
   size?: string
   color?: string
   className?: string
   onClick?: (e: any) => void
+  arialabel
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes
   return (
     <>
       <svg
+        aria-label={arialabel}
         onClick={onClick}
         className={className}
         width={size}
