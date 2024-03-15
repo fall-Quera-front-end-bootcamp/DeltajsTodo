@@ -224,24 +224,28 @@ export const authApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
+  // Login Mutaion
   useLoginMutation,
+  // Workspace
   useGetWorkspacesQuery,
   useCreateWorkspaceMutation,
   useUpdataWorkspaceMutation,
   useDeleteWorkspaceMutation,
-  /////////////////////////////////////
+  // Project
   useGetProjectsQuery,
   useCreateProjectMutation,
   useGetProjectQuery,
   useUpdataProjectMutation,
   useDeleteProjectMutation,
-  ///////////////////////////////////
+  // Boards
   useGetBoardsQuery,
+  // Board
   useCreateBoardMutation,
   useGetBoardQuery,
   useUpdataBoardMutation,
   useDeleteBoardMutation,
-  /////////////////////////////
+  // Task
   useCreateTaskMutation,
-  useGetTasksQuery
+  useGetTasksQuery,
+  useDeleteTaskMutation
 } = authApiSlice

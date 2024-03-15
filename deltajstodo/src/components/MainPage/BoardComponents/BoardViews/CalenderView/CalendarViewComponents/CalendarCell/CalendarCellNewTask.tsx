@@ -39,9 +39,9 @@ const CalendarCellNewTask = ({
   const [priority, setPriority] = useState(0)
   const [showPriority, setShowPriority] = useState(false)
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const divRef = useRef(null)
   const methods = useForm()
   // Click OutSide
+  const divRef = useRef(null)
   const handleClickOutside = (): void => {
     localPageDispatch({ type: 'closeModal' })
   }

@@ -26,7 +26,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
   const [register, { isLoading }] = useRegisterMutation()
 
   const validateEmail = (): boolean => {
-    if (methods.watch('email')?.includes('@') === true) return true
+    if ((methods.watch('email')?.includes('@') === true && methods.watch('email')?.includes('.')) === true) return true
     else return false
   }
 
@@ -63,10 +63,6 @@ const Register: FunctionComponent<RegisterProps> = () => {
   const onSubmit = methods.handleSubmit((data) => {
     handleSubmit(data)
   })
-
-  function showBoxFunction(): void {
-    setShowBox((prev) => !prev)
-  }
 
   // userName input Props
   const userNameProps = {
@@ -113,13 +109,14 @@ const Register: FunctionComponent<RegisterProps> = () => {
   }
 
   return (
-    <>
+    <div className="relative w-full h-screen">
       <Layout
         buttonText={'ورود'}
         linkText={'ثبت‌نام کرده‌ای؟'}
         onClickFunction={() => {
           navigate('/api/auth/login')
         }}
+        className={showBox ? 'bg-gray-dark/50 backdrop-blur-md blur-md' : ''}
       >
         <AuthCard>
           <FormProvider {...methods}>
@@ -149,7 +146,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                   <label className="text-base h-[23px] w-[190px] text-right font-normal leading-[22.5px] text-[#1E1E1E] ">
                     <p
                       className="inline cursor-pointer underline underline-offset-4"
-                      onClick={showBoxFunction}
+                      onClick={() => setShowBox(true)}
                     >
                       {' '}
                       قوانین و مقررات
@@ -169,11 +166,11 @@ const Register: FunctionComponent<RegisterProps> = () => {
             </motion.form>
           </FormProvider>
         </AuthCard>
-        <AnimatePresence>
-          {showBox && <TermsConditions onClickFunction={showBoxFunction} />}
-        </AnimatePresence>
       </Layout>
-    </>
+      <AnimatePresence>
+        {showBox && <TermsConditions onClickFunction={setShowBox} />}
+      </AnimatePresence>
+    </div>
   )
 }
 

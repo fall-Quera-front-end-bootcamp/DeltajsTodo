@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -22,6 +23,8 @@ interface ProfileInfoProps {
 const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
   const cookies = new Cookies()
   const id = cookies.get('id')
+
+  console.log(id)
 
   const getUser = useGetUserQuery(id)
   const [UpdateInfo] = useUpdateInfoMutation()
@@ -155,7 +158,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
       messageFunction('اطلاعات با موفقیت تغییر کرد', 'success')
     } catch (err: any) {
       messageFunction('مشکلی در تغییر اطلاعات به وجود آمده', 'fail')
-      methods.reset
+      methods.reset()
     }
     setIsSending(false)
   }
@@ -182,34 +185,30 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
       >
         <div className="flex items-center gap-4">
           <div className="h-[93.71px] w-[100.71px] overflow-hidden rounded-[285.71px]">
-            {profileImageURL !== null
-              ? (
+            {profileImageURL !== null ? (
               <img
                 src={profileImageURL}
                 alt=""
                 className="size-[100%] object-cover"
               />
-                )
-              : (
+            ) : (
               <span className="flex size-[100%] items-center justify-center bg-[#FFF3BF] pt-2 text-[34.29px] font-medium leading-[48.31px] text-[#FAB005]">
                 NM
               </span>
-                )}
+            )}
           </div>
 
           <div className="flex h-[93.71px] flex-col justify-center gap-3">
-            {profileImageURL !== null
-              ? (
+            {profileImageURL !== null ? (
               <span
                 className="cursor-pointer text-[15px] text-red-primary"
                 onClick={deleteProfileImage}
               >
                 حذف تصویر پروفایل
               </span>
-                )
-              : (
+            ) : (
               <></>
-                )}
+            )}
 
             <label
               htmlFor="image_input"

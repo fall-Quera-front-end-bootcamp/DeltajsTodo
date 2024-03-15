@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
 import BottomLeftSide from './BottomLeftSide'
 import TaskInfoComment from './TaskInfoComment'
@@ -6,25 +6,51 @@ import TopLeftSide from './TopLeftSide'
 import TopRightSide from './TopRightSide'
 import BottomRightSide from './BottomRightSide'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { useOnClickOutside } from 'usehooks-ts'
+import moment from 'jalali-moment'
 
-function TaskInformation(): JSX.Element {
+interface TaskInfoProps {
+  name?: string
+  description?: string
+  createAt?: string
+  deadline?: string
+  priority?: number
+}
+
+function TaskInformation({
+  name,
+  createAt,
+  description,
+  deadline,
+  priority
+}: TaskInfoProps): JSX.Element {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [commentOpen, setCommentOpen] = useState(false)
-  const [commentClassNames, setCommentClassNames] = useState('h-[67px]')
+  const [commentClassNames, setCommentClassNames] = useState('h-[87px]')
   const [bottomLeftHeight, setBottomLeftHeight] = useState('h-[439px]')
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // open comment
   const openComment = (): void => {
     if (!commentOpen) {
-      setCommentClassNames('h-[209px] shadow-comment rounded-t-[12px]')
+      setCommentClassNames('h-[249px] shadow-comment rounded-t-[12px]')
       setBottomLeftHeight('h-[297px]')
     } else {
-      setCommentClassNames('h-[67px]')
+      setCommentClassNames('h-[87px]')
       setBottomLeftHeight('h-[439px]')
     }
     setCommentOpen((prev) => !prev)
   }
 
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
+    <div
+      ref={bigDivRef}
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 "
+    >
       {' '}
       <div className="relative h-[596px] w-[1352px] overflow-hidden rounded-[20px] bg-white shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]">
         {/* close icon */}
@@ -45,7 +71,7 @@ function TaskInformation(): JSX.Element {
             <div
               className={`${bottomLeftHeight} flex flex-col gap-6 transition-all duration-700 ease-linear`}
             >
-              <TopLeftSide />
+              <TopLeftSide createAt={createAt} deadline={deadline} />
 
               <hr className="border-[1px] border-[#F4F4F4]" />
 
@@ -60,11 +86,11 @@ function TaskInformation(): JSX.Element {
 
           {/* right side */}
           <div className="flex w-[100%] flex-col gap-6">
-            <TopRightSide />
+            <TopRightSide priority={priority} />
 
             <hr className="border-[1px] border-[#F4F4F4]" />
 
-            <BottomRightSide />
+            <BottomRightSide name={name} description={description} />
           </div>
         </div>
       </div>

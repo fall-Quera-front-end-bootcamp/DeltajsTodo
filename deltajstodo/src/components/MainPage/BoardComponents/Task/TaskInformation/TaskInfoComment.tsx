@@ -9,32 +9,50 @@ interface TaskInfoCommentProps {
   commentClassNames: string
 }
 
-function TaskInfoComment({
+function TaskInfoComment ({
   onClick,
   commentClassNames
 }: TaskInfoCommentProps): JSX.Element {
   return (
     <div
-      className={`${commentClassNames} relative cursor-pointer overflow-hidden border-[1px] border-[#F4F4F4] transition-all duration-700 ease-linear`}
-      onClick={onClick}
+      dir="rtl"
+      className={`${commentClassNames} relative overflow-hidden border-[1px] border-[#F4F4F4] transition-all duration-700 ease-linear`}
     >
-      <span className="absolute left-[600px] top-[13px] text-[16px] font-medium leading-[22.55px] text-[#AEAEAE]">
-        کامنت
-      </span>
-
-      <ChatMessageIconSvg className="absolute left-[36px] top-[13px] size-[24px]" />
+      <div className="flex flex-row items-center justify-between px-6 pt-3">
+        <span className=" text-[16px] font-medium leading-[22.55px] text-[#AEAEAE]">
+          کامنت
+        </span>
+        <div className="cursor-pointer rounded-full p-2 transition-all duration-200 hover:bg-gray-primary">
+          <ChatMessageIconSvg onClick={onClick} className="size-[24px]" />
+        </div>
+      </div>
+      <div className="p-2">
+        <textarea
+          name=""
+          id=""
+          className="w-full rounded-xl border-[1px] border-gray-primary p-2"
+        ></textarea>
+      </div>
 
       <div className="absolute top-[149px] flex h-[60px] w-[100%] items-center justify-between px-[20px]">
+        <div className="flex gap-5">
+          <SmileysIconSvg
+            color="#C9CBDA"
+            className="size-[24px] cursor-pointer"
+          />
+          <DocumentsIconSvg
+            color="#C9CBDA"
+            className="size-[24px] cursor-pointer"
+          />
+          <LinkCopyIconSvg
+            color="#C9CBDA"
+            className="size-[24px] cursor-pointer"
+          />
+          <MailIconSvg color="#C9CBDA" className="size-[24px] cursor-pointer" />
+        </div>
         <button className="rounded-[6px] bg-brand-primary px-[12px] py-[6px] text-[12px] font-extrabold leading-[16.91px] text-white">
           ثبت کامنت
         </button>
-
-        <div className="flex gap-5">
-          <SmileysIconSvg color="#C9CBDA" className="size-[24px]" />
-          <DocumentsIconSvg color="#C9CBDA" className="size-[24px]" />
-          <LinkCopyIconSvg color="#C9CBDA" className="size-[24px]" />
-          <MailIconSvg color="#C9CBDA" className="size-[24px]" />
-        </div>
       </div>
     </div>
   )

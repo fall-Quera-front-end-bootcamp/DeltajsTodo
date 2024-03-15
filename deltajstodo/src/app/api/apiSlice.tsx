@@ -11,7 +11,7 @@ const cookies = new Cookies()
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://185.8.174.74:8000',
 
-  prepareHeaders: (headers, { getState }: { getState: any }) => {
+  prepareHeaders: (headers) => {
     const token = cookies.get('accessToken')
     if (token !== null) {
       headers.set('authorization', `Bearer ${token}`)

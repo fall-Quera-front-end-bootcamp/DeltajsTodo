@@ -1,4 +1,3 @@
-import PriorityFlag from '../../../../../../../Common/Icons/PriorityFlag'
 import BookmarkTagIconSvg from '../../../../../../../Common/Icons/BookmarkTagIconSvg'
 import CalendarIconSvg from '../../../../../../../Common/Icons/CalendarIcons/CalendarIconSvg'
 import Button from '../../../../../../../Common/Buttons/Button'
@@ -31,7 +30,13 @@ const BoxFive = ({
           }}
           className="flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed border-[#C1C1C1]"
         >
-          {taskPriority(priority, 'size-[30px]')}
+          {taskPriority(
+            priority,
+            'size-[30px]',
+            true,
+            'flex size-[50px] cursor-pointer items-center justify-center rounded-full border border-dashed',
+            true
+          )}
         </div>
         <div
           onClick={handleShowCalendar}
@@ -49,7 +54,7 @@ const BoxFive = ({
       <Priority
         setShowPriority={setShowPriority}
         setPriority={setPriority}
-        className={`absolute right-0 top-[190px] ${showPriority ? '' : 'hidden'}`}
+        className={`absolute bottom-[90px] right-[-25px] ${showPriority ? '' : 'hidden'}`}
       />
     </div>
   )

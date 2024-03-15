@@ -25,9 +25,19 @@ import TaskInformation from '../../components/MainPage/BoardComponents/Task/Task
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
-  const { value, workspaceID, projectID, boardID, month, day } =
-    useContext(localPageContext)
-  console.log(value)
+  const {
+    value,
+    workspaceID,
+    projectID,
+    boardID,
+    month,
+    day,
+    name,
+    createAt,
+    description,
+    deadline,
+    priority
+  } = useContext(localPageContext)
 
   return (
     <>
@@ -81,7 +91,15 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                 month={month}
               />
             )}
-            {value === 14 && <TaskInformation />}
+            {value === 14 && (
+              <TaskInformation
+                name={name}
+                description={description}
+                createAt={createAt}
+                deadline={deadline}
+                priority={priority}
+              />
+            )}
           </div>
         </div>
       </div>

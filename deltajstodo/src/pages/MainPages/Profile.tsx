@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, type FunctionComponent } from 'react'
 import ProfileInfo from '../../components/MainPage/ProfileComponents/ProfileInfo'
@@ -12,10 +13,10 @@ const Profile: FunctionComponent<ProfileProps> = () => {
   const [section, setSection] = useState('info')
   const [title, setTitle] = useState('اطلاعات فردی')
   const [messages, setMessages] = useState<
-  Array<{ text: string, type: string }>
+    Array<{ text: string; type: string }>
   >([])
 
-  const setMessage = (text: string, type: string) => {
+  const setMessage = (text: string, type: string): (() => void) => {
     setMessages((prev) => [...prev, { text, type }])
     const remove = setTimeout(() => {
       setMessages([])
@@ -25,8 +26,8 @@ const Profile: FunctionComponent<ProfileProps> = () => {
     }
   }
 
-  const changeSection = (e: any) => {
-    setSection(e.target.ariaLabel)
+  const changeSection = (e: any): void => {
+    setSection(e?.target?.ariaLabel)
     switch (e.target.ariaLabel) {
       case 'info':
         setTitle('اطلاعات فردی')
@@ -39,7 +40,7 @@ const Profile: FunctionComponent<ProfileProps> = () => {
     }
   }
 
-  const sectionRendering = () => {
+  const sectionRendering = (): JSX.Element => {
     switch (section) {
       case 'info':
         return <ProfileInfo messageFunction={setMessage} />
@@ -54,13 +55,11 @@ const Profile: FunctionComponent<ProfileProps> = () => {
     <div dir="rtl" className={'flex h-[100vh] w-[100%]'}>
       <div className="fixed left-[50%] top-3 z-10 translate-x-[-50%]">
         {messages.map((item, index) =>
-          index < messages.length / 2
-            ? (
+          index < messages.length / 2 ? (
             <Message key={index} text={item.text} type={item.type} />
-              )
-            : (
+          ) : (
             <></>
-              )
+          )
         )}
       </div>
       {/* sidebar */}

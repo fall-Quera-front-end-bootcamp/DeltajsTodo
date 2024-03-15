@@ -16,7 +16,7 @@ const DeleteModalParent = ({
   isLoading: boolean
   onSubmitHandler: () => void
   CloseModalHandler: () => void
-  className: string
+  className: string | undefined
 }): JSX.Element => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   return (

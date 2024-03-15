@@ -30,7 +30,14 @@ const ColumnTask = ({
         isLoading ? (
           <LoadingComponent key={t?.id} />
         ) : isSuccess ? (
-          <TaskCard task={t} key={t?.id} />
+          <TaskCard
+            WID={WID}
+            PID={PID}
+            BID={BID}
+            TID={t?.id}
+            task={t}
+            key={t?.id}
+          />
         ) : isError ? (
           <div className="">Error</div>
         ) : (

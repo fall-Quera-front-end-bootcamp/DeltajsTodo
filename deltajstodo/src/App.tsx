@@ -32,7 +32,7 @@ function App(): JSX.Element {
           <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
           <Route path="api/auth/resetPassword" element={<ResetPassword />} />
 
-          <Route element={<RequireAuth />}>
+          <Route path="/" element={<RequireAuth />}>
             <Route path="/profile" element={<Profile />} />
 
             <Route

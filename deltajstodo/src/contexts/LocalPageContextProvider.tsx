@@ -10,6 +10,11 @@ interface MainLayoutContext {
   taskID?: number
   month?: string
   day?: string
+  name?: string
+  description?: string
+  createAt?: string
+  deadline?: string
+  priority?: number
   responseData?: { type: 'success' | 'fail'; message: string } | undefined
 }
 
@@ -21,6 +26,11 @@ export const localPageContext = createContext<MainLayoutContext>({
   taskID: -1,
   month: 'none',
   day: 'none',
+  name: 'none',
+  description: 'none',
+  createAt: 'none',
+  deadline: 'none',
+  priority: 0,
   responseData: { type: 'success', message: '' }
 })
 export const localPageDispatchContext = createContext<unknown>(null)
@@ -38,6 +48,11 @@ const LocalPageContextProvider = ({
     taskID: -1,
     month: 'none',
     day: 'none',
+    name: 'none',
+    description: 'none',
+    createAt: 'none',
+    deadline: 'none',
+    priority: 0,
     responseData: { type: 'success', message: '' }
   })
 
@@ -51,7 +66,12 @@ const LocalPageContextProvider = ({
         taskID: localPage.taskID,
         responseData: localPage.responseData,
         month: localPage.month,
-        day: localPage.day
+        day: localPage.day,
+        name: localPage.name,
+        description: localPage.description,
+        createAt: localPage.createAt,
+        deadline: localPage.deadline,
+        priority: localPage.priority
       }}
     >
       <localPageDispatchContext.Provider value={dispatch}>
@@ -153,7 +173,12 @@ function StepReducer(
     case 'openTaskInfo': {
       return {
         ...localPage,
-        value: 14
+        value: 14,
+        name: action?.name,
+        description: action?.description,
+        createAt: action?.createAt,
+        deadline: action?.deadline,
+        priority: action?.priority
       }
     }
     case 'openResponseModal': {

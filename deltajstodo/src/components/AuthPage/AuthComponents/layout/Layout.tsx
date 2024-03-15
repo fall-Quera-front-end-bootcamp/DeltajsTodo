@@ -8,6 +8,7 @@ interface LayoutProps {
   buttonText: string
   linkText: string
   onClickFunction: any
+  className?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
@@ -15,10 +16,13 @@ function Layout({
   children,
   buttonText,
   linkText,
-  onClickFunction
+  onClickFunction,
+  className
 }: LayoutProps): JSX.Element {
   return (
-    <div className="relative flex h-[100vh] items-center justify-center ">
+    <div
+      className={`relative flex h-[100vh] items-center justify-center ${className}`}
+    >
       <Header
         buttonText={buttonText}
         linkText={linkText}

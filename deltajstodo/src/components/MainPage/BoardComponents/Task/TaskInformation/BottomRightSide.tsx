@@ -1,6 +1,12 @@
 import AddSecondaryIconSvg from '../../../../Common/Icons/AddSecondaryIconSvg'
 import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
-function BottomRightSide(): JSX.Element {
+function BottomRightSide({
+  name,
+  description
+}: {
+  name: string | undefined
+  description: string | undefined
+}): JSX.Element {
   return (
     <div dir="rtl" className="flex flex-col gap-6 px-[20px]">
       <div className="flex items-center gap-4">
@@ -13,15 +19,12 @@ function BottomRightSide(): JSX.Element {
 
       <div className="flex flex-col gap-2">
         <span className="text-[24px] font-extrabold leading-[32px]">
-          عنوان تسک
+          {name}
         </span>
 
         <div className="rounded-xl border-[1px] border-[#C1C1C1] p-[12px]">
           <span className="text-[16px] font-medium leading-[22.55px]">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-            استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در
-            ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز،
-            و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
+            {description}
           </span>
         </div>
       </div>

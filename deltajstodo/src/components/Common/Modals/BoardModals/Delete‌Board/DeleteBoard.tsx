@@ -9,16 +9,8 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent } from 'react'
-import LeftArrow from '../../../Icons/LeftArrow'
-import Close from '../../../Icons/Close'
-
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
-import {
-  useDeleteBoardMutation,
-  useDeleteProjectMutation,
-  useDeleteWorkspaceMutation
-} from '../../../../../features/auth/authApiSlice'
-import LoadingComponent from '../../../LoadingComponent/LoadingComponent'
+import { useDeleteBoardMutation } from '../../../../../features/auth/authApiSlice'
 import DeleteModalParent from '../../DeleteModalParentComponent/DeleteModalParent'
 import toast from 'react-hot-toast'
 
@@ -35,7 +27,7 @@ const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
   PID,
   className
 }) => {
-  const [deleteBoard, { isLoading, isSuccess }] = useDeleteBoardMutation()
+  const [deleteBoard, { isLoading }] = useDeleteBoardMutation()
 
   const localPageDispatch: any = useContext(localPageDispatchContext)
 

@@ -11,7 +11,7 @@ function Priority({
   className,
   ref,
   setPriority,
-  setShowPriority
+  setShowPriority,
 }: {
   className?: string
   ref?: MutableRefObject<null>

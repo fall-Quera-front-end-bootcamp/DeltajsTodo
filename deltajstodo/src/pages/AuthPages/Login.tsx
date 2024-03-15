@@ -17,6 +17,7 @@ import LoadingComponent from '../../components/Common/LoadingComponent/LoadingCo
 import toast from 'react-hot-toast'
 import { AxiosError } from 'axios'
 import Cookies from 'universal-cookie'
+import { setUserId } from '../../features/users/usersInteractionSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}

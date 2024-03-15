@@ -1,38 +1,24 @@
-import { type MutableRefObject, useEffect, useRef } from 'react'
+import { type Dispatch, type SetStateAction, useRef } from 'react'
 import '../../../dist/output.css'
 import { motion } from 'framer-motion'
 import Close from '../Icons/Close'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface TermProps {
-  onClickFunction: any
+  onClickFunction: Dispatch<SetStateAction<boolean>>
   className?: string
-}
-
-function useOutsideAlerter (ref: MutableRefObject<null>): void {
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside (event: unknown): void {
-      if (Boolean(ref.current) && !ref.current.contains(event.target)) {
-        alert('You clicked outside of me!')
-      }
-    }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [ref])
 }
 
 const TermsConditions = ({
   onClickFunction,
   className
 }: TermProps): JSX.Element => {
+  // Click OutSide
   const wrapperRef = useRef(null)
-  useOutsideAlerter(wrapperRef)
+  const handleClickOutside = (): void => {
+    onClickFunction(false)
+  }
+  useOnClickOutside(wrapperRef, handleClickOutside)
   return (
     <motion.div
       dir="rtl"
@@ -41,12 +27,12 @@ const TermsConditions = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
       ref={wrapperRef}
-      className={`absolute z-50 flex h-screen w-full bg-gray-dark/50 backdrop-blur-md ${className}`}
+      className={`absolute right-1/2 top-1/2 z-50 flex -translate-y-1/2 translate-x-1/2 ${className}`}
     >
       <div className="relative m-auto flex w-[800px] flex-col items-center justify-center gap-[32px] rounded-[20px] bg-white p-6 px-[24px] pb-[32px] pt-[24px]">
         <div className=" flex w-full flex-row-reverse items-center justify-center">
           <Close
-            onClickFunction={onClickFunction}
+            onClickFunction={handleClickOutside}
             className="absolute left-[16px] top-[16px] size-10 cursor-pointer"
           />
           <h1 className="text-right text-headingl font-[800] leading-[45px] text-[#1E1E1E]">

@@ -18,6 +18,7 @@ import { useGetWorkspacesQuery } from '../../../features/auth/authApiSlice'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 interface SidebarPrimaryProps {}
 
@@ -32,6 +33,12 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
     cookies.remove('id')
     localStorage.removeItem('refreshToken')
     navigate('/api/auth/login')
+    toast.success('شما از سایت خارج شدید', {
+      style: {
+        borderColor: '#51cb28',
+        border: '2px'
+      }
+    })
   }
 
   try {
@@ -140,7 +147,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
               <ThemeToggle />
               <div
                 onClick={handleLogout}
-                className="flex items-center justify-center space-x-2"
+                className="flex cursor-pointer items-center justify-center space-x-2 rounded-lg px-4 transition-all duration-300 hover:bg-gray-secondary"
               >
                 <LogoutIconSvg />
                 <p className="text-right text-[16px] font-medium text-[#818181]">

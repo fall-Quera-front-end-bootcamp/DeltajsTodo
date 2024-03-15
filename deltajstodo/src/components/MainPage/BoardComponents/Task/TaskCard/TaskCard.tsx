@@ -6,11 +6,76 @@ import DotsMenuIconSvg from '../../../../Common/Icons/DotsMenuIconSvg'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
 import moment from 'jalali-moment'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { useDeleteTaskMutation } from '../../../../../features/auth/authApiSlice'
+import toast from 'react-hot-toast'
+import { taskPriority } from '../../BoardViews/RowView/RowComponents/TaskPriorityFunction'
 
-function TaskCard({ task }: { task: Task }): JSX.Element {
+function TaskCard ({
+  task,
+  WID,
+  PID,
+  BID,
+  TID
+}: {
+  task: Task
+  WID: number
+  PID: number
+  BID: number
+  TID: number
+}): JSX.Element {
   moment.locale('fa', { useGregorianParser: true })
-  const deadline = moment(task?.deadline).format('DD / MM')
+  const deadlineMonth = moment(task?.deadline).format('MM')
+  const deadlineDay = moment(task?.deadline).format('DD')
   const localPageDispatch: any = useContext(localPageDispatchContext)
+
+  const [deleteTask, { isLoading }] = useDeleteTaskMutation()
+
+  const handleDeleteTask = async (): Promise<void> => {
+    try {
+      await deleteTask({
+        workspace_id: WID,
+        project_id: PID,
+        board_id: BID,
+        id: TID
+      }).unwrap()
+    } catch (error: any) {
+      console.log('Hi i am that error: ', error)
+    }
+  }
+
+  const onSubmit = (): void => {
+    void toast.promise(
+      handleDeleteTask(),
+      {
+        loading: '... در حال بررسی',
+        success: 'تسک با موفقیت حذف شد',
+        error: 'مشکلی در حذف تسک وجود دارد کمی بعد امتحان بکنید'
+      },
+      {
+        style: {
+          minWidth: '250px'
+        },
+        loading: {
+          style: { backgroundColor: '#ffffff80' }
+        },
+        success: {
+          duration: 3000,
+          style: {
+            border: '2px',
+            borderStyle: 'solid',
+            borderColor: 'rgb(130, 201, 30)'
+          }
+        },
+        error: {
+          style: {
+            border: '2px',
+            borderStyle: 'solid',
+            borderColor: 'red'
+          }
+        }
+      }
+    )
+  }
 
   return (
     <section
@@ -19,20 +84,41 @@ function TaskCard({ task }: { task: Task }): JSX.Element {
     >
       <button
         onClick={() => {
-          localPageDispatch({ type: 'openTaskInfo' })
+          localPageDispatch({
+            type: 'openTaskInfo',
+            name: task.name,
+            description: task?.description,
+            deadline: task.deadline,
+            priority: task.priority,
+            create_at: task.created_at
+          })
         }}
         className="flex w-full flex-col gap-s"
       >
         <div className="text-[12px] text-[#534D60]">{task.name}</div>
         <div className="flex flex-row gap-2">
-          <div className="text-[12px]">
+          <div className="whitespace-normal text-[12px]">
             {task?.description?.slice(0, 20)}...
           </div>
           <ParagraphsIconSvg className="size-3" />
         </div>
-        <div className="text-gray-primary">{toFarsiNumber(deadline)}</div>
+        <div className="flex w-full flex-row">
+          {taskPriority(task?.priority, '', false, '')}
+          <div className="flex w-[20px] flex-row gap-1">
+            <div className="text-gray-primary">
+              {toFarsiNumber(deadlineDay)}
+            </div>
+            <span>/</span>
+            <div className="text-gray-primary">
+              {toFarsiNumber(deadlineMonth)}
+            </div>
+          </div>
+        </div>
       </button>
-      <div className="hidden w-full flex-row items-center justify-between border-t-2 border-gray-primary transition-all duration-700 group-1-hover:flex">
+      <div
+        onClick={onSubmit}
+        className="hidden w-full flex-row items-center justify-between border-t-[0.5px] border-gray-primary border-opacity-30 transition-all duration-700 group-1-hover:flex"
+      >
         <DotsMenuIconSvg />
       </div>
     </section>

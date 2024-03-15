@@ -1,4 +1,13 @@
-function TopLeftSide(): JSX.Element {
+import moment from 'jalali-moment'
+import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
+
+function TopLeftSide({
+  deadline,
+  createAt
+}: {
+  deadline: string | undefined
+  createAt: string | undefined
+}): JSX.Element {
   return (
     <div dir="rtl" className="flex gap-6 pl-[36px] pr-[20px]">
       <div className="flex flex-col gap-2">
@@ -6,8 +15,10 @@ function TopLeftSide(): JSX.Element {
           ساخته شده در
         </span>
 
-        <span className="text-[16px] font-medium leading-[22.55px]">
-          ۱ اردیبهشت ۱۴۰۲
+        <span className="flex flex-row gap-1 text-[16px] font-medium leading-[22.55px]">
+          <span>{toFarsiNumber(`${moment(createAt).format('DD')}`)}</span>
+          <span> {moment(createAt).format('MMMM')}</span>
+          <span> {toFarsiNumber(`${moment(createAt).format('YYYY')}`)}</span>
         </span>
       </div>
 
@@ -20,6 +31,7 @@ function TopLeftSide(): JSX.Element {
 
         <span className="text-[16px] font-medium leading-[22.55px]">
           پس‌فردا
+          {deadline}
         </span>
       </div>
     </div>
