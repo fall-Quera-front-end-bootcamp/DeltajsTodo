@@ -6,15 +6,14 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useState, type FunctionComponent } from 'react'
 import ItemColor from '../../../../Common/Icons/ItemColor'
-
 import { type Task, type Board } from '../../../../../utilities/models'
-import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
 import ArrowButton from './RowComponents/ArrowButton'
 import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import moment from 'jalali-moment'
 import { useGetTasksQuery } from '../../../../../features/auth/authApiSlice'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
+import { taskPriority } from './RowComponents/TaskPriorityFunction'
 
 interface RowProps {
   board: Board
@@ -32,7 +31,6 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
   const {
     data: tasks,
     isLoading,
-    isError,
     isSuccess
   } = useGetTasksQuery({
     workspace_id: WID,
@@ -118,18 +116,15 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
                         })}
                         Img
                       </div>
-
                       <p className="text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
                         {toFarsiNumber(moment(task?.deadline).format('DD MMM'))}
                       </p>
-
-                      <div className="">Priority</div>
-
+                      <div className="">{taskPriority(task?.priority)}</div>
                       <ParagraphsIconSvg />
                     </div>
                   </div>
                 )
-              } else if (isError) {
+              } else {
                 return (
                   <div key={task?.id} className="">
                     <div className="">Error</div>

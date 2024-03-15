@@ -11,12 +11,12 @@ const BoardsDropDown = ({
   selected
 }: {
   boards?: [] | undefined
-  placeHolderText: string
+  placeHolderText?: string
   className?: string
   inputCN?: string
   ref?: Ref<HTMLDivElement>
-  setSelected: ((selected: number) => void) | undefined
-  selected: number | undefined
+  setSelected?: ((selected: number) => void) | undefined
+  selected?: number | undefined
 }): JSX.Element => {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
@@ -42,7 +42,7 @@ const BoardsDropDown = ({
       </div>
 
       <ul
-        className={`absolute left-0 top-[31px] mt-2 overflow-y-auto ${open ? 'max-h-60 w-full cursor-pointer bg-white shadow-[0_3px_4px_0] shadow-[#00000033]' : 'max-h-0'} `}
+        className={`absolute left-0 top-[31px] mt-2 overflow-y-auto ${open ? 'max-h-60 w-full cursor-pointer bg-white shadow-[0_3px_4px_0] shadow-[#00000033]' : 'max-h-0'} scrollbar-thin`}
       >
         <li
           className={'w-full p-2 text-bodys hover:bg-brand-secondary'}

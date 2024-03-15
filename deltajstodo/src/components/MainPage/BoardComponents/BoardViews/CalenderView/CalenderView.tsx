@@ -6,7 +6,6 @@ import {
   useMemo,
   useEffect
 } from 'react'
-import { type Project } from '../../../../../utilities/models'
 import { DatepickerContext } from '../../../../../contexts/DateContextProvider'
 import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import CalendarCell from './CalendarViewComponents/CalendarCell/CalendarCell'
@@ -23,16 +22,11 @@ import {
 import moment from 'jalali-moment'
 
 interface CalenderViewProps {
-  project: Project
   PID: number
   WID: number
 }
 
-const CalenderView: FunctionComponent<CalenderViewProps> = ({
-  project,
-  PID,
-  WID
-}) => {
+const CalenderView: FunctionComponent<CalenderViewProps> = ({ PID, WID }) => {
   moment.locale('fa')
   const date = moment().format()
   const { days, daysChangeF } = useContext(DatepickerContext)
@@ -91,6 +85,7 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({
                 WID={WID}
                 key={days.previous.indexOf(day)}
                 day={toFarsiNumber(String(day))}
+                month={moment().format('MMM')}
               />
             )
           })}
@@ -101,6 +96,7 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({
                 WID={WID}
                 key={days.current.indexOf(day)}
                 day={toFarsiNumber(String(day))}
+                month={moment().format('MMM')}
               />
             )
           })}
@@ -111,6 +107,7 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({
                 WID={WID}
                 key={days.next.indexOf(day)}
                 day={toFarsiNumber(String(day))}
+                month={moment().format('MMM')}
               />
             )
           })}

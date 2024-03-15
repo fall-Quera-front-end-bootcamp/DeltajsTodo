@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type FunctionComponent, useEffect, useContext } from 'react'
+import { type FunctionComponent, useContext } from 'react'
 import SidebarPrimary from '../../components/MainPage/SideBarPrimary/SidebarPrimary'
 import { Outlet } from 'react-router-dom'
 import NewProject from '../../components/Common/Modals/ProjectModals/NewProject'
@@ -13,23 +13,21 @@ import ChangeWorkspaceTitle from '../../components/Common/Modals/WorkspaceModals
 import ChangeWorkspaceColor from '../../components/Common/Modals/WorkspaceModals/ChangeWorkspaceColor'
 import ChangeProjectTitle from '../../components/Common/Modals/ProjectModals/ChangeProjectTitle'
 import DeleteWorkspace from '../../components/Common/Modals/WorkspaceModals/DeleteWorkspace'
-import Response from '../../components/Common/Modals/ResponseModals/Response'
-import { store } from '../../app/store'
 import DeleteProject from '../../components/Common/Modals/ProjectModals/DeleteProject'
 import { localPageContext } from '../../contexts/LocalPageContextProvider'
-import Message from '../../components/Common/Message/Message'
 import NewBoard from '../../components/Common/Modals/BoardModals/NewBoard/NewBoard'
 import ChangeBoardTitle from '../../components/Common/Modals/BoardModals/ChangeBoardTitle.tsx/ChangeBoardTitle'
 import NewTask from '../../components/MainPage/BoardComponents/Task/NewTask/NewTask'
 import DeleteBoard from '../../components/Common/Modals/BoardModals/Delete‌Board/DeleteBoard'
-import { AnimatePresence } from 'framer-motion'
-import { Toaster } from 'react-hot-toast'
 import NewTaskContextProvider from '../../contexts/NewTaskContextProvider'
+import CalendarCellNewTask from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalendarViewComponents/CalendarCell/CalendarCellNewTask'
+import TaskInformation from '../../components/MainPage/BoardComponents/Task/TaskInformation/TaskInformation'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
-  const { value, workspaceID, projectID, boardID, taskID, responseData } =
+  const { value, workspaceID, projectID, boardID, month, day } =
     useContext(localPageContext)
+  console.log(value)
 
   return (
     <>
@@ -75,6 +73,15 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                 <NewTask WID={workspaceID} PID={projectID} BID={boardID} />
               </NewTaskContextProvider>
             )}
+            {value === 13 && (
+              <CalendarCellNewTask
+                WID={workspaceID}
+                PID={projectID}
+                day={day}
+                month={month}
+              />
+            )}
+            {value === 14 && <TaskInformation />}
           </div>
         </div>
       </div>

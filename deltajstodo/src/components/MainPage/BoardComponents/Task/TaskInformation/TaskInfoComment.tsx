@@ -1,4 +1,3 @@
-import '../../../../dist/output.css'
 import ChatMessageIconSvg from '../../../../Common/Icons/ChatMessageIconSvg'
 import SmileysIconSvg from '../../../../Common/Icons/SmileysIconSvg'
 import DocumentsIconSvg from '../../../../Common/Icons/DocumentsIconSvg'

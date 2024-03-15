@@ -1,8 +1,7 @@
-import '../../../../dist/output.css'
 import PriorityFlag from '../../../../Common/Icons/PriorityFlag'
 import ProfileAddUserIconSvg from '../../../../Common/Icons/ProfileAddUserIconSvg'
 import ShareIconSvg from '../../../../Common/Icons/ShareIconSvg'
-import profile from '../../../Common/Imgs/taskInformationprofile.jpg'
+import profile from '../../../../Common/Imgs/taskInformationprofile.jpg'
 
 function TopRightSide(): JSX.Element {
   return (

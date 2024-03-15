@@ -1,4 +1,3 @@
-import '../../../../dist/output.css'
 import CommentCard from './CommentCard'
 function BottomLeftSide(): JSX.Element {
   return (

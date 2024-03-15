@@ -1,5 +1,4 @@
-import '../../../../dist/output.css'
-function TopLeftSide (): JSX.Element {
+function TopLeftSide(): JSX.Element {
   return (
     <div dir="rtl" className="flex gap-6 pl-[36px] pr-[20px]">
       <div className="flex flex-col gap-2">

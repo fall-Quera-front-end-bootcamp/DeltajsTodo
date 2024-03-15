@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 import { useGetBoardsQuery } from '../../../../../../../../features/auth/authApiSlice'
-import { Board } from '../../../../../../../../utilities/models'
+import { type Board } from '../../../../../../../../utilities/models'
 import BoardsDropDown from '../../DropDowns/BoardsDropDown'
 import NewTaskInput from '../../Inputs/NewTaskInput'
 import CloseNewTaskButton from './CloseNewTaskButton'
@@ -22,21 +22,6 @@ const BoxOne = ({
     workspace_id: WID,
     project_id: PID
   })
-
-  const boardProps = {
-    name: 'board_id',
-    validation: {
-      required: {
-        value: true,
-        message: 'لطفا یکی از برد‌ها را انتخاب بکنید'
-      }
-    },
-    id: 'text',
-    label: 'برد‌ها',
-    type: 'text',
-    placeholder: 'یکی از برد‌ها را انتخاب بکنید',
-    inputDir: 'rtl'
-  }
 
   const newTaskNameProps = {
     name: 'name',

@@ -4,13 +4,7 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import {
-  useEffect,
-  type FunctionComponent,
-  useContext,
-  useState,
-  useRef
-} from 'react'
+import { type FunctionComponent, useContext, useState } from 'react'
 import NewColumn from './ColumnComponents/NewColumn'
 import {
   type Project,
@@ -19,32 +13,18 @@ import {
 } from '../../../../../utilities/models'
 import Column from './ColumnComponents/Column'
 import { useGetBoardsQuery } from '../../../../../features/auth/authApiSlice'
-
 import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
-import NewTask from '../../Task/NewTask/NewTask'
-import ClickDargToScroll from '../../../../../utilities/ClickDargToScroll'
 import Slider from '../../../SliderHorizontal/SliderHorizontal'
-import NewTaskContextProvider from '../../../../../contexts/NewTaskContextProvider'
 
 interface ColumnViewProps {
   WID: number
   PID: number
-
-  project?: Project
 }
 
 const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
-  const [showNewTask, setShowNewTask] = useState(false)
-  const [showNewTaskBoard, setShowNewTaskBoard] = useState(false)
-  ///////////////////////////// API FOR BOADRs ////////////////////////////////
   const localPageDispatch: any = useContext(localPageDispatchContext)
-
-  const handleNewTask = (): void => {
-    setShowNewTask((p) => !p)
-    setShowNewTaskBoard((p) => !p)
-  }
 
   const handleNewColumn = (): void => {
     localPageDispatch({ type: 'openNewBoard', WID, PID })
@@ -54,8 +34,7 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
     data: boards,
     isLoading,
     isError,
-    isSuccess,
-    error
+    isSuccess
   } = useGetBoardsQuery({
     workspace_id: WID,
     project_id: PID

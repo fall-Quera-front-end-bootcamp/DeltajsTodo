@@ -41,8 +41,6 @@ const Login: FunctionComponent<LoginProps> = () => {
         password: data.password
       }).unwrap()
 
-      console.log(userData)
-
       dispatch(
         setCredentials({ accessToken: userData.access, user: { ...userData } })
       )

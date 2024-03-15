@@ -1,4 +1,3 @@
-import '../../../../dist/output.css'
 import AddSecondaryIconSvg from '../../../../Common/Icons/AddSecondaryIconSvg'
 import BookmarkTagIconSvg from '../../../../Common/Icons/BookmarkTagIconSvg'
 function BottomRightSide(): JSX.Element {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import AddSecondaryIconSvg from '../../../../../../Common/Icons/AddSecondaryIconSvg'
 import CalendarCellNewTask from './CalendarCellNewTask'
 import {
@@ -7,6 +7,7 @@ import {
   useGetTasksQuery
 } from '../../../../../../../features/auth/authApiSlice'
 import { Board, Task } from '../../../../../../../utilities/models'
+import { localPageDispatchContext } from '../../../../../../../contexts/LocalPageContextProvider'
 
 interface CalendarCellProps {
   today?: boolean
@@ -26,15 +27,7 @@ const CalendarCell = ({
   PID
 }: CalendarCellProps): JSX.Element => {
   const [addIconOpacity, setAddIconOpacity] = useState('opacity-0')
-  const [newTaskView, setNewTaskView] = useState('hidden')
-
-  const showNewTask = (): void => {
-    setNewTaskView('block')
-  }
-  const closeNewTask = (e: any): void => {
-    e.stopPropagation()
-    setNewTaskView((prev) => (prev = 'hidden'))
-  }
+  const localPageDispatch: any = useContext(localPageDispatchContext)
 
   return (
     <>
@@ -47,25 +40,23 @@ const CalendarCell = ({
           setAddIconOpacity('opacity-0')
         }}
       >
-        {/* {tasks?.map((t: Task) => {
-          return (
-            <div key={t?.id} className="">
-              {t?.name}
-            </div>
-          )
-        })} */}
         <span className="absolute bottom-[10px] left-[10px] text-[16px] font-medium leading-[22.55px]">
           {day}
         </span>
         <div
-          onClick={showNewTask}
+          onClick={() => {
+            localPageDispatch({
+              type: 'openNewTaskLittle',
+              WID,
+              PID,
+              month,
+              day
+            })
+          }}
           className={`absolute bottom-[10px] right-[10px] flex size-[24px] items-center justify-center rounded-[3px] bg-brand-primary ${addIconOpacity} cursor-pointer transition-all duration-300`}
         >
           <AddSecondaryIconSvg color="#ffffff" />
         </div>
-      </div>
-      <div className={`absolute left-0 top-0 ${newTaskView}`}>
-        <CalendarCellNewTask onClickFunction={closeNewTask} />
       </div>
     </>
   )

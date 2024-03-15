@@ -1,6 +1,5 @@
-import '../../../../dist/output.css'
-import profile from '../../../Common/Imgs/taskInformationprofile.jpg'
-function CommentCard (): JSX.Element {
+import profile from '../../../../Common/Imgs/taskInformationprofile.jpg'
+function CommentCard(): JSX.Element {
   return (
     <div className="flex gap-2 px-[16px]">
       <div

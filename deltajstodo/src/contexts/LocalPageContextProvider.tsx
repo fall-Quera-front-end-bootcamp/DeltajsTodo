@@ -8,6 +8,8 @@ interface MainLayoutContext {
   projectID: number
   boardID: number
   taskID?: number
+  month?: string
+  day?: string
   responseData?: { type: 'success' | 'fail'; message: string } | undefined
 }
 
@@ -17,6 +19,8 @@ export const localPageContext = createContext<MainLayoutContext>({
   projectID: -1,
   boardID: -1,
   taskID: -1,
+  month: 'none',
+  day: 'none',
   responseData: { type: 'success', message: '' }
 })
 export const localPageDispatchContext = createContext<unknown>(null)
@@ -32,6 +36,8 @@ const LocalPageContextProvider = ({
     projectID: -1,
     boardID: -1,
     taskID: -1,
+    month: 'none',
+    day: 'none',
     responseData: { type: 'success', message: '' }
   })
 
@@ -43,7 +49,9 @@ const LocalPageContextProvider = ({
         projectID: localPage.projectID,
         boardID: localPage.boardID,
         taskID: localPage.taskID,
-        responseData: localPage.responseData
+        responseData: localPage.responseData,
+        month: localPage.month,
+        day: localPage.day
       }}
     >
       <localPageDispatchContext.Provider value={dispatch}>
@@ -129,6 +137,23 @@ function StepReducer(
         workspaceID: action?.WID,
         projectID: action?.PID,
         boardID: action?.BID
+      }
+    }
+    case 'openNewTaskLittle': {
+      return {
+        ...localPage,
+        value: 13,
+        workspaceID: action?.WID,
+        projectID: action?.PID,
+        boardID: action?.BID,
+        month: action?.month,
+        day: action?.day
+      }
+    }
+    case 'openTaskInfo': {
+      return {
+        ...localPage,
+        value: 14
       }
     }
     case 'openResponseModal': {

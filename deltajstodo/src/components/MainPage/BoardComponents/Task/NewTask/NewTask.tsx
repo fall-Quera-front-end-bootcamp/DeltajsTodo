@@ -21,6 +21,7 @@ import NewTaskContextProvider, {
 } from '../../../../../contexts/NewTaskContextProvider'
 import { store } from '../../../../../app/store'
 import axios from 'axios'
+import BoxThree from './NewTaskComponents/Boxs/Box3/BoxThree'
 
 interface NewTaskProps {
   WID?: number //this is workspace id you need
@@ -46,6 +47,7 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
   // UseState hook
   const [showCalendar, setShowCalendar] = useState(false)
   const [textAreaValue, setTextAreaValue] = useState('')
+  const [priority, setPriority] = useState<number>(0)
   const [selectedAttachmentFile, setSelectedAttachmentFile] =
     useState<FormData | null>(null)
   const [selectedCoverFile, setSelectedCoverFile] = useState<FormData | null>(
@@ -117,10 +119,11 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
         board_id: BID,
         name: data.name,
         description: data.description,
-        priority: 1,
-        attachment: data.attachment,
-        thumbnail: selectedCoverFile,
-        order: 12
+        priority,
+        deadline: '2024-03-20'
+        // attachment: data.attachment,
+        // thumbnail: selectedCoverFile,
+        // order: 12
       }).unwrap()
       localPageDispatch({ type: 'closeModal' })
     } catch (err: any) {
@@ -194,7 +197,7 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
           {/* Box 2 */}
           <NewTaskBoxTwo projects={projects} />
           {/* Box 3 : Description */}
-          <NewTaskDescription handleSetDesc={handleSetDesc} />
+          <BoxThree />
           {/* Box 4  */}
           <BoxFourUpload
             handleOnChangeFirst={handleOnChangeFirst}
@@ -210,6 +213,8 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
           />
           {/* Bottom Box 5 */}
           <BoxFive
+            priority={priority}
+            setPriority={setPriority}
             handleShowCalendar={handleShowCalendar}
             isLoading={isLoading}
             onSubmit={onSubmit}
