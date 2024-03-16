@@ -11,7 +11,7 @@ import LogoutIconSvg from '../../Common/Icons/LogoutIconSvg'
 import WorkspaceItem from '../WorkspaceComponents/WorkspaceItem/WorkspaceItem'
 import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
 import ThemeToggle from '../../Common/Buttons/ThemeToggle'
-import UserButton from './UserButton/UserButton'
+import UserButton from './UserButton'
 import HeadingTextLogoLink from '../../Common/HeadingMainText/HeadingTextLogoLink'
 import { type Workspace as W } from '../../../utilities/models'
 import { useGetWorkspacesQuery } from '../../../features/auth/authApiSlice'
@@ -19,26 +19,20 @@ import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
+import NewWorkspaceButton from './NewWorkspaceButton'
 
 interface SidebarPrimaryProps {}
 
 const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
   const cookies = new Cookies()
   const [filterValue, setFilterValue] = useState('')
-  const stepDispatch: any = useContext(localPageDispatchContext)
   const navigate = useNavigate()
 
   const handleLogout = (): void => {
     cookies.remove('accessToken')
     cookies.remove('id')
     localStorage.removeItem('refreshToken')
-    navigate('/api/auth/login')
-    toast.success('شما از سایت خارج شدید', {
-      style: {
-        borderColor: '#51cb28',
-        border: '2px'
-      }
-    })
+    navigate(0)
   }
 
   try {
@@ -94,24 +88,9 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
               {/* Spices */}
               <div className="flex flex-col gap-[8px] space-y-[8px]">
                 {/* Creating a new space */}
-
-                <button
-                  onClick={() =>
-                    stepDispatch({
-                      type: 'openNewWorkspace'
-                    })
-                  }
-                >
-                  <div className="flex w-full items-center justify-center space-x-1 rounded-[6px] bg-[#D3D3D3]">
-                    <p className="text-bodyxs font-normal text-[#1E1E1E]">
-                      ساختن اسپیس جدید
-                    </p>
-                    <AddSecondaryIconSvg />
-                  </div>
-                </button>
-
+                <NewWorkspaceButton />
                 {/* list workspace */}
-                <ul className="flex h-[45vh] max-h-96 flex-col gap-[8px] overflow-y-scroll scrollbar-thin">
+                <ul className="flex flex-col gap-[8px] scrollbar-thin">
                   {/* ***********!!!  Need typescript to display remove and add list !!!******************************************** */}
 
                   {filterValue === ''

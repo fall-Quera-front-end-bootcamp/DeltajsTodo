@@ -24,8 +24,6 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
   const cookies = new Cookies()
   const id = cookies.get('id')
 
-  console.log(id)
-
   const getUser = useGetUserQuery(id)
   const [UpdateInfo] = useUpdateInfoMutation()
   const methods = useForm()
@@ -112,8 +110,9 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
 
     if (profileImageFile) {
       const updateData = new FormData()
-      updateData.append('thumbnail', profileImageFile, profileImageFile.name)
+      updateData.set('thumbnail', profileImageFile, profileImageFile.name)
       handleImageSubmit(updateData)
+      console.log(updateData)
     }
 
     const updateData = {
@@ -122,17 +121,21 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
       last_name: data.profile_last_name,
       phone_number: data.profile_phone
     }
+
+    console.log()
+
     handleInfoSubmit(updateData)
   })
 
   const handleImageSubmit = async (data: FormData): Promise<void> => {
-    const accessToken = store.getState().auth.user?.access
+    const accessToken = cookies.get('accessToken')
     const url = 'http://185.8.174.74:8000/accounts/86/'
+    console.log(data)
 
     await axios
       .patch(url, data, {
         headers: {
-          'content-type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`
         }
       })

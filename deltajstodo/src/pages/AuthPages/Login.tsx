@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-import { useState, type FunctionComponent } from 'react'
+import { useState, type FunctionComponent, useEffect } from 'react'
 import Layout from '../../components/AuthPage/AuthComponents/layout/Layout'
 import AuthCard from '../../components/AuthPage/AuthComponents/Card/AuthCard'
 import Input from '../../components/Common/Input/Input'

@@ -40,18 +40,19 @@ function ProjectMoreOption({
     }
   }
   return (
-    <div className="flex items-center gap-2">
+    <button
+      onClick={() => {
+        onClickHandler(workspaceID)
+      }}
+      className="flex w-full items-center gap-2 hover:bg-gray-secondary py-2 rounded-lg transition-all duration-300"
+    >
       {iconChoose()}
-      <span className={`  text-[14px] font-normal ${color} leading-[19.73px]`}>
-        <button
-          onClick={() => {
-            onClickHandler(workspaceID)
-          }}
-        >
-          {text}
-        </button>
-      </span>
-    </div>
+      <p
+        className={` w-full text-[14px] font-normal ${color} leading-[19.73px]`}
+      >
+        {text}
+      </p>
+    </button>
   )
 }
 

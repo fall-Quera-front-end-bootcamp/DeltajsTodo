@@ -41,7 +41,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
   ///////////////////////////////////////////////////////////
   if (!!isLoading) {
     return (
-      <div className="h-[31px] w-full bg-gray-secondary">
+      <div className="h-[10px] w-full bg-gray-secondary">
         <LoadingComponent />
       </div>
     )

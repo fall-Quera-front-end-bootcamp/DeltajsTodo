@@ -24,12 +24,12 @@ function PriorityOption({
     if (setPriority !== undefined) setPriority(num)
   }
   return (
-    <div onClick={handleClick} className="flex items-center gap-2">
+    <button onClick={handleClick} className="flex items-center gap-2">
       <PriorityFlag color={color} />
       <span className="  text-[14px] font-normal leading-[19.73px]">
         {text}
       </span>
-    </div>
+    </button>
   )
 }
 
