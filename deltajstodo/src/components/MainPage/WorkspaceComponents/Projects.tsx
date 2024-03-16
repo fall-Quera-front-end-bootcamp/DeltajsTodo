@@ -1,12 +1,11 @@
 /* eslint-disable multiline-ternary */
-import { useContext, type FunctionComponent, useRef } from 'react'
+import { useContext, type FunctionComponent } from 'react'
 import { useGetProjectsQuery } from '../../../features/auth/authApiSlice'
 import { type Project, type Workspace } from '../../../utilities/models'
 import BuildProjectItemWorkspaceButton from './BuildProjectItemWorkspaceButton'
 import ProjectItemWorkspace from './ProjectItemWorkspace'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
-import ClickDargToScroll from '../../../utilities/ClickDargToScroll'
 import Slider from '../SliderHorizontal/SliderHorizontal'
 
 interface ProjectsInterface {
@@ -29,13 +28,13 @@ const Projects: FunctionComponent<ProjectsInterface> = ({ w }) => {
 
   if (isLoading) {
     return (
-      <div className="h-full w-full flex flex-col items-center justify-center">
+      <div className="flex size-full flex-col items-center justify-center">
         <LoadingComponent />
       </div>
     )
   } else if (isSuccess) {
     return (
-      <Slider className="flex h-28 w-full flex-row-reverse gap-8 overflow-x-scroll scrollbar-thin scrollbar-track-gray-secondary scrollbar-thumb-gray-dark">
+      <Slider className="flex h-[86px] w-full flex-row-reverse gap-8 overflow-x-auto scrollbar-thin scrollbar-track-gray-secondary scrollbar-thumb-gray-dark">
         {projects?.length !== undefined && projects?.length > 0 ? (
           <>
             {projects?.map((p: Project) => {

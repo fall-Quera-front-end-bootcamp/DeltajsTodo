@@ -8,12 +8,13 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useContext, type FunctionComponent } from 'react'
+import { useContext, type FunctionComponent, useRef } from 'react'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
 import { useDeleteProjectMutation } from '../../../../features/auth/authApiSlice'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import DeleteModalParent from '../DeleteModalParentComponent/DeleteModalParent'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface DeleteProjectProps {
   WID: number
@@ -29,6 +30,14 @@ const DeleteProject: FunctionComponent<DeleteProjectProps> = ({
   const [deleteProject, { isLoading }] = useDeleteProjectMutation()
   const navigate = useNavigate()
   const localPageDispatch: any = useContext(localPageDispatchContext)
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const onSubmitHandler = async (): Promise<void> => {
     try {
@@ -47,13 +56,16 @@ const DeleteProject: FunctionComponent<DeleteProjectProps> = ({
   }
 
   return (
-    <DeleteModalParent
-      className={className}
-      isLoading={isLoading}
-      CloseModalHandler={CloseModalHandler}
-      onSubmitHandler={onSubmitHandler}
-      DeleteItem="پروژه"
-    />
+    <div ref={bigDivRef} className="">
+      <DeleteModalParent
+        className={className}
+        isLoading={isLoading}
+        CloseModalHandler={CloseModalHandler}
+        onSubmitHandler={onSubmitHandler}
+        QuestionParagraph="ایا از حذف این پروژه اطمینان دارید؟"
+        QuestionTitle="حذف پروژه"
+      />
+    </div>
   )
 }
 export default DeleteProject

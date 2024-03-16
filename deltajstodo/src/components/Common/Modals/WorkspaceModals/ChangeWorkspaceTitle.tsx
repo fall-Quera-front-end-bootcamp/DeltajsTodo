@@ -10,6 +10,7 @@ import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
 import { useUpdataWorkspaceMutation } from '../../../../features/auth/authApiSlice'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface ChangeWorkspaceTitleProps {
   WID: number
@@ -23,6 +24,14 @@ const ChangeWorkspaceTitle: FunctionComponent<ChangeWorkspaceTitleProps> = ({
   const [inputValue, setInputVlue] = useState('')
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [updataWorkspace, { isLoading }] = useUpdataWorkspaceMutation()
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const onChangeHandler = (e: any): void => {
     setInputVlue((p) => e?.target?.value ?? p)
@@ -53,6 +62,7 @@ const ChangeWorkspaceTitle: FunctionComponent<ChangeWorkspaceTitleProps> = ({
   return (
     <>
       <div
+        ref={bigDivRef}
         dir="rtl"
         className={`fixed left-1/2 top-1/2 flex h-[268px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] rounded-lg bg-white p-[24px] shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
       >

@@ -89,6 +89,7 @@ export interface Board {
   name: string
   color: string
   tasks: Task[]
+  is_archive: boolean
   tasks_count: number
 }
 

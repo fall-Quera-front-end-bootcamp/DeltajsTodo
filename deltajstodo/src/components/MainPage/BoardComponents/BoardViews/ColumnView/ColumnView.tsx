@@ -17,6 +17,7 @@ import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonP
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 import Slider from '../../../SliderHorizontal/SliderHorizontal'
+import toast from 'react-hot-toast'
 
 interface ColumnViewProps {
   WID: number
@@ -68,7 +69,17 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
           IconColor="#ffffff"
           title="تسک جدید"
           onClick={() => {
-            localPageDispatch({ type: 'openNewTask', WID, PID })
+            if (boards?.length === 0) {
+              toast.error('چرا اول نمیری یک ستون ایجاد بکنی خوشگله', {
+                style: {
+                  borderWidth: '2px',
+                  borderColor: '#FA5252'
+                },
+                icon: '😁'
+              })
+            } else {
+              localPageDispatch({ type: 'openNewTask', WID, PID })
+            }
           }}
         />
       </>

@@ -34,6 +34,7 @@ function TaskInformation({
     localPageDispatch({ type: 'closeModal' })
   }
   useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
   // open comment
   const openComment = (): void => {
     if (!commentOpen) {

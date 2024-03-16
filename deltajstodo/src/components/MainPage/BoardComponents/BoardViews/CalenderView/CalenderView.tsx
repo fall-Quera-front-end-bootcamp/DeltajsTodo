@@ -66,7 +66,7 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({ PID, WID }) => {
   }, [calendarData.days])
 
   return (
-    <div className=" mt-5 flex w-full flex-col items-end justify-start overflow-hidden">
+    <div className=" mt-5 flex h-[80vh]  w-full flex-col items-end justify-start overflow-y-auto scrollbar-thin">
       <div className="relative flex flex-col transition-all duration-500 min-[1024px]:w-[800px] xl:w-[1033px]">
         <div
           dir="rtl"
@@ -76,7 +76,7 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({ PID, WID }) => {
         </div>
         <div
           dir="rtl"
-          className="grid h-[770px] w-full grid-cols-7 grid-rows-6 overflow-auto"
+          className="grid h-[840px] w-full grid-cols-7 grid-rows-6"
         >
           {days.previous.map((day) => {
             return (

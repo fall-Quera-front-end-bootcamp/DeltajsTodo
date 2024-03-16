@@ -14,6 +14,7 @@ import Close from '../../Icons/Close'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
 import ButtonColorIconSvg from '../../Icons/ButtonColorIconSvg'
 import { useUpdataWorkspaceMutation } from '../../../../features/auth/authApiSlice'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface ChangeWorkspaceColorProps {
   WID: number
@@ -42,6 +43,14 @@ const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
   ])
   const [updataWorkspace, { isLoading }] = useUpdataWorkspaceMutation()
   const localPageDispatch: any = useContext(localPageDispatchContext)
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const onSubmitHandler = async (): Promise<void> => {
     if (WScolor !== '') {
@@ -73,6 +82,7 @@ const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
   return (
     <>
       <div
+        ref={bigDivRef}
         dir="rtl"
         className={`bg-white h-[286px] w-[501px] rounded-lg p-[24px] flex flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
       >

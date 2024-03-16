@@ -57,7 +57,9 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
               className="absolute right-[-100px] top-[20px]"
               onMouseLeave={() => setColumnMore(false)}
             >
-              {columnMore && <BoradMore WID={WID} PID={PID} BID={BID} />}
+              {columnMore && (
+                <BoradMore board={board} WID={WID} PID={PID} BID={BID} />
+              )}
             </div>
           </div>
         </div>

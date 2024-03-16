@@ -22,6 +22,7 @@ import DeleteBoard from '../../components/Common/Modals/BoardModals/Delete‌Boa
 import NewTaskContextProvider from '../../contexts/NewTaskContextProvider'
 import CalendarCellNewTask from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalendarViewComponents/CalendarCell/CalendarCellNewTask'
 import TaskInformation from '../../components/MainPage/BoardComponents/Task/TaskInformation/TaskInformation'
+import ArchiveAllTask from '../../components/MainPage/BoardComponents/Task/ArchiveAllTask'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
@@ -99,6 +100,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                 deadline={deadline}
                 priority={priority}
               />
+            )}
+            {value === 15 && (
+              <ArchiveAllTask WID={workspaceID} PID={projectID} BID={boardID} />
             )}
           </div>
         </div>

@@ -12,6 +12,7 @@ import { localPageDispatchContext } from '../../../../contexts/LocalPageContextP
 
 import Message from '../../Message/Message'
 import { useUpdataProjectMutation } from '../../../../features/auth/authApiSlice'
+import { useOnClickOutside } from 'usehooks-ts'
 interface ChangeProjectTitleProps {
   WID: number
   PID: number
@@ -29,6 +30,14 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
   const onChangeHandler = (e: any): void => {
     setInputValue((p) => e?.target?.value)
   }
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const [updataProject, { isLoading }] = useUpdataProjectMutation()
 
@@ -59,8 +68,9 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
   return (
     <>
       <div
+        ref={bigDivRef}
         dir="rtl"
-      className={`flex h-[268px] w-[500px] flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
+        className={`flex h-[268px] w-[500px] flex-col items-center gap-[40px] fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
       >
         <div
           className="bg-white 

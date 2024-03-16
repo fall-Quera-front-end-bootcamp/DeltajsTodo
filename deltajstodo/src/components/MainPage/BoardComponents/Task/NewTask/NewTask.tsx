@@ -6,7 +6,8 @@ import { useContext, useRef, useState } from 'react'
 import DateRangePicker from '../../Calendar/DateRangePicker'
 import {
   useCreateTaskMutation,
-  useGetProjectsQuery
+  useGetProjectsQuery,
+  useGetTasksQuery
 } from '../../../../../features/auth/authApiSlice'
 import { toast } from 'react-hot-toast'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
@@ -22,6 +23,7 @@ import NewTaskContextProvider, {
 import { store } from '../../../../../app/store'
 import axios from 'axios'
 import BoxThree from './NewTaskComponents/Boxs/Box3/BoxThree'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface NewTaskProps {
   WID?: number //this is workspace id you need
@@ -56,6 +58,14 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
   // Ref hook
   const inputRefFirstUpload = useRef<HTMLInputElement | null>(null)
   const inputRefSecondUpload = useRef<HTMLInputElement | null>(null)
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const onChooseFileFirst = (): void => {
     inputRefFirstUpload.current?.click()
@@ -98,15 +108,17 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
     setShowCalendar(true)
   }
 
-  const handleSetDesc = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setTextAreaValue(e.target.value)
-  }
-
   const [Task, { isLoading, isError, isSuccess, error }] =
     useCreateTaskMutation()
 
   const { data: projects } = useGetProjectsQuery({
     workspace_id: WID
+  })
+
+  const { data: tasks } = useGetTasksQuery({
+    workspace_id: WID,
+    project_id: PID,
+    board_id: BID
   })
 
   const handleSubmit = async (
@@ -120,10 +132,10 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
         name: data.name,
         description: data.description,
         priority,
-        deadline: '2024-03-20'
+        order: tasks?.length + 1
+        // deadline: '2024-03-20'
         // attachment: data.attachment,
         // thumbnail: selectedCoverFile,
-        // order: 12
       }).unwrap()
       localPageDispatch({ type: 'closeModal' })
     } catch (err: any) {
@@ -173,6 +185,7 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
     <AnimatePresence>
       <FormProvider {...methods}>
         <motion.form
+          ref={bigDivRef}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

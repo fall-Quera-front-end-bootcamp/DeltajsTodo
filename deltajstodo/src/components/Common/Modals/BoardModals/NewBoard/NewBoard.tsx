@@ -12,7 +12,8 @@ import {
   useReducer,
   createContext,
   useState,
-  useContext
+  useContext,
+  useRef
 } from 'react'
 
 import Step1 from './Step1'
@@ -27,6 +28,7 @@ import {
 } from '../../../../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import toast from 'react-hot-toast'
+import { useOnClickOutside } from 'usehooks-ts'
 ////////////////////// 🟨Local Context🟥 //////////////////////////
 export const CreationWorkspaceStepContext = createContext<number | null>(null)
 export const CreationWorkspaceStepDispatchContext = createContext<unknown>(null)
@@ -72,6 +74,15 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({
     status: Permission.manager,
     projects: []
   })
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
+
   const navigate = useNavigate()
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [createBoard, { isLoading }] = useCreateBoardMutation()
@@ -98,10 +109,7 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({
         project_id: PID,
         name: form?.name,
         order: boards.length + 1,
-        color: form?.color,
-        is_archive: false,
-        tasks: [],
-        tasks_count: 0
+        color: form?.color
       }).unwrap()
       toast.success('ستون با موفقیت ساخته شد', {
         duration: 4000,
@@ -124,6 +132,7 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({
       <CreationWorkspaceStepContext.Provider value={creationStep}>
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
+            ref={bigDivRef}
             dir="rtl"
             className={`fixed left-1/2 top-1/2 flex w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] ${className}`}
           >

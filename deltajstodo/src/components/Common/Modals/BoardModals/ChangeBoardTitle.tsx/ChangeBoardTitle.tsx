@@ -5,7 +5,7 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable tailwindcss/no-custom-classname */
 
-import { useContext, type FunctionComponent, useState } from 'react'
+import { useContext, type FunctionComponent, useState, useRef } from 'react'
 import LeftArrow from '../../../Icons/LeftArrow'
 import Close from '../../../Icons/Close'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
@@ -15,6 +15,7 @@ import {
   useUpdataWorkspaceMutation
 } from '../../../../../features/auth/authApiSlice'
 import { toast } from 'react-hot-toast'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface ChangeBoardTitleProps {
   WID: number
@@ -36,6 +37,14 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
   const onChangeHandler = (e: any): void => {
     setInputVlue((p) => e?.target?.value ?? p)
   }
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
   ////////////////////////////////////////////////////////////////
 
   const { data: board } = useGetBoardQuery({
@@ -57,7 +66,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
           tasks_count: board?.tasks_count,
           color: board?.color
         }).unwrap()
-        
+
         toast.success('عنوان ستون با موفقیت تغییر کرد', {
           duration: 4000,
           style: {
@@ -81,6 +90,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
   return (
     <>
       <div
+        ref={bigDivRef}
         dir="rtl"
         className={`fixed 
         left-1/2 top-1/2
@@ -116,9 +126,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
             w-[415px] flex-col gap-[8px]
             "
           >
-            <p
-              className="h-[20px] w-[92px] text-right font-yekan text-[14px] leading-[19.73px]  text-[#1E1E1E]"
-            >
+            <p className="h-[20px] w-[92px] text-right font-yekan text-[14px] leading-[19.73px]  text-[#1E1E1E]">
               نام برد
             </p>
 

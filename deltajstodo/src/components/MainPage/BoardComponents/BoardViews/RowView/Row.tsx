@@ -105,17 +105,8 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
                         {task?.name}
                       </p>
                     </div>
-                    <div className="ml-4 flex flex-row gap-[70px] justify-between">
-                      <div className="flex flex-row justify-center items-center">
-                        {task?.members?.map((memeber, i) => {
-                          return (
-                            <div key={i} className="">
-                              <img src={memeber.coverImg} alt="" />
-                            </div>
-                          )
-                        })}
-                        Img
-                      </div>
+                    <div className="ml-4 flex flex-row gap-[82px] justify-between">
+                      <div className="">img</div>
                       <p className="text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
                         {toFarsiNumber(moment(task?.deadline).format('DD MMM'))}
                       </p>

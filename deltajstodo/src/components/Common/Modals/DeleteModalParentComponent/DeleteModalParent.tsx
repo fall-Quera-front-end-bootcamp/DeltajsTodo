@@ -5,18 +5,20 @@ import LoadingComponent from '../../LoadingComponent/LoadingComponent'
 
 const DeleteModalParent = ({
   children,
-  DeleteItem,
   isLoading,
   onSubmitHandler,
   CloseModalHandler,
-  className
+  className,
+  QuestionParagraph,
+  QuestionTitle
 }: {
   children?: JSX.Element
-  DeleteItem: string
   isLoading: boolean
   onSubmitHandler: () => void
   CloseModalHandler: () => void
   className: string | undefined
+  QuestionTitle: string
+  QuestionParagraph: string
 }): JSX.Element => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   return (
@@ -30,14 +32,14 @@ const DeleteModalParent = ({
             <Close />
           </button>
           <p className="text-center text-[24px] font-extrabold leading-[32px]  text-[#1E1E1E] ">
-            حذف ‌
+            {QuestionTitle} ‌
           </p>
           <button className="invisible">
             <Close />
           </button>
         </div>
-        <p className="text-center text-[24px] font-extrabold leading-[32px] text-[#1E1E1E]">
-          {`آیا از حذف ${DeleteItem} اطمینان داری؟`}
+        <p className="text-center text-[16px] font-extrabold leading-[32px] text-[#1E1E1E]">
+          {QuestionParagraph}
         </p>
       </div>
       <div className="flex gap-[15px] rounded-md ">

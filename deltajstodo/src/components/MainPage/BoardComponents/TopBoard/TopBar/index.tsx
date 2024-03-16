@@ -2,13 +2,13 @@
 /* eslint-disable tailwindcss/no-contradicting-classname */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { type MouseEventHandler, type FunctionComponent } from 'react'
-import ShareTaskButton from '../Task/ShareTask/ShareTaskButton'
+import ShareTaskButton from '../../Task/ShareTask/ShareTaskButton'
 import ListViewButton from './TopBarButtons/ListViewButton'
 import ColumnViewButton from './TopBarButtons/ColumnViewButton'
 import CalendarViewButton from './TopBarButtons/CalendarViewButton'
 import VerticalLine from './LineComponents/VerticalLine'
 import TopBarTitle from './TopBarTitle/TopBarTitle'
-import { type Views } from '../../../../utilities/models'
+import { type Views } from '../../../../../utilities/models'
 
 interface TopBarProps {
   projectInfoTitle: string

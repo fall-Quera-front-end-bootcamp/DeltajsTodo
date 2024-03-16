@@ -14,6 +14,7 @@ import { localPageDispatchContext } from '../../../../contexts/LocalPageContextP
 import { useCreateProjectMutation } from '../../../../features/auth/authApiSlice'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
 import toast from 'react-hot-toast'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface NewProjectProps {
   WID: number
@@ -24,6 +25,14 @@ const NewProject: FunctionComponent<NewProjectProps> = ({ WID, className }) => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [inputValue, setInputVlue] = useState('')
   const [createProject, { isLoading }] = useCreateProjectMutation()
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const onChangeHandler = (e: any): void => {
     setInputVlue((p) => e?.target?.value ?? p)
@@ -54,6 +63,7 @@ const NewProject: FunctionComponent<NewProjectProps> = ({ WID, className }) => {
   return (
     <>
       <div
+        ref={bigDivRef}
         dir="rtl"
         className={`fixed left-1/2 top-1/2  flex h-[268px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
       >

@@ -1,5 +1,5 @@
-import { Views } from '../../../../../utilities/models'
-import CalendarIconSvg from '../../../../Common/Icons/CalendarIcons/CalendarIconSvg'
+import { Views } from '../../../../../../utilities/models'
+import CalendarIconSvg from '../../../../../Common/Icons/CalendarIcons/CalendarIconSvg'
 
 const CalendarViewButton = ({
   handleView,

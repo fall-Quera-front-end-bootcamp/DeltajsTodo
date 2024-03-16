@@ -61,6 +61,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
     id: 'profile_name',
     label: 'نام',
     type: 'text',
+    inputDir: 'rtl',
     initialValue: `${userData[0]}`
   }
 
@@ -75,6 +76,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
     id: 'profile_last_name',
     label: 'نام خانوادگی',
     type: 'text',
+    inputDir: 'rtl',
     initialValue: `${userData[1]}`
   }
 
@@ -88,7 +90,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
     },
     id: 'profile_phone',
     label: 'شماره موبایل',
-    type: 'text',
+    type: 'number',
     initialValue: `${userData[2]}`
   }
 

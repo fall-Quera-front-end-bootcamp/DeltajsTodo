@@ -11,7 +11,8 @@ import {
   useReducer,
   createContext,
   useState,
-  useContext
+  useContext,
+  useRef
 } from 'react'
 
 import Step1 from './Steps/Step1'
@@ -22,6 +23,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCreateWorkspaceMutation } from '../../../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
 import { toast } from 'react-hot-toast'
+import { useOnClickOutside } from 'usehooks-ts'
 
 export const CreationWorkspaceStepContext = createContext<number | null>(null)
 export const CreationWorkspaceStepDispatchContext = createContext<unknown>(null)
@@ -63,8 +65,15 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = ({ className }) => {
   })
   const navigate = useNavigate()
   const localPageDispatch: any = useContext(localPageDispatchContext)
-  const [createWorkspace, { isLoading, isSuccess, isError }] =
-    useCreateWorkspaceMutation()
+  const [createWorkspace, { isLoading }] = useCreateWorkspaceMutation()
+
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const onchangeHandler = (e: any): void => {
     setForm((prev) => {
@@ -96,6 +105,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = ({ className }) => {
       <CreationWorkspaceStepContext.Provider value={creationStep}>
         <CreationWorkspaceStepDispatchContext.Provider value={dispatch}>
           <div
+            ref={bigDivRef}
             dir="rtl"
             className={`fixed left-1/2 top-1/2 flex h-[316px] w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[40px] ${className}`}
           >

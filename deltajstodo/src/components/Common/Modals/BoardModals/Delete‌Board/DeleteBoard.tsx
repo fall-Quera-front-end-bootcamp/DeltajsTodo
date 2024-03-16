@@ -8,11 +8,12 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useContext, type FunctionComponent } from 'react'
+import { useContext, type FunctionComponent, useRef } from 'react'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import { useDeleteBoardMutation } from '../../../../../features/auth/authApiSlice'
 import DeleteModalParent from '../../DeleteModalParentComponent/DeleteModalParent'
 import toast from 'react-hot-toast'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface DeleteBoardProps {
   WID: number
@@ -53,18 +54,29 @@ const DeleteBoard: FunctionComponent<DeleteBoardProps> = ({
     }
   }
 
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
+
   const CloseModalHandler = (): void => {
     localPageDispatch({ type: 'closeModal' })
   }
 
   return (
-    <DeleteModalParent
-      className={className}
-      CloseModalHandler={CloseModalHandler}
-      isLoading={isLoading}
-      onSubmitHandler={onSubmitHandler}
-      DeleteItem="برد"
-    />
+    <div ref={bigDivRef} className="">
+      <DeleteModalParent
+        className={className}
+        CloseModalHandler={CloseModalHandler}
+        isLoading={isLoading}
+        onSubmitHandler={onSubmitHandler}
+        QuestionParagraph="آیا از حذف از این برد اطمینان دارید؟"
+        QuestionTitle="حذف برد"
+      />
+    </div>
   )
 }
 export default DeleteBoard

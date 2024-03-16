@@ -22,6 +22,7 @@ import { set } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import DeleteModalParent from '../DeleteModalParentComponent/DeleteModalParent'
+import { useOnClickOutside } from 'usehooks-ts'
 
 interface DeleteWorkspaceProps {
   WID: number
@@ -37,6 +38,13 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({
   const navigate = useNavigate()
   ///////////////////////////////////////////////////
   const localPageDispatch: any = useContext(localPageDispatchContext)
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
+  }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  // Click OutSide
 
   const onSubmitHandler = async (): Promise<void> => {
     try {
@@ -54,13 +62,16 @@ const DeleteWorkspace: FunctionComponent<DeleteWorkspaceProps> = ({
   }
 
   return (
-    <DeleteModalParent
-      className={className}
-      CloseModalHandler={CloseModalHandler}
-      onSubmitHandler={onSubmitHandler}
-      isLoading={isLoading}
-      DeleteItem="ورک اسپیس"
-    />
+    <div ref={bigDivRef} className="">
+      <DeleteModalParent
+        className={className}
+        CloseModalHandler={CloseModalHandler}
+        onSubmitHandler={onSubmitHandler}
+        isLoading={isLoading}
+        QuestionParagraph="آیا از حذف این ورک اسپیس اطمینان دارید؟"
+        QuestionTitle="حذف ورک اسپیس"
+      />
+    </div>
   )
 }
 export default DeleteWorkspace

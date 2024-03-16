@@ -8,6 +8,7 @@ import {
 } from '../../../../../../../features/auth/authApiSlice'
 import { Board, Task } from '../../../../../../../utilities/models'
 import { localPageDispatchContext } from '../../../../../../../contexts/LocalPageContextProvider'
+import toast from 'react-hot-toast'
 
 interface CalendarCellProps {
   today?: boolean
@@ -28,6 +29,10 @@ const CalendarCell = ({
 }: CalendarCellProps): JSX.Element => {
   const [addIconOpacity, setAddIconOpacity] = useState('opacity-0')
   const localPageDispatch: any = useContext(localPageDispatchContext)
+  const { data: boards } = useGetBoardsQuery({
+    workspace_id: WID,
+    project_id: PID
+  })
 
   return (
     <>
@@ -45,13 +50,23 @@ const CalendarCell = ({
         </span>
         <div
           onClick={() => {
-            localPageDispatch({
-              type: 'openNewTaskLittle',
-              WID,
-              PID,
-              month,
-              day
-            })
+            if (boards?.length === 0) {
+              toast.error('چرا اول نمیری یک ستون ایجاد بکنی خوشگله', {
+                style: {
+                  borderWidth: '2px',
+                  borderColor: '#FA5252'
+                },
+                icon: '😁'
+              })
+            } else {
+              localPageDispatch({
+                type: 'openNewTaskLittle',
+                WID,
+                PID,
+                month,
+                day
+              })
+            }
           }}
           className={`absolute bottom-[10px] right-[10px] flex size-[24px] items-center justify-center rounded-[3px] bg-brand-primary ${addIconOpacity} cursor-pointer transition-all duration-300`}
         >

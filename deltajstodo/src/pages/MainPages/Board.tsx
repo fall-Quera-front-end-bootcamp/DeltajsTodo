@@ -6,16 +6,16 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent, useContext, useRef } from 'react'
+import { useState, type FunctionComponent } from 'react'
 import { useLocation } from 'react-router-dom'
 import ColumnView from '../../components/MainPage/BoardComponents/BoardViews/ColumnView/ColumnView'
 import RowView from '../../components/MainPage/BoardComponents/BoardViews/RowView/RowView'
 import CalenderView from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalenderView'
 import { useGetProjectQuery } from '../../features/auth/authApiSlice'
-import { localPageDispatchContext } from '../../contexts/LocalPageContextProvider'
-import TopBar from '../../components/MainPage/BoardComponents/TopBar/TopBar'
+import TopBar from '../../components/MainPage/BoardComponents/TopBoard/TopBar'
 import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
-import ClickDargToScroll from '../../utilities/ClickDargToScroll'
+import FilterBar from '../../components/MainPage/BoardComponents/TopBoard/FilterBar'
+import CalendarBar from '../../components/MainPage/BoardComponents/TopBoard/CalendarBar'
 
 interface BoardProps {}
 enum Views {
@@ -59,14 +59,10 @@ const Board: FunctionComponent<BoardProps> = () => {
           projectInfoTitle={project.name}
           view={view}
         />
-
+        {view === Views.calender ? <CalendarBar /> : <FilterBar />}
         <>
           {view === Views.column && (
-            <ColumnView
-              project={project}
-              PID={projectItemID}
-              WID={workspaceItemID}
-            />
+            <ColumnView PID={projectItemID} WID={workspaceItemID} />
           )}
           {view === Views.row && (
             <div className="flex flex-row items-start justify-end">
@@ -74,11 +70,7 @@ const Board: FunctionComponent<BoardProps> = () => {
             </div>
           )}
           {view === Views.calender && (
-            <CalenderView
-              WID={workspaceItemID}
-              PID={projectItemID}
-              project={project}
-            />
+            <CalenderView WID={workspaceItemID} PID={projectItemID} />
           )}
         </>
       </>

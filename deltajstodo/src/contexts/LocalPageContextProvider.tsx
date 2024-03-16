@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/member-delimiter-style */
 import { createContext, useReducer } from 'react'
+import {
+  useGetBoardQuery,
+  useUpdataBoardMutation
+} from '../features/auth/authApiSlice'
 
 interface MainLayoutContext {
   value: number
@@ -179,6 +183,15 @@ function StepReducer(
         createAt: action?.createAt,
         deadline: action?.deadline,
         priority: action?.priority
+      }
+    }
+    case 'openArchiveAllTask': {
+      return {
+        ...localPage,
+        value: 15,
+        workspaceID: action?.WID,
+        projectID: action?.PID,
+        boardID: action?.BID
       }
     }
     case 'openResponseModal': {
