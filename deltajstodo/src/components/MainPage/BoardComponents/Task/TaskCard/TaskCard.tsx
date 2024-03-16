@@ -6,11 +6,15 @@ import DotsMenuIconSvg from '../../../../Common/Icons/DotsMenuIconSvg'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
 import moment from 'jalali-moment'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
-import { useDeleteTaskMutation } from '../../../../../features/auth/authApiSlice'
+import {
+  useDeleteTaskMutation,
+  useGetTaskMembersQuery
+} from '../../../../../features/auth/authApiSlice'
 import toast from 'react-hot-toast'
 import { taskPriority } from '../../BoardViews/RowView/RowComponents/TaskPriorityFunction'
+import { useGetUsersQuery } from '../../../../../features/users/usersInteractionApiSlice'
 
-function TaskCard ({
+function TaskCard({
   task,
   WID,
   PID,
@@ -90,12 +94,19 @@ function TaskCard ({
             description: task?.description,
             deadline: task.deadline,
             priority: task.priority,
-            create_at: task.created_at
+            create_at: task.created_at,
+            taskID: task?.id,
+            WID,
+            PID,
+            BID
           })
         }}
         className="flex w-full flex-col gap-s"
       >
-        <div className="text-[12px] text-[#534D60]">{task.name}</div>
+        <div className="flex w-full flex-row">
+          <div className="">{task?.members}</div>
+          <div className="text-[12px] text-[#534D60]">{task.name}</div>
+        </div>
         <div className="flex flex-row gap-2">
           <div className="whitespace-normal text-[12px]">
             {task?.description?.slice(0, 20)}...
@@ -117,7 +128,7 @@ function TaskCard ({
       </button>
       <div
         onClick={onSubmit}
-        className="hidden w-full flex-row items-center justify-between border-t-[0.5px] border-gray-primary border-opacity-30 transition-all duration-700 group-1-hover:flex"
+        className="hidden w-full cursor-pointer flex-row items-center justify-between border-t-[0.5px] border-gray-primary transition-all duration-700 group-1-hover:flex"
       >
         <DotsMenuIconSvg />
       </div>

@@ -15,6 +15,10 @@ interface TaskInfoProps {
   createAt?: string
   deadline?: string
   priority?: number
+  WID?: number
+  PID?: number
+  BID?: number
+  taskID?: number
 }
 
 function TaskInformation({
@@ -22,7 +26,11 @@ function TaskInformation({
   createAt,
   description,
   deadline,
-  priority
+  priority,
+  WID,
+  PID,
+  BID,
+  taskID
 }: TaskInfoProps): JSX.Element {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [commentOpen, setCommentOpen] = useState(false)
@@ -87,7 +95,7 @@ function TaskInformation({
 
           {/* right side */}
           <div className="flex w-[100%] flex-col gap-6">
-            <TopRightSide priority={priority} />
+            <TopRightSide WID={WID} PID={PID} BID={BID} taskID={taskID} priority={priority} />
 
             <hr className="border-[1px] border-[#F4F4F4]" />
 

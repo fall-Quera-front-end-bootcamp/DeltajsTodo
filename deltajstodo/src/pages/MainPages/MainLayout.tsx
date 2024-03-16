@@ -37,7 +37,8 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
     createAt,
     description,
     deadline,
-    priority
+    priority,
+    taskID
   } = useContext(localPageContext)
 
   return (
@@ -99,6 +100,10 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
                 createAt={createAt}
                 deadline={deadline}
                 priority={priority}
+                WID={workspaceID}
+                PID={projectID}
+                BID={boardID}
+                taskID={taskID}
               />
             )}
             {value === 15 && (

@@ -182,7 +182,11 @@ function StepReducer(
         description: action?.description,
         createAt: action?.createAt,
         deadline: action?.deadline,
-        priority: action?.priority
+        priority: action?.priority,
+        workspaceID: action?.WID,
+        projectID: action?.PID,
+        boardID: action?.BID,
+        taskID: action?.taskID
       }
     }
     case 'openArchiveAllTask': {

@@ -123,10 +123,13 @@ export interface Workspace {
 /*--------------------------------- User--------------------------------------- */
 export interface User {
   id: string
+  username: string
+  email: string
+  first_name: string
+  last_name: string
   gmailAccount: string
-  coverImg: string
-  profile: Profile
-  workspaces: Workspace[]
+  phone_number: string
+  thumbnail: string
 }
 /*----------------------------  Users----------------------------------- */
 /**

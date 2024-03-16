@@ -137,6 +137,7 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
         // attachment: data.attachment,
         // thumbnail: selectedCoverFile,
       }).unwrap()
+
       localPageDispatch({ type: 'closeModal' })
     } catch (err: any) {
       console.log(err)

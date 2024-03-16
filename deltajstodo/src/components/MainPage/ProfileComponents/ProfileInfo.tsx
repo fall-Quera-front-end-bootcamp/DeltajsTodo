@@ -101,7 +101,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
         getUser.data.last_name,
         getUser.data.phone_number
       ])
-      
+
       setProfileImageURL(getUser.data.thumbnail)
       setIsLoading(false)
     }
@@ -132,7 +132,6 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
   const handleImageSubmit = async (data: FormData): Promise<void> => {
     const accessToken = cookies.get('accessToken')
     const url = 'http://185.8.174.74:8000/accounts/86/'
-    console.log(data)
 
     await axios
       .patch(url, data, {

@@ -126,18 +126,14 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
             w-[415px] flex-col gap-[8px]
             "
           >
-            <p className="h-[20px] w-[92px] text-right font-yekan text-[14px] leading-[19.73px]  text-[#1E1E1E]">
+            <p className="text-right font-yekan text-[14px] leading-[19.73px]  text-[#1E1E1E]">
               نام برد
             </p>
 
-            <div
-              className="h-[40px] w-[415px]
-rounded-md border-[1px] border-[#AAAAAA]
-"
-            >
+            <div className="rounded-md border-[1px] border-[#AAAAAA]">
               <input
-                className="h-[40px] w-[415px]
-              rounded-md border-[1px] border-[#AAAAAA]"
+                className="w-[170px]
+              rounded-md border-[1px] border-[#AAAAAA] text-wrap"
                 type="text"
                 name="title"
                 value={inputValue}

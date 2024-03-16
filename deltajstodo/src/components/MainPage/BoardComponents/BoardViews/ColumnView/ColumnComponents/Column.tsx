@@ -28,13 +28,13 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
     isSuccess
   } = useGetBoardQuery({ workspace_id: WID, project_id: PID, id: BID })
 
-  if (!!isLoading) {
+  if (isLoading) {
     return (
       <div className="mt-14 flex h-10 w-[270px] flex-col items-center justify-start gap-4 rounded-3xl bg-gray-secondary">
         <LoadingComponent />
       </div>
     )
-  } else if (!!isSuccess) {
+  } else if (isSuccess) {
     return (
       <>
         <div className="group mt-4 flex h-[70vh] flex-col gap-4">
@@ -51,7 +51,7 @@ const Column: FunctionComponent<ColumnProps> = ({ WID, PID, BID }) => {
         </div>
       </>
     )
-  } else if (!!isError) {
+  } else if (isError) {
     return <>Error</>
   }
 }

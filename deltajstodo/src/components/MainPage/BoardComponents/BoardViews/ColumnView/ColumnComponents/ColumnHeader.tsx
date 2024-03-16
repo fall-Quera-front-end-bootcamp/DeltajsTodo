@@ -29,17 +29,29 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
   const [ishover, setHover] = useState(false)
 
   return (
-    <button className="group relative pt-10">
+    <div dir="rtl" className="group relative pt-10">
       <div
         className={`absolute bottom-[40px] left-[-23px] ${ishover ? 'opacity-1' : 'opacity-0'}`}
       >
         <AddTaskLableSvg />
       </div>
       <div
-        className="relative flex h-[40px] w-[270px] flex-row items-center justify-between rounded-[16px] border-t-[2px]  px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]"
+        className="relative flex min-h-9 w-[270px] flex-row items-center justify-between rounded-[16px]  border-t-[2px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]"
         style={{ borderColor: board?.color }}
       >
-        <div className="invisible  flex h-[24px] w-[48px] flex-row gap-[4px] group-hover:visible ">
+        {' '}
+        <div className="flex w-full flex-row items-center justify-start gap-[4px]">
+          <p className="max-w-[170px] text-right text-boldm leading-[22.55px] text-[#1E1E1E]">
+            {board.name}
+          </p>{' '}
+          <div className="rounded-lg bg-gray-secondary px-1">
+            {toFarsiNumber(String(board?.tasks_count))}
+          </div>
+        </div>
+        <div className="invisible  flex w-[48px] flex-row gap-[4px] group-hover:visible ">
+          <div onClick={() => setColumnMore((p) => !p)}>
+            <DotsMenuIconSvg />
+          </div>
           <div
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
@@ -48,9 +60,6 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
             }}
           >
             <AddIconSvg />
-          </div>
-          <div onClick={() => setColumnMore((p) => !p)}>
-            <DotsMenuIconSvg />
           </div>
           <div className="relative">
             <div
@@ -63,17 +72,8 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex w-full flex-row items-center justify-end gap-[4px]">
-          <div className="rounded-lg bg-gray-secondary px-1">
-            {toFarsiNumber(String(board?.tasks_count))}
-          </div>
-
-          <p className="text-right text-boldm leading-[22.55px] text-[#1E1E1E]">
-            {board.name}
-          </p>
-        </div>
       </div>
-    </button>
+    </div>
   )
 }
 

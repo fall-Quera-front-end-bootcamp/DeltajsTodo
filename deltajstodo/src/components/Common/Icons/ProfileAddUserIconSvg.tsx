@@ -1,17 +1,20 @@
 const ProfileAddUserIconSvg = ({
   size = '20',
   color = '#C1C1C1',
-  className
+  className,
+  onClick
 }: {
   size?: string
   color?: string
   className?: string
+  onClick?: () => void
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes
 
   return (
     <svg
+      onClick={onClick}
       className={className}
       width={size}
       height={size}

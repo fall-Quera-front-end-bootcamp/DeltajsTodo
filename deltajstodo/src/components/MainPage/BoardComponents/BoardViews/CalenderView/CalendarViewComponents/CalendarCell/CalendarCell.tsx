@@ -9,20 +9,18 @@ import {
 import { Board, Task } from '../../../../../../../utilities/models'
 import { localPageDispatchContext } from '../../../../../../../contexts/LocalPageContextProvider'
 import toast from 'react-hot-toast'
+import moment from 'jalali-moment'
+import { toFarsiNumber } from '../../../../../../../utilities/toFarsiNumber'
 
 interface CalendarCellProps {
-  today?: boolean
   day: string
-  date?: string
   month?: string
   PID: number
   WID: number
 }
 
 const CalendarCell = ({
-  today = false,
   day = '',
-  date,
   month,
   WID,
   PID
@@ -34,12 +32,17 @@ const CalendarCell = ({
     project_id: PID
   })
 
+  const today = toFarsiNumber(moment().format('DD')) === day
+
   return (
     <>
       <div
-        className={`relative border bg-white ${today ? 'border-[#208D8E]' : 'border-[#AAAAAA]'}`}
+        className={`relative bg-white ${today ? 'border-[2px] border-[#208D8E]' : 'border border-[#AAAAAA]'}`}
         onMouseEnter={() => {
-          setAddIconOpacity('opacity-100')
+          setTimeout(() => {
+            setAddIconOpacity('opacity-100')
+          }, 2000)
+          setAddIconOpacity('opacity-0')
         }}
         onMouseLeave={() => {
           setAddIconOpacity('opacity-0')
