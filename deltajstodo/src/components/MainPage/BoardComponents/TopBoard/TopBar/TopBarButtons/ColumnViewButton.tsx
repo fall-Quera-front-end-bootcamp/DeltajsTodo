@@ -27,13 +27,6 @@ const ColumnViewButton = ({
           arialabel="column"
           color={view === Views.column ? '#208D8E' : '#323232'}
         />
-        <div
-          className={
-            view === Views.column
-              ? 'absolute bottom-[-22px] w-full rounded-full border-b-[3px] border-[#208D8E]'
-              : 'hidden'
-          }
-        ></div>
       </button>
     </>
   )

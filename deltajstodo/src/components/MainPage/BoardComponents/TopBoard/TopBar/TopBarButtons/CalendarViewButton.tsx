@@ -27,13 +27,6 @@ const CalendarViewButton = ({
         className="size-6"
         color={view === Views.calender ? '#208D8E' : '#323232'}
       />
-      <div
-        className={
-          view === Views.calender
-            ? 'absolute bottom-[-22px] w-full rounded-full border-b-[3px] border-[#208D8E]'
-            : 'hidden'
-        }
-      ></div>
     </button>
   )
 }

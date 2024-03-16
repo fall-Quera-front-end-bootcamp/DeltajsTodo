@@ -8,12 +8,12 @@ import ColumnViewButton from './TopBarButtons/ColumnViewButton'
 import CalendarViewButton from './TopBarButtons/CalendarViewButton'
 import VerticalLine from './LineComponents/VerticalLine'
 import TopBarTitle from './TopBarTitle/TopBarTitle'
-import { type Views } from '../../../../../utilities/models'
+import { Views, type Views as v } from '../../../../../utilities/models'
 
 interface TopBarProps {
   projectInfoTitle: string
   handleView: (e: MouseEventHandler<HTMLButtonElement>) => void
-  view: Views
+  view: v
 }
 
 const TopBar: FunctionComponent<TopBarProps> = ({
@@ -27,7 +27,7 @@ const TopBar: FunctionComponent<TopBarProps> = ({
         <div className="flex w-full flex-row justify-between ">
           <ShareTaskButton ShareTaskClass="absolute left-0 top-0 z-50" />
 
-          <div className="flex flex-row-reverse gap-4">
+          <div className="relative flex flex-row-reverse gap-4">
             <TopBarTitle title={projectInfoTitle} />
             <VerticalLine />
             <ListViewButton handleView={handleView} view={view} />
@@ -36,6 +36,17 @@ const TopBar: FunctionComponent<TopBarProps> = ({
             <VerticalLine />
             <CalendarViewButton handleView={handleView} view={view} />
             <VerticalLine />
+            <div
+              className={`transition-all duration-300  ${
+                view === Views.row
+                  ? 'absolute bottom-[-19px] left-[260px] w-[150px] rounded-full border-b-[3px] border-[#208D8E]'
+                  : view === Views.column
+                    ? 'absolute bottom-[-19px] left-[110px] w-[150px] rounded-full border-b-[3px] border-[#208D8E]'
+                    : view === Views.calender
+                      ? 'absolute bottom-[-19px] left-[0px] w-[105px] rounded-full border-b-[3px] border-[#208D8E]'
+                      : 'hidden'
+              }`}
+            ></div>
           </div>
         </div>
         <div className="w-full border-b-[0.5px] border-[#AAAAAA] pt-4"></div>

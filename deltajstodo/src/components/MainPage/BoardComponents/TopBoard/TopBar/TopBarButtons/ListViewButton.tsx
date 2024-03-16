@@ -28,13 +28,6 @@ const ListViewButton = ({
         arialabel="row"
         color={view === Views.row ? '#208D8E' : '#323232'}
       />
-      <div
-        className={
-          view === Views.row
-            ? 'absolute bottom-[-22px] w-full rounded-full border-b-[3px] border-[#208D8E]'
-            : 'hidden'
-        }
-      ></div>
     </button>
   )
 }

@@ -101,7 +101,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
         getUser.data.last_name,
         getUser.data.phone_number
       ])
-      console.log(getUser.data.thumbnail)
+      
       setProfileImageURL(getUser.data.thumbnail)
       setIsLoading(false)
     }
