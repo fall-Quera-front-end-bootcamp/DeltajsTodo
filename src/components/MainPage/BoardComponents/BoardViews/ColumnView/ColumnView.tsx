@@ -55,7 +55,11 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
             <Slider className="flex w-full scale-100 flex-row-reverse gap-[16px] overflow-x-auto overflow-y-hidden transition-all duration-200 will-change-transform scrollbar-thin">
               <>
                 {boards.map((b: B) => {
-                  return <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
+                  if (!b?.is_archive) {
+                    return <Column key={b.id} WID={WID} PID={PID} BID={b.id} />
+                  } else {
+                    return <></>
+                  }
                 })}
                 <NewColumn onClickFunc={handleNewColumn} />
               </>

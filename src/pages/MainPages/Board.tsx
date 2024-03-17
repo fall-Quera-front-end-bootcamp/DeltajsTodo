@@ -58,8 +58,14 @@ const Board: FunctionComponent<BoardProps> = () => {
           handleView={handleView}
           projectInfoTitle={project.name}
           view={view}
+          WID={workspaceItemID}
+          PID={projectItemID}
         />
-        {view === Views.calender ? <CalendarBar /> : <FilterBar />}
+        {view === Views.calender ? (
+          <CalendarBar />
+        ) : (
+          <FilterBar WID={workspaceItemID} PID={projectItemID} />
+        )}
         <>
           {view === Views.column && (
             <ColumnView PID={projectItemID} WID={workspaceItemID} />

@@ -66,23 +66,23 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
                 h-[17px] w-[37px] text-right
                  text-[12px] font-normal 
                  leading-[16.91px]
-                  text-[#1E1E1E]"
+                  text-[#1E1E1E] dark:text-white"
               >
                 {toFarsiNumber(`${board?.tasks?.length}`)} تسک
               </p>
             </div>
           </div>
           <div className="flex flex-row gap-[70px]">
-            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E] dark:text-white">
               اعضا
             </p>
-            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E] dark:text-white">
               ددلاین
             </p>
-            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E] dark:text-white">
               اولویت
             </p>
-            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E]">
+            <p className="text-right text-[16px] font-medium leading-[22.55px] text-[#1E1E1E] dark:text-white">
               توضیحات
             </p>
           </div>
@@ -97,17 +97,17 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
                 return (
                   <div
                     key={task.id}
-                    className="rounded-[4px] flex flex-row justify-between py-[7px] bg-white items-center"
+                    className="rounded-[4px] flex flex-row justify-between py-[7px] items-center"
                   >
                     <div className="flex flex-row gap-[7px] items-center">
                       <ItemColor color={board.color} size="16" />
-                      <p className="font-yekan text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
+                      <p className="font-yekan text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E] dark:text-white">
                         {task?.name}
                       </p>
                     </div>
                     <div className="ml-4 flex flex-row gap-[82px] justify-between">
                       <div className="">img</div>
-                      <p className="text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E]">
+                      <p className="text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E] dark:text-white">
                         {toFarsiNumber(moment(task?.deadline).format('DD MMM'))}
                       </p>
                       <div className="">{taskPriority(task?.priority)}</div>

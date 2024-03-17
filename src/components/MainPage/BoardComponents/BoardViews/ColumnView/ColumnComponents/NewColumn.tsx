@@ -19,7 +19,7 @@ const NewColumn: FunctionComponent<NewColumnProps> = ({ onClickFunc }) => {
       <button onClick={onClickFunc}>
         <div
           className="relative mt-4 flex h-[40px] w-[250px] flex-row-reverse items-center
-          justify-between rounded-[16px] border-t-[2px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]"
+          justify-between rounded-[16px] border-t-[2px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] dark:shadow-[#ffffff33]"
         >
           <p className="text-right font-yekan text-[16px] font-medium leading-[22.55px] text-[#1E1E1E] dark:text-white">
             ساختن برد جدید

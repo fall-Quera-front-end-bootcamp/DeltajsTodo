@@ -35,12 +35,12 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
         className={`absolute bottom-[40px] left-[-23px] ${ishover ? 'opacity-1' : 'opacity-0'}`}
       >
         <AddTaskLableSvg
-          pathColor={darkTheme === 'dark' ? 'black' : '#000'}
+          pathColor={darkTheme === 'dark' ? 'black' : 'white'}
           color={darkTheme === 'dark' ? '#ffffff' : '#000'}
         />
       </div>
       <div
-        className="relative flex min-h-9 w-[270px] flex-row items-center justify-between rounded-[16px]  border-t-[2px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033]"
+        className="relative flex min-h-9 w-[270px] flex-row items-center justify-between rounded-[16px]  border-t-[2px] px-[12px] py-[8x] shadow-[0_3px_4px_0] shadow-[#00000033] dark:shadow-[#ffffff33]"
         style={{ borderColor: board?.color }}
       >
         {' '}
@@ -53,9 +53,9 @@ const ColumnHeader: FunctionComponent<ColumnHeaderProps> = ({
           </div>
         </div>
         <div className="invisible  flex w-[48px] flex-row gap-[4px] group-hover:visible ">
-          <div onClick={() => setColumnMore((p) => !p)}>
+          <button onClick={() => setColumnMore((p) => !p)}>
             <DotsMenuIconSvg />
-          </div>
+          </button>
           <div
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}

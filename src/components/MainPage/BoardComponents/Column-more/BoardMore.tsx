@@ -51,7 +51,7 @@ function BoradMore({
         color="text-[black]"
         text="آرشیو تمام تسک‌ها"
         onClickFunc={() => {
-          if (board?.is_archive === true) {
+          if (board?.is_archive) {
             toast.error('تسک‌های این برد از قبل آرشیو شدند')
           } else {
             localPageDispatch({

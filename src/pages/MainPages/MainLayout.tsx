@@ -23,6 +23,7 @@ import NewTaskContextProvider from '../../contexts/NewTaskContextProvider'
 import CalendarCellNewTask from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalendarViewComponents/CalendarCell/CalendarCellNewTask'
 import TaskInformation from '../../components/MainPage/BoardComponents/Task/TaskInformation/TaskInformation'
 import ArchiveAllTask from '../../components/MainPage/BoardComponents/Task/ArchiveAllTask'
+import Filter from '../../components/MainPage/BoardComponents/Filters/Filter'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
@@ -108,6 +109,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
             )}
             {value === 15 && (
               <ArchiveAllTask WID={workspaceID} PID={projectID} BID={boardID} />
+            )}
+            {value === 16 && (
+              <Filter />
             )}
           </div>
         </div>

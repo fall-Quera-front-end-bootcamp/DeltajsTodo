@@ -32,6 +32,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
     cookies.remove('accessToken')
     cookies.remove('id')
     localStorage.removeItem('refreshToken')
+    navigate('/')
     navigate(0)
   }
 

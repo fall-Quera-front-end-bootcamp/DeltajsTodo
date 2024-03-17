@@ -89,7 +89,7 @@ function TaskCard({
   return (
     <section
       dir="rtl"
-      className="group-1 flex w-full flex-col gap-s rounded-2xl bg-[#ffff] p-4 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] transition-all duration-1000"
+      className="group-1 flex w-full flex-col gap-s rounded-2xl p-4 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] dark:shadow-[0px_2px_4px_0px_#ffffff66,0px_7px_6px_-3px_#ffffff4D,0px_-3px_0px_0px_#ffffff33_inset] transition-all duration-1000 dark:"
     >
       <div
         onClick={() => {
@@ -109,7 +109,9 @@ function TaskCard({
         className="flex w-full cursor-pointer flex-col gap-s"
       >
         <div className="flex w-full flex-row justify-between">
-          <div className="text-[12px] text-[#534D60]">{task.name}</div>
+          <div className="text-[12px] text-[#534D60] dark:text-white">
+            {task.name}
+          </div>
           {task?.members?.length === 0 ? (
             <></>
           ) : (
@@ -119,19 +121,19 @@ function TaskCard({
           )}
         </div>
         <div className="flex flex-row gap-2">
-          <div className="whitespace-normal text-[12px]">
-            {task?.description?.slice(0, 20)}...
+          <div className="whitespace-normal text-[12px] truncate dark:text-white">
+            {task?.description?.slice(0, 20)}
           </div>
           <ParagraphsIconSvg className="size-3" />
         </div>
         <div className="flex w-full flex-row">
           {taskPriority(task?.priority, '', false, '')}
           <div className="flex w-[20px] flex-row gap-1">
-            <div className="text-gray-primary">
+            <div className="text-gray-primary dark:text-white">
               {toFarsiNumber(deadlineDay)}
             </div>
             <span>/</span>
-            <div className="text-gray-primary">
+            <div className="text-gray-primary dark:text-white">
               {toFarsiNumber(deadlineMonth)}
             </div>
           </div>

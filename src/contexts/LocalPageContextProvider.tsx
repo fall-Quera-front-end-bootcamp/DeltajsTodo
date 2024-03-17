@@ -198,6 +198,12 @@ function StepReducer(
         boardID: action?.BID
       }
     }
+    case 'openFilter': {
+      return {
+        ...localPage,
+        value: 16
+      }
+    }
     case 'openResponseModal': {
       return { ...localPage, value: -1, responseData: action?.responseData }
     }

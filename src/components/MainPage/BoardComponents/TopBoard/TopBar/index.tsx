@@ -14,12 +14,16 @@ interface TopBarProps {
   projectInfoTitle: string
   handleView: (e: MouseEventHandler<HTMLButtonElement>) => void
   view: v
+  WID?: number
+  PID?: number
 }
 
 const TopBar: FunctionComponent<TopBarProps> = ({
   projectInfoTitle,
   view,
-  handleView
+  handleView,
+  WID,
+  PID
 }) => {
   return (
     <>
