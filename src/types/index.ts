@@ -4,8 +4,8 @@ import { type COLORS } from '../constants'
 import { type MomentInput } from 'jalali-moment'
 
 export interface Period {
-  start: string | MomentInput | undefined | null
-  end: string | MomentInput | undefined | null
+  start: string | MomentInput | undefined
+  end: string | MomentInput | undefined
 }
 
 type CustomShortcuts = Record<string, ShortcutsItem>
@@ -89,8 +89,8 @@ export interface DatepickerType {
 export type ColorKeys = (typeof COLORS)[number] // "blue" | "orange"
 
 export type Colors = Record<
-  string,
-  {
-    [K in ColorKeys]: string
-  }
+string,
+{
+  [K in ColorKeys]: string
+}
 >

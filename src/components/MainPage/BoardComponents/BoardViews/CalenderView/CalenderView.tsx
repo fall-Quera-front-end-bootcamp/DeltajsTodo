@@ -78,34 +78,34 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({ PID, WID }) => {
           dir="rtl"
           className="grid h-[840px] w-full grid-cols-7 grid-rows-6"
         >
-          {days?.previous.map((day) => {
+          {days?.previous?.map((day) => {
             return (
               <CalendarCell
                 PID={PID}
                 WID={WID}
-                key={days?.previous.indexOf(day)}
+                key={days?.previous?.indexOf(day)}
                 day={toFarsiNumber(String(day))}
                 month={moment().format('MMM')}
               />
             )
           })}
-          {days?.current.map((day) => {
+          {days?.current?.map((day) => {
             return (
               <CalendarCell
                 PID={PID}
                 WID={WID}
-                key={days?.current.indexOf(day)}
+                key={days?.current?.indexOf(day)}
                 day={toFarsiNumber(String(day))}
                 month={moment().format('MMM')}
               />
             )
           })}
-          {days?.next.map((day) => {
+          {days?.next?.map((day) => {
             return (
               <CalendarCell
                 PID={PID}
                 WID={WID}
-                key={days?.next.indexOf(day)}
+                key={days?.next?.indexOf(day)}
                 day={toFarsiNumber(String(day))}
                 month={moment().format('MMM')}
               />

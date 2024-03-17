@@ -34,7 +34,7 @@ export const DatepickerContext = createContext<DatepickerStore>({
     startDate: null,
     endDate: null
   },
-  period: { start: null, end: null },
+  period: { start: '', end: '' },
   changePeriod: (_period?: Period) => {},
   dayHover: null,
   changeDayHover: (_day?: string | null | undefined) => {},
@@ -56,8 +56,8 @@ const DateContextProvider = ({
 }): JSX.Element => {
   // Start ---------------------------_\
   const [period, setPeriod] = useState<Period>({
-    start: null,
-    end: null
+    start: '',
+    end: ''
   })
 
   const [dayHover, setDayHover] = useState<string | null | undefined>(null)

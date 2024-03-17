@@ -92,7 +92,7 @@ const Calendar = ({
       const fullDay = `${year}-${month}-${day >= 10 ? day : '0' + day}`
 
       let newStart
-      let newEnd = null
+      let newEnd = 0
 
       // True & True
       if (period?.start && period?.end) {
@@ -101,8 +101,8 @@ const Calendar = ({
         }
         if (changePeriod !== undefined) {
           changePeriod({
-            start: null,
-            end: null
+            start: '',
+            end: ''
           })
         }
       }
@@ -197,18 +197,18 @@ const Calendar = ({
         <div className="mx-5 mb-[36px] mt-[51px] flex flex-row items-start">
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2">
             <div className="text-[26px] font-[500] text-brand-primary">
-              {toFarsiNumber(`${value.startDate}`) === 'null'
+              {toFarsiNumber(`${value?.startDate}`) === 'null'
                 ? ''
-                : `${moment(period?.start === null ? date : period?.start).format('MMM')} ${toFarsiNumber(`${value.startDate}`).slice(8, 10)}`}
+                : `${moment(period?.start === null ? date : period?.start).format('MMM')} ${toFarsiNumber(`${value?.startDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان شروع</p>
             <CalendarStartIconSvg color="#BDBDBD" />
           </div>
           <div className="flex w-1/2 flex-row-reverse items-center justify-end gap-2 border-r-[1px] border-[#E8EAED] pr-2">
             <div className="text-[26px] font-[500] text-brand-primary">
-              {toFarsiNumber(`${value.endDate}`) === 'null'
+              {toFarsiNumber(`${value?.endDate}`) === 'null'
                 ? ''
-                : `${moment(period?.end === null ? date : period?.end).format('MMM')} ${toFarsiNumber(`${value.endDate}`).slice(8, 10)}`}
+                : `${moment(period?.end === null ? date : period?.end).format('MMM')} ${toFarsiNumber(`${value?.endDate}`).slice(8, 10)}`}
             </div>
             <p className="text-[24px]"> زمان پایان</p>
             <CalendarEndIconSvg color="#BDBDBD" />
