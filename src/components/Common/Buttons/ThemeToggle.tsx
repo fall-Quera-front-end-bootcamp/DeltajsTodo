@@ -17,14 +17,14 @@ const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
 
   useEffect(() => {
     if (darkTheme === 'dark') {
-      setInsideDivPosition('left-[3px]')
+      setInsideDivPosition('left-[2px]')
       setInsideDivBg('bg-[#868E96]')
       setContainerDivBg('bg-[#343A40]')
       setLightSvgColor('#343A40')
       setDarkSvgColor('white')
       document.documentElement.classList.add('dark')
     } else {
-      setInsideDivPosition('left-[31px]')
+      setInsideDivPosition('left-[33px]')
       setInsideDivBg('bg-[#FFFFFF]')
       setContainerDivBg('bg-[#F1F3F5]')
       setLightSvgColor('#262626')
@@ -36,7 +36,7 @@ const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
   return (
     <div
       dir="rtl"
-      className={`relative flex h-[36px] w-[64px] items-center justify-around rounded-lg ${containerDivBg} cursor-pointer p-[3px] transition-all duration-300`}
+      className={`relative flex h-[36px] w-[64px] items-center justify-around rounded-lg ${containerDivBg} cursor-pointer p-[3px] transition-all duration-300 dark:border-gray-primary dark:border-2`}
       onClick={handleDarkTheme}
     >
       <div

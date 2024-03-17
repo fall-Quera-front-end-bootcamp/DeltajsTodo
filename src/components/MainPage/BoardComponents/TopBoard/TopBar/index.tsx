@@ -23,7 +23,7 @@ const TopBar: FunctionComponent<TopBarProps> = ({
 }) => {
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-between pl-4 pt-10">
+      <div className="flex w-full flex-col items-center justify-between pl-4 pt-10 dark:bg-gray-dark dark:text-white">
         <div className="flex w-full flex-row justify-between ">
           <ShareTaskButton ShareTaskClass="absolute left-0 top-0 z-50" />
 

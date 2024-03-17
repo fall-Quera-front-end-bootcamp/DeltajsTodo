@@ -29,7 +29,7 @@ const RowView: FunctionComponent<RowViewProps> = ({ project, WID }) => {
   } else if (isSuccess) {
     return (
       <div className="mt-[33px] flex h-[70vh] w-full max-w-[1400px] flex-col items-end justify-start overflow-auto pl-8 scrollbar-thin scrollbar-track-gray-secondary">
-        <p className="mb-[31px] text-right text-[20px] font-extrabold leading-[32px] text-[#1E1E1E]">
+        <p className="mb-[31px] text-right text-[20px] font-extrabold leading-[32px] text-[#1E1E1E] dark:text-white">
           {project?.name}
         </p>
 

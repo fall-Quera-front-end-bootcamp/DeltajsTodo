@@ -58,14 +58,16 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
       )
     } else if (isSuccess) {
       return (
-        <section className="relative flex h-screen w-[340px] flex-col justify-between border-l-[1px] border-[#AAAAAA] bg-[#ffff]">
+        <section className="relative flex h-screen w-[340px] flex-col justify-between border-l-[1px] border-[#AAAAAA] bg-[#ffff] dark:bg-gray-dark">
           <div className="flex flex-col items-center justify-center gap-y-[32px] p-6 text-right">
             <HeadingTextLogoLink />
             {/* center div input... */}
             <div className="flex flex-col space-y-5">
               <div className="flex justify-between space-x-32">
                 <ArrowDownIconSvg />
-                <p className="text-[16px] font-extrabold">ورک‌اسپیس‌ها</p>
+                <p className="text-[16px] font-extrabold dark:text-white">
+                  ورک‌اسپیس‌ها
+                </p>
               </div>
               {/* --------------------------------------- */}
               {/* search input  */}

@@ -43,7 +43,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
 
   return (
     <>
-      <div className="flex flex-row-reverse gap-4 overflow-hidden">
+      <div className="flex flex-row-reverse gap-4 overflow-hidden dark:bg-gray-dark">
         <div className="relative max-h-[100vh]">
           <SidebarPrimary />
         </div>

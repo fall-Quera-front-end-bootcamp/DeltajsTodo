@@ -131,6 +131,11 @@ export interface User {
   phone_number: string
   thumbnail: string
 }
+
+export interface TaskMembers {
+  id: number
+  user: User
+}
 /*----------------------------  Users----------------------------------- */
 /**
  * whole users have account on quera Task manager

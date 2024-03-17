@@ -1,6 +1,7 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable tailwindcss/no-custom-classname */
-import { useContext } from 'react'
-import { type Task } from '../../../../../utilities/models'
+import { useContext, useState } from 'react'
+import { type TaskMembers, type Task } from '../../../../../utilities/models'
 import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import DotsMenuIconSvg from '../../../../Common/Icons/DotsMenuIconSvg'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
@@ -13,6 +14,8 @@ import {
 import toast from 'react-hot-toast'
 import { taskPriority } from '../../BoardViews/RowView/RowComponents/TaskPriorityFunction'
 import { useGetUsersQuery } from '../../../../../features/users/usersInteractionApiSlice'
+import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
+import { BiUser } from 'react-icons/bi'
 
 function TaskCard({
   task,
@@ -31,6 +34,8 @@ function TaskCard({
   const deadlineMonth = moment(task?.deadline).format('MM')
   const deadlineDay = moment(task?.deadline).format('DD')
   const localPageDispatch: any = useContext(localPageDispatchContext)
+  const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false)
+  const [showDo, setShowDo] = useState<boolean>(false)
 
   const [deleteTask, { isLoading }] = useDeleteTaskMutation()
 
@@ -86,7 +91,7 @@ function TaskCard({
       dir="rtl"
       className="group-1 flex w-full flex-col gap-s rounded-2xl bg-[#ffff] p-4 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] transition-all duration-1000"
     >
-      <button
+      <div
         onClick={() => {
           localPageDispatch({
             type: 'openTaskInfo',
@@ -101,11 +106,17 @@ function TaskCard({
             BID
           })
         }}
-        className="flex w-full flex-col gap-s"
+        className="flex w-full cursor-pointer flex-col gap-s"
       >
-        <div className="flex w-full flex-row">
-          <div className="">{task?.members}</div>
+        <div className="flex w-full flex-row justify-between">
           <div className="text-[12px] text-[#534D60]">{task.name}</div>
+          {task?.members?.length === 0 ? (
+            <></>
+          ) : (
+            <p className="flex h-[25px] w-[28px] flex-col items-center justify-center rounded-[100px] bg-blue-secondary px-[8px] pb-[7px] pt-[9px] text-right text-bodyxs font-normal text-[#4C6EF5]">
+              {toFarsiNumber(`+${task?.members?.length}`)}
+            </p>
+          )}
         </div>
         <div className="flex flex-row gap-2">
           <div className="whitespace-normal text-[12px]">
@@ -125,12 +136,51 @@ function TaskCard({
             </div>
           </div>
         </div>
-      </button>
-      <div
-        onClick={onSubmit}
-        className="hidden w-full cursor-pointer flex-row items-center justify-between border-t-[0.5px] border-gray-primary transition-all duration-700 group-1-hover:flex"
-      >
-        <DotsMenuIconSvg />
+      </div>
+      <div className="hidden w-full flex-row items-center justify-end border-t-[0.5px] border-gray-primary p-1 transition-all duration-700 group-1-hover:flex">
+        <div className="relative rounded-full p-1 hover:bg-gray-secondary">
+          <div
+            onClick={() => {
+              setShowDeleteTask((p) => !p)
+            }}
+          >
+            <DotsMenuIconSvg />
+          </div>
+
+          {showDeleteTask &&
+            (showDo ? (
+              isLoading ? (
+                <div className="absolute left-8 top-0 w-[140px] rounded-full bg-gray-primary p-1">
+                  <LoadingComponent />
+                </div>
+              ) : (
+                <button
+                  onMouseLeave={() => {
+                    setShowDeleteTask(false)
+                    setShowDo(false)
+                  }}
+                  onClick={() => {
+                    onSubmit()
+                  }}
+                  className="absolute left-8 top-0 w-[140px] rounded-full bg-red-primary p-1"
+                >
+                  حذف
+                </button>
+              )
+            ) : (
+              <button
+                onMouseLeave={() => {
+                  setShowDeleteTask(false)
+                }}
+                onClick={() => {
+                  setShowDo(true)
+                }}
+                className="absolute left-8 top-0 w-[140px] rounded-full bg-blue-primary p-1 text-white"
+              >
+                اگر مطمئنی کلیک بکن
+              </button>
+            ))}
+        </div>
       </div>
     </section>
   )

@@ -62,7 +62,7 @@ const CalenderView: FunctionComponent<CalenderViewProps> = ({ PID, WID }) => {
   }, [current, date, previous])
 
   useEffect(() => {
-    daysChangeF(calendarData.days)
+    if (daysChangeF !== undefined) daysChangeF(calendarData.days)
   }, [calendarData.days])
 
   return (

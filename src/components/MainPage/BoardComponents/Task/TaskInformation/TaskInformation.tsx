@@ -3,11 +3,11 @@ import DisabledIconSvg from '../../../../Common/Icons/DisabledIconSvg'
 import BottomLeftSide from './BottomLeftSide'
 import TaskInfoComment from './TaskInfoComment'
 import TopLeftSide from './TopLeftSide'
-import TopRightSide from './TopRightSide'
+// import TopRightSide from './TopRightSide'
 import BottomRightSide from './BottomRightSide'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import { useOnClickOutside } from 'usehooks-ts'
-import moment from 'jalali-moment'
+import TopRightSide from './TopRightSide'
 
 interface TaskInfoProps {
   name?: string
@@ -61,15 +61,17 @@ function TaskInformation({
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 "
     >
       {' '}
-      <div className="relative h-[596px] w-[1352px] overflow-hidden rounded-[20px] bg-white shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]">
+      <div className="relative overflow-hidden rounded-[20px] bg-white shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]">
         {/* close icon */}
-        <button
-          onClick={() => {
-            localPageDispatch({ type: 'closeModal' })
-          }}
-        >
-          <DisabledIconSvg className="absolute left-[1292px] top-[36px] size-[24px] cursor-pointer" />
-        </button>
+        <div className="w-full flex flex-row items-center justify-end p-6">
+          <button
+            onClick={() => {
+              localPageDispatch({ type: 'closeModal' })
+            }}
+          >
+            <DisabledIconSvg className="size-[24px] cursor-pointer" />
+          </button>
+        </div>
         {/* vertical line */}
         <div className="absolute left-[659px] top-[30px] z-10 h-[566px] w-[1px] border-r-[1px] border-[#F4F4F4]"></div>
 
@@ -95,7 +97,13 @@ function TaskInformation({
 
           {/* right side */}
           <div className="flex w-[100%] flex-col gap-6">
-            <TopRightSide WID={WID} PID={PID} BID={BID} taskID={taskID} priority={priority} />
+            <TopRightSide
+              WID={WID}
+              PID={PID}
+              BID={BID}
+              taskID={taskID}
+              priority={priority}
+            />
 
             <hr className="border-[1px] border-[#F4F4F4]" />
 

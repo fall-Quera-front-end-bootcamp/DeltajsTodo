@@ -23,7 +23,7 @@ const UserButton = (): JSX.Element => {
           to={'/profile'}
           className="flex items-center justify-end gap-4 p-[16px]"
         >
-          <div className="flex flex-row items-center justify-center gap-3 rounded-lg px-4 py-2  text-right text-[16px] font-medium transition-all duration-300 hover:bg-gray-secondary">
+          <div className="flex flex-row items-center justify-center gap-3 rounded-lg px-4 py-2  text-right text-[16px] font-medium transition-all duration-300 hover:bg-gray-secondary dark:hover:text-black dark:text-white">
             <p className="">{`${firstName} ${lastName}`}</p>
             <div className="h-[33px] w-[36px] rounded-[100px] bg-blue-secondary px-[8px] pb-[7px] pt-[9px] text-right text-bodyxs font-normal text-[#4C6EF5]">
               {`${firstName.slice(0, 1)} ${lastName.slice(0, 1)}`}

@@ -45,7 +45,7 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
       <div dir="rtl" className="flex w-full flex-col gap-[19px]">
         {/**header */}
         <button
-          onClick={handleSetColumnMore}
+          onClick={board?.tasks_count === 0 ? () => {} : handleSetColumnMore}
           className="flex flex-row justify-between"
         >
           <div className="flex flex-row gap-[8px] items-center">
@@ -55,7 +55,7 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
                 style={{ backgroundColor: `${board?.color}` }}
                 className="relative rounded-[8px] flex flex-row gap-[10px] items-center justify-center"
               >
-                <p className="text-center text-boldm text-white px-4">
+                <p className="text-center text-boldm text-white px-4 dark:text-white">
                   {board?.name}
                 </p>
               </div>

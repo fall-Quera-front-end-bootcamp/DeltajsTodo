@@ -18,7 +18,7 @@ const ColumnViewButton = ({
       >
         <p
           aria-label="column"
-          className={`h-[23px] w-[98px] text-right font-yekan text-[16px] font-medium leading-[22.5px] text-[#1E1E1E] 
+          className={`h-[23px] w-[98px] text-right font-yekan text-[16px] font-medium leading-[22.5px] text-[#1E1E1E] dark:text-white
             ${view === Views.column && 'text-[#208D8E]'}`}
         >
           نمایش ستونی

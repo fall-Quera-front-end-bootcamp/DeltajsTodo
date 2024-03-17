@@ -35,7 +35,7 @@ const WorkspacePage: FunctionComponent<WorkspaceProps> = () => {
           workspaces?.map((w: Workspace) => {
             return (
               <div key={w?.id} className="mr-5 flex flex-col items-end gap-8">
-                <h3 className="text-boldxl">{w.name}</h3>
+                <h3 className="text-boldxl dark:text-white">{w.name}</h3>
                 <Projects w={w} />
                 <div className="w-full border-[1px] border-gray-primary opacity-30"></div>
               </div>

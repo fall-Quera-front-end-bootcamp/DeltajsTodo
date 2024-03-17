@@ -50,7 +50,7 @@ const ColumnView: FunctionComponent<ColumnViewProps> = ({ WID, PID }) => {
   } else if (!!isSuccess) {
     return (
       <>
-        <div className="relative ml-4 flex w-full flex-row-reverse pr-4">
+        <div className="relative ml-4 flex w-full flex-row-reverse pr-4 dark:bg-gray-dark">
           {boards?.length > 0 ? (
             <Slider className="flex w-full scale-100 flex-row-reverse gap-[16px] overflow-x-auto overflow-y-hidden transition-all duration-200 will-change-transform scrollbar-thin">
               <>

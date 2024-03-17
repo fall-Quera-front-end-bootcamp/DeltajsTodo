@@ -20,7 +20,7 @@ const ListViewButton = ({
     >
       <p
         aria-label="row"
-        className={`text-right  font-yekan text-[16px] font-medium leading-[22.5px] text-[#1E1E1E] ${view === Views.row ? 'text-[#208D8E]' : ''}`}
+        className={`text-right  font-yekan text-[16px] font-medium leading-[22.5px] text-[#1E1E1E] dark:text-white ${view === Views.row ? 'text-[#208D8E]' : ''}`}
       >
         نمایش لیستی
       </p>

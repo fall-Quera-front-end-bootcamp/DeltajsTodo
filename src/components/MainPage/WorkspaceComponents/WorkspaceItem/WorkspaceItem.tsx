@@ -71,7 +71,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
                   }
                 }}
               >
-                <p className="h-[24] text-right text-[16px] font-medium text-[#1E1E1E]">
+                <p className="h-[24] text-right text-[16px] font-medium text-[#1E1E1E] dark:text-white dark:hover:text-black">
                   {workspace.name}
                 </p>
               </NavLink>

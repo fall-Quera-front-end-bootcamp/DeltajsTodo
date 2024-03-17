@@ -1,12 +1,6 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import AddSecondaryIconSvg from '../../../../../../Common/Icons/AddSecondaryIconSvg'
-import CalendarCellNewTask from './CalendarCellNewTask'
-import {
-  useGetBoardQuery,
-  useGetBoardsQuery,
-  useGetTasksQuery
-} from '../../../../../../../features/auth/authApiSlice'
-import { Board, Task } from '../../../../../../../utilities/models'
+import { useGetBoardsQuery } from '../../../../../../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../../../../../../contexts/LocalPageContextProvider'
 import toast from 'react-hot-toast'
 import moment from 'jalali-moment'
@@ -25,7 +19,6 @@ const CalendarCell = ({
   WID,
   PID
 }: CalendarCellProps): JSX.Element => {
-  const [addIconOpacity, setAddIconOpacity] = useState('opacity-0')
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const { data: boards } = useGetBoardsQuery({
     workspace_id: WID,
@@ -37,16 +30,7 @@ const CalendarCell = ({
   return (
     <>
       <div
-        className={`relative bg-white ${today ? 'border-[2px] border-[#208D8E]' : 'border border-[#AAAAAA]'}`}
-        onMouseEnter={() => {
-          setTimeout(() => {
-            setAddIconOpacity('opacity-100')
-          }, 2000)
-          setAddIconOpacity('opacity-0')
-        }}
-        onMouseLeave={() => {
-          setAddIconOpacity('opacity-0')
-        }}
+        className={`group relative bg-white ${today ? 'border-[2px] border-[#208D8E]' : 'border border-[#AAAAAA]'}`}
       >
         <span className="absolute bottom-[10px] left-[10px] text-[16px] font-medium leading-[22.55px]">
           {day}
@@ -71,7 +55,9 @@ const CalendarCell = ({
               })
             }
           }}
-          className={`absolute bottom-[10px] right-[10px] flex size-[24px] items-center justify-center rounded-[3px] bg-brand-primary ${addIconOpacity} cursor-pointer transition-all duration-300`}
+          className={
+            'absolute bottom-[10px] right-[10px] flex size-[24px] cursor-pointer items-center justify-center rounded-[3px] bg-brand-primary opacity-0 transition-all duration-300 group-hover:opacity-100'
+          }
         >
           <AddSecondaryIconSvg color="#ffffff" />
         </div>

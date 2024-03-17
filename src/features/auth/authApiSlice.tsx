@@ -227,6 +227,22 @@ export const authApiSlice = apiSlice.injectEndpoints({
         //body: { ...data }
       }),
       providesTags: ['task']
+    }),
+    updataTaskMembers: builder.mutation({
+      query: (data) => ({
+        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.board_id}/tasks/${data.id}/assignee/`,
+        method: 'POST',
+        body: { ...data }
+      }),
+      invalidatesTags: ['task']
+    }),
+    deleteTaskMember: builder.mutation({
+      query: (data) => ({
+        url: `/workspaces/${data.workspace_id}/projects/${data.project_id}/boards/${data.board_id}/tasks/${data.taskID}/assignee/${data.id}/`,
+        method: 'Delete'
+        // body: { ...data }
+      }),
+      invalidatesTags: ['task']
     })
   })
 })
@@ -257,5 +273,7 @@ export const {
   useGetTasksQuery,
   useDeleteTaskMutation,
   // Members
-  useGetTaskMembersQuery
+  useGetTaskMembersQuery,
+  useUpdataTaskMembersMutation,
+  useDeleteTaskMemberMutation
 } = authApiSlice

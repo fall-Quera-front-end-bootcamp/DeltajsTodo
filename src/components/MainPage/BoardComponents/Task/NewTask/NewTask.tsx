@@ -124,23 +124,25 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
   const handleSubmit = async (
     data: FieldValues | FormDataProps
   ): Promise<void> => {
-    try {
-      await Task({
-        workspace_id: WID,
-        project_id: PID,
-        board_id: BID,
-        name: data.name,
-        description: data.description,
-        priority,
-        order: tasks?.length + 1
-        // deadline: '2024-03-20'
-        // attachment: data.attachment,
-        // thumbnail: selectedCoverFile,
-      }).unwrap()
+    if (!isLoading) {
+      try {
+        await Task({
+          workspace_id: WID,
+          project_id: PID,
+          board_id: BID,
+          name: data.name,
+          description: data.description,
+          priority,
+          order: tasks?.length + 1
+          // deadline: '2024-03-20'
+          // attachment: data.attachment,
+          // thumbnail: selectedCoverFile,
+        }).unwrap()
 
-      localPageDispatch({ type: 'closeModal' })
-    } catch (err: any) {
-      console.log(err)
+        localPageDispatch({ type: 'closeModal' })
+      } catch (err: any) {
+        console.log(err)
+      }
     }
   }
 
@@ -197,7 +199,7 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
             e.preventDefault()
           }}
           dir="rtl"
-          className={`absolute left-1/2 top-1/2 z-50 flex w-[1153px] -translate-x-1/2 -translate-y-1/2 flex-col gap-xl rounded-[20px] bg-white p-l shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className}`}
+          className={`absolute left-1/2 top-1/2 z-50 flex w-[1153px] -translate-x-1/2 -translate-y-1/2 flex-col gap-xl rounded-[20px] bg-white p-l shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] ${className} dark:bg-gray-dark`}
         >
           {/* Box 1 */}
           {/* Top New Task  */}
