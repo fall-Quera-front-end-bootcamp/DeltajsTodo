@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
 import { AnimatePresence, motion } from 'framer-motion'
@@ -226,9 +227,7 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
             setPriority={setPriority}
             handleShowCalendar={handleShowCalendar}
             isLoading={isLoading}
-            onSubmit={() => {
-              void onSubmit
-            }}
+            onSubmit={onSubmit}
           />
           <div
             className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${showCalendar ? '' : 'hidden'}`}
