@@ -1,44 +1,91 @@
-import { type Dispatch, type SetStateAction } from 'react'
-import ArrowDownIconSvg from '../../../../Common/Icons/ArrowDownIconSvg'
-import Close from '../../../../Common/Icons/Close'
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { useContext, useRef, useState } from 'react'
+import Close from '../../Icons/Close'
+import ArrowDownIconSvg from '../../Icons/ArrowDownIconSvg'
+import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { useOnClickOutside } from 'usehooks-ts'
+import { useUpdateWorkspaceSubscriptionMutation } from '../../../../features/auth/authApiSlice'
+import toast from 'react-hot-toast'
 
-const ShareTask = ({
+const ShareWorkspace = ({
   className,
-  setShare
+  workspaceID
 }: {
-  className: string | undefined
-  setShare: Dispatch<SetStateAction<boolean>>
+  className?: string | undefined
+  workspaceID?: number
 }): JSX.Element => {
-  const handleShowShareTask = (): void => {
-    setShare(false)
+  const localPageDispatch: any = useContext(localPageDispatchContext)
+  const [inputValue, setInputValue] = useState<string>('')
+  // Click OutSide
+  const bigDivRef = useRef(null)
+  const handleClickOutside = (): void => {
+    localPageDispatch({ type: 'closeModal' })
   }
+  useOnClickOutside(bigDivRef, handleClickOutside)
+  const [updateSub] = useUpdateWorkspaceSubscriptionMutation({})
+  // Click OutSide
+  console.log(workspaceID)
+
+  const handleSub = (): void => {
+    updateSub({
+      workspace: workspaceID,
+      email: inputValue
+    })
+      .unwrap()
+      .then(() => {
+        toast.success(' الان تسک رو نداره ', {
+          style: {
+            direction: 'rtl',
+            width: '300px',
+            border: '2px',
+            borderStyle: 'solid',
+            borderColor: 'red'
+          },
+          icon: '😂'
+        })
+      })
+      .catch((err) => {
+        toast.error(err?.data?.non_field_errors, {
+          style: {
+            direction: 'rtl'
+          }
+        })
+
+        console.log(err)
+      })
+  }
+
   return (
     <div
-      onMouseLeave={handleShowShareTask}
-      className={`flex w-[462px] flex-col justify-center gap-[40px] rounded-[12px] bg-[#ffffff] p-[16px] shadow-md ${className}`}
+      ref={bigDivRef}
+      className={`absolute left-1/2 top-1/2 flex w-[462px] -translate-x-1/2 -translate-y-1/2 flex-col justify-center gap-[40px] rounded-[12px] bg-[#ffffff] p-[16px] shadow-md ${className}`}
     >
       {/* top site */}
       <div className="flex items-center justify-between">
-        <Close onClickFunction={handleShowShareTask} color="#D3D3D3" />
+        <Close color="#D3D3D3" />
         <p className="text-center text-headingxs font-medium">
-          به اشتراک‌گذاری تسک
+          به اشتراک‌گذاری ورک اسپیس
         </p>
-        <Close onClickFunction={handleShowShareTask} color="#D3D3D3" />
+        <Close color="#D3D3D3" />
       </div>
       {/* -------------- */}
       {/* body input  */}
       <div className="flex items-center">
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-y-0 -left-3 flex cursor-pointer items-center px-3 ps-3">
-            <button className="h-[40px] w-[91px] rounded-l-[8px] bg-[#208D8E] text-white">
-              ارسال
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={() => {
+            handleSub()
+          }}
+          className="relative"
+        >
+          ارسال
+        </button>
         <input
           type="email"
           className="h-[40px] w-[430px] rounded-[8px] bg-[#F0F1F3] text-right placeholder:pr-2 placeholder:text-right placeholder:text-bodys placeholder:font-normal"
           placeholder="دعوت با ایمیل"
+          onChange={(e) => {
+            setInputValue(e.target.value)
+          }}
         />
       </div>
       {/* ------------------ */}
@@ -104,12 +151,6 @@ const ShareTask = ({
           </li>
           <li className="flex justify-between">
             <div className="cursor-pointer rounded-[6px] border-[1px] border-solid border-[#E9EBF0] px-[12px] pb-[2px] pt-[3px] text-right text-bodyxs font-normal">
-              {/* استایل فیگما سلکت با اررو دان سمت راست */}
-              {/* <select name="" id="">
-                  <option selected>دسترسی کامل</option>
-                  <option value="">ادیت</option>
-                  <option value="">خواندن</option>
-                </select> */}
               <div className="flex items-center space-x-1">
                 <ArrowDownIconSvg />
                 <p className="cursor-pointer text-right text-bodyxs font-normal">
@@ -134,4 +175,4 @@ const ShareTask = ({
   )
 }
 
-export default ShareTask
+export default ShareWorkspace

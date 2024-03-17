@@ -41,14 +41,14 @@ function TopRightSide ({
   const id = cookies.get('id')
   const [showAddUser, setShowAddUser] = useState<boolean>(false)
 
+  const { data: accounts } = useGetUsersQuery({})
+
   const { data: members } = useGetTaskMembersQuery({
     workspace_id: WID,
     project_id: PID,
     board_id: BID,
     id: taskID
   })
-
-  const { data: accounts } = useGetUsersQuery({})
 
   const { data: user } = useGetUserQuery(id)
 

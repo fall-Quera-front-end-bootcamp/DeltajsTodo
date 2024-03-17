@@ -21,7 +21,7 @@ interface TaskInfoProps {
   taskID?: number
 }
 
-function TaskInformation({
+function TaskInformation ({
   name,
   createAt,
   description,
@@ -63,7 +63,7 @@ function TaskInformation({
       {' '}
       <div className="relative overflow-hidden rounded-[20px] bg-white shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]">
         {/* close icon */}
-        <div className="w-full flex flex-row items-center justify-end p-6">
+        <div className="flex w-full flex-row items-center justify-end p-6">
           <button
             onClick={() => {
               localPageDispatch({ type: 'closeModal' })

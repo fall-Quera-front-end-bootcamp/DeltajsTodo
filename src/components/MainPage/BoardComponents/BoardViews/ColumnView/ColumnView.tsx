@@ -4,13 +4,9 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type FunctionComponent, useContext, useState } from 'react'
+import { type FunctionComponent, useContext } from 'react'
 import NewColumn from './ColumnComponents/NewColumn'
-import {
-  type Project,
-  type Board as B,
-  type Task as T
-} from '../../../../../utilities/models'
+import { type Board as B } from '../../../../../utilities/models'
 import Column from './ColumnComponents/Column'
 import { useGetBoardsQuery } from '../../../../../features/auth/authApiSlice'
 import BuildTaskButtonPrimary from '../../Task/BuildTaskButtons/BuildTaskButtonPrimary'

@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable no-extra-boolean-cast */
 /* eslint-disable tailwindcss/enforces-shorthand */
 /* eslint-disable no-lone-blocks */

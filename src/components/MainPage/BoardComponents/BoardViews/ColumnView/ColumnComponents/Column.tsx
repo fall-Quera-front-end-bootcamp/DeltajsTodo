@@ -1,14 +1,11 @@
 /* eslint-disable no-extra-boolean-cast */
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-import { useState, type FunctionComponent, useContext } from 'react'
+import { type FunctionComponent, useContext } from 'react'
 import ColumnHeader from './ColumnHeader'
-import { type Task as T } from '../../../../../../utilities/models'
 import { useGetBoardQuery } from '../../../../../../features/auth/authApiSlice'
-import TaskCard from '../../../Task/TaskCard/TaskCard'
 import BuildTaskButtonPrimary from '../../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
 import LoadingComponent from '../../../../../Common/LoadingComponent/LoadingComponent'
-import NewTask from '../../../Task/NewTask/NewTask'
 import { localPageDispatchContext } from '../../../../../../contexts/LocalPageContextProvider'
 import ColumnTask from './ColumnTask'
 

@@ -18,7 +18,7 @@ export enum Views {
   row = 802,
   calender = 541
 }
-interface Profile {
+export interface Profile {
   userInformatin: {
     name: string
     fmailyName: string
@@ -43,10 +43,7 @@ export interface Tag {
   name: string
   color: string
 }
-interface TimeLine {
-  start: Date
-  deadLine: Date
-}
+
 export enum Priorities {
   asa = '#FA5252',
   high = '#FAB005',
@@ -54,7 +51,7 @@ export enum Priorities {
   low = '#82C91E',
   nothing = '#C1C1C1'
 }
-interface Comment {
+export interface Comment {
   userName: string
   profileImg: string
   gmailAccount?: string
@@ -97,7 +94,6 @@ export interface Project {
   readonly id: number
   name: string
   status: Permission.manager
-  sendforPeople?: Pick<User, 'gmailAccount' | 'coverImg'>
   boards: Board[]
 }
 export enum Permission {
@@ -140,6 +136,3 @@ export interface TaskMembers {
 /**
  * whole users have account on quera Task manager
  */
-interface Users {
-  people: User[]
-}

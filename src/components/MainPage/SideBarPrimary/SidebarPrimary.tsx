@@ -6,15 +6,12 @@
 import {
   type FunctionComponent,
   useState,
-  useContext,
   useCallback
 } from 'react'
 import ArrowDownIconSvg from '../../Common/Icons/ArrowDownIconSvg'
 import SearchIconSvg from '../../Common/Icons/SearchIconSvg'
-import AddSecondaryIconSvg from '../../Common/Icons/AddSecondaryIconSvg'
 import LogoutIconSvg from '../../Common/Icons/LogoutIconSvg'
 import WorkspaceItem from '../WorkspaceComponents/WorkspaceItem/WorkspaceItem'
-import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
 import ThemeToggle from '../../Common/Buttons/ThemeToggle'
 import UserButton from './UserButton'
 import HeadingTextLogoLink from '../../Common/HeadingMainText/HeadingTextLogoLink'
@@ -23,7 +20,6 @@ import { useGetWorkspacesQuery } from '../../../features/auth/authApiSlice'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
 import NewWorkspaceButton from './NewWorkspaceButton'
 
 interface SidebarPrimaryProps {}
@@ -37,7 +33,7 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
     cookies.remove('accessToken')
     cookies.remove('id')
     localStorage.removeItem('refreshToken')
-    // navigate('/')
+    navigate('/')
     navigate(0)
   }, [])
 

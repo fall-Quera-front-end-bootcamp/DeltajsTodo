@@ -97,6 +97,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['workspaces']
     }),
+    updateWorkspaceSubscription: builder.mutation({
+      query: (data) => ({
+        url: '/workspaces/subscriptions/copy/',
+        method: 'POST',
+        body: { ...data }
+      }),
+      invalidatesTags: ['workspaces']
+    }),
     /////////////////////////////////////////////////////////
     getProjects: builder.query({
       query: (data) => ({
@@ -255,6 +263,10 @@ export const {
   useCreateWorkspaceMutation,
   useUpdataWorkspaceMutation,
   useDeleteWorkspaceMutation,
+  useUpdateWorkspaceSubscriptionMutation,
+  useUpdataWorkspaceMemberMutation,
+  useCreateWorkspaceMemberMutation,
+  useGetWorkspaceMembersQuery,
   // Project
   useGetProjectsQuery,
   useCreateProjectMutation,

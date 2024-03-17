@@ -60,7 +60,7 @@ function ProjectMore({ id }: ProjectMoreProps): JSX.Element {
           localPageDispatch({ type: 'openDeleteWorkspace', WID: id })
         }
       />
-      <ShareButton />
+      <ShareButton WID={id} />
     </div>
   )
 }

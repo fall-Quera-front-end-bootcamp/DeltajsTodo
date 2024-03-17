@@ -34,7 +34,6 @@ function App(): JSX.Element {
 
           <Route path="/" element={<RequireAuth />}>
             <Route path="/profile" element={<Profile />} />
-
             <Route
               path="/workspace"
               element={

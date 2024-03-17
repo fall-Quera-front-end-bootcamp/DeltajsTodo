@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/member-delimiter-style */
 import { createContext, useReducer } from 'react'
-import {
-  useGetBoardQuery,
-  useUpdataBoardMutation
-} from '../features/auth/authApiSlice'
 
 interface MainLayoutContext {
   value: number
@@ -202,6 +198,13 @@ function StepReducer(
       return {
         ...localPage,
         value: 16
+      }
+    }
+    case 'openShareWorkspace': {
+      return {
+        ...localPage,
+        value: 17,
+        workspaceID: action?.WID
       }
     }
     case 'openResponseModal': {

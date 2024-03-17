@@ -11,17 +11,12 @@ import {
 } from '../../../../../features/auth/authApiSlice'
 import { toast } from 'react-hot-toast'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
-import { FieldError, FieldValues, FormProvider, useForm } from 'react-hook-form'
+import { type FieldValues, FormProvider, useForm } from 'react-hook-form'
 import NewTaskBoxTwo from './NewTaskComponents/Boxs/Box2/NewTaskBoxTwo'
-import NewTaskDescription from './NewTaskComponents/Boxs/Box3/NewTaskDescription'
 import BoxOne from './NewTaskComponents/Boxs/Box1/BoxOne'
 import BoxFourUpload from './NewTaskComponents/Boxs/Box4/BoxFourUpload'
 import BoxFive from './NewTaskComponents/Boxs/Box5/BoxFive'
-import NewTaskContextProvider, {
-  NewTaskContext
-} from '../../../../../contexts/NewTaskContextProvider'
-import { store } from '../../../../../app/store'
-import axios from 'axios'
+import { NewTaskContext } from '../../../../../contexts/NewTaskContextProvider'
 import BoxThree from './NewTaskComponents/Boxs/Box3/BoxThree'
 import { useOnClickOutside } from 'usehooks-ts'
 
@@ -48,7 +43,6 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
   const { selected, setSelected } = useContext(NewTaskContext)
   // UseState hook
   const [showCalendar, setShowCalendar] = useState(false)
-  const [textAreaValue, setTextAreaValue] = useState('')
   const [priority, setPriority] = useState<number>(0)
   const [selectedAttachmentFile, setSelectedAttachmentFile] =
     useState<FormData | null>(null)
@@ -108,8 +102,7 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
     setShowCalendar(true)
   }
 
-  const [Task, { isLoading, isError, isSuccess, error }] =
-    useCreateTaskMutation()
+  const [Task, { isLoading }] = useCreateTaskMutation()
 
   const { data: projects } = useGetProjectsQuery({
     workspace_id: WID
@@ -233,7 +226,9 @@ const NewTask = ({ WID, BID, PID, className }: NewTaskProps): JSX.Element => {
             setPriority={setPriority}
             handleShowCalendar={handleShowCalendar}
             isLoading={isLoading}
-            onSubmit={onSubmit}
+            onSubmit={() => {
+              void onSubmit
+            }}
           />
           <div
             className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${showCalendar ? '' : 'hidden'}`}

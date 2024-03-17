@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { useCallback, useState } from 'react'
 import {
   useGetBoardsQuery,

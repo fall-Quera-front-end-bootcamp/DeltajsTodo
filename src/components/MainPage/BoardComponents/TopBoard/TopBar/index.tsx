@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-contradicting-classname */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { type MouseEventHandler, type FunctionComponent } from 'react'
-import ShareTaskButton from '../../Task/ShareTask/ShareTaskButton'
+import { type FunctionComponent, type MouseEvent } from 'react'
+import ShareTaskButton from '../../../../Common/ShareSomeThingComponents/ShareTask/ShareTaskButton'
 import ListViewButton from './TopBarButtons/ListViewButton'
 import ColumnViewButton from './TopBarButtons/ColumnViewButton'
 import CalendarViewButton from './TopBarButtons/CalendarViewButton'
@@ -12,7 +12,7 @@ import { Views, type Views as v } from '../../../../../utilities/models'
 
 interface TopBarProps {
   projectInfoTitle: string
-  handleView: (e: MouseEventHandler<HTMLButtonElement>) => void
+  handleView: (e: MouseEvent<HTMLButtonElement>) => void
   view: v
   WID?: number
   PID?: number
@@ -21,9 +21,7 @@ interface TopBarProps {
 const TopBar: FunctionComponent<TopBarProps> = ({
   projectInfoTitle,
   view,
-  handleView,
-  WID,
-  PID
+  handleView
 }) => {
   return (
     <>

@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable spaced-comment */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, type FunctionComponent } from 'react'
+import { useState, type FunctionComponent, useContext } from 'react'
 import ItemColor from '../../../../Common/Icons/ItemColor'
 import { type Task, type Board } from '../../../../../utilities/models'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
@@ -14,15 +14,17 @@ import moment from 'jalali-moment'
 import { useGetTasksQuery } from '../../../../../features/auth/authApiSlice'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 import { taskPriority } from './RowComponents/TaskPriorityFunction'
+import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 
 interface RowProps {
   board: Board
-  BID: number
+  PID: number
   WID: number
 }
 
-const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
+const Row: FunctionComponent<RowProps> = ({ board, WID, PID }) => {
   const [columnMore, setColumnMore] = useState(false)
+  const localPageDispatch: any = useContext(localPageDispatchContext)
 
   const handleSetColumnMore = (): void => {
     setColumnMore((p) => !p)
@@ -35,10 +37,13 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
   } = useGetTasksQuery({
     workspace_id: WID,
     board_id: board.id,
-    project_id: BID
+    project_id: PID
   })
 
+  const BID = board?.id
+
   moment.locale('fa', { useGregorianParser: true })
+  console.log(WID, PID, BID)
 
   return (
     <>
@@ -61,13 +66,7 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
               </div>
             </div>
             <div className="h-[17px] w-[37px]">
-              <p
-                className="font-yekan 
-                h-[17px] w-[37px] text-right
-                 text-[12px] font-normal 
-                 leading-[16.91px]
-                  text-[#1E1E1E] dark:text-white"
-              >
+              <p className="font-yekan h-[17px] w-[37px] text-right text-[12px] font-normal leading-[16.91px] text-[#1E1E1E] dark:text-white">
                 {toFarsiNumber(`${board?.tasks?.length}`)} تسک
               </p>
             </div>
@@ -97,7 +96,21 @@ const Row: FunctionComponent<RowProps> = ({ board, WID, BID }) => {
                 return (
                   <div
                     key={task.id}
-                    className="rounded-[4px] flex flex-row justify-between py-[7px] items-center"
+                    onClick={() => {
+                      localPageDispatch({
+                        type: 'openTaskInfo',
+                        WID,
+                        PID,
+                        BID,
+                        name: task?.name,
+                        description: task?.description,
+                        createAt: task?.created_at,
+                        deadline: task?.deadline,
+                        priority: task?.priority,
+                        taskID: task?.id
+                      })
+                    }}
+                    className="rounded-[4px] flex flex-row justify-between py-[7px] items-center cursor-pointer"
                   >
                     <div className="flex flex-row gap-[7px] items-center">
                       <ItemColor color={board.color} size="16" />

@@ -22,7 +22,7 @@ function BoradMore({
   return (
     <div
       dir="rtl"
-      className="flex w-max flex-col gap-4 rounded-lg bg-[white] p-3 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] z-[1000]"
+      className="z-[1000] flex w-max flex-col gap-4 rounded-lg bg-[white] p-3 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset]"
     >
       <BordMoreOption
         color="text-[black]"

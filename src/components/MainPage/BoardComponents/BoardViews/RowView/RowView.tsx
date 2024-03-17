@@ -35,11 +35,15 @@ const RowView: FunctionComponent<RowViewProps> = ({ project, WID }) => {
 
         <div className="flex w-full flex-col gap-10 overflow-x-auto">
           {boards?.map((board: Board) => {
-            return (
-              <div key={board.id}>
-                <Row board={board} BID={project?.id} WID={WID} />
-              </div>
-            )
+            if (!board?.is_archive) {
+              return (
+                <div key={board.id}>
+                  <Row board={board} PID={project?.id} WID={WID} />
+                </div>
+              )
+            } else {
+              return <></>
+            }
           })}
         </div>
       </div>

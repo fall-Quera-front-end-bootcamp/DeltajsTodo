@@ -45,7 +45,7 @@ const Filter = (): JSX.Element => {
         </div>
         {/* -------------------------------------------------- */}
         <div className="flex flex-col p-6">
-          {filters.map((filter, index) => (
+          {filters.map((filter) => (
             <div key={filter} className="flex justify-between">
               <RemoveIconSvg
                 onClick={() => {

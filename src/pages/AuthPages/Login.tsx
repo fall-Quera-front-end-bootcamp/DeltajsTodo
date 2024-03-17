@@ -1,14 +1,15 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
-import { useState, type FunctionComponent, useEffect } from 'react'
+import { type FunctionComponent } from 'react'
 import Layout from '../../components/AuthPage/AuthComponents/layout/Layout'
 import AuthCard from '../../components/AuthPage/AuthComponents/Card/AuthCard'
 import Input from '../../components/Common/Input/Input'
 import { Link, useNavigate } from 'react-router-dom'
-import { FieldValue, FormProvider, useForm } from 'react-hook-form'
+import { type FieldValues, FormProvider, useForm } from 'react-hook-form'
 import Button from '../../components/Common/Buttons/Button'
 import { motion } from 'framer-motion'
 import { useLoginMutation } from '../../features/auth/authApiSlice'
@@ -16,9 +17,7 @@ import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../features/auth/authSlice'
 import LoadingComponent from '../../components/Common/LoadingComponent/LoadingComponent'
 import toast from 'react-hot-toast'
-import { AxiosError } from 'axios'
 import Cookies from 'universal-cookie'
-import { setUserId } from '../../features/users/usersInteractionSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginProps {}
@@ -29,14 +28,9 @@ const Login: FunctionComponent<LoginProps> = () => {
   const cookies = new Cookies()
 
   // ---------------
-  const [login, { isLoading, isError, isSuccess }] = useLoginMutation()
+  const [login, { isLoading }] = useLoginMutation()
   const dispatch = useDispatch()
-  const handleSubmit = async (
-    data = {
-      username: 'any',
-      password: 'any'
-    }
-  ): Promise<void> => {
+  const handleSubmit = async (data: FieldValues): Promise<void> => {
     try {
       const userData = await login({
         username: data.username,
@@ -100,7 +94,6 @@ const Login: FunctionComponent<LoginProps> = () => {
     )
   })
 
-  const [formVisible, setFormVisible] = useState(true)
   const navigate = useNavigate()
 
   // userName input Props
@@ -154,7 +147,6 @@ const Login: FunctionComponent<LoginProps> = () => {
             onSubmit={(e) => e.preventDefault()}
             noValidate
             autoComplete="off"
-            className={`${formVisible ? 'mt-[32px]' : 'hidden'}`}
           >
             {' '}
             <div className="flex flex-col items-center justify-center">

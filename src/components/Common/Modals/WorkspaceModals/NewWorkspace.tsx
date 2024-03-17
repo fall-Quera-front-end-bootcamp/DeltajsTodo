@@ -52,9 +52,13 @@ function CreationWorkspaceStepReducer(step: number, action: any): number {
 
 interface NewWorkspaceProps {
   className?: string
+  WID?: number
 }
 
-const NewWorkspace: FunctionComponent<NewWorkspaceProps> = ({ className }) => {
+const NewWorkspace: FunctionComponent<NewWorkspaceProps> = ({
+  className,
+  WID
+}) => {
   const [creationStep, dispatch] = useReducer(CreationWorkspaceStepReducer, 1)
   const [form, setForm] = useState<Workspace>({
     id: -1,
@@ -83,7 +87,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = ({ className }) => {
 
   const onSubmitWSCreation = async (): Promise<void> => {
     try {
-      const newWS = await createWorkspace({
+      await createWorkspace({
         name: form?.name,
         color: form?.color
       }).unwrap()
@@ -117,6 +121,7 @@ const NewWorkspace: FunctionComponent<NewWorkspaceProps> = ({ className }) => {
             )}
             {creationStep === 3 && (
               <Step3
+                WID={WID}
                 form={form}
                 onSubmitWSCreation={onSubmitWSCreation}
                 isLoading={isLoading}

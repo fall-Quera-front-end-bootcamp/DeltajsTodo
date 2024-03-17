@@ -1,23 +1,18 @@
 /* eslint-disable multiline-ternary */
 /* eslint-disable tailwindcss/no-custom-classname */
 import { useContext, useState } from 'react'
-import { type TaskMembers, type Task } from '../../../../../utilities/models'
+import { type Task } from '../../../../../utilities/models'
 import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import DotsMenuIconSvg from '../../../../Common/Icons/DotsMenuIconSvg'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
 import moment from 'jalali-moment'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
-import {
-  useDeleteTaskMutation,
-  useGetTaskMembersQuery
-} from '../../../../../features/auth/authApiSlice'
+import { useDeleteTaskMutation } from '../../../../../features/auth/authApiSlice'
 import toast from 'react-hot-toast'
 import { taskPriority } from '../../BoardViews/RowView/RowComponents/TaskPriorityFunction'
-import { useGetUsersQuery } from '../../../../../features/users/usersInteractionApiSlice'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
-import { BiUser } from 'react-icons/bi'
 
-function TaskCard({
+function TaskCard ({
   task,
   WID,
   PID,
@@ -89,7 +84,7 @@ function TaskCard({
   return (
     <section
       dir="rtl"
-      className="group-1 flex w-full flex-col gap-s rounded-2xl p-4 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] dark:shadow-[0px_2px_4px_0px_#ffffff66,0px_7px_6px_-3px_#ffffff4D,0px_-3px_0px_0px_#ffffff33_inset] transition-all duration-1000 dark:"
+      className="group-1 dark: flex w-full flex-col gap-s rounded-2xl p-4 shadow-[0px_2px_4px_0px_#00000066,0px_7px_6px_-3px_#0000004D,0px_-3px_0px_0px_#00000033_inset] transition-all duration-1000 dark:shadow-[0px_2px_4px_0px_#ffffff66,0px_7px_6px_-3px_#ffffff4D,0px_-3px_0px_0px_#ffffff33_inset]"
     >
       <div
         onClick={() => {
@@ -121,7 +116,7 @@ function TaskCard({
           )}
         </div>
         <div className="flex flex-row gap-2">
-          <div className="whitespace-normal text-[12px] truncate dark:text-white">
+          <div className="truncate whitespace-normal text-[12px] dark:text-white">
             {task?.description?.slice(0, 20)}
           </div>
           <ParagraphsIconSvg className="size-3" />

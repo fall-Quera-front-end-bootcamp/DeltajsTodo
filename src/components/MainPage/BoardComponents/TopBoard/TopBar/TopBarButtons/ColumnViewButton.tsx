@@ -1,5 +1,5 @@
-import { Views } from '../../../../../../utilities/models' 
-import ColumnArtboardIconSvg from '../../../../../Common/Icons/ColumnArtboardIconSvg' 
+import { Views } from '../../../../../../utilities/models'
+import ColumnArtboardIconSvg from '../../../../../Common/Icons/ColumnArtboardIconSvg'
 
 const ColumnViewButton = ({
   handleView,

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable tailwindcss/no-custom-classname */
 import Layout from '../../components/AuthPage/AuthComponents/layout/Layout'
@@ -6,7 +8,7 @@ import Input from '../../components/Common/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { useState, type FunctionComponent } from 'react'
 import Checkbox from '../../components/AuthPage/AuthComponents/Checkbox'
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm, type FieldValues } from 'react-hook-form'
 import TermsConditions from '../../components/Common/Modals/TermsConditions'
 import Button from '../../components/Common/Buttons/Button'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -26,17 +28,15 @@ const Register: FunctionComponent<RegisterProps> = () => {
   const [register, { isLoading }] = useRegisterMutation()
 
   const validateEmail = (): boolean => {
-    if ((methods.watch('email')?.includes('@') === true && methods.watch('email')?.includes('.')) === true) return true
-    else return false
+    if (
+      (methods.watch('email')?.includes('@') === true &&
+        methods.watch('email')?.includes('.')) === true
+    ) {
+      return true
+    } else return false
   }
 
-  const handleSubmit = async (
-    data = {
-      username: 'any',
-      email: 'any',
-      password: 'any'
-    }
-  ): Promise<void> => {
+  const handleSubmit = async (data: FieldValues): Promise<void> => {
     if (validateEmail()) {
       try {
         await register({
@@ -44,16 +44,11 @@ const Register: FunctionComponent<RegisterProps> = () => {
           email: data.email,
           password: data.password
         }).unwrap()
-
-        isLoading
-          ? toast.loading('در حال بررسی...')
-          : toast.success('ثبت‌نام با موفقیت انجام شد')
+        toast.success('با موفقیت ثبت‌نام کردید.')
 
         methods.reset()
         navigate('/api/auth/login')
       } catch (err: unknown) {
-        if (err?.data?.username !== undefined) toast.error(err.data.username)
-        if (err?.data?.email !== undefined) toast.error(err.data.email)
         console.log(err)
       }
     } else {
@@ -109,14 +104,14 @@ const Register: FunctionComponent<RegisterProps> = () => {
   }
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative h-screen w-full">
       <Layout
         buttonText={'ورود'}
         linkText={'ثبت‌نام کرده‌ای؟'}
         onClickFunction={() => {
           navigate('/api/auth/login')
         }}
-        className={showBox ? 'bg-gray-dark/50 backdrop-blur-md blur-md' : ''}
+        className={showBox ? 'bg-gray-dark/50 blur-md backdrop-blur-md' : ''}
       >
         <AuthCard>
           <FormProvider {...methods}>

@@ -13,7 +13,8 @@ const baseQuery = fetchBaseQuery({
 
   prepareHeaders: (headers) => {
     const token = cookies.get('accessToken')
-    if (token !== null) {
+
+    if (token !== null && token !== 'undefined') {
       headers.set('authorization', `Bearer ${token}`)
     }
     return headers
@@ -65,5 +66,5 @@ const baseQueryWithReauth = async (
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['workspaces', 'project', 'board', 'task', 'profile'],
-  endpoints: (builder) => ({})
+  endpoints: () => ({})
 })

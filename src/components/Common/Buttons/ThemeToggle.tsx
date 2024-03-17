@@ -36,7 +36,7 @@ const ThemeToggle: FunctionComponent<ThemeToggleProps> = () => {
   return (
     <div
       dir="rtl"
-      className={`relative flex h-[36px] w-[64px] items-center justify-around rounded-lg ${containerDivBg} cursor-pointer p-[3px] transition-all duration-300 dark:border-gray-primary dark:border-2`}
+      className={`relative flex h-[36px] w-[64px] items-center justify-around rounded-lg ${containerDivBg} cursor-pointer p-[3px] transition-all duration-300 dark:border-2 dark:border-gray-primary`}
       onClick={handleDarkTheme}
     >
       <div

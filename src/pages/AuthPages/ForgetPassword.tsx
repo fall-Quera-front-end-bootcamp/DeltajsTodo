@@ -6,6 +6,7 @@ import Input from '../../components/Common/Input/Input'
 import { type NavigateFunction, useNavigate } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 import Button from '../../components/Common/Buttons/Button'
+import { useForgetMutation } from '../../features/users/usersInteractionApiSlice'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ForgetPasswordProps {}
@@ -16,13 +17,23 @@ const ForgetPassword: FunctionComponent<ForgetPasswordProps> = () => {
 
   const methods = useForm()
 
-  const onSubmit = methods.handleSubmit(() => {
+  const [forgetP] = useForgetMutation({})
+
+  const onSubmit = methods.handleSubmit((data) => {
     setFormVisible(false)
-    // console.log(data)
+    forgetP(data)
+      .unwrap()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    console.log(data)
   })
   // userEmail input Props
   const userEmailProps = {
-    name: 'ایمیل',
+    name: 'email',
     validation: {
       required: {
         value: true,

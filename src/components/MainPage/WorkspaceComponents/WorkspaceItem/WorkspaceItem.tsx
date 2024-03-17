@@ -34,8 +34,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
     data: projects,
     isLoading,
     isError,
-    isSuccess,
-    error
+    isSuccess
   } = useGetProjectsQuery({ workspace_id: workspace.id })
 
   ///////////////////////////////////////////////////////////
@@ -45,7 +44,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
         <LoadingComponent />
       </div>
     )
-  } else if (!!isSuccess) {
+  } else if (isSuccess) {
     return (
       <div className="relative">
         <button className="group flex w-[274px] h-[31px] cursor-pointer justify-between space-x-2 hover:bg-[#E9F9FF] -z-10">
@@ -143,7 +142,7 @@ const WorkspaceItem: FunctionComponent<WorkspaceItemProps> = ({
         )}
       </div>
     )
-  } else if (!!isError) {
+  } else if (isError) {
     return (
       <>
         <p>error</p>

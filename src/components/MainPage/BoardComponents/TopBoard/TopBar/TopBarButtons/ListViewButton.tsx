@@ -1,4 +1,4 @@
-import { type MouseEventHandler } from 'react'
+import { type MouseEvent } from 'react'
 import { Views } from '../../../../../../utilities/models'
 import TodoListIconSvg from '../../../../../Common/Icons/TodoListIconSvg'
 
@@ -6,7 +6,7 @@ const ListViewButton = ({
   handleView,
   view
 }: {
-  handleView: (e: MouseEventHandler<HTMLButtonElement>) => void
+  handleView: (e: MouseEvent<HTMLButtonElement>) => void
   view: Views
 }): JSX.Element => {
   return (

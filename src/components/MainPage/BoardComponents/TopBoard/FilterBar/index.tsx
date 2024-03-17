@@ -6,7 +6,7 @@ import VerticalLine from '../TopBar/LineComponents/VerticalLine'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import ReArchiveButton from './ReArchiveButton'
 
-const FilterBar = ({ WID, PID }: { WID: number; PID: number }): JSX.Element => {
+const FilterBar = ({ WID, PID }: { WID: number, PID: number }): JSX.Element => {
   const handleSearch = (): void => {}
   const localPageDispatch: any = useContext(localPageDispatchContext)
   return (

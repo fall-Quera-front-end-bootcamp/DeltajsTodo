@@ -24,6 +24,7 @@ import CalendarCellNewTask from '../../components/MainPage/BoardComponents/Board
 import TaskInformation from '../../components/MainPage/BoardComponents/Task/TaskInformation/TaskInformation'
 import ArchiveAllTask from '../../components/MainPage/BoardComponents/Task/ArchiveAllTask'
 import Filter from '../../components/MainPage/BoardComponents/Filters/Filter'
+import ShareWorkspace from '../../components/Common/ShareSomeThingComponents/ShareWorkspace'
 interface MainLayoutProps {}
 
 const MainLayout: FunctionComponent<MainLayoutProps> = () => {
@@ -58,7 +59,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
           </div>
           <div className="">
             {value === 1 && (
-              <NewWorkspace className={value === 1 ? '' : 'hidden'} />
+              <NewWorkspace WID={workspaceID} className={value === 1 ? '' : 'hidden'} />
             )}
             {value === 2 && <NewProject WID={workspaceID} />}
             {/* {step === 3 && <NewTask />}??? */}
@@ -112,6 +113,9 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
             )}
             {value === 16 && (
               <Filter />
+            )}
+            {value === 17 && (
+              <ShareWorkspace workspaceID={workspaceID} />
             )}
           </div>
         </div>
