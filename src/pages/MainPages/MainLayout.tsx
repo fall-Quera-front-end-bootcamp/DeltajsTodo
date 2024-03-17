@@ -54,7 +54,7 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
             'relative h-screen w-full overflow-auto scrollbar-thin scrollbar-thumb-gray-dark'
           }
         >
-          <div className={`overflow-hidden ${value > 0 ? 'blur-3xl' : ''}`}>
+          <div className={`overflow-hidden ${value > 0 ? 'blur-xl' : ''}`}>
             <Outlet />
           </div>
           <div className="">

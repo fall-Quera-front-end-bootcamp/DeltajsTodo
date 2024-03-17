@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { type FunctionComponent } from 'react'
+import { useEffect, type FunctionComponent } from 'react'
 import { useGetUsersQuery } from '../features/users/usersInteractionApiSlice'
 import { useDispatch } from 'react-redux'
 import { setUsers } from '../features/users/usersInteractionSlice'
 import { store } from '../app/store'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AdminProps {}
 
@@ -33,6 +34,9 @@ const Admin: FunctionComponent<AdminProps> = () => {
       }
     }
   }
+  useEffect(() => {
+    toast.error(errMsg)
+  }, [])
 
   return (
     <>

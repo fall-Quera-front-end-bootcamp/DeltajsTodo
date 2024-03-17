@@ -1,5 +1,3 @@
-import { type Dispatch, type SetStateAction } from 'react'
-
 const ArrowButton = ({
   columnMore,
   setColumnMore
@@ -9,7 +7,7 @@ const ArrowButton = ({
 }): JSX.Element => {
   return (
     <svg
-      className={`size-5 cursor-pointer ${columnMore ? 'rotate-[180deg]' : 'rotate-[0deg]'}`}
+      className={`size-5 cursor-pointer ${columnMore === true ? 'rotate-[180deg]' : 'rotate-[0deg]'}`}
       onClick={setColumnMore}
       width="20"
       height="20"

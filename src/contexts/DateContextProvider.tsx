@@ -1,22 +1,31 @@
 import { createContext, useMemo, useState } from 'react'
-import { type Period, type DateValueType } from '../types'
+import { type Period } from '../types'
+import { type MomentInput } from 'jalali-moment'
 
 interface DatepickerStore {
-  days: { previous: number[]; current: number[]; next: number[] }
-  value: {
-    startDate: null
-    endDate: null
+  days?: { previous?: number[], current?: number[], next?: number[] }
+  value?: {
+    startDate?: null
+    endDate?: null
   }
   period?: Period
-  changePeriod?: (period: Period) => void
+  changePeriod?: (period?: Period) => void
   dayHover?: string | null
-  changeDayHover?: (day: string | null) => void
-  changeDatepickerValue?: (value: { startDate: null; endDate: null }) => void
-  daysChangeF?: ((days: {
-    previous: number[]
-    current: number[]
-    next: number[]
-  }) => void) | undefined
+  changeDayHover?: (day?: string | null) => void
+  changeDatepickerValue?: (value?: {
+    startDate?: MomentInput | null
+    endDate?: MomentInput | null
+  }) => void
+  daysChangeF?:
+  | ((days?: {
+    previous?: number[]
+    current?: number[]
+    next?: number[]
+  }) => void)
+  | undefined
+  minDate?: string
+  maxDate?: string
+  disabledDates?: string
 }
 
 export const DatepickerContext = createContext<DatepickerStore>({
@@ -26,14 +35,17 @@ export const DatepickerContext = createContext<DatepickerStore>({
     endDate: null
   },
   period: { start: null, end: null },
-  changePeriod: (period) => {},
+  changePeriod: (_period?: Period) => {},
   dayHover: null,
-  changeDayHover: (day: string | null) => {},
-  changeDatepickerValue: (value: DateValueType) => {},
-  daysChangeF: (days: {
-    previous: number[]
-    current: number[]
-    next: number[]
+  changeDayHover: (_day?: string | null | undefined) => {},
+  changeDatepickerValue: (_value?: {
+    startDate?: MomentInput | null
+    endDate?: MomentInput | null
+  }) => {},
+  daysChangeF: (_days?: {
+    previous?: number[]
+    current?: number[]
+    next?: number[]
   }) => {}
 })
 
@@ -48,7 +60,7 @@ const DateContextProvider = ({
     end: null
   })
 
-  const [dayHover, setDayHover] = useState<string | null>(null)
+  const [dayHover, setDayHover] = useState<string | null | undefined>(null)
 
   const [valueS, setValueS] = useState({
     startDate: null,
@@ -73,7 +85,7 @@ const DateContextProvider = ({
     setDaysF(days)
   }
 
-  const onChange = (valueS: { startDate: null; endDate: null }): void => {
+  const onChange = (valueS: { startDate: null, endDate: null }): void => {
     setValueS(valueS)
   }
 
@@ -86,7 +98,7 @@ const DateContextProvider = ({
         setPeriod(newPeriod)
       },
       dayHover,
-      changeDayHover: (newDay: string | null) => {
+      changeDayHover: (newDay: string | null | undefined) => {
         setDayHover(newDay)
       },
       changeDatepickerValue: onChange,

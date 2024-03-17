@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useEffect, useState } from 'react'
@@ -6,7 +8,6 @@ import { motion } from 'framer-motion'
 
 import axios from 'axios'
 
-import { store } from '../../../app/store'
 import {
   useGetUserQuery,
   useUpdateInfoMutation
@@ -17,10 +18,10 @@ import Input from '../../Common/Input/Input'
 import Cookies from 'universal-cookie'
 
 interface ProfileInfoProps {
-  messageFunction: Function
+  messageFunction: () => void
 }
 
-const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
+const ProfileInfo = ({ messageFunction }: ProfileInfoProps): void => {
   const cookies = new Cookies()
   const id = cookies.get('id')
 
@@ -110,7 +111,7 @@ const ProfileInfo = ({ messageFunction }: ProfileInfoProps) => {
   const onSubmit = methods.handleSubmit((data) => {
     setIsSending(true)
 
-    if (profileImageFile) {
+    if (profileImageFile != null) {
       const updateData = new FormData()
       updateData.set('thumbnail', profileImageFile, profileImageFile.name)
       handleImageSubmit(updateData)

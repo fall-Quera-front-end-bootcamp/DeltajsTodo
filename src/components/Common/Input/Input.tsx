@@ -41,6 +41,7 @@ const Input = ({
   const inputError = findInputError(errors, name)
   const isInvalid = isFormInvalid(inputError)
 
+  const mg = (inputError as { error: { message: string } }).error?.message
   return (
     <div dir={dir} className="relative flex flex-col gap-2">
       <label
@@ -50,12 +51,7 @@ const Input = ({
         {label}
       </label>
       <AnimatePresence mode="wait" initial={false}>
-        {isInvalid && (
-          <InputError
-            message={inputError.error.message}
-            key={inputError.error.message}
-          />
-        )}
+        {isInvalid && <InputError message={mg} key={mg} />}
       </AnimatePresence>
       <input
         id={id}

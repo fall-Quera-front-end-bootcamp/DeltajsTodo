@@ -9,7 +9,7 @@ const ColumnArtboardIconSvg = ({
   color?: string
   className?: string
   onClick?: (e: any) => void
-  arialabel
+  arialabel?: string
 }): JSX.Element => {
   // The size Prop it's Width & Height
   // Color the Color of svg Strokes

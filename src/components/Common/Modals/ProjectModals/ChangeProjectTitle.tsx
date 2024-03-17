@@ -9,8 +9,6 @@ import { useContext, type FunctionComponent, useRef, useState } from 'react'
 import LeftArrow from '../../Icons/LeftArrow'
 import Close from '../../Icons/Close'
 import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
-
-import Message from '../../Message/Message'
 import { useUpdataProjectMutation } from '../../../../features/auth/authApiSlice'
 import { useOnClickOutside } from 'usehooks-ts'
 interface ChangeProjectTitleProps {
@@ -28,7 +26,7 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [inputValue, setInputValue] = useState('')
   const onChangeHandler = (e: any): void => {
-    setInputValue((p) => e?.target?.value)
+    setInputValue(() => e?.target?.value)
   }
 
   // Click OutSide
@@ -45,7 +43,7 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
   const onSubmitHandler = async (): Promise<void> => {
     if (inputValue !== '') {
       try {
-        const userData = await updataProject({
+        await updataProject({
           workspace_id: WID,
           id: PID,
           name: inputValue
@@ -120,7 +118,7 @@ const ChangeProjectTitle: FunctionComponent<ChangeProjectTitleProps> = ({
             "
             >
               <p
-                className="font-yekan w-[51px]
+                className="w-[51px]
                h-[20px] text-right text-[14px] font-[400px] 
               leading-[19.73px]  text-[#1E1E1E] "
               >

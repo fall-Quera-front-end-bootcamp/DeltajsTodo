@@ -22,8 +22,7 @@ const NewTaskInput = ({
   name,
   validation,
   className,
-  dir = 'rtl',
-  labelClassName
+  dir = 'rtl'
 }: InputProps): JSX.Element => {
   const {
     register,
@@ -33,7 +32,9 @@ const NewTaskInput = ({
   const inputError = findInputError(errors, name)
   const isInvalid = isFormInvalid(inputError)
 
-  if (isInvalid) toast.error(inputError.error.message)
+  const mg = (inputError as { error: { message: string } }).error?.message
+
+  if (isInvalid) toast.error(mg)
 
   return (
     <input

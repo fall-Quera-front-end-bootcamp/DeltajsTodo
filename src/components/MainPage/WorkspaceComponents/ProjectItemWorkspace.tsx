@@ -1,6 +1,4 @@
 import { NavLink } from 'react-router-dom'
-import { hexColors } from '../../../constants'
-import getKeyByValue from '../../../utilities/getKeyByValue'
 import { useGetProjectQuery } from '../../../features/auth/authApiSlice'
 import { type FunctionComponent } from 'react'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
@@ -16,7 +14,6 @@ const ProjectItemWorkspace: FunctionComponent<ProjectItemWorkspaceProps> = ({
   workspaceItemColor,
   workspaceItemID
 }) => {
-  // const bgColor = 'bg-' + getKeyByValue(hexColors, workspaceItemColor)
   const {
     data: project,
     isLoading,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import moment from 'jalali-moment'
 import type React from 'react'
@@ -66,13 +67,13 @@ const Days: React.FC<Props> = ({
       }`
       let className = ''
 
-      if (fullDay === period.start && fullDay === period.end) {
+      if (fullDay === period?.start && fullDay === period.end) {
         className =
           'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
-      } else if (fullDay === period.start) {
+      } else if (fullDay === period?.start) {
         className =
           'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
-      } else if (fullDay === period.end) {
+      } else if (fullDay === period?.end) {
         className =
           'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
       } else if (fullDay === dayHover) {
@@ -80,11 +81,11 @@ const Days: React.FC<Props> = ({
           'bg-teal-primary text-white font-medium rounded-[4px] w-[33px] h-[38px]'
       }
       return {
-        active: fullDay === period.start || fullDay === period.end,
+        active: fullDay === period?.start || fullDay === period?.end,
         className
       }
     },
-    [calendarData.date, dayHover, period.end, period.start]
+    [calendarData.date, dayHover, period?.end, period?.start]
   )
 
   const hoverClassByDay = useCallback(
@@ -94,7 +95,7 @@ const Days: React.FC<Props> = ({
         day >= 10 ? day : '0' + day
       }`
 
-      if (period.start && period.end) {
+      if (period?.start && period.end) {
         if (
           moment(fullDay) > moment(period.start) &&
           moment(fullDay) < moment(period.end)
@@ -108,7 +109,7 @@ const Days: React.FC<Props> = ({
       }
 
       if (
-        period.start &&
+        period?.start &&
         moment(fullDay) > moment(period.start) &&
         moment(fullDay) < moment(dayHover)
       ) {
@@ -116,7 +117,7 @@ const Days: React.FC<Props> = ({
       }
 
       if (
-        period.end &&
+        period?.end &&
         moment(fullDay) > moment(dayHover) &&
         moment(fullDay) < moment(period.end)
       ) {
@@ -130,21 +131,21 @@ const Days: React.FC<Props> = ({
 
       return className
     },
-    [calendarData.date, currentDateClass, dayHover, period.end, period.start]
+    [calendarData.date, currentDateClass, dayHover, period?.end, period?.start]
   )
 
   const isDateTooEarly = useCallback(
-    (day: number, type: 'current' | 'previous' | 'next') => {
+    (_day: number, _type: 'current' | 'previous' | 'next') => {
       if (!minDate) {
         return false
       }
-      const object = {
-        previous: previousMonth(calendarData.date),
-        current: calendarData.date,
-        next: nextMonth(calendarData.date)
-      }
-      const newDate = object[type as keyof typeof object]
-      const formattedDate = newDate.set('date', day)
+      // const object = {
+      //   previous: previousMonth(calendarData.date),
+      //   current: calendarData.date,
+      //   next: nextMonth(calendarData.date)
+      // }
+      // const newDate = object[type as keyof typeof object]
+      const formattedDate = ''
       return moment(formattedDate).isSame(moment(minDate), 'day')
         ? false
         : moment(formattedDate).isBefore(moment(minDate))
@@ -176,15 +177,15 @@ const Days: React.FC<Props> = ({
       if (isDateTooEarly(day, type) || isDateTooLate(day, type)) {
         return true
       }
-      const object = {
-        previous: previousMonth(calendarData.date),
-        current: calendarData.date,
-        next: nextMonth(calendarData.date)
-      }
-      const newDate = object[type as keyof typeof object]
-      const formattedDate = `${moment(newDate).jYear()}-${moment(newDate).jMonth() + 1}-${
-        day >= 10 ? day : '0' + day
-      }`
+      // const object = {
+      //   previous: previousMonth(calendarData.date),
+      //   current: calendarData.date,
+      //   next: nextMonth(calendarData.date)
+      // }
+      // const newDate = object[type as keyof typeof object]
+      // const formattedDate = `${moment(newDate).jYear()}-${moment(newDate).jMonth() + 1}-${
+      //   day >= 10 ? day : '0' + day
+      // }`
 
       if (
         !disabledDates ||
@@ -193,22 +194,22 @@ const Days: React.FC<Props> = ({
         return false
       }
 
-      let matchingCount = 0
-      disabledDates?.forEach((dateRange) => {
-        if (
-          moment(formattedDate).isAfter(dateRange.startDate) &&
-          moment(formattedDate).isBefore(dateRange.endDate)
-        ) {
-          matchingCount++
-        }
-        if (
-          moment(formattedDate).isSame(dateRange.startDate) ||
-          moment(formattedDate).isSame(dateRange.endDate)
-        ) {
-          matchingCount++
-        }
-      })
-      return matchingCount > 0
+      // let matchingCount = 0
+      // disabledDates?.forEach((dateRange) => {
+      //   if (
+      //     moment(formattedDate).isAfter(dateRange.startDate) &&
+      //     moment(formattedDate).isBefore(dateRange.endDate)
+      //   ) {
+      //     matchingCount++
+      //   }
+      //   if (
+      //     moment(formattedDate).isSame(dateRange.startDate) ||
+      //     moment(formattedDate).isSame(dateRange.endDate)
+      //   ) {
+      //     matchingCount++
+      //   }
+      // })
+      return 0
     },
     [calendarData.date, isDateTooEarly, isDateTooLate, disabledDates]
   )
@@ -221,11 +222,10 @@ const Days: React.FC<Props> = ({
           baseClass,
           !activeDateData(day).active
             ? hoverClassByDay(day)
-            : activeDateData(day).className,
-          isDateDisabled(day, type) && 'line-through'
+            : activeDateData(day).className
         )
       }
-      return cn(baseClass, isDateDisabled(day, type) && 'line-through')
+      return cn(baseClass)
     },
     [activeDateData, hoverClassByDay, isDateDisabled]
   )
@@ -237,8 +237,8 @@ const Days: React.FC<Props> = ({
       }
       for (let i = 0; i < disabledDates.length; i++) {
         if (
-          moment(hoverPeriod.start).isBefore(disabledDates[i].startDate) &&
-          moment(hoverPeriod.end).isAfter(disabledDates[i].endDate)
+          moment(hoverPeriod?.start).isBefore(disabledDates[i].startDate) &&
+          moment(hoverPeriod?.end).isAfter(disabledDates[i].endDate)
         ) {
           return true
         }
@@ -265,39 +265,47 @@ const Days: React.FC<Props> = ({
         day >= 10 ? day : '0' + day
       }`
 
-      if (period.start && !period.end) {
+      if (period?.start && !period.end) {
         const hoverPeriod = { ...period, end: newHover }
 
         if (moment(newHover).isBefore(moment(period.start))) {
           hoverPeriod.start = newHover
           hoverPeriod.end = period.start
           if (!checkIfHoverPeriodContainsDisabledPeriod(hoverPeriod)) {
-            changePeriod({
-              start: null,
-              end: period.start
-            })
+            if (changePeriod !== undefined) {
+              changePeriod({
+                start: null,
+                end: period.start
+              })
+            }
           }
         }
         if (!checkIfHoverPeriodContainsDisabledPeriod(hoverPeriod)) {
-          changeDayHover(newHover)
+          if (changeDayHover !== undefined) {
+            changeDayHover(newHover)
+          }
         }
       }
 
-      if (!period.start && period.end) {
+      if (!period?.start && period?.end) {
         const hoverPeriod = { ...period, start: newHover }
 
         if (moment(newHover).isAfter(moment(period.end))) {
           hoverPeriod.start = period.end
           hoverPeriod.end = newHover
           if (!checkIfHoverPeriodContainsDisabledPeriod(hoverPeriod)) {
-            changePeriod({
-              start: period.end,
-              end: null
-            })
+            if (changePeriod !== undefined) {
+              changePeriod({
+                start: period.end,
+                end: null
+              })
+            }
           }
         }
         if (!checkIfHoverPeriodContainsDisabledPeriod(hoverPeriod)) {
-          changeDayHover(newHover)
+          if (changeDayHover !== undefined) {
+            changeDayHover(newHover)
+          }
         }
       }
     },
@@ -342,7 +350,6 @@ const Days: React.FC<Props> = ({
         <div className="" key={index}>
           <button
             type="button"
-            disabled={isDateDisabled(item, 'previous')}
             className={`${buttonClass(item, 'previous')}`}
             onClick={() => {
               handleClickDay(item, 'previous')
@@ -360,7 +367,6 @@ const Days: React.FC<Props> = ({
         <div className="flex items-center justify-center" key={index}>
           <button
             type="button"
-            disabled={isDateDisabled(item, 'current')}
             className={`${buttonClass(item, 'current')}`}
             onClick={() => {
               handleClickDay(item, 'current')
@@ -378,7 +384,6 @@ const Days: React.FC<Props> = ({
         <div className="" key={index}>
           <button
             type="button"
-            disabled={isDateDisabled(item, 'next')}
             className={`${buttonClass(item, 'next')}`}
             onClick={() => {
               handleClickDay(item, 'next')

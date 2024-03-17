@@ -7,7 +7,7 @@ interface NewTaskContextStore {
 
 export const NewTaskContext = createContext<NewTaskContextStore>({
   selected: -1,
-  setSelected: (selected: number) => {}
+  setSelected: (_selected: number) => {}
 })
 
 const NewTaskContextProvider = ({

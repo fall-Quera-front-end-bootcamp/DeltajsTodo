@@ -11,8 +11,7 @@ import Close from '../../../Icons/Close'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
 import {
   useGetBoardQuery,
-  useUpdataBoardMutation,
-  useUpdataWorkspaceMutation
+  useUpdataBoardMutation
 } from '../../../../../features/auth/authApiSlice'
 import { toast } from 'react-hot-toast'
 import { useOnClickOutside } from 'usehooks-ts'
@@ -56,7 +55,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
   const onSubmitHandler = async (): Promise<void> => {
     if (inputValue !== '') {
       try {
-        const userData = await updataBoard({
+        await updataBoard({
           workspace_id: WID,
           project_id: PID,
           id: BID,
@@ -133,7 +132,7 @@ const ChangeBoardTitle: FunctionComponent<ChangeBoardTitleProps> = ({
             <div className="rounded-md border-[1px] border-[#AAAAAA]">
               <input
                 className="w-[170px]
-              rounded-md border-[1px] border-[#AAAAAA] text-wrap"
+              text-wrap rounded-md border-[1px] border-[#AAAAAA]"
                 type="text"
                 name="title"
                 value={inputValue}

@@ -18,14 +18,14 @@ interface Step2Props {
   onChangeHandler: (e: any) => void
 }
 
-const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
+const Step2: FunctionComponent<Step2Props> = ({ onChangeHandler }) => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const creationWorkspaceDispatch: any = useContext(
     CreationWorkspaceStepDispatchContext
   )
   const [WScolor, setWSColor] = useState<string>('#7D828C')
   const onWSColorChangeHandler = (e: any): void => {
-    setWSColor((p) => e?.target?.value)
+    setWSColor(() => e?.target?.value)
     onChangeHandler(e)
   }
 
@@ -98,7 +98,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
             {/*--------------------------------------------------------------- */}
             <div className="w-[293px] h-86px] flex flex-col gap-[16px]">
               <div className="w-[97px] h-[20px]">
-                <p className="font-yekan w-[97px] h-[20px] text-right text-[14px] font-[400px]  leading-[19.73px]  text-[#1E1E1E] ">
+                <p className="w-[97px] h-[20px] text-right text-[14px] font-[400px]  leading-[19.73px]  text-[#1E1E1E] ">
                   رنگ برد
                 </p>
               </div>

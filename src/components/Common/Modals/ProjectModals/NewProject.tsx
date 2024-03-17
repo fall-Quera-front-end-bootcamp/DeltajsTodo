@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-useless-return */
@@ -42,7 +43,7 @@ const NewProject: FunctionComponent<NewProjectProps> = ({ WID, className }) => {
   const onSubmitHandler = async (): Promise<void> => {
     if (inputValue !== '') {
       try {
-        const userData = await createProject({
+        await createProject({
           workspace_id: WID,
           name: inputValue
         }).unwrap()

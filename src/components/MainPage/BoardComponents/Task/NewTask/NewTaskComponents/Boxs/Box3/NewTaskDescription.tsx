@@ -32,7 +32,8 @@ const NewTaskDescription = ({
   const inputError = findInputError(errors, name)
   const isInvalid = isFormInvalid(inputError)
 
-  if (isInvalid) toast.error(inputError.error.message)
+  const mg = (inputError as { error: { message: string } }).error?.message
+  if (isInvalid) toast.error(mg)
 
   return (
     <textarea

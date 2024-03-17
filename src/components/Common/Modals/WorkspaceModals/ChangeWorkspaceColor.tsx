@@ -55,7 +55,7 @@ const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
   const onSubmitHandler = async (): Promise<void> => {
     if (WScolor !== '') {
       try {
-        const userData = await updataWorkspace({
+        await updataWorkspace({
           id: WID,
           color: WScolor
         }).unwrap()
@@ -74,7 +74,7 @@ const ChangeWorkspaceColor: FunctionComponent<ChangeWorkspaceColorProps> = ({
   ///////////////////////////////////////////////////
 
   const onChangeHandler = (e: any): void => {
-    setWSColor((p) => e?.target?.value)
+    setWSColor(() => e?.target?.value)
   }
 
   //////////////////////////////////////////

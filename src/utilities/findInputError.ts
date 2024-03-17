@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* -------------------------------------------------------------------
 |  🐼 Function findInputError
 |
@@ -8,12 +9,7 @@
 |  🐸 Returns:  OBJECT
 *------------------------------------------------------------------- */
 
-import { type FieldErrors, type FieldValues } from 'react-hook-form'
-
-export function findInputError (
-  errors: FieldErrors<FieldValues>,
-  name: string
-): object {
+export function findInputError (errors: any, name: string): object {
   const filtered = Object.keys(errors)
     .filter((key) => key.includes(name))
     .reduce((cur, key) => {

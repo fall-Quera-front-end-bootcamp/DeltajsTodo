@@ -60,7 +60,7 @@ function TaskMore({
           })
         }
       />
-      <ShareButton />
+      <ShareButton WID={workspaceID} />
     </div>
   )
 }

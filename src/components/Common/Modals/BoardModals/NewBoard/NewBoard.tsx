@@ -20,10 +20,8 @@ import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 import { Permission, type Workspace } from '../../../../../utilities/models'
-import { useNavigate } from 'react-router-dom'
 import {
   useCreateBoardMutation,
-  useCreateWorkspaceMutation,
   useGetBoardsQuery
 } from '../../../../../features/auth/authApiSlice'
 import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
@@ -83,15 +81,9 @@ const NewBoard: FunctionComponent<NewBoardProps> = ({
   useOnClickOutside(bigDivRef, handleClickOutside)
   // Click OutSide
 
-  const navigate = useNavigate()
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const [createBoard, { isLoading }] = useCreateBoardMutation()
-  const {
-    data: boards,
-    isSuccess,
-    isError,
-    error
-  } = useGetBoardsQuery({
+  const { data: boards } = useGetBoardsQuery({
     workspace_id: WID,
     project_id: PID
   })

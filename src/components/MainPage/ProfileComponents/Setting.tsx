@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type Key } from 'react'
 import { motion } from 'framer-motion'
 
 import {
@@ -12,7 +14,7 @@ import ThemeToggle from '../../Common/Buttons/ThemeToggle'
 import Loading from '../../Common/Loading/Loading'
 
 interface SettingProps {
-  messageFunction: Function
+  messageFunction: () => void
 }
 
 const Setting = ({ messageFunction }: SettingProps) => {
@@ -40,7 +42,7 @@ const Setting = ({ messageFunction }: SettingProps) => {
     '#FA5252'
   ])
 
-  const changeThemeHandler = (e: any) => {
+  const changeThemeHandler = (e: any): void => {
     setChosedColor(e.target.value)
   }
 
@@ -51,7 +53,7 @@ const Setting = ({ messageFunction }: SettingProps) => {
     }
   }, [getSettings])
 
-  const onSubmit = () => {
+  const onSubmit = (): void => {
     setIsSending(true)
     const updateData = {
       theme: chosedColor
@@ -94,7 +96,7 @@ const Setting = ({ messageFunction }: SettingProps) => {
           </span>
 
           <div className="flex gap-[20.36px]">
-            {colorsPalet.current.map((color: string, x) => {
+            {colorsPalet.current.map((color: string, x: Key | null | undefined) => {
               const checked = color === chosedColor
               return (
                 <ButtonColorIconSvg

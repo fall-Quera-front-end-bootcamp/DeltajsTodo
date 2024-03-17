@@ -21,7 +21,10 @@ const Checkbox = (): JSX.Element => {
   }
 
   const inputError = findInputError(errors, name)
+
   const isInvalid = isFormInvalid(inputError)
+
+  const mg = (inputError as { error: { message: string } }).error?.message
   return (
     <div className="relative mt-1">
       <input
@@ -46,12 +49,7 @@ const Checkbox = (): JSX.Element => {
         <path d="M10.5 1L3.5 8.29297" stroke="#208D8E" strokeLinecap="square" />
       </svg>
       <AnimatePresence mode="wait" initial={false}>
-        {isInvalid && (
-          <InputError
-            message={inputError.error.message}
-            key={inputError.error.message}
-          />
-        )}
+        {isInvalid && <InputError message={mg} key={mg} />}
       </AnimatePresence>
     </div>
   )

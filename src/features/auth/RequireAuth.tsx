@@ -2,8 +2,6 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable multiline-ternary */
 import { type FunctionComponent } from 'react'
-import { useSelector } from 'react-redux'
-import { selectCurrentToken } from './authSlice'
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 

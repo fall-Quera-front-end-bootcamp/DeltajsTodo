@@ -28,8 +28,7 @@ const ProjectItem: FunctionComponent<ProjectItemProps> = ({
     data: project,
     isLoading,
     isError,
-    isSuccess,
-    error
+    isSuccess
   } = useGetProjectQuery({ workspace_id: workspaceItemID, id: projectID })
 
   /////////////////////////////////////////////////////////////////////

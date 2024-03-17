@@ -78,7 +78,9 @@ const Calendar = ({
   }, [current, date, previous])
 
   useEffect(() => {
-    daysChangeF(calendarData.days)
+    if (daysChangeF !== undefined) {
+      daysChangeF(calendarData.days)
+    }
   }, [calendarData.days])
 
   const clickDay = useCallback(
@@ -97,16 +99,20 @@ const Calendar = ({
         if (changeDayHover) {
           changeDayHover(null)
         }
-        changePeriod({
-          start: null,
-          end: null
-        })
+        if (changePeriod !== undefined) {
+          changePeriod({
+            start: null,
+            end: null
+          })
+        }
       }
 
       // True & True / False & False
       if ((!period?.start && !period?.end) || (period?.start && period?.end)) {
         if (!period?.start && !period?.end) {
-          changeDayHover(fullDay)
+          if (changeDayHover !== undefined) {
+            changeDayHover(fullDay)
+          }
         }
         newStart = fullDay
       } else {
@@ -130,21 +136,27 @@ const Calendar = ({
       }
 
       if (!(newEnd && newStart)) {
-        changePeriod({
-          start: newStart,
-          end: newEnd
-        })
+        if (changePeriod !== undefined) {
+          changePeriod({
+            start: newStart,
+            end: newEnd
+          })
+        }
       } else {
-        changePeriod({
-          start: newStart,
-          end: newEnd
-        })
+        if (changePeriod !== undefined) {
+          changePeriod({
+            start: newStart,
+            end: newEnd
+          })
+        }
       }
 
-      changeDatepickerValue({
-        startDate: newStart,
-        endDate: newEnd
-      })
+      if (changeDatepickerValue !== undefined) {
+        changeDatepickerValue({
+          startDate: newStart,
+          endDate: newEnd
+        })
+      }
     },
     [
       changeDatepickerValue,
@@ -215,7 +227,7 @@ const Calendar = ({
               onClickPrevious={onClickPrevious}
             />
             <div className="absolute left-[16px] top-[160px] my-1 grid w-[600px] grid-cols-7 gap-y-4">
-              <Week className='text-gray-primary' />
+              <Week className="text-gray-primary" />
               <Days
                 calendarData={calendarData}
                 onClickPreviousDays={clickPreviousDays}

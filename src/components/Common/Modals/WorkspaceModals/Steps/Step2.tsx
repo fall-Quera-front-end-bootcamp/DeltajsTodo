@@ -18,14 +18,14 @@ interface Step2Props {
   onChangeHandler: (e: any) => void
 }
 
-const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
+const Step2: FunctionComponent<Step2Props> = ({ onChangeHandler }) => {
   const localPageDispatch: any = useContext(localPageDispatchContext)
   const creationWorkspaceDispatch: any = useContext(
     CreationWorkspaceStepDispatchContext
   )
   const [WScolor, setWSColor] = useState<string>('#7D828C')
   const onWSColorChangeHandler = (e: any): void => {
-    setWSColor((p) => e?.target?.value)
+    setWSColor(() => e?.target?.value)
     onChangeHandler(e)
   }
 
@@ -47,7 +47,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
   return (
     <>
       <div
-        className="bg-white 
+        className="bg-white
             h-[286px] w-[501px]
             rounded-lg p-[24px]
              flex flex-col items-center
@@ -55,14 +55,14 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
             "
       >
         <div
-          className="bg-white 
+          className="bg-white
             h-[158px] w-[453px]
              flex flex-col items-center
               gap-[40px]"
         >
           {/* header */}
           <div
-            className="bg-white 
+            className="bg-white
             h-[32px] w-[453px]
              flex flex-row justify-between "
           >
@@ -74,7 +74,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
             <div>
               <p
                 className="font-yekan w-[245px] h-[32px]
-                 text-center text-[24px] font-extrabold 
+                 text-center text-[24px] font-extrabold
                  leading-[32px]  text-[#1E1E1E] "
               >
                 انتخاب رنگ ورک‌اسپیس‌
@@ -120,7 +120,7 @@ const Step2: FunctionComponent<Step2Props> = ({ value, onChangeHandler }) => {
               >
                 <p
                   className="  font-yekan w-[47px]
-h-[32px] text-center text-[24px] font-extrabold 
+h-[32px] text-center text-[24px] font-extrabold
 leading-[32px]  text-[#1E1E1E]
 
 "
@@ -195,7 +195,7 @@ leading-[19.73px]  text-[#1E1E1E] "
 
             {/* <p
                 className="font-yekan w-[92px]
-                   h-[20px] text-right text-[14px] font-[400px] 
+                   h-[20px] text-right text-[14px] font-[400px]
                   leading-[19.73px]  text-[#1E1E1E] "
               >
                 نام ورک‌اسپیس
@@ -211,7 +211,7 @@ leading-[19.73px]  text-[#1E1E1E] "
 
         {/* ادامه*/}
         <div
-          className="bg-white 
+          className="bg-white
             h-[40px] w-[415px] rounded-md    flex gap-[10px] "
         >
           <button

@@ -17,7 +17,6 @@ import CalendarCellNewTaskInput from './CalendarCellNewTaskInput'
 interface CalendarCellNewTaskProps {
   WID: number
   PID: number
-  BID?: number
   month: string | undefined
   day: string | undefined
 }
@@ -31,7 +30,6 @@ interface FormDataProps {
 const CalendarCellNewTask = ({
   WID,
   PID,
-  BID,
   month,
   day
 }: CalendarCellNewTaskProps): JSX.Element => {
@@ -154,7 +152,9 @@ const CalendarCellNewTask = ({
             </div>
           </div>
           <button
-            onClick={onSubmit}
+            onClick={() => {
+              void onSubmit()
+            }}
             className="h-[32px] w-[125px] rounded-[4px] bg-brand-primary px-[7px] py-[4px] text-[12px] font-normal leading-[16.91px] text-white"
           >
             {TaskDetail.isLoading ? <LoadingComponent /> : 'ساخت تسک'}

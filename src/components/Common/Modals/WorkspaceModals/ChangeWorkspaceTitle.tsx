@@ -41,12 +41,10 @@ const ChangeWorkspaceTitle: FunctionComponent<ChangeWorkspaceTitleProps> = ({
   const onSubmitHandler = async (): Promise<void> => {
     if (inputValue !== '') {
       try {
-        const userData = await updataWorkspace({
+        await updataWorkspace({
           id: WID,
           name: inputValue
         }).unwrap()
-        // console.log(userData)
-
         localPageDispatch({ type: 'closeModal' })
       } catch (err: any) {
         //console.log(err)
@@ -95,7 +93,7 @@ const ChangeWorkspaceTitle: FunctionComponent<ChangeWorkspaceTitleProps> = ({
           >
             <p
               className="h-[20px] w-[92px]
-               text-right font-yekan text-[14px] font-[400px] 
+               text-right font-yekan text-[14px]
               leading-[19.73px]  text-[#1E1E1E] "
             >
               نام ورک‌اسپیس
