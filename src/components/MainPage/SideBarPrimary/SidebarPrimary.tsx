@@ -3,7 +3,12 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable multiline-ternary */
-import { type FunctionComponent, useState, useContext } from 'react'
+import {
+  type FunctionComponent,
+  useState,
+  useContext,
+  useCallback
+} from 'react'
 import ArrowDownIconSvg from '../../Common/Icons/ArrowDownIconSvg'
 import SearchIconSvg from '../../Common/Icons/SearchIconSvg'
 import AddSecondaryIconSvg from '../../Common/Icons/AddSecondaryIconSvg'
@@ -28,13 +33,13 @@ const SidebarPrimary: FunctionComponent<SidebarPrimaryProps> = () => {
   const [filterValue, setFilterValue] = useState('')
   const navigate = useNavigate()
 
-  const handleLogout = (): void => {
+  const handleLogout = useCallback((): void => {
     cookies.remove('accessToken')
     cookies.remove('id')
     localStorage.removeItem('refreshToken')
-    navigate('/')
+    // navigate('/')
     navigate(0)
-  }
+  }, [])
 
   try {
     const {
