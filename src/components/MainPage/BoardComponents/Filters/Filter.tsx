@@ -3,7 +3,7 @@ import RemoveIconSvg from '../../../Common/Icons/RemoveIconSvg'
 import FilterIsOrNot from './SearchItem/FilterIsOrNot'
 import FilterTags from './SearchItem/FilterTags'
 import FilterWhere from './SearchItem/FilterWhere'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 import { useOnClickOutside } from 'usehooks-ts'
 import Close from '../../../Common/Icons/Close'
 

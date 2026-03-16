@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { localPageDispatchContext } from '../../../../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../../../../context/LocalPageContextProvider'
 import DisabledIconSvg from '../../../../../../../Common/Icons/DisabledIconSvg'
 
 const CloseNewTaskButton = (): JSX.Element => {

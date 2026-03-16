@@ -88,9 +88,4 @@ export interface DatepickerType {
 
 export type ColorKeys = (typeof COLORS)[number] // "blue" | "orange"
 
-export type Colors = Record<
-string,
-{
-  [K in ColorKeys]: string
-}
->
+export type Colors = Record<string, { [K in ColorKeys]: string }>

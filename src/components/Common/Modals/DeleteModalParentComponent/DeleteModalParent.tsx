@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 import Close from '../../Icons/Close'
 import LoadingComponent from '../../LoadingComponent/LoadingComponent'
 

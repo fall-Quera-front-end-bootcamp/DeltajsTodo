@@ -6,10 +6,10 @@ import {
   useMemo,
   useEffect
 } from 'react'
-import { DatepickerContext } from '../../../../../contexts/DateContextProvider'
+import { DatepickerContext } from '../../../../../context/DateContextProvider'
 import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import CalendarCell from './CalendarViewComponents/CalendarCell/CalendarCell'
-import Week from '../../Calendar/Week'
+import Week from '../../../../Calendar/Week'
 import {
   getDaysInMonth,
   getFirstDayInMonth,

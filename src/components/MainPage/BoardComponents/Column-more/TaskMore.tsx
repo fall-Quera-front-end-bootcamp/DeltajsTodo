@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import '../../../../dist/output.css'
 import ShareButton from '../../../Common/Buttons/ShareButton'
 import TaskMoreOption from './TaskMoreOption'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 
 function TaskMore({
   workspaceID,

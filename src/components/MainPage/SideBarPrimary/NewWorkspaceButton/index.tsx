@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import AddSecondaryIconSvg from '../../../Common/Icons/AddSecondaryIconSvg'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 
 const NewWorkspaceButton = (): JSX.Element => {
   const stepDispatch: any = useContext(localPageDispatchContext)

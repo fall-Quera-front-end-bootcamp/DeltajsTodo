@@ -1,30 +1,54 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable @typescript-eslint/space-before-function-paren */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import './dist/output.css'
 import { Route, Routes } from 'react-router-dom'
-
+import Shop from './pages/Shop'
+import Home from './pages/Home'
+import Cart from './pages/Cart'
+import RootLayout from './pages/RootLayout'
+import AllContext from './context/AllContext'
 import Login from './pages/AuthPages/Login'
+import Admin from './pages/Admin'
 import Register from './pages/AuthPages/Register'
+import EmptyArea from './pages/EmptyArea'
 import ForgetPassword from './pages/AuthPages/ForgetPassword'
 import ResetPassword from './pages/AuthPages/ResetPassword'
-import NotFound from './pages/NotFound'
-import MainLayout from './pages/MainPages/MainLayout'
-import Board from './pages/MainPages/Board'
-import Admin from './pages/Admin'
-import RequireAuth from './features/auth/RequireAuth'
-import AllContext from './contexts/AllContext'
-import EmptyArea from './pages/EmptyArea'
-import LocalPageContextProvider from './contexts/LocalPageContextProvider'
-import WorkspacePage from './pages/MainPages/Workspace'
-import { Toaster } from 'react-hot-toast'
 import Profile from './pages/MainPages/Profile'
-// eslint-disable-next-line @typescript-eslint/space-before-function-paren
-function App(): JSX.Element {
+import RequireAuth from './features/auth/RequireAuth'
+import LocalPageContextProvider from './context/LocalPageContextProvider'
+import MainLayout from './pages/MainPages/MainLayout'
+import WorkspacePage from './pages/MainPages/Workspace'
+import Board from './pages/MainPages/Board'
+import NotFound from './pages/NotFound'
+
+export default function App() {
   return (
     <>
       <AllContext>
         <Routes>
+          {/* <Route path="/">
+            <Route
+              path=""
+              element={
+                <RootLayout>
+                  <Home />
+                </RootLayout>
+              }
+            />
+            <Route
+              path="shop"
+              element={
+                <RootLayout>
+                  <Shop />
+                </RootLayout>
+              }
+            />
+            <Route
+              path="cart"
+              element={
+                <RootLayout>
+                  <Cart />
+                </RootLayout>
+              }
+            />
+          </Route> */}
           <Route path="api/auth/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="api/auth/register" element={<Register />} />
@@ -49,9 +73,6 @@ function App(): JSX.Element {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AllContext>
-      <Toaster />
     </>
   )
 }
-
-export default App

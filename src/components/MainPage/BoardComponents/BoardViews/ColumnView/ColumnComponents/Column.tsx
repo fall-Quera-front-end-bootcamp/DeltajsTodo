@@ -6,7 +6,7 @@ import ColumnHeader from './ColumnHeader'
 import { useGetBoardQuery } from '../../../../../../features/auth/authApiSlice'
 import BuildTaskButtonPrimary from '../../../Task/BuildTaskButtons/BuildTaskButtonPrimary'
 import LoadingComponent from '../../../../../Common/LoadingComponent/LoadingComponent'
-import { localPageDispatchContext } from '../../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../../context/LocalPageContextProvider'
 import ColumnTask from './ColumnTask'
 
 interface ColumnProps {

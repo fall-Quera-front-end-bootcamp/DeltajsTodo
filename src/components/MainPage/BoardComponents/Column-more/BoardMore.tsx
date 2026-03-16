@@ -2,7 +2,7 @@
 import { useContext } from 'react'
 import '../../../../dist/output.css'
 import BordMoreOption from './BordMoreOption'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 import { type Board } from '../../../../utilities/models'
 import toast from 'react-hot-toast'
 

@@ -5,7 +5,7 @@ import { type Project, type Workspace } from '../../../utilities/models'
 import BuildProjectItemWorkspaceButton from './BuildProjectItemWorkspaceButton'
 import ProjectItemWorkspace from './ProjectItemWorkspace'
 import LoadingComponent from '../../Common/LoadingComponent/LoadingComponent'
-import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../context/LocalPageContextProvider'
 import Slider from '../SliderHorizontal/SliderHorizontal'
 
 interface ProjectsInterface {

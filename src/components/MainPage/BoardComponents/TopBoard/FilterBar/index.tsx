@@ -3,7 +3,7 @@ import FilterSettingIconSvg from '../../../../Common/Icons/FilterIconSvg'
 import SearchIconSvg from '../../../../Common/Icons/SearchIconSvg'
 import LayoutBar from '../LayoutBar'
 import VerticalLine from '../TopBar/LineComponents/VerticalLine'
-import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import ReArchiveButton from './ReArchiveButton'
 
 const FilterBar = ({ WID, PID }: { WID: number; PID: number }): JSX.Element => {

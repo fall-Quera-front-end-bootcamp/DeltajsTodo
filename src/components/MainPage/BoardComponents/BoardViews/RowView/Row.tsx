@@ -14,7 +14,7 @@ import moment from 'jalali-moment'
 import { useGetTasksQuery } from '../../../../../features/auth/authApiSlice'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 import { taskPriority } from './RowComponents/TaskPriorityFunction'
-import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 
 interface RowProps {
   board: Board

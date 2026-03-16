@@ -8,8 +8,8 @@ import { type Board } from '../../../../../../utilities/models'
 import { toFarsiNumber } from '../../../../../../utilities/toFarsiNumber'
 import BoradMore from '../../../Column-more/BoardMore'
 import AddTaskLableSvg from '../../../../../Common/Icons/AddTaskLableSvg'
-import { localPageDispatchContext } from '../../../../../../contexts/LocalPageContextProvider'
-import { DarkModeContext } from '../../../../../../contexts/DarkModeContextProvider'
+import { localPageDispatchContext } from '../../../../../../context/LocalPageContextProvider'
+import { DarkModeContext } from '../../../../../../context/DarkModeContextProvider'
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface ColumnHeaderProps {

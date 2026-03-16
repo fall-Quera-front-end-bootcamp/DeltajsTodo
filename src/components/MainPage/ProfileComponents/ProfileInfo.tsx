@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable multiline-ternary */
 /* eslint-disable @typescript-eslint/no-empty-interface */
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
 
@@ -18,10 +18,12 @@ import Input from '../../Common/Input/Input'
 import Cookies from 'universal-cookie'
 
 interface ProfileInfoProps {
-  messageFunction: () => void
+  messageFunction: (text: string, type: string) => (() => void)
 }
 
-const ProfileInfo = ({ messageFunction }: ProfileInfoProps): void => {
+const ProfileInfo = ({
+  messageFunction
+}: ProfileInfoProps): React.ReactNode => {
   const cookies = new Cookies()
   const id = cookies.get('id')
 

@@ -14,7 +14,7 @@ import ThemeToggle from '../../Common/Buttons/ThemeToggle'
 import Loading from '../../Common/Loading/Loading'
 
 interface SettingProps {
-  messageFunction: () => void
+  messageFunction: (text: string, type: string) => () => void
 }
 
 const Setting = ({ messageFunction }: SettingProps) => {
@@ -96,20 +96,22 @@ const Setting = ({ messageFunction }: SettingProps) => {
           </span>
 
           <div className="flex gap-[20.36px]">
-            {colorsPalet.current.map((color: string, x: Key | null | undefined) => {
-              const checked = color === chosedColor
-              return (
-                <ButtonColorIconSvg
-                  key={x}
-                  id={color}
-                  name={'color'}
-                  color={color}
-                  value={color}
-                  checked={checked}
-                  onChangeHandler={changeThemeHandler}
-                />
-              )
-            })}
+            {colorsPalet.current.map(
+              (color: string, x: Key | null | undefined) => {
+                const checked = color === chosedColor
+                return (
+                  <ButtonColorIconSvg
+                    key={x}
+                    id={color}
+                    name={'color'}
+                    color={color}
+                    value={color}
+                    checked={checked}
+                    onChangeHandler={changeThemeHandler}
+                  />
+                )
+              }
+            )}
           </div>
         </div>
 

@@ -4,7 +4,7 @@
 import { useContext, type FunctionComponent, useRef } from 'react'
 import LeftArrow from '../../../Icons/LeftArrow'
 import Close from '../../../Icons/Close'
-import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import { CreationWorkspaceStepDispatchContext } from './NewBoard'
 
 interface Step1Props {

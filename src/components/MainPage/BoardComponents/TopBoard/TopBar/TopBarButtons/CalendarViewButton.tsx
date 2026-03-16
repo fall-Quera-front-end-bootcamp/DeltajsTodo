@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { Views } from '../../../../../../utilities/models'
 import CalendarIconSvg from '../../../../../Common/Icons/CalendarIcons/CalendarIconSvg'
-import { DarkModeContext } from '../../../../../../contexts/DarkModeContextProvider'
+import { DarkModeContext } from '../../../../../../context/DarkModeContextProvider'
 
 const CalendarViewButton = ({
   handleView,

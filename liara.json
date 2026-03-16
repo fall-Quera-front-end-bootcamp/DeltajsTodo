@@ -1,0 +1,10 @@
+{
+  "app": "shop",
+  "platform": "react",
+  "build": {
+    "location": "iran"
+  },
+  "react": {
+    "mirror": true
+  }
+}
