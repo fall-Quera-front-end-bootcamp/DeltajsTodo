@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import ShareIconSvg from '../../Icons/ShareIconSvg'
 import ShareTask from '.'
-import { DarkModeContext } from '../../../../contexts/DarkModeContextProvider'
+import { DarkModeContext } from '../../../../context/DarkModeContextProvider'
 
 const ShareTaskButton = ({
   ShareTaskClass

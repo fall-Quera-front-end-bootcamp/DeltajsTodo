@@ -37,7 +37,7 @@ const Calendar = ({
   onClickNext: () => void
   setShowCalendar: Dispatch<SetStateAction<boolean>>
 }): JSX.Element => {
-  // Contexts
+  // context
   const {
     period,
     changePeriod,

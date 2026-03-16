@@ -6,13 +6,13 @@ import { toFarsiNumber } from '../../../../../utilities/toFarsiNumber'
 import DotsMenuIconSvg from '../../../../Common/Icons/DotsMenuIconSvg'
 import ParagraphsIconSvg from '../../../../Common/Icons/ParagraphsIconSvg'
 import moment from 'jalali-moment'
-import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import { useDeleteTaskMutation } from '../../../../../features/auth/authApiSlice'
 import toast from 'react-hot-toast'
 import { taskPriority } from '../../BoardViews/RowView/RowComponents/TaskPriorityFunction'
 import LoadingComponent from '../../../../Common/LoadingComponent/LoadingComponent'
 
-function TaskCard ({
+function TaskCard({
   task,
   WID,
   PID,

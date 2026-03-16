@@ -21,7 +21,7 @@ import {
 import Days from './Days'
 import Week from './Week'
 import moment from 'jalali-moment'
-import { DatepickerContext } from '../../../../contexts/DateContextProvider'
+import { DatepickerContext } from '../../../../context/DateContextProvider'
 import CalendarStartIconSvg from '../../../Common/Icons/CalendarIcons/CalendarStartIconSvg'
 import CalendarEndIconSvg from '../../../Common/Icons/CalendarIcons/CalendarEndIconSvg'
 import CalendarBoxRight from './CalendarComponents/CalendarBoxRight'
@@ -37,7 +37,7 @@ const Calendar = ({
   onClickNext: () => void
   setShowCalendar: Dispatch<SetStateAction<boolean>>
 }): JSX.Element => {
-  // Contexts
+  // context
   const {
     period,
     changePeriod,

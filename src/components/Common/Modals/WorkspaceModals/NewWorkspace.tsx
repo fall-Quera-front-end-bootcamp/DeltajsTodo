@@ -21,7 +21,7 @@ import Step3 from './Steps/Step3'
 import { Permission, type Workspace } from '../../../../utilities/models'
 import { useNavigate } from 'react-router-dom'
 import { useCreateWorkspaceMutation } from '../../../../features/auth/authApiSlice'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 import { toast } from 'react-hot-toast'
 import { useOnClickOutside } from 'usehooks-ts'
 

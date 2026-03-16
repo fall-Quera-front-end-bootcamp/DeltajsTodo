@@ -9,7 +9,7 @@
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import { useContext, type FunctionComponent, useRef } from 'react'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 import { useDeleteProjectMutation } from '../../../../features/auth/authApiSlice'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'

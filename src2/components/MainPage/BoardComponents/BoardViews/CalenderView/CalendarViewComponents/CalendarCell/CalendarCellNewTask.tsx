@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from 'react'
-import { localPageDispatchContext } from '../../../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../../../context/LocalPageContextProvider'
 import Close from '../../../../../../Common/Icons/Close'
 import PriorityFlag from '../../../../../../Common/Icons/PriorityFlag'
 import {

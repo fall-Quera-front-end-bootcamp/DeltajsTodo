@@ -12,7 +12,7 @@ import ProjectItem from './ProjectItem/ProjectItem'
 import { NavLink } from 'react-router-dom'
 import ProjectMore from '../../BoardComponents/Column-more/ProjectMore'
 
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import ItemColor from '../../../Common/Icons/ItemColor'
 import { useGetProjectsQuery } from '../../../../features/auth/authApiSlice'
 import LoadingComponent from '../../../Common/LoadingComponent/LoadingComponent'

@@ -2,7 +2,7 @@
 import { useState, type FunctionComponent, useEffect, useContext } from 'react'
 import DarkModeSwitchIconSvg from '../Icons/DarkModeSwitchIconSvg'
 import LightModeSwitchIconSvg from '../Icons/LightModeSwitchIconSvg'
-import { DarkModeContext } from '../../../contexts/DarkModeContextProvider'
+import { DarkModeContext } from '../../../context/DarkModeContextProvider'
 
 interface ThemeToggleProps {}
 

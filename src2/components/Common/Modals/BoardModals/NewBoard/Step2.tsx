@@ -9,7 +9,7 @@ import { useContext, type FunctionComponent, useRef, useState } from 'react'
 import LeftArrow from '../../../Icons/LeftArrow'
 import Close from '../../../Icons/Close'
 
-import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import { CreationWorkspaceStepDispatchContext } from './NewBoard'
 import ButtonColorIconSvg from '../../../Icons/ButtonColorIconSvg'
 

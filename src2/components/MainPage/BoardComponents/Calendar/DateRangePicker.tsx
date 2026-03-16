@@ -8,7 +8,7 @@ import {
 import Calendar from './Calendar'
 import moment from 'jalali-moment'
 import { nextMonth, previousMonth } from '../../../../helpers'
-import { DatepickerContext } from '../../../../contexts/DateContextProvider'
+import { DatepickerContext } from '../../../../context/DateContextProvider'
 
 const DateRangePicker = ({
   setShowCalendar

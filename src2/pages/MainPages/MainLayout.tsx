@@ -14,12 +14,12 @@ import ChangeWorkspaceColor from '../../components/Common/Modals/WorkspaceModals
 import ChangeProjectTitle from '../../components/Common/Modals/ProjectModals/ChangeProjectTitle'
 import DeleteWorkspace from '../../components/Common/Modals/WorkspaceModals/DeleteWorkspace'
 import DeleteProject from '../../components/Common/Modals/ProjectModals/DeleteProject'
-import { localPageContext } from '../../contexts/LocalPageContextProvider'
+import { localPageContext } from '../../context/LocalPageContextProvider'
 import NewBoard from '../../components/Common/Modals/BoardModals/NewBoard/NewBoard'
 import ChangeBoardTitle from '../../components/Common/Modals/BoardModals/ChangeBoardTitle.tsx/ChangeBoardTitle'
 import NewTask from '../../components/MainPage/BoardComponents/Task/NewTask/NewTask'
 import DeleteBoard from '../../components/Common/Modals/BoardModals/Delete‌Board/DeleteBoard'
-import NewTaskContextProvider from '../../contexts/NewTaskContextProvider'
+import NewTaskContextProvider from '../../context/NewTaskContextProvider'
 import CalendarCellNewTask from '../../components/MainPage/BoardComponents/BoardViews/CalenderView/CalendarViewComponents/CalendarCell/CalendarCellNewTask'
 import TaskInformation from '../../components/MainPage/BoardComponents/Task/TaskInformation/TaskInformation'
 import ArchiveAllTask from '../../components/MainPage/BoardComponents/Task/ArchiveAllTask'
@@ -59,7 +59,10 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
           </div>
           <div className="">
             {value === 1 && (
-              <NewWorkspace WID={workspaceID} className={value === 1 ? '' : 'hidden'} />
+              <NewWorkspace
+                WID={workspaceID}
+                className={value === 1 ? '' : 'hidden'}
+              />
             )}
             {value === 2 && <NewProject WID={workspaceID} />}
             {/* {step === 3 && <NewTask />}??? */}
@@ -111,12 +114,8 @@ const MainLayout: FunctionComponent<MainLayoutProps> = () => {
             {value === 15 && (
               <ArchiveAllTask WID={workspaceID} PID={projectID} BID={boardID} />
             )}
-            {value === 16 && (
-              <Filter />
-            )}
-            {value === 17 && (
-              <ShareWorkspace workspaceID={workspaceID} />
-            )}
+            {value === 16 && <Filter />}
+            {value === 17 && <ShareWorkspace workspaceID={workspaceID} />}
           </div>
         </div>
       </div>

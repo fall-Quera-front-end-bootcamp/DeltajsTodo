@@ -4,7 +4,7 @@ import moment from 'jalali-moment'
 import type React from 'react'
 import { useCallback, useContext } from 'react'
 
-import { DatepickerContext } from '../../../../contexts/DateContextProvider'
+import { DatepickerContext } from '../../../../context/DateContextProvider'
 import { nextMonth, previousMonth, classNames as cn } from '../../../../helpers'
 import { type Period } from '../../../../types'
 import { toFarsiNumber } from '../../../../utilities/toFarsiNumber'
@@ -29,7 +29,7 @@ const Days: React.FC<Props> = ({
   onClickDay,
   onClickNextDays
 }) => {
-  // Contexts
+  // context
   const {
     period,
     changePeriod,

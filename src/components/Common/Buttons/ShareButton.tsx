@@ -2,7 +2,7 @@
 import { useContext } from 'react'
 import '../../../dist/output.css'
 import ShareIconSvg from '../Icons/ShareIconSvg'
-import { localPageDispatchContext } from '../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../context/LocalPageContextProvider'
 
 // eslint-disable-next-line @typescript-eslint/space-before-function-paren
 function ShareButton({ WID }: { WID: number }): JSX.Element {

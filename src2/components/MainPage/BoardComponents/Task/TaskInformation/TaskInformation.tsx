@@ -5,7 +5,7 @@ import TaskInfoComment from './TaskInfoComment'
 import TopLeftSide from './TopLeftSide'
 // import TopRightSide from './TopRightSide'
 import BottomRightSide from './BottomRightSide'
-import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import { useOnClickOutside } from 'usehooks-ts'
 import TopRightSide from './TopRightSide'
 
@@ -21,7 +21,7 @@ interface TaskInfoProps {
   taskID?: number
 }
 
-function TaskInformation ({
+function TaskInformation({
   name,
   createAt,
   description,

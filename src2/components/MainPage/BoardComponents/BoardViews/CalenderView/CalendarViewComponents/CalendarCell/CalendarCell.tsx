@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import AddSecondaryIconSvg from '../../../../../../Common/Icons/AddSecondaryIconSvg'
 import { useGetBoardsQuery } from '../../../../../../../features/auth/authApiSlice'
-import { localPageDispatchContext } from '../../../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../../../context/LocalPageContextProvider'
 import toast from 'react-hot-toast'
 import moment from 'jalali-moment'
 import { toFarsiNumber } from '../../../../../../../utilities/toFarsiNumber'

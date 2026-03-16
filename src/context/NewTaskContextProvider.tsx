@@ -1,11 +1,11 @@
 import { createContext, useMemo, useState } from 'react'
 
-interface NewTaskContextStore {
+interface NewTaskcontexttore {
   selected: number
   setSelected?: (selected: number) => void
 }
 
-export const NewTaskContext = createContext<NewTaskContextStore>({
+export const NewTaskContext = createContext<NewTaskcontexttore>({
   selected: -1,
   setSelected: (_selected: number) => {}
 })

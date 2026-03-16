@@ -29,7 +29,7 @@ const Days: React.FC<Props> = ({
   onClickDay,
   onClickNextDays
 }) => {
-  // Contexts
+  // context
   const {
     period,
     changePeriod,

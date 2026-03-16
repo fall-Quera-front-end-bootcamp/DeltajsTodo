@@ -2,7 +2,7 @@
 import { useContext, useRef, useState } from 'react'
 import Close from '../../Icons/Close'
 import ArrowDownIconSvg from '../../Icons/ArrowDownIconSvg'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 import { useOnClickOutside } from 'usehooks-ts'
 import { useUpdateWorkspaceSubscriptionMutation } from '../../../../features/auth/authApiSlice'
 import toast from 'react-hot-toast'

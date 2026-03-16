@@ -5,7 +5,7 @@ import '../../../../dist/output.css'
 import ShareButton from '../../../Common/Buttons/ShareButton'
 import ProjectMoreOption from './ProjectMoreOption'
 import { useContext } from 'react'
-import { localPageDispatchContext } from '../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../context/LocalPageContextProvider'
 
 interface ProjectMoreProps {
   id: number

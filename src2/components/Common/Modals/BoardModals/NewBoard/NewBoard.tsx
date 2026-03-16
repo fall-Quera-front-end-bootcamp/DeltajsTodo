@@ -24,7 +24,7 @@ import {
   useCreateBoardMutation,
   useGetBoardsQuery
 } from '../../../../../features/auth/authApiSlice'
-import { localPageDispatchContext } from '../../../../../contexts/LocalPageContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import toast from 'react-hot-toast'
 import { useOnClickOutside } from 'usehooks-ts'
 ////////////////////// 🟨Local Context🟥 //////////////////////////

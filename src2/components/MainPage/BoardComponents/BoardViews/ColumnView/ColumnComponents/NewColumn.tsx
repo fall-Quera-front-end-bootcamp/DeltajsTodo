@@ -5,7 +5,7 @@
 
 import { useContext, type FunctionComponent } from 'react'
 import AddIconSvg from '../../../../../Common/Icons/AddIconSvg'
-import { DarkModeContext } from '../../../../../../contexts/DarkModeContextProvider'
+import { DarkModeContext } from '../../../../../../context/DarkModeContextProvider'
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface NewColumnProps {

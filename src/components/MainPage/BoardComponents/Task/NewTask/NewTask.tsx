@@ -17,7 +17,7 @@ import NewTaskBoxTwo from './NewTaskComponents/Boxs/Box2/NewTaskBoxTwo'
 import BoxOne from './NewTaskComponents/Boxs/Box1/BoxOne'
 import BoxFourUpload from './NewTaskComponents/Boxs/Box4/BoxFourUpload'
 import BoxFive from './NewTaskComponents/Boxs/Box5/BoxFive'
-import { NewTaskContext } from '../../../../../contexts/NewTaskContextProvider'
+import { NewTaskContext } from '../../../../../context/NewTaskContextProvider'
 import BoxThree from './NewTaskComponents/Boxs/Box3/BoxThree'
 import { useOnClickOutside } from 'usehooks-ts'
 
