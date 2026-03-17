@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { toFarsiNumber } from '../../utilities/toFarsiNumber'
-import Button from '../Common/Buttons/Button'
+import { toFarsiNumber } from '@/utilities/toFarsiNumber'
+import Button from '@/components/Common/Buttons/Button'
 import {
   getDaysInMonth,
   getFirstDayInMonth,
@@ -9,7 +9,7 @@ import {
   getNumberOfDay,
   nextMonth,
   previousMonth
-} from '../../helpers'
+} from '@/helpers'
 import {
   type SetStateAction,
   useCallback,

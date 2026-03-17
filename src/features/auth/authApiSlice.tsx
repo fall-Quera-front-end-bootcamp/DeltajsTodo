@@ -1,5 +1,5 @@
 /* eslint-disable spaced-comment */
-import { apiSlice } from '../../app/api/apiSlice'
+import { apiSlice } from '../../lib/api/apiSlice'
 //every api here has the auth header if user login succesfully
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

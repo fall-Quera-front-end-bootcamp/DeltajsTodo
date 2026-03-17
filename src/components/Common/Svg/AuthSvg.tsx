@@ -1,4 +1,4 @@
-import '../../../dist/output.css'
+import '@/dist/output.css'
 
 function AuthSvg(): JSX.Element {
   return (

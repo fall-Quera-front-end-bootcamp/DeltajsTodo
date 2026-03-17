@@ -1,0 +1,77 @@
+    <svg
+        width="128"
+        height="128"
+        viewBox="0 0 128 128"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFD166" />
+            <stop offset="100%" stop-color="#FFC857" />
+          </linearGradient>
+        </defs>
+
+
+        <circle
+          cx="64"
+          cy="64"
+          r="52"
+          fill="none"
+          stroke="url(#g)"
+          stroke-width="8"
+        />
+
+
+        <circle
+          cx="64"
+          cy="64"
+          r="18"
+          fill="none"
+          stroke="#FFD166"
+          stroke-width="4"
+        />
+
+
+        <path
+          d="M56 64 L62 70 L74 56"
+          stroke="#FFD166"
+          stroke-width="5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+
+        <path
+          d="M90 52 Q104 64 90 76"
+          stroke="#FFD166"
+          stroke-width="4"
+          fill="none"
+          stroke-linecap="round"
+        />
+
+        <path
+          d="M98 46 Q118 64 98 82"
+          stroke="#FFC857"
+          stroke-width="4"
+          fill="none"
+          stroke-linecap="round"
+        />
+
+
+        <path
+          d="M38 52 Q24 64 38 76"
+          stroke="#FFD166"
+          stroke-width="4"
+          fill="none"
+          stroke-linecap="round"
+        />
+
+        <path
+          d="M30 46 Q10 64 30 82"
+          stroke="#FFC857"
+          stroke-width="4"
+          fill="none"
+          stroke-linecap="round"
+        />
+      </svg>

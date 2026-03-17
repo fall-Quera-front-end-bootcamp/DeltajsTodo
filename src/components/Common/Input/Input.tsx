@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import '../../../dist/output.css'
 import { findInputError, isFormInvalid } from '../../../utilities'
-import { useFormContext } from 'react-hook-form'
+import { useForm, useFormContext } from 'react-hook-form'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MdError } from 'react-icons/md'
 interface InputProps {
@@ -17,6 +17,9 @@ interface InputProps {
   initialValue?: string
   autocomplete?: string
   labelClassName?: string
+  pattern?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 const Input = ({
@@ -27,16 +30,18 @@ const Input = ({
   name,
   validation,
   className,
+  pattern,
   dir = 'rtl',
   inputDir = 'ltr',
   initialValue = '',
   autocomplete,
-  labelClassName
+  labelClassName,
+  onKeyDown
 }: InputProps): JSX.Element => {
   const {
     register,
     formState: { errors }
-  } = useFormContext()
+  } = useForm()
 
   const inputError = findInputError(errors, name)
   const isInvalid = isFormInvalid(inputError)
@@ -57,9 +62,11 @@ const Input = ({
         id={id}
         type={type}
         placeholder={placeholder}
+        pattern={pattern}
+        onKeyDown={onKeyDown}
         dir={inputDir}
         defaultValue={initialValue}
-        className={`w-[100%] rounded-[6px] border-[1px] border-solid border-gray-primary bg-[white] p-2  ${className}`}
+        className={`w-[100%] rounded-[6px] border-[1px] border-solid p-2  ${className}`}
         autoComplete={autocomplete}
         required
         {...register(name, validation)}

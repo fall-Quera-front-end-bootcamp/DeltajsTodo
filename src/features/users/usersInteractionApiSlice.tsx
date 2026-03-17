@@ -1,5 +1,5 @@
 /* eslint-disable spaced-comment */
-import { apiSlice } from '../../app/api/apiSlice'
+import { apiSlice } from '../../lib/api/apiSlice'
 
 export const usersInteractionApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

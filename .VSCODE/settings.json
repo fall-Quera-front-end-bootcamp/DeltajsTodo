@@ -20,5 +20,9 @@
   "prettier.useTabs": true,
   "prettier.jsxSingleQuote": true,
   "prettier.tabWidth": 2,
-  "prettier.arrowParens": "avoid"
+  "prettier.arrowParens": "avoid",
+
+  //  Auto Update Imports
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }

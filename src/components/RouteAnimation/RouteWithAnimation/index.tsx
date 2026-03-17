@@ -1,10 +1,10 @@
 import { type FunctionComponent } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import Login from '../../../pages/AuthPages/Login'
-import NotFound from '../../../pages/NotFound'
-import ResetPassword from '../../../pages/AuthPages/ResetPassword'
-import Register from '../../../pages/AuthPages/Register'
-import ForgetPassword from '../../../pages/AuthPages/ForgetPassword'
+import Login from '../../../auth/Login'
+import NotFound from '../../../NotFound'
+import ResetPassword from '../../../auth/ResetPassword'
+import Register from '../../../auth/Register'
+import ForgetPassword from '../../../auth/ForgetPassword'
 
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface RoutesWithAnimationProps {}
@@ -17,11 +17,11 @@ const RoutesWithAnimation: FunctionComponent<RoutesWithAnimationProps> = () => {
   return (
     <>
       <Routes location={location} key={location.key}>
-        <Route path="api/auth/login" element={<Login />} />
+        <Route path="auth/login" element={<Login />} />
         <Route path="/" element={<Login />} />
-        <Route path="api/auth/register" element={<Register />} />
-        <Route path="api/auth/forgetPassword" element={<ForgetPassword />} />
-        <Route path="api/auth/resetPassword" element={<ResetPassword />} />
+        <Route path="auth/register" element={<Register />} />
+        <Route path="auth/forgetPassword" element={<ForgetPassword />} />
+        <Route path="auth/resetPassword" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

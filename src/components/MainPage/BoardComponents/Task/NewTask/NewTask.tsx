@@ -11,7 +11,7 @@ import {
   useGetTasksQuery
 } from '../../../../../features/auth/authApiSlice'
 import { toast } from 'react-hot-toast'
-import { localPageDispatchContext } from '../../../../../context/DateContextProvider'
+import { localPageDispatchContext } from '../../../../../context/LocalPageContextProvider'
 import { type FieldValues, FormProvider, useForm } from 'react-hook-form'
 import NewTaskBoxTwo from './NewTaskComponents/Boxs/Box2/NewTaskBoxTwo'
 import BoxOne from './NewTaskComponents/Boxs/Box1/BoxOne'
