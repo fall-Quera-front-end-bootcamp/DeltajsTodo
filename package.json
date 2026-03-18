@@ -21,6 +21,7 @@
     "framer-motion": "^11.0.5",
     "jalali-moment": "^3.3.11",
     "jotai": "^2.7.0",
+    "lucide-react": "^0.577.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
