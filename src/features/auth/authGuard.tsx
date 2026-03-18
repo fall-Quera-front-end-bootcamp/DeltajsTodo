@@ -5,7 +5,7 @@ export const AuthGuard = ({ children }: { children: JSX.Element }) => {
   const { authenticated, loading } = useAuth()
 
   if (loading) return null
-  if (!authenticated) return <Navigate to="/login" replace />
+  if (!authenticated) return <Navigate to="/auth/login" replace />
 
   return children
 }
