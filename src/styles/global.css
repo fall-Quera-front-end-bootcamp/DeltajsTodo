@@ -5,13 +5,8 @@
 /* Custom Font Faces */
 @layer base {
   @font-face {
-    font-family: 'Yekan';
-    font-weight: normal;
-    src: url(../assets/fonts/yekan/Yekan.woff) format('woff');
-  }
-  @font-face {
     font-family: 'Vazirmatn';
-    src: url('../assets/fonts/yekan/Yekan.woff2') format('woff2');
+    src: url('../assets/fonts/Vazirmatn.woff2') format('woff2');
     font-weight: 100 900;
     font-display: swap;
     font-style: normal;
@@ -109,7 +104,7 @@ a {
 
 @font-face {
   font-family: 'Vazirmatn';
-  src: url('../assets/fonts/yekan/Yekan.woff2') format('woff2');
+  src: url('../assets/fonts/Vazirmatn.woff2') format('woff2');
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;

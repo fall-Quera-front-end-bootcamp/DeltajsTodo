@@ -1,9 +1,8 @@
+import React, { createContext, useContext, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { FloatingBall } from './FloatingBall'
-import React, { createContext, useContext, useState } from 'react'
 
 const STORAGE_KEY = 'app-theme-mode'
-
 type ThemeMode = 'light' | 'dark' | 'system'
 
 interface ThemeModeContext {
@@ -11,23 +10,16 @@ interface ThemeModeContext {
   setMode: React.Dispatch<React.SetStateAction<ThemeMode>>
 }
 
-const UseThemeMode = createContext<ThemeModeContext>({
-  mode: 'system',
-  setMode: () => {}
-})
+const ThemeModeContext = createContext<ThemeModeContext | null>(null)
 
 export const FloatingBallProvider = ({
   children
 }: {
   children: React.ReactNode
 }) => {
-  // This pattern causes the reset you’re seeing.
-  // The correct solution is to initialize the state directly ,
-  // from localStorage inside useState instead of using an effect.
-
   const [mode, setMode] = useState<ThemeMode>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY) as ThemeMode | null
-    return saved ?? 'system'
+    if (typeof window === 'undefined') return 'system'
+    return (localStorage.getItem(STORAGE_KEY) as ThemeMode) ?? 'system'
   })
 
   React.useEffect(() => {
@@ -56,15 +48,16 @@ export const FloatingBallProvider = ({
   }, [mode])
 
   return (
-    <UseThemeMode.Provider value={{ mode, setMode }}>
+    <ThemeModeContext.Provider value={{ mode, setMode }}>
       {children}
       {ReactDOM.createPortal(<FloatingBall />, document.body)}
-    </UseThemeMode.Provider>
+    </ThemeModeContext.Provider>
   )
 }
 
 export const useThemeMode = () => {
-  const ctx = useContext(UseThemeMode)
-  if (!ctx) throw new Error('useAuth outside provider')
+  const ctx = useContext(ThemeModeContext)
+  if (!ctx)
+    throw new Error('useThemeMode must be used inside FloatingBallProvider')
   return ctx
 }

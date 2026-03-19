@@ -35,6 +35,7 @@
     "tailwind-scrollbar": "^3.1.0",
     "universal-cookie": "^7.1.0",
     "usehooks-ts": "^3.0.1",
+    "uuid": "^13.0.0",
     "ws": "^8.19.0"
   },
   "devDependencies": {

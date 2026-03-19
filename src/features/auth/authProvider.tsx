@@ -1,14 +1,14 @@
 import { createContext, useContext } from 'react'
 import { useLogout, useMe } from './api'
 import type { User } from './types'
-import { UseMutationResult } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import type { UseMutationResult } from '@tanstack/react-query'
+import type { AxiosResponse } from 'axios'
 
 type AuthContextType = {
   user: User | null
   loading: boolean
   authenticated: boolean
-  logout: UseMutationResult<AxiosResponse<any, any>, Error, void, unknown>
+  logout: UseMutationResult<AxiosResponse<any>, Error, void, unknown>
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         user: user ?? null,
         loading: isLoading,
         authenticated: !!user,
-        logout: logout
+        logout
       }}
     >
       {children}
@@ -33,6 +33,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useAuth = () => {
   const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth outside provider')
+  if (!ctx) throw new Error('useAuth must be used inside AuthProvider')
   return ctx
 }

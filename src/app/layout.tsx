@@ -21,16 +21,18 @@ export default function App() {
     <>
       <Providers>
         <Routes>
+
           {/* Public routes */}
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/page/terms" element={<TermsPage />} />
+          
           {/* Protected routes */}
           <Route path="/app" element={<ProtectedLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<DashboardPageMain />}>
-              <Route index element={<DashboardPage />} />
+              <Route index element={<DashboardPage />} /> 
               <Route path="planner" element={<PlannerPage />} />
               <Route path="pomodoro" element={<PomodoroPage />} />
               <Route path="projects" element={<ProjectsPage />} />
@@ -39,10 +41,10 @@ export default function App() {
               <Route path="timers" element={<TimersPage />} />
               <Route path="voice" element={<VoicePage />} />
             </Route>
-            {/* <Route path=":page" element={<DynamicPage />} /> */}
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
+
         {/* Global Widget */}
         <FloatingBall />
       </Providers>

@@ -14,8 +14,7 @@ type Props = {
 }
 
 const isActive = (href: string, pathname: string) =>
-  pathname === href ||
-  (href !== '/app/dashboard/' && pathname.startsWith(`${href}/`))
+  pathname === href || (href !== '/' && pathname.startsWith(`/${href}`))
 
 export default function Sidebar({
   primary,
