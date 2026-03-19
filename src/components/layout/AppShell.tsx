@@ -8,7 +8,6 @@ import { useLocation } from 'react-router-dom'
 import Modal from '../ui/Modal'
 import { useModal } from '@/context/UseModalContext'
 import { useLogout } from '@/features/auth/api'
-
 type Props = {
   navPrimary: NavLink[]
   navSecondary?: NavLink[]
@@ -34,7 +33,10 @@ export default function AppShell({
   }, [])
 
   return (
-    <div className="flex min-h-screen bg-[var(--bg)] text-slate-100" dir="rtl">
+    <div
+      className="flex min-h-screen dark:bg-[var(--bg-dark)] bg-[var(--bg-light)] text-slate-100"
+      dir="rtl"
+    >
       <Sidebar
         primary={navPrimary}
         secondary={navSecondary}
@@ -47,7 +49,7 @@ export default function AppShell({
       <div className="flex min-h-screen flex-1 flex-col">
         <Topbar onToggleNav={() => setMobileOpen(true)} />
 
-        <nav className="flex gap-2 overflow-x-auto border-b border-[var(--border)] bg-[var(--surface)] px-3 py-3 lg:hidden">
+        <nav className="sm:flex hidden gap-2 overflow-x-auto border-b border-[var(--border)] bg-[var(--surface)] px-3 py-3 lg:hidden">
           {navPrimary.map((item) => {
             const active =
               pathname === item.href ||

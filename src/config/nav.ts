@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react'
+import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 import {
   CalendarRange,
   Clock3,
@@ -7,10 +7,13 @@ import {
   Settings,
   Timer,
   Users,
-  FolderKanban
+  FolderKanban,
+  LucideProps
 } from 'lucide-react'
 
-type IconType = ComponentType<{ className?: string; size?: number }>
+type IconType = ForwardRefExoticComponent<
+  Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
+>
 
 export type NavLink = {
   href: string
@@ -22,38 +25,43 @@ export type NavLink = {
 
 export const primaryNav: NavLink[] = [
   {
-    href: '/dashboard',
+    href: '/app/dashboard',
     label: 'داشبورد',
     description: 'نمای کلی امروز',
     icon: LayoutDashboard
   },
   {
-    href: '/projects',
+    href: '/app/dashboard/projects',
     label: 'پروژه‌ها',
     description: 'تیم‌ها و پروژه‌ها',
     icon: FolderKanban
   },
   {
-    href: '/planner',
+    href: '/app/dashboard/planner',
     label: 'برنامه‌ریز',
     description: 'کارهای روزانه و هفتگی',
     icon: CalendarRange
   },
   {
-    href: '/pomodoro',
+    href: '/app/dashboard/pomodoro',
     label: 'پومودورو',
     description: 'جلسات تمرکز',
     icon: Timer
   },
   {
-    href: '/timers',
+    href: '/app/dashboard/timers',
     label: 'تایمرها',
     description: 'ثبت لپ و زمان',
     icon: Clock3
   },
-  { href: '/team', label: 'تیم', description: 'چت و همکاری', icon: Users },
   {
-    href: '/voice',
+    href: '/app/dashboard/team',
+    label: 'تیم',
+    description: 'چت و همکاری',
+    icon: Users
+  },
+  {
+    href: '/app/dashboard/voice',
     label: 'صوت',
     description: 'اتاق‌ها و سیگنالینگ',
     icon: Mic
@@ -61,5 +69,5 @@ export const primaryNav: NavLink[] = [
 ]
 
 export const secondaryNav: NavLink[] = [
-  { href: '/settings', label: 'تنظیمات', icon: Settings }
+  { href: '/app/dashboard/settings', label: 'تنظیمات', icon: Settings }
 ]

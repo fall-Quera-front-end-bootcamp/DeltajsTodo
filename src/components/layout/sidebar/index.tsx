@@ -14,7 +14,8 @@ type Props = {
 }
 
 const isActive = (href: string, pathname: string) =>
-  pathname === href || (href !== '/' && pathname.startsWith(`${href}/`))
+  pathname === href ||
+  (href !== '/app/dashboard/' && pathname.startsWith(`${href}/`))
 
 export default function Sidebar({
   primary,
@@ -36,6 +37,15 @@ export default function Sidebar({
         onNavigate={onCloseMobile}
       />
     ))
+  const renderSectionMobile = (items: NavLink[]) =>
+    items.map((item) => (
+      <SidebarItem
+        key={item.href}
+        item={item}
+        active={isActive(item.href, pathname)}
+        onNavigate={onCloseMobile}
+      />
+    ))
 
   return (
     <>
@@ -53,10 +63,7 @@ export default function Sidebar({
           {desktopCollapsed ? '›' : '‹'}
         </button>
 
-        <SidebarHeader
-          collapsed={desktopCollapsed}
-          onToggle={onToggleDesktop}
-        />
+        <SidebarHeader collapsed={desktopCollapsed} />
 
         <nav className="space-y-2">{renderSection(primary)}</nav>
 
@@ -97,10 +104,10 @@ export default function Sidebar({
             ✕
           </button>
         </div>
-        <nav className="space-y-2">{renderSection(primary)}</nav>
+        <nav className="space-y-2">{renderSectionMobile(primary)}</nav>
         {secondary.length > 0 && (
           <div className="mt-4 space-y-2 border-t border-[var(--border)] pt-3">
-            {renderSection(secondary)}
+            {renderSectionMobile(secondary)}
           </div>
         )}
         <div className="mt-6">

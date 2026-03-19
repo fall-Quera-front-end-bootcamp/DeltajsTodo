@@ -9,7 +9,7 @@ type Props = {
   collapsed: boolean
 }
 
-export default function SidebarUser({ collapsed }: Props) {
+export default function wSidebarUser({ collapsed }: Props) {
   const modal = useModal()
   const { user } = useAuth()
   const navigate = useNavigate()

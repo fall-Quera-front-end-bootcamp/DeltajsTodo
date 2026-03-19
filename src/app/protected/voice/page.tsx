@@ -1,12 +1,11 @@
-'use client';
-
+// Voice Page
 import { useState } from "react";
-import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
 import { voiceService } from "@/services/voice";
+import { Link } from "react-router-dom";
 
 export default function VoicePage() {
   const [name, setName] = useState("");
@@ -67,7 +66,7 @@ export default function VoicePage() {
                 <p className="text-lg font-semibold text-slate-50">{room.name}</p>
                 <p className="text-xs text-slate-500">شناسه اتاق: {room.id}</p>
               </div>
-              <Link href={`/voice/${room.id}`}>
+              <Link to={`/voice/${room.id}`}>
                 <Button variant="secondary">ورود</Button>
               </Link>
             </div>

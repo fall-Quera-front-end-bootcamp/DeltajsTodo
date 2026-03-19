@@ -18,7 +18,7 @@ const variants: Record<NonNullable<ButtonProps['variant']>, string> = {
   secondary:
     'border-slate-600 bg-slate-800/60 text-slate-50 hover:border-slate-500 hover:bg-slate-800 focus-visible:outline-slate-500',
   ghost:
-    'border-transparent bg-transparent text-slate-300 hover:border-slate-700 hover:bg-slate-800/50 focus-visible:outline-slate-500'
+    'dark:border-transparent dark:bg-transparent border-black dark:text-slate-300 text-slate-600 dark:hover:border-slate-700 hover:border-slate-200 dark:hover:bg-slate-800/50 hover:bg-slate-400/50  focus-visible:outline-slate-500'
 }
 
 export default function Button({

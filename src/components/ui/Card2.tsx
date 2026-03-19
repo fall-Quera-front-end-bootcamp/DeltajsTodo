@@ -18,13 +18,13 @@ export default function Card2({
     <div
       className={clsx(
         'rounded-xl border border-[var(--border)]',
-        'bg-[var(--surface)] p-5',
+        'bg-[var(--surface)] sm:p-5 p-2',
         'shadow-sm backdrop-blur',
         className
       )}
     >
       {(title || description) && (
-        <div className="mb-4 space-y-1">
+        <div className="sm:mb-4 mb-2 space-y-1">
           {title && (
             <h3 className="text-sm font-semibold text-slate-50">{title}</h3>
           )}

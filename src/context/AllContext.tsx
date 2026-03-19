@@ -3,6 +3,7 @@ import DarkModeContextProvider from './DarkModeContextProvider'
 import DateContextProvider from './DateContextProvider'
 import LocalPageContextProvider from './LocalPageContextProvider'
 import { UseModalContextProvider } from './UseModalContext'
+import { FloatingBallProvider } from '@/components/others/floatingBall'
 
 const AllContext = ({ children }: { children: JSX.Element }): JSX.Element => {
   return (
@@ -10,7 +11,9 @@ const AllContext = ({ children }: { children: JSX.Element }): JSX.Element => {
       <LocalPageContextProvider>
         <DateContextProvider>
           <UseModalContextProvider>
-            <DarkModeContextProvider>{children}</DarkModeContextProvider>
+            <FloatingBallProvider>
+              <DarkModeContextProvider>{children}</DarkModeContextProvider>
+            </FloatingBallProvider>
           </UseModalContextProvider>
         </DateContextProvider>
       </LocalPageContextProvider>

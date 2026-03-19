@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
-import { formatClock, type TimeMode } from '../utilities/time'
+import { formatClock, type TimeShape } from '../utilities/time'
 
 type UseClockOptions = {
-  initialMode?: TimeMode
+  initialShape?: TimeShape
   tickMs?: number
 }
 
 export const useClock = ({
-  initialMode = '24',
+  initialShape = '24',
   tickMs = 1000
 }: UseClockOptions = {}) => {
-  const [mode, setMode] = useState<TimeMode>(initialMode)
+  const [shape, setShape] = useState<TimeShape>(initialShape)
   const [now, setNow] = useState<Date>(new Date())
 
   useEffect(() => {
@@ -18,9 +18,9 @@ export const useClock = ({
     return () => window.clearInterval(id)
   }, [tickMs])
 
-  const formatted = useMemo(() => formatClock(now, mode), [now, mode])
+  const formatted = useMemo(() => formatClock(now, shape), [now, shape])
 
-  const toggleMode = () => setMode((m) => (m === '24' ? '12' : '24'))
+  const toggleMode = () => setShape((m) => (m === '24' ? '12' : '24'))
 
-  return { now, mode, setMode, formatted, toggleMode }
+  return { now, shape, setShape, formatted, toggleMode }
 }

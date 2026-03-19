@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from "react";
-import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Input from "@/components/ui/Input";
 import { projectsService } from "@/services/projects";
+import { Link } from "react-router-dom";
 
 export default function ProjectsPage() {
   const [name, setName] = useState("");
@@ -84,7 +84,7 @@ export default function ProjectsPage() {
                   <p className="text-lg font-semibold text-slate-50">{project.name}</p>
                 </div>
                 <div className="flex gap-2">
-                  <Link href={`/projects/${project.id}`}>
+                  <Link to={`/projects/${project.id}`}>
                     <Button variant="secondary">مشاهده</Button>
                   </Link>
                   <Button

@@ -8,7 +8,7 @@ export const useMe = () =>
     queryKey: ['auth', 'me'],
     queryFn: async (): Promise<User | null> => {
       const res = await api.get('/users/me')
-      console.log('ME RESPONSE', res)
+
       return res?.data?.user ?? res?.data ?? null
     },
     retry: false

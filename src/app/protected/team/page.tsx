@@ -1,51 +1,58 @@
-'use client';
-
-import { useState } from "react";
-import Link from "next/link";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
-import Input from "@/components/ui/Input";
-import { teamService } from "@/services/team";
+import { useState } from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import Button from '@/components/ui/Button'
+import Card from '@/components/ui/Card'
+import Input from '@/components/ui/Input'
+import { teamService } from '@/services/team'
+import { Link } from 'react-router-dom'
 
 export default function TeamPage() {
-  const [name, setName] = useState("");
-  const [color, setColor] = useState("#facc15");
-  const [invite, setInvite] = useState("");
-  const queryClient = useQueryClient();
+  const [name, setName] = useState('')
+  const [color, setColor] = useState('#facc15')
+  const [invite, setInvite] = useState('')
+  const queryClient = useQueryClient()
 
   const teamsQuery = useQuery({
-    queryKey: ["team"],
-    queryFn: teamService.list,
-  });
+    queryKey: ['team'],
+    queryFn: teamService.list
+  })
 
   const createTeam = useMutation({
     mutationFn: () => teamService.create({ name, color }),
     onSuccess: () => {
-      setName("");
-      queryClient.invalidateQueries({ queryKey: ["team"] });
-    },
-  });
+      setName('')
+      queryClient.invalidateQueries({ queryKey: ['team'] })
+    }
+  })
 
   const joinTeam = useMutation({
     mutationFn: () => teamService.join(invite),
     onSuccess: () => {
-      setInvite("");
-      queryClient.invalidateQueries({ queryKey: ["team"] });
-    },
-  });
+      setInvite('')
+      queryClient.invalidateQueries({ queryKey: ['team'] })
+    }
+  })
 
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-xs uppercase tracking-[0.25em] text-amber-200">تیم</p>
-          <h1 className="text-3xl font-semibold text-slate-50">فضای تیم و چت</h1>
+          <p className="text-xs uppercase tracking-[0.25em] text-amber-200">
+            تیم
+          </p>
+          <h1 className="text-3xl font-semibold text-slate-50">
+            فضای تیم و چت
+          </h1>
           <p className="text-sm text-slate-400">
-            `/api/team` ، `/api/team/:id/messages` ، استریم از `/api/events/stream?teamId=...`.
+            `/api/team` ، `/api/team/:id/messages` ، استریم از
+            `/api/events/stream?teamId=...`.
           </p>
         </div>
-        <Button onClick={() => queryClient.invalidateQueries({ queryKey: ["team"] })}>به‌روزرسانی</Button>
+        <Button
+          onClick={() => queryClient.invalidateQueries({ queryKey: ['team'] })}
+        >
+          به‌روزرسانی
+        </Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -63,7 +70,11 @@ export default function TeamPage() {
               value={color}
               onChange={(e) => setColor(e.target.value)}
             />
-            <Button disabled={!name} onClick={() => createTeam.mutate()} className="sm:col-span-2">
+            <Button
+              disabled={!name}
+              onClick={() => createTeam.mutate()}
+              className="sm:col-span-2"
+            >
               ایجاد تیم
             </Button>
           </div>
@@ -77,7 +88,11 @@ export default function TeamPage() {
               onChange={(e) => setInvite(e.target.value)}
               placeholder="team_abc123"
             />
-            <Button disabled={!invite} onClick={() => joinTeam.mutate()} className="sm:w-32">
+            <Button
+              disabled={!invite}
+              onClick={() => joinTeam.mutate()}
+              className="sm:w-32"
+            >
               پیوستن
             </Button>
           </div>
@@ -85,7 +100,9 @@ export default function TeamPage() {
       </div>
 
       <Card title="تیم‌های شما">
-        {teamsQuery.isLoading && <p className="text-slate-500">در حال بارگذاری تیم‌ها…</p>}
+        {teamsQuery.isLoading && (
+          <p className="text-slate-500">در حال بارگذاری تیم‌ها…</p>
+        )}
         {!teamsQuery.isLoading && teamsQuery.data?.length === 0 && (
           <p className="text-slate-500">هنوز تیمی ندارید.</p>
         )}
@@ -96,10 +113,14 @@ export default function TeamPage() {
               className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3"
             >
               <div>
-                <p className="text-lg font-semibold text-slate-50">{team.name}</p>
-                <p className="text-xs text-slate-500">اعضا: {team.members?.length ?? 0}</p>
+                <p className="text-lg font-semibold text-slate-50">
+                  {team.name}
+                </p>
+                <p className="text-xs text-slate-500">
+                  اعضا: {team.members?.length ?? 0}
+                </p>
               </div>
-              <Link href={`/team/${team.id}`}>
+              <Link to={`/team/${team.id}`}>
                 <Button variant="secondary">مشاهده</Button>
               </Link>
             </div>
@@ -107,5 +128,5 @@ export default function TeamPage() {
         </div>
       </Card>
     </div>
-  );
+  )
 }

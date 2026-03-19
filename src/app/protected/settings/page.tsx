@@ -1,19 +1,27 @@
-'use client';
+'use client'
 
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
-import { useAuth } from "@/auth/AuthProvider";
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import { useAuth } from '@/features/auth/authProvider'
+import { useLogout } from '@/features/auth/api'
+import { useThemeMode } from '@/components/others/floatingBall'
 
 export default function SettingsPage() {
-  const { user, theme, setTheme, logout } = useAuth();
+  const { user } = useAuth()
+  const { mode, setMode } = useThemeMode()
 
   return (
     <div className="space-y-6">
       <div>
-        <p className="text-xs uppercase tracking-[0.25em] text-amber-200">تنظیمات</p>
-        <h1 className="text-3xl font-semibold text-slate-50">پروفایل و ترجیحات</h1>
+        <p className="text-xs uppercase tracking-[0.25em] text-amber-200">
+          تنظیمات
+        </p>
+        <h1 className="text-3xl font-semibold text-slate-50">
+          پروفایل و ترجیحات
+        </h1>
         <p className="text-sm text-slate-400">
-          نگهبان سمت کلاینت منتظر `/api/auth/me` می‌ماند. تم در حالت ورود در بک‌اند و لوکال ذخیره می‌شود.
+          نگهبان سمت کلاینت منتظر `/api/auth/me` می‌ماند. تم در حالت ورود در
+          بک‌اند و لوکال ذخیره می‌شود.
         </p>
       </div>
 
@@ -21,18 +29,19 @@ export default function SettingsPage() {
         {user ? (
           <div className="space-y-2 text-sm text-slate-200">
             <p>
-              <span className="text-slate-400">نام:</span> {user.name}
+              <span className="text-slate-400">نام:</span> {user.username}
             </p>
-            {user.email && (
+            {/* {user.email && (
               <p>
                 <span className="text-slate-400">ایمیل:</span> {user.email}
               </p>
-            )}
-            {user.provider && (
+            )} */}
+            {/* {user.provider && (
               <p>
-                <span className="text-slate-400">ارائه‌دهنده:</span> {user.provider}
+                <span className="text-slate-400">ارائه‌دهنده:</span>{' '}
+                {user.provider}
               </p>
-            )}
+            )} */}
           </div>
         ) : (
           <p className="text-slate-500">کاربری بارگذاری نشده.</p>
@@ -41,21 +50,23 @@ export default function SettingsPage() {
 
       <Card title="ظاهر">
         <div className="flex items-center gap-3">
-          <Button variant="secondary" onClick={() => setTheme("light")}>
+          <Button variant="secondary" onClick={() => setMode('light')}>
             روشن
           </Button>
-          <Button variant="secondary" onClick={() => setTheme("dark")}>
+          <Button variant="secondary" onClick={() => setMode('dark')}>
             تاریک
           </Button>
-          <span className="text-sm text-slate-400">حالت فعلی: {theme === "dark" ? "تاریک" : "روشن"}</span>
+          <span className="text-sm text-slate-400">
+            حالت فعلی: {mode === 'dark' ? 'تاریک' : 'روشن'}
+          </span>
         </div>
       </Card>
 
       <Card title="خروج">
-        <Button variant="ghost" onClick={() => logout()}>
+        <Button variant="ghost" onClick={() => useLogout().mutate}>
           خروج
         </Button>
       </Card>
     </div>
-  );
+  )
 }

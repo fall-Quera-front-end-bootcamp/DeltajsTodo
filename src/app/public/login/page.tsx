@@ -44,13 +44,15 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-sm rounded-xl shadow-md p-8">
+        {/* Logo */}
         <div className="flex justify-center mb-6">
           <img src={Logo} alt="logo" className="h-8" />
         </div>
 
+        {/* Title */}
         <div className="flex flex-col sm:flex-row-reverse w-full justify-between items-center">
           <Link to={'/home'} className="text-[#F9BC00] mx-1">
-           بازگشت به خانه
+            بازگشت به خانه
           </Link>
           <h1 className="text-2xl font-semibold text-[#6166b7] mb-2">
             ورود | ثبت‌نام

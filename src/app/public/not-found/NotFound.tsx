@@ -23,7 +23,7 @@ const NotFound: FunctionComponent<NotFoundProps> = () => {
           </div>
 
           <div className="flex justify-center gap-3">
-            <Link to="/">
+            <Link to="/app/dashboard">
               <Button>بازگشت به داشبورد</Button>
             </Link>
 
@@ -36,7 +36,7 @@ const NotFound: FunctionComponent<NotFoundProps> = () => {
             مسیر فعلی در سیستم پیدا نشد.
           </div>
         </div>
-      </Card>
+      </Card> 
     </div>
   )
 }
