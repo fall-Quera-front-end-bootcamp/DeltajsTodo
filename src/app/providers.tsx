@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { I18nProvider } from '../i18n/I18nProvider'
 import { createQueryClient } from '@/lib/queryClient'
 import { AuthProvider } from '@/features/auth/authProvider'
 import AllContext from '@/context/AllContext'
@@ -17,11 +16,9 @@ const Providers = ({ children }: ProvidersProps) => {
     <>
       <QueryClientProvider client={queryClient}>
         <AllContext>
-          <AuthProvider>
-            <I18nProvider>{children}</I18nProvider>
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </AllContext>
-        <ReactQueryDevtools initialIsOpen={false}  />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   )
