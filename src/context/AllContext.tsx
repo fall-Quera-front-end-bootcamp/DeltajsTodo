@@ -2,13 +2,16 @@ import { JSX } from 'react'
 import DarkModeContextProvider from './DarkModeContextProvider'
 import DateContextProvider from './DateContextProvider'
 import LocalPageContextProvider from './LocalPageContextProvider'
+import { UseModalContextProvider } from './UseModalContext'
 
 const AllContext = ({ children }: { children: JSX.Element }): JSX.Element => {
   return (
     <>
       <LocalPageContextProvider>
         <DateContextProvider>
-          <DarkModeContextProvider>{children}</DarkModeContextProvider>
+          <UseModalContextProvider>
+            <DarkModeContextProvider>{children}</DarkModeContextProvider>
+          </UseModalContextProvider>
         </DateContextProvider>
       </LocalPageContextProvider>
     </>
