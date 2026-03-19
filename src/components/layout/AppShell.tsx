@@ -5,6 +5,9 @@ import Sidebar from './sidebar'
 import Topbar from './Topbar'
 import type { NavLink } from '@/config/nav'
 import { useLocation } from 'react-router-dom'
+import Modal from '../ui/Modal'
+import { useModal } from '@/context/UseModalContext'
+import { useLogout } from '@/features/auth/api'
 
 type Props = {
   navPrimary: NavLink[]
@@ -20,6 +23,7 @@ export default function AppShell({
   const [mobileOpen, setMobileOpen] = useState(false)
   const [desktopCollapsed, setDesktopCollapsed] = useState(true)
   const pathname = useLocation().pathname || '/'
+  const modal = useModal()
 
   useEffect(() => {
     const handler = () => {
@@ -71,6 +75,20 @@ export default function AppShell({
           </div>
         </main>
       </div>
+      <Modal
+        isOpen={modal.isOpen}
+        onClose={modal.close}
+        title="خروج از حساب کاربری"
+        description="آیا مطمئن به خروج از حساب کاربری خود هستید؟!"
+        buttons={[
+          { label: 'نه', onClick: modal.close, variant: 'secondary' },
+          {
+            label: 'بله',
+            onClick: useLogout().mutate,
+            variant: 'primary'
+          }
+        ]}
+      />
     </div>
   )
 }

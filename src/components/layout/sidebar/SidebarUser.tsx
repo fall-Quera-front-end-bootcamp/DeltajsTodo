@@ -2,17 +2,16 @@
 
 import { User, LogOut, LogIn } from 'lucide-react'
 import { useAuth } from '@/features/auth/authProvider'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useLogout } from '@/features/auth/api'
+import { useNavigate } from 'react-router-dom'
+import { useModal } from '@/context/UseModalContext'
 
 type Props = {
   collapsed: boolean
 }
 
 export default function SidebarUser({ collapsed }: Props) {
+  const modal = useModal()
   const { user } = useAuth()
-  const logout = useLogout()
   const navigate = useNavigate()
 
   if (!user) {
@@ -36,21 +35,23 @@ export default function SidebarUser({ collapsed }: Props) {
         )}
       </div>
       {!collapsed && (
-        <div className="flex-1">
-          <p className="text-sm font-semibold">{user.username}</p>
-          {/* <p className="text-[11px] text-slate-400">
+        <>
+          <div className="flex-1">
+            <p className="text-sm font-semibold">{user.username}</p>
+            {/* <p className="text-[11px] text-slate-400">
             {user.email ?? user.provider}
           </p> */}
-        </div>
-      )}
-      <button
-        type="button"
-        onClick={() => logout.mutate()}
-        aria-label="خروج"
-        className="rounded-lg border border-amber-300/60 bg-amber-400/10 p-2 text-amber-100 hover:border-amber-200"
-      >
-        <LogOut className="h-4 w-4" />
-      </button>
+          </div>
+          <button
+            type="button"
+            onClick={() => modal.open()}
+            aria-label="خروج"
+            className="rounded-lg border border-amber-300/60 bg-amber-400/10 p-2 text-amber-100 hover:border-amber-200"
+          >
+            <LogOut className="h-4 w-4" />
+          </button>
+        </>
+      )}{' '}
     </div>
   )
 }

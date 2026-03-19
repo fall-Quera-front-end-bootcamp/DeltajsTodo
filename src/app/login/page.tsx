@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSendOtp, useVerifyOtp } from '@/features/auth/api'
 import Logo from '@/assets/logo.svg'
 import { useAuth } from '@/features/auth/authProvider'
@@ -48,9 +48,14 @@ export default function LoginPage() {
           <img src={Logo} alt="logo" className="h-8" />
         </div>
 
-        <h1 className="text-xl font-semibold text-[#23254E] mb-2">
-          ورود | ثبت‌نام
-        </h1>
+        <div className="flex flex-col sm:flex-row-reverse w-full justify-between items-center">
+          <Link to={'/home'} className="text-[#F9BC00] mx-1">
+           بازگشت به خانه
+          </Link>
+          <h1 className="text-2xl font-semibold text-[#6166b7] mb-2">
+            ورود | ثبت‌نام
+          </h1>
+        </div>
 
         {step === 'phone' ? (
           <>
@@ -66,7 +71,7 @@ export default function LoginPage() {
                 onChange={(e) => setPhone(e.target.value)}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#F9BC00]"
                 required
-                dir='rtl'
+                dir="rtl"
               />
 
               <button
@@ -94,7 +99,7 @@ export default function LoginPage() {
               <input
                 type="text"
                 maxLength={5}
-                placeholder="کد U+06f5 رقمی"
+                placeholder="کد ۵ رقمی"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 className="w-full text-center tracking-widest border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#F9BC00]"
@@ -119,7 +124,13 @@ export default function LoginPage() {
 
         <p className="text-xs text-gray-400 text-center mt-8 leading-relaxed">
           ورود شما به معنای پذیرش{' '}
-          <span className="text-[#F9BC00] mx-1">شرایط و قوانین</span> است
+          <Link to={'/page/terms'} className="text-[#F9BC00] mx-1">
+            شرایط دایوتایم{' '}
+          </Link>
+          <Link to={'/page/privacy'} className="text-[#F9BC00] mx-1">
+            و قوانین حریم‌خصوصی
+          </Link>{' '}
+          است
         </p>
       </div>
     </div>

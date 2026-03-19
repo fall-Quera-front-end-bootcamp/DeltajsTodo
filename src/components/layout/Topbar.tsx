@@ -1,5 +1,4 @@
-'use client'
-
+// TopBar
 import Button from '@/components/ui/Button'
 import { useAuth } from '@/features/auth/authProvider'
 import { useClock } from '@/hooks/useClock'
